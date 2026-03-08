@@ -654,8 +654,8 @@ export default function MicrosoftAnalysis() {
   <AlertBox type="signal">
     <strong>✅ Slutsats: KÖP</strong> — Microsoft är ett av marknadens bästa långsiktiga kvalitetsinnehav. Bolaget uppfyller samtliga kriterier för ett bolag man kan äga i 5–10 år. AI är inte en kortlivad trend för Microsoft — det är en fundamental omstrukturering av alla bolagets affärsenheter.
   </AlertBox>
+ </div>
 </div>
-
 {/* X. Scenarios */}
 <div data-section="scenarios" id="scenarios" className="pt-14">
   <SectionHeader number="X" title="Scenarier: Bull, Base & Bear Case" />
