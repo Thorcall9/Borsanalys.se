@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { defaultMetadata } from "@/lib/seo";
@@ -49,6 +50,7 @@ export default function RootLayout({
             </Script>
           </>
         )}
+        <Analytics />
       </body>
     </html>
   );
