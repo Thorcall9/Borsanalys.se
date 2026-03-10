@@ -144,7 +144,14 @@ export default function MicrosoftAnalysis() {
           ))}
         </div>
       </div>
-
+      {/* Hero image */}
+      <div className="w-full">
+        <img
+          src="/microsoft_analys_hero.png"
+          alt="Microsoft aktieanalys 2026"
+          className="w-full object-cover"
+        />
+      </div>
       <div className="px-6 sm:px-12 pb-20 bg-[#faf8f3] text-[#0f0f0f]">
         {/* I. Overview */}
 <div data-section="overview" id="overview" className="pt-14">
