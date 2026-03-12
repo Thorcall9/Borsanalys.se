@@ -10,81 +10,103 @@ SwotGrid,
 ScenarioCards,
 AlertBox,
 RatingBox,
-} from "@/components/analysis";
+// app/analyser/alphabet/page.tsx
+import { Analysis } from "@/components/analysis";
 import type { AnalysisSection, Scenario } from "@/components/analysis";
+import { notFound } from "next/navigation";
 
+// Ditt sections, SWOT och scenarios
 const ACCENT = "#1a3c6e";
 
 const sections: AnalysisSection[] = [
-{ id: "overview",   number: "I",    title: "Översikt" },
-{ id: "moat",       number: "II",   title: "Strategisk Moat" },
-{ id: "financials", number: "III",  title: "Finansiell analys" },
-{ id: "valuation",  number: "IV",   title: "Värdering" },
-{ id: "growth",     number: "V",    title: "Tillväxtmotorer" },
-{ id: "risk",       number: "VI",   title: "Riskprofil" },
-{ id: "esg",        number: "VII",  title: "ESG & Makro" },
-{ id: "ai-obs",     number: "VIII", title: "AI-observationer" },
-{ id: "verdict",    number: "IX",   title: "Investeringsbeslut" },
-{ id: "scenarios",  number: "X",    title: "Scenarier" },
+  { id: "overview",   number: "I",    title: "Översikt" },
+  { id: "moat",       number: "II",   title: "Strategisk Moat" },
+  { id: "financials", number: "III",  title: "Finansiell analys" },
+  { id: "valuation",  number: "IV",   title: "Värdering" },
+  { id: "growth",     number: "V",    title: "Tillväxtmotorer" },
+  { id: "risk",       number: "VI",   title: "Riskprofil" },
+  { id: "esg",        number: "VII",  title: "ESG & Makro" },
+  { id: "ai-obs",     number: "VIII", title: "AI-observationer" },
+  { id: "verdict",    number: "IX",   title: "Investeringsbeslut" },
+  { id: "scenarios",  number: "X",    title: "Scenarier" },
 ];
 
 const swotData = {
-strengths: [
-"Dominans inom sök och annonsering — ~90% global marknadsandel",
-"Full-stack AI-ledarskap: Gemini 2.5, TPU Ironwood (gen. 7), DeepMind",
-"Massiva nätverkseffekter — 7 produkter med över 2 miljarder användare",
-"GCP-marginal 20,7% (Q2 2025) — snabb lönsamhetsexpansion",
-"Exceptionell balansräkning: $95Mdr nettokassa, nästintill skuldfri",
-],
-weaknesses: [
-"~75% av intäkterna från annonsering — koncentrationsrisk",
-"Google Cloud är #3 bakom AWS och Azure",
-"CapEx exploderar: ~$85Mdr 2025, pressar FCF kortsiktigt",
-"Other Bets (inkl. Waymo) genererar operativa förluster >$1Mdr/kvartal",
-"Dual-class aktiestruktur begränsar minoritetsägares inflytande",
-],
-opportunities: [
-"AI Overview Ads: bevisad monetarisering av generativ sökning",
-"GCP: målsättning $100Mdr ARR — 32% tillväxt i Q2 2025",
-"Waymo: ~450 000 betalda resor/vecka, potentiellt $100Mdr+ värde",
-"YouTube Subscriptions: 270M+ betalande prenumeranter",
-"Gemini 2.5 Pro: topprankad modell driver Cloud-efterfrågan",
-],
-threats: [
-"Microsoft/OpenAI hotar sökbeteendet med Bing + ChatGPT Search",
-"EU Digital Markets Act — begränsar Google Play och ekosystemet",
-"DOJ antitrust: eventuella beteendemässiga krav kvarstår",
-"FCF-kompression 2025–2026 pga massivt CapEx",
-"Energibehov från AI-datacenter — ESG-risk och kostnadsrisk",
-],
+  strengths: [
+    "Dominans inom sök och annonsering — ~90% global marknadsandel",
+    "Full-stack AI-ledarskap: Gemini 2.5, TPU Ironwood (gen. 7), DeepMind",
+    "Massiva nätverkseffekter — 7 produkter med över 2 miljarder användare",
+    "GCP-marginal 20,7% (Q2 2025) — snabb lönsamhetsexpansion",
+    "Exceptionell balansräkning: $95Mdr nettokassa, nästintill skuldfri",
+  ],
+  weaknesses: [
+    "~75% av intäkterna från annonsering — koncentrationsrisk",
+    "Google Cloud är #3 bakom AWS och Azure",
+    "CapEx exploderar: ~$85Mdr 2025, pressar FCF kortsiktigt",
+    "Other Bets (inkl. Waymo) genererar operativa förluster >$1Mdr/kvartal",
+    "Dual-class aktiestruktur begränsar minoritetsägares inflytande",
+  ],
+  opportunities: [
+    "AI Overview Ads: bevisad monetarisering av generativ sökning",
+    "GCP: målsättning $100Mdr ARR — 32% tillväxt i Q2 2025",
+    "Waymo: ~450 000 betalda resor/vecka, potentiellt $100Mdr+ värde",
+    "YouTube Subscriptions: 270M+ betalande prenumeranter",
+    "Gemini 2.5 Pro: topprankad modell driver Cloud-efterfrågan",
+  ],
+  threats: [
+    "Microsoft/OpenAI hotar sökbeteendet med Bing + ChatGPT Search",
+    "EU Digital Markets Act — begränsar Google Play och ekosystemet",
+    "DOJ antitrust: eventuella beteendemässiga krav kvarstår",
+    "FCF-kompression 2025–2026 pga massivt CapEx",
+    "Energibehov från AI-datacenter — ESG-risk och kostnadsrisk",
+  ],
 };
 
 const scenarios: Scenario[] = [
-{
-type: "bull",
-probability: "25%",
-price: "$420",
-change: "+37% från $307",
-assumptions: "GCP över 35% tillväxt med över 25% marginal\nAI Overview Ads driver Search\nEPS $13–14",
-requires: "Cloud tar marknadsandelar, Gemini stärker Search-monetarisering, CapEx-effektiviteten är hög och regulatoriska remedies är minimala.",
-},
-{
-type: "base",
-probability: "50%",
-price: "$360",
-change: "+17% från $307",
-assumptions: "GCP ~30% tillväxt med stigande marginal\nSearch +10% YoY\nEPS ~$11,24 (2026e)",
-requires: "Stabil annonsmiljö, Cloud fortsätter växa, CapEx-toppen passerats 2025 och FCF återhämtar sig 2026–2027.",
-},
-{
-type: "bear",
-probability: "25%",
-price: "$220",
-change: "−28% från $307",
-assumptions: "Strukturella DOJ-åtgärder\nSearch tappar andelar till AI-konkurrenter\nP/E-kompression till 20x",
-requires: "Regulatorisk chock utöver det tidigare utfallet, AI-disruption av Search, Cloud-besvikelse och FCF under fortsatt press.",
-},
+  {
+    type: "bull",
+    probability: "25%",
+    price: "$420",
+    change: "+37% från $307",
+    assumptions: "GCP över 35% tillväxt med över 25% marginal\nAI Overview Ads driver Search\nEPS $13–14",
+    requires: "Cloud tar marknadsandelar, Gemini stärker Search-monetarisering, CapEx-effektiviteten är hög och regulatoriska remedies är minimala.",
+  },
+  {
+    type: "base",
+    probability: "50%",
+    price: "$360",
+    change: "+17% från $307",
+    assumptions: "GCP ~30% tillväxt med stigande marginal\nSearch +10% YoY\nEPS ~$11,24 (2026e)",
+    requires: "Stabil annonsmiljö, Cloud fortsätter växa, CapEx-toppen passerats 2025 och FCF återhämtar sig 2026–2027.",
+  },
+  {
+    type: "bear",
+    probability: "25%",
+    price: "$220",
+    change: "−28% från $307",
+    assumptions: "Strukturella DOJ-åtgärder\nSearch tappar andelar till AI-konkurrenter\nP/E-kompression till 20x",
+    requires: "Regulatorisk chock utöver det tidigare utfallet, AI-disruption av Search, Cloud-besvikelse och FCF under fortsatt press.",
+  },
 ];
+
+export default function AlphabetPage() {
+  // Om analysen inte finns, returnera 404
+  if (!sections || !swotData || !scenarios) return notFound();
+
+  return (
+    <Analysis
+      title="Alphabet (GOOGL): AI-ledarskap och historiska milstolpar"
+      author="Carl Fredrik Thor"
+      date="2026-03-12"
+      verdict="Buy"
+      target="$360"
+      sections={sections}
+      swot={swotData}
+      scenarios={scenarios}
+      accent={ACCENT}
+    />
+  );
+}
 
 const PUBLISHED = true; // ändra till true för att publicera
 
