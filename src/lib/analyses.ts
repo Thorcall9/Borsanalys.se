@@ -11,7 +11,7 @@ export interface Analysis {
 
 export const analyses: Analysis[] = [
   {
-    slug: "alphabet-2026",
+    slug: "alphabet",
     title: "Alphabet (GOOGL): AI-ledarskap och historiska milstolpar",
     date: "2026-03-12",
     author: "Carl Fredrik Thor",
