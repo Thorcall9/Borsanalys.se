@@ -68,14 +68,21 @@ export default function ChatWidget() {
             {isLoading && <div className="text-xs text-muted animate-pulse">Tänker...</div>}
           </div>
 
-          <form onSubmit={handleSubmit} className="p-4 border-t border-border bg-card">
+                    <form onSubmit={handleSubmit} className="p-4 border-t border-border bg-card flex gap-2">
             <input
               type="text"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Skriv din fråga..."
-              className="w-full p-2 border border-border rounded-lg bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+              className="flex-1 p-2 border border-border rounded-lg bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary"
             />
+            <button
+              type="submit"
+              disabled={isLoading || !message.trim()}
+              className="bg-primary hover:bg-primary-light disabled:opacity-40 text-white px-3 py-2 rounded-lg text-sm transition-colors"
+            >
+              ➤
+            </button>
           </form>
         </div>
       )}
