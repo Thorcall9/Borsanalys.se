@@ -507,11 +507,11 @@ theme="light"
 
       <div className="bg-[#0f1a0f] rounded p-4 mb-4 font-mono">
         <div className="text-[#40d040] text-[10px] tracking-widest mb-2">* AI-ANALYSMODUL AKTIVERAD · ALPHABET INC. · 10 MARS 2026</div>
-        <div className="text-[#80e080] text-xs leading-loose">> Sentimentanalys: BULLISH (76/100) | Omvärdering pågår sedan H2 2025 — "AI winner"-narrativ befäst</div>
-        <div className="text-[#80e080] text-xs leading-loose">> Analytikerkonsensus: 41/41 = KÖP/Strong Buy | Snittpris $351–367</div>
-        <div className="text-[#80e080] text-xs leading-loose">> Q3 2025: Omsättning $102,3Mdr — historisk milstolpe, EPS $3,10 kraftig beat</div>
-        <div className="text-[#80e080] text-xs leading-loose">> GCP-marginal Q2 2025: 20,7% — upp från 8,7% ett år tidigare</div>
-        <div className="text-[#80e080] text-xs leading-loose">> DOJ: Strukturell uppdelning undveks sept 2025 — beteendemässiga krav kvarstår</div>
+        <div className="text-[#80e080] text-xs leading-loose"> Sentimentanalys: BULLISH (76/100) | Omvärdering pågår sedan H2 2025 — "AI winner"-narrativ befäst</div>
+        <div className="text-[#80e080] text-xs leading-loose"> Analytikerkonsensus: 41/41 = KÖP/Strong Buy | Snittpris $351–367</div>
+        <div className="text-[#80e080] text-xs leading-loose"> Q3 2025: Omsättning $102,3Mdr — historisk milstolpe, EPS $3,10 kraftig beat</div>
+        <div className="text-[#80e080] text-xs leading-loose"> GCP-marginal Q2 2025: 20,7% — upp från 8,7% ett år tidigare</div>
+        <div className="text-[#80e080] text-xs leading-loose"> DOJ: Strukturell uppdelning undveks sept 2025 — beteendemässiga krav kvarstår</div>
       </div>
 
       <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mt-6 mb-2 pl-2 border-l-[3px] border-[#b5892a]">Positiv omvärdering under 2025</h3>
