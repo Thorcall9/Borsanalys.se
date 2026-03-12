@@ -11,15 +11,14 @@ export interface Analysis {
 
 export const analyses: Analysis[] = [
   {
-    slug: "microsoft-2026",
-    title: "Microsoft 2026 – Är AI-giganten fortfarande köpvärd?",
-    date: "2026-03-02",
+    slug: "alphabet-2026",
+    title: "Alphabet (GOOGL): AI-ledarskap och historiska milstolpar",
+    date: "2026-03-12",
     author: "Carl Fredrik Thor",
     category: "Långsiktiga analyser",
-    excerpt:
-      "Djupanalys av Microsofts AI-strategi, Azure-tillväxt, Copilot-monetarisering och värdering inför 2026.",
+    excerpt: "Med en historisk kvartalsomsättning på över $100Mdr och en Cloud-marginal som rusat från 8% till 20% på ett år, befäster Alphabet sin roll som AI-erans definitiva vinnare.",
     verdict: "KÖP",
-    target: "$480",
+    target: "$360",
   },
   {
     slug: "nvidia-fy2026",
@@ -27,32 +26,29 @@ export const analyses: Analysis[] = [
     date: "2026-03-03",
     author: "Carl Fredrik Thor",
     category: "Långsiktiga analyser",
-    excerpt:
-      "Komplett analys av NVIDIAs dominans inom AI-chip, Blackwell-plattformen, värdering och framtidsutsikter.",
+    excerpt: "Komplett analys av NVIDIAs dominans inom AI-chip, Blackwell-plattformen, värdering och framtidsutsikter.",
     verdict: "KÖP",
     target: "$230–250",
   },
   {
+    slug: "microsoft-2026",
+    title: "Microsoft 2026 – Är AI-giganten fortfarande köpvärd?",
+    date: "2026-03-02",
+    author: "Carl Fredrik Thor",
+    category: "Långsiktiga analyser",
+    excerpt: "Djupanalys av Microsofts AI-strategi, Azure-tillväxt, Copilot-monetarisering och värdering inför 2026.",
+    verdict: "KÖP",
+    target: "$480",
+  },
+  {
     slug: "novo-nordisk-2025",
-    title: "Novo Nordisk: Från hypertillväxt till hård konkurrens – vad händer nu?",
+    title: "Novo Nordisk: Från hypertillväxt till hård konkurrens – vad hände nu?",
     date: "2025-10-20",
     author: "Carl Fredrik Thor",
     category: "Långsiktiga analyser",
-    excerpt:
-      "Analys av konkurrensläget inom GLP-1, pipeline-uppdateringar och värdering av Novo Nordisk.",
+    excerpt: "Analys av konkurrensläget inom GLP-1, pipeline-uppdateringar och värdering av Novo Nordisk.",
     verdict: "KÖP",
     target: "DKK 520",
-  },
-  {
-   slug: "alphabet-2026",
-title: "Alphabet (GOOGL): AI-ledarskap och historiska milstolpar",
-date: "2026-03-12",
-author: "Carl Fredrik Thor",
-category: "Långsiktiga analyser",
-excerpt: "Med en historisk kvartalsomsättning på över $100Mdr och en Cloud-marginal som rusat från 8% till 20% på ett år, befäster Alphabet sin roll som AI-erans definitiva vinnare.",
-verdict: "KÖP",
-target: "$360",
-
   },
   {
     slug: "investor-2025-q2",
