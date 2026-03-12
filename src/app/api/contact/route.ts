@@ -4,7 +4,19 @@ const MAX_NAME_LENGTH = 200;
 const MAX_EMAIL_LENGTH = 254;
 const MAX_MESSAGE_LENGTH = 5000;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const ALLOWED_ORIGIN = "https://borsanalys.se";
+
+// Vi tillåter din domän och allt som slutar på .vercel.app
+function isValidOrigin(request: NextRequest): boolean {
+  const origin = request.headers.get("origin");
+  if (!origin) return true; 
+  
+  return (
+    origin === "https://borsanalys.se" || 
+    origin === "https://www.borsanalys.se" ||
+    origin.endsWith(".vercel.app") || 
+    origin.startsWith("http://localhost")
+  );
+}
 
 function isValidOrigin(request: NextRequest): boolean {
   const origin = request.headers.get("origin");
