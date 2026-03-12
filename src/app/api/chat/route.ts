@@ -1,8 +1,9 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
 
-// Vi rensar nyckeln från eventuella dolda mellanslag
 const apiKey = process.env.GOOGLE_GEMINI_API_KEY?.trim();
+
+// Här tvingar vi in API-versionen "v1"
 const genAI = new GoogleGenerativeAI(apiKey || "");
 
 export async function POST(req: Request) {
@@ -10,24 +11,21 @@ export async function POST(req: Request) {
     const { message } = await req.json();
 
     if (!apiKey) {
-      console.error("API-nyckel saknas helt i Vercel!");
-      return NextResponse.json({ text: "Systemfel: API-nyckel saknas." }, { status: 500 });
+      return NextResponse.json({ text: "API-nyckel saknas." }, { status: 500 });
     }
 
-    // Vi byter till 1.0 Pro som är den mest stabila "legacy"-modellen för API-anrop
-const model = genAI.getGenerativeModel({ model: "gemini-1.0-pro" });
+    // Vi testar att köra utan "models/" prefixet men med en specifik metod
+    const model = genAI.getGenerativeModel({ 
+      model: "gemini-1.5-flash",
+    }, { apiVersion: 'v1' }); // TVINGA V1 ISTÄLLET FÖR BETA
 
-
-    const prompt = `Du är en intelligent AI-assistent på Börsanalys.se. Svara på svenska. Fråga: ${message}`;
-
-    const result = await model.generateContent(prompt);
+    const result = await model.generateContent(message);
     const response = await result.response;
     const text = response.text();
 
     return NextResponse.json({ text });
   } catch (error: any) {
-    // Här loggar vi exakt vad Google säger så du kan se det i Vercel-loggen
     console.error("DETALJERAT FEL:", error.message);
-    return NextResponse.json({ text: "AI:n sover just nu, försök igen om en liten stund!" }, { status: 500 });
+    return NextResponse.json({ text: "Nu blev det ett tekniskt fel. Prova igen!" }, { status: 500 });
   }
 }
