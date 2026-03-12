@@ -3,6 +3,9 @@ import { createMetadata } from "@/lib/seo";
 import { getAnalysisBySlug, analyses } from "@/lib/analyses";
 import { formatDate, verdictColor } from "@/lib/utils";
 
+// Importa din Alphabet-komponent
+import AlphabetAnalysis from "./alphabet/page";
+
 export async function generateStaticParams() {
   return analyses.map((a) => ({ slug: a.slug }));
 }
@@ -38,6 +41,12 @@ export default async function AnalysisPage({
     notFound();
   }
 
+  // Om det är Alphabet, visa den fulla analysen
+  if (slug === "alphabet") {
+    return <AlphabetAnalysis />;
+  }
+
+  // För alla andra analyser, visa placeholder
   return (
     <article className="py-16 md:py-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
