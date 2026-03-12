@@ -85,7 +85,7 @@ requires: "Regulatorisk chock utöver det tidigare utfallet, AI-disruption av Se
 },
 ];
 
-const PUBLISHED = false; // ändra till true för att publicera
+const PUBLISHED = true; // ändra till true för att publicera
 
 export default function AlphabetAnalysis() {
 if (!PUBLISHED) return null;
