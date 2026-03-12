@@ -15,7 +15,7 @@ export async function POST(req: Request) {
     }
 
     // Vi använder 'gemini-1.5-flash-latest' som är mest tolerant mot versionsfel
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const prompt = `Du är en intelligent AI-assistent på Börsanalys.se. Svara på svenska. Fråga: ${message}`;
 
