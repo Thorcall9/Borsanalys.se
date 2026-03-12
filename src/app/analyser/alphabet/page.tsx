@@ -64,7 +64,7 @@ type: "bull",
 probability: "25%",
 price: "$420",
 change: "+37% från $307",
-assumptions: "GCP >35% tillväxt med >25% marginal\nAI Overview Ads driver Search\nEPS $13–14",
+assumptions: "GCP över 35% tillväxt med över 25% marginal\nAI Overview Ads driver Search\nEPS $13–14",
 requires: "Cloud tar marknadsandelar, Gemini stärker Search-monetarisering, CapEx-effektiviteten är hög och regulatoriska remedies är minimala.",
 },
 {
@@ -320,7 +320,7 @@ theme="light"
       />
 
       <AlertBox type="risk">
-        <strong>⚠️ Strategisk FCF-kompression:</strong> FCF-marginalen sjunker pga aggressiv CapEx (~$85Mdr 2025). Detta är en medveten strategisk "bränning" för att köpa framtida marknadsandelar i AI-infrastruktur — inte ett tecken på operativ ineffektivitet. När CapEx-toppen passeras och GCP:s marginaler (nu 20,7%) konverteras till FCF förväntas kraftig FCF-expansion från 2026.
+        <strong>OBS: Strategisk FCF-kompression:</strong> FCF-marginalen sjunker pga aggressiv CapEx (~$85Mdr 2025). Detta är en medveten strategisk "bränning" för att köpa framtida marknadsandelar i AI-infrastruktur — inte ett tecken på operativ ineffektivitet. När CapEx-toppen passeras och GCP:s marginaler (nu 20,7%) konverteras till FCF förväntas kraftig FCF-expansion från 2026.
       </AlertBox>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-5">
@@ -419,7 +419,7 @@ theme="light"
         ]}
         rows={[
           { cells: { catalyst: { value: "AI Overview Ads — monetariseringsdata"     }, timing: { value: "Kvartalsvis"   }, impact: { value: "Hög",          color: "green" } } },
-          { cells: { catalyst: { value: "GCP-tillväxt >35% med stigande marginal"   }, timing: { value: "Löpande"      }, impact: { value: "Hög",          color: "green" } } },
+          { cells: { catalyst: { value: "GCP-tillväxt över 35% med stigande marginal"   }, timing: { value: "Löpande"      }, impact: { value: "Hög",          color: "green" } } },
           { cells: { catalyst: { value: "FCF-återhämtning när CapEx toppar"         }, timing: { value: "2026"         }, impact: { value: "Hög",          color: "green" } } },
           { cells: { catalyst: { value: "Wiz-förvärv stänger & integreras"          }, timing: { value: "2026"         }, impact: { value: "Medel"                       } } },
           { cells: { catalyst: { value: "Waymo kapitalrunda + geografisk expansion" }, timing: { value: "2026"         }, impact: { value: "Hög risk/reward", color: "amber" } } },
@@ -458,7 +458,7 @@ theme="light"
       />
 
       <AlertBox type="risk">
-        <strong>⚠️ DOJ Antitrust:</strong> En domstol fastslog i augusti 2024 att Google brutit mot antitrustlagar rörande sökverksamheten. Strukturell uppdelning (Chrome/Android) undveks i september 2025 — utfallet blev beteendemässiga krav. Remedies-fasen är dock inte avslutad och eventuella ytterligare krav kan komma under 2026. EU DMA-utredningar om Google Play pågår parallellt. Regulatorisk klarhet är en positiv katalysator när den väl kommer.
+        <strong>OBS: DOJ Antitrust:</strong> En domstol fastslog i augusti 2024 att Google brutit mot antitrustlagar rörande sökverksamheten. Strukturell uppdelning (Chrome/Android) undveks i september 2025 — utfallet blev beteendemässiga krav. Remedies-fasen är dock inte avslutad och eventuella ytterligare krav kan komma under 2026. EU DMA-utredningar om Google Play pågår parallellt. Regulatorisk klarhet är en positiv katalysator när den väl kommer.
       </AlertBox>
 
       <RatingBox rating={3}><strong>3/5 risk</strong> — Finansiell risk är låg tack vare stark balansräkning och hög kassaflödesgenerering. Strukturell regulatorisk risk är förhöjd men minskat sedan strukturell uppdelning undveks. Bolagets snabba anpassning visar att riskerna är hanterbara.</RatingBox>
@@ -506,17 +506,17 @@ theme="light"
       <SectionHeader number="VIII" title="AI-observationer & Avvikande mönster" />
 
       <div className="bg-[#0f1a0f] rounded p-4 mb-4 font-mono">
-        <div className="text-[#40d040] text-[10px] tracking-widest mb-2">◈ AI-ANALYSMODUL AKTIVERAD · ALPHABET INC. · 10 MARS 2026</div>
-        <div className="text-[#80e080] text-xs leading-loose">► Sentimentanalys: BULLISH (76/100) | Omvärdering pågår sedan H2 2025 — "AI winner"-narrativ befäst</div>
-        <div className="text-[#80e080] text-xs leading-loose">► Analytikerkonsensus: 41/41 = KÖP/Strong Buy | Snittpris $351–367</div>
-        <div className="text-[#80e080] text-xs leading-loose">► Q3 2025: Omsättning $102,3Mdr — historisk milstolpe, EPS $3,10 kraftig beat</div>
-        <div className="text-[#80e080] text-xs leading-loose">► GCP-marginal Q2 2025: 20,7% — upp från 8,7% ett år tidigare</div>
-        <div className="text-[#80e080] text-xs leading-loose">► DOJ: Strukturell uppdelning undveks sept 2025 — beteendemässiga krav kvarstår</div>
+        <div className="text-[#40d040] text-[10px] tracking-widest mb-2">* AI-ANALYSMODUL AKTIVERAD · ALPHABET INC. · 10 MARS 2026</div>
+        <div className="text-[#80e080] text-xs leading-loose">> Sentimentanalys: BULLISH (76/100) | Omvärdering pågår sedan H2 2025 — "AI winner"-narrativ befäst</div>
+        <div className="text-[#80e080] text-xs leading-loose">> Analytikerkonsensus: 41/41 = KÖP/Strong Buy | Snittpris $351–367</div>
+        <div className="text-[#80e080] text-xs leading-loose">> Q3 2025: Omsättning $102,3Mdr — historisk milstolpe, EPS $3,10 kraftig beat</div>
+        <div className="text-[#80e080] text-xs leading-loose">> GCP-marginal Q2 2025: 20,7% — upp från 8,7% ett år tidigare</div>
+        <div className="text-[#80e080] text-xs leading-loose">> DOJ: Strukturell uppdelning undveks sept 2025 — beteendemässiga krav kvarstår</div>
       </div>
 
       <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mt-6 mb-2 pl-2 border-l-[3px] border-[#b5892a]">Positiv omvärdering under 2025</h3>
       <p className="text-sm leading-relaxed text-[#2a2a2a] mb-3">
-        Marknadssentimentet kring Alphabet har genomgått en betydande positiv omvärdering. Tidigare investeraroro över bolagets AI-positionering har ersatts av optimism — bolaget ses nu som en tydlig "generative-AI winner". Q3 2025 med >$100Mdr kvartal bekräftade detta. CapEx-planen ($85Mdr 2025) bör tolkas som en medveten strategisk manöver — en upprepning av historiska mönster där aggressiva investeringsvågor ledde till marknadsdominans (GCP, Android, YouTube).
+        Marknadssentimentet kring Alphabet har genomgått en betydande positiv omvärdering. Tidigare investeraroro över bolagets AI-positionering har ersatts av optimism — bolaget ses nu som en tydlig "generative-AI winner". Q3 2025 med över $100Mdr kvartal bekräftade detta. CapEx-planen ($85Mdr 2025) bör tolkas som en medveten strategisk manöver — en upprepning av historiska mönster där aggressiva investeringsvågor ledde till marknadsdominans (GCP, Android, YouTube).
       </p>
 
       <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mt-5 mb-2 pl-2 border-l-[3px] border-[#b5892a]">Search mer resilient än befarat</h3>
@@ -525,7 +525,7 @@ theme="light"
       </p>
 
       <AlertBox type="info">
-        <strong>💡 EPS-estimaten kan vara konservativa:</strong> Analytikernas 2026e EPS ~$11,24 förutsätter blygsam tillväxt jämfört med TTM Q2 2025 ($9,48). Om GCP levererar 40–50% tillväxt och Search håller +12% finns upprevideringsrisk mot $13–14 EPS — vilket ger målpris $415–450 vid 32x P/E. GCP:s marginalexpansion (8,7% → 20,7% på ett år) är den starkaste signalen för denna upprevidering.
+        <strong>Tips: EPS-estimaten kan vara konservativa:</strong> Analytikernas 2026e EPS ~$11,24 förutsätter blygsam tillväxt jämfört med TTM Q2 2025 ($9,48). Om GCP levererar 40–50% tillväxt och Search håller +12% finns upprevideringsrisk mot $13–14 EPS — vilket ger målpris $415–450 vid 32x P/E. GCP:s marginalexpansion (8,7% → 20,7% på ett år) är den starkaste signalen för denna upprevidering.
       </AlertBox>
 
       <FinancialTable
@@ -587,15 +587,15 @@ theme="light"
           { key: "comment",  header: "Kommentar" },
         ]}
         rows={[
-          { cells: { criteria: { value: "Uthållig affärsmodell"    }, result: { value: "✅ Ja",     color: "green" }, comment: { value: "Sökmonopol + GCP + YouTube — AI-first"   } } },
-          { cells: { criteria: { value: "Stark moat"              }, result: { value: "✅ Ja",     color: "green" }, comment: { value: "Full-stack AI, nätverkseffekter, TPUs"    } } },
-          { cells: { criteria: { value: "Konsistent vinsttillväxt"}, result: { value: "✅ Ja",     color: "green" }, comment: { value: "EPS +38% FY2024, +49% Q1 2025"           } } },
-          { cells: { criteria: { value: "Stark balansräkning"     }, result: { value: "✅ Ja",     color: "green" }, comment: { value: "$95Mdr nettokassa, soliditet 72%"         } } },
-          { cells: { criteria: { value: "Hög kapitalavkastning"   }, result: { value: "✅ Ja",     color: "green" }, comment: { value: "ROE ~30%, ROIC > WACC"                   } } },
-          { cells: { criteria: { value: "Kompetent ledning"       }, result: { value: "✅ Ja",     color: "green" }, comment: { value: "Pichai + Hassabis (Nobelpriset) — topp"  } } },
-          { cells: { criteria: { value: "Attraktiv värdering"     }, result: { value: "⚠️ Delvis", color: "amber" }, comment: { value: "28x P/E — motiverat men inte billigt"    } } },
-          { cells: { criteria: { value: "Regulatorisk risk"       }, result: { value: "⚠️ Risk",   color: "amber" }, comment: { value: "DOJ + EU DMA — hanterbara men påtagliga" } } },
-          { cells: { criteria: { value: "5–10 år ägbarhet"        }, result: { value: "✅ Ja",     color: "green" }, comment: { value: "AI + Cloud + Waymo = generationsskifte"  } } },
+          { cells: { criteria: { value: "Uthållig affärsmodell"    }, result: { value: "Ja",     color: "green" }, comment: { value: "Sökmonopol + GCP + YouTube — AI-first"   } } },
+          { cells: { criteria: { value: "Stark moat"              }, result: { value: "Ja",     color: "green" }, comment: { value: "Full-stack AI, nätverkseffekter, TPUs"    } } },
+          { cells: { criteria: { value: "Konsistent vinsttillväxt"}, result: { value: "Ja",     color: "green" }, comment: { value: "EPS +38% FY2024, +49% Q1 2025"           } } },
+          { cells: { criteria: { value: "Stark balansräkning"     }, result: { value: "Ja",     color: "green" }, comment: { value: "$95Mdr nettokassa, soliditet 72%"         } } },
+          { cells: { criteria: { value: "Hög kapitalavkastning"   }, result: { value: "Ja",     color: "green" }, comment: { value: "ROE ~30%, ROIC > WACC"                   } } },
+          { cells: { criteria: { value: "Kompetent ledning"       }, result: { value: "Ja",     color: "green" }, comment: { value: "Pichai + Hassabis (Nobelpriset) — topp"  } } },
+          { cells: { criteria: { value: "Attraktiv värdering"     }, result: { value: "Delvis", color: "amber" }, comment: { value: "28x P/E — motiverat men inte billigt"    } } },
+          { cells: { criteria: { value: "Regulatorisk risk"       }, result: { value: "Risk",   color: "amber" }, comment: { value: "DOJ + EU DMA — hanterbara men påtagliga" } } },
+          { cells: { criteria: { value: "5–10 år ägbarhet"        }, result: { value: "Ja",     color: "green" }, comment: { value: "AI + Cloud + Waymo = generationsskifte"  } } },
         ]}
       />
 
@@ -629,7 +629,7 @@ theme="light"
       </div>
 
       <AlertBox type="signal">
-        <strong>✅ Slutsats: KÖP</strong> — Alphabet kombinerar ett av teknikhistoriens starkaste sökmonopol med en snabbväxande och alltmer lönsam Cloud-affär (GCP-marginal 20,7% Q2 2025) och world-class AI-kapacitet i DeepMind. Q3 2025 visade att bolaget är tillbaka i offensiven — historisk milstolpe med >$100Mdr i kvartalsomsättning. Regulatorisk risk (DOJ) är reell men hanteras — vi ser $360 som rimligt bascase och köper vid nuvarande nivåer kring $307.
+        <strong>Slutsats: KÖP</strong> — Alphabet kombinerar ett av teknikhistoriens starkaste sökmonopol med en snabbväxande och alltmer lönsam Cloud-affär (GCP-marginal 20,7% Q2 2025) och world-class AI-kapacitet i DeepMind. Q3 2025 visade att bolaget är tillbaka i offensiven — historisk milstolpe med över $100Mdr i kvartalsomsättning. Regulatorisk risk (DOJ) är reell men hanteras — vi ser $360 som rimligt bascase och köper vid nuvarande nivåer kring $307.
       </AlertBox>
     </div>
 
