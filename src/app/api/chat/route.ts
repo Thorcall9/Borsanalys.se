@@ -9,7 +9,7 @@ export async function POST(req: Request) {
     const { message } = await req.json();
 
     // Vi använder "models/gemini-1.5-flash" (vissa system kräver "models/" prefixet)
-const model = genAI.getGenerativeModel({ model: "gemini-3-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
     const result = await model.generateContent(message);
     const response = await result.response;
