@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import ChatWidget from "@/components/chat/ChatWidget";
 import { defaultMetadata } from "@/lib/seo";
 import "./globals.css";
 
@@ -50,6 +51,7 @@ export default function RootLayout({
             </Script>
           </>
         )}
+        <ChatWidget />
         <Analytics />
       </body>
     </html>
