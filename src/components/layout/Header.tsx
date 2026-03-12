@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useState } from "react";
+// Vi hämtar din lista med analyser här
+import { analyses } from "@/lib/analyses";
 
 const navItems = [
   { href: "/", label: "Hem" },
@@ -21,12 +23,15 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [toolsOpen, setToolsOpen] = useState(false);
 
+  // Vi hämtar den allra senaste analysen (den som ligger överst i analyses.ts)
+  const latestAnalysis = analyses[0];
+
   return (
     <>
-      {/* Announcement bar */}
-      <div className="bg-gradient-to-r from-primary to-primary-light text-white text-center text-sm py-2 px-4">
-        <Link href="/analyser" className="hover:underline">
-          Ny analys av Microsoft ute nu!
+      {/* Announcement bar - NU HELT AUTOMATISK */}
+      <div className="bg-gradient-to-r from-primary to-primary-light text-white text-center text-sm py-2 px-4 transition-all">
+        <Link href={`/analyser/${latestAnalysis.slug}`} className="hover:underline">
+          Ny analys ute nu: <span className="font-semibold">{latestAnalysis.title}</span>
         </Link>
       </div>
 
