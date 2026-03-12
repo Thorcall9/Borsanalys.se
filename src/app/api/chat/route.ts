@@ -1,23 +1,15 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
 
-const apiKey = process.env.GOOGLE_GEMINI_API_KEY?.trim();
-
-// Här tvingar vi in API-versionen "v1"
-const genAI = new GoogleGenerativeAI(apiKey || "");
+const apiKey = process.env.GOOGLE_GEMINI_API_KEY?.trim() || "";
+const genAI = new GoogleGenerativeAI(apiKey);
 
 export async function POST(req: Request) {
   try {
     const { message } = await req.json();
 
-    if (!apiKey) {
-      return NextResponse.json({ text: "API-nyckel saknas." }, { status: 500 });
-    }
-
-    // Vi testar att köra utan "models/" prefixet men med en specifik metod
-    const model = genAI.getGenerativeModel({ 
-      model: "gemini-1.5-flash",
-    }, { apiVersion: 'v1' }); // TVINGA V1 ISTÄLLET FÖR BETA
+    // Vi använder "models/gemini-1.5-flash" (vissa system kräver "models/" prefixet)
+    const model = genAI.getGenerativeModel({ model: "models/gemini-1.5-flash" });
 
     const result = await model.generateContent(message);
     const response = await result.response;
@@ -26,6 +18,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ text });
   } catch (error: any) {
     console.error("DETALJERAT FEL:", error.message);
-    return NextResponse.json({ text: "Nu blev det ett tekniskt fel. Prova igen!" }, { status: 500 });
+    // Om det fortfarande blir 404, skriver vi ut en ledtråd
+    return NextResponse.json({ text: `Fel: ${error.message}` }, { status: 500 });
   }
 }
