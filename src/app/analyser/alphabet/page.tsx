@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image" 
 import {
 AnalysisLayout,
 SectionHeader,
@@ -133,14 +134,17 @@ theme="light"
 </div>
 
 
-  {/* Hero image */}
-  <div className="w-full">
-    <img
-      src="/alphabet_analys_hero.png"
-      alt="Alphabet aktieanalys 2026"
-      className="w-full object-cover"
-    />
-  </div>
+{/* Hero image */}
+<div className="w-full">
+  <Image
+    src="/alphabet_analys_hero.png"
+    alt="Alphabet aktieanalys 2026"
+    width={1600}
+    height={600}
+    className="w-full h-auto"
+    priority
+  />
+</div>
 
   <div className="px-6 sm:px-12 pb-20 bg-[#faf8f3] text-[#0f0f0f]">
 
