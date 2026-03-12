@@ -9,7 +9,7 @@ export async function POST(req: Request) {
     const { message } = await req.json();
 
     // Vi använder "flash"-modellen för att den är snabbast och gratis
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
     const prompt = `Du är en intelligent AI-assistent på hemsidan Börsanalys.se. 
     Ditt jobb är att hjälpa besökare med frågor om aktieanalyser, börsen och finansiella nycklar. 
