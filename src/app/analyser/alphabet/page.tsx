@@ -132,7 +132,7 @@ theme="light"
 </div>
 </div>
 
-```
+
   {/* Hero image */}
   <div className="w-full">
     <img
@@ -672,7 +672,6 @@ theme="light"
 
   </div>
 </AnalysisLayout>
-```
 
 );
 }
