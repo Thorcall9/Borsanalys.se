@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
 
-// Vi hämtar nyckeln som du precis sparade i Vercel
+// Vi hämtar nyckeln som du precis sparade i Vercel 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY || "");
 
 export async function POST(req: Request) {
