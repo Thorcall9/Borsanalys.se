@@ -44,14 +44,15 @@ export const analyses: Analysis[] = [
     target: "DKK 520",
   },
   {
-    slug: "alphabet-2025",
-    title: "Alphabet (GOOGL): Är AI nästa stora lyft eller dyr fälla?",
-    date: "2025-10-13",
-    author: "Carl Fredrik Thor",
-    category: "Långsiktiga analyser",
-    excerpt: "Googles AI-satsning med Gemini — möjlighet eller risk för investerare?",
-    verdict: "KÖP",
-    target: "$210",
+   slug: "alphabet-2026",
+title: "Alphabet (GOOGL): AI-ledarskap och historiska milstolpar",
+date: "2026-03-12",
+author: "Carl Fredrik Thor",
+category: "Långsiktiga analyser",
+excerpt: "Med en historisk kvartalsomsättning på över $100Mdr och en Cloud-marginal som rusat från 8% till 20% på ett år, befäster Alphabet sin roll som AI-erans definitiva vinnare.",
+verdict: "KÖP",
+target: "$360",
+
   },
   {
     slug: "investor-2025-q2",
