@@ -14,8 +14,9 @@ export async function POST(req: Request) {
       return NextResponse.json({ text: "Systemfel: API-nyckel saknas." }, { status: 500 });
     }
 
-    // Vi använder 'gemini-1.5-flash-latest' som är mest tolerant mot versionsfel
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    // Vi byter till 1.0 Pro som är den mest stabila "legacy"-modellen för API-anrop
+const model = genAI.getGenerativeModel({ model: "gemini-1.0-pro" });
+
 
     const prompt = `Du är en intelligent AI-assistent på Börsanalys.se. Svara på svenska. Fråga: ${message}`;
 
