@@ -59,7 +59,7 @@ threats: [
 
 const scenarios: Scenario[] = [
   {
-    label: "Bull",
+    type: "Bull",
     probability: "25%",
     price: "430 kr",
     return: "+22%",
@@ -68,7 +68,7 @@ const scenarios: Scenario[] = [
       "Bred börshaussé lyfter noterade innehav. EQT levererar starka exits. Nova Biomedical-integration lyckas och återgår till positiv tillväxt. Sobis Arthrosi visar positiva fas 3-resultat. ABB och Atlas Copco gynnas av AI-infrastrukturinvesteringar. Substansrabatt normaliseras mot 5-10%.",
   },
   {
-    label: "Base",
+    type: "Base",
     probability: "50%",
     price: "370 kr",
     return: "+5%",
@@ -77,7 +77,7 @@ const scenarios: Scenario[] = [
       "NAV-tillväxt ca 5-7%. Utdelning 5,60 kr utbetalas. Nova-integrationen fortskrider men med viss tröghet. Permobil vänder sakta. Valutamotvinden avtar gradvis. EQT-distributioner håller sig på starka nivåer.",
   },
   {
-    label: "Bear",
+    type: "Bear",
     probability: "25%",
     price: "260 kr",
     return: "-26%",
