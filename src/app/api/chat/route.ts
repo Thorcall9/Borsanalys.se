@@ -1,20 +1,29 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
+import { analyses } from "../../lib/analyses";
 
 const apiKey = process.env.GOOGLE_GEMINI_API_KEY?.trim() || "";
 const genAI = new GoogleGenerativeAI(apiKey);
 
-const SYSTEM_PROMPT = `Du är en analytisk AI-assistent på Börsanalys.se — en svensk sajt med djupgående aktieanalyser. 
+function buildSystemPrompt(): string {
+  const analysisLines = analyses
+    .map((a) => {
+      const verdict = a.verdict ?? "Ingen rekommendation";
+      const target = a.target ? `, Riktkurs: ${a.target}` : "";
+      return `- ${a.title} (${a.date}): ${verdict}${target} — /analyser/${a.slug}`;
+    })
+    .join("\n");
+
+  return `Du är en analytisk AI-assistent på Börsanalys.se — en svensk sajt med djupgående aktieanalyser.
 
 DITT UPPDRAG:
 - Ge korta, faktabaserade svar om aktier, bolag och börsen
-- Hänvisa till Börsanalys.se egna analyser när de är relevanta (NVIDIA, Microsoft, Alphabet)
+- Hänvisa till Börsanalys.se egna analyser när de är relevanta
+- Besvara även generella börsfrågor: värdering (P/E, P/S, EV/EBITDA), diversifiering, makroekonomi, teknisk analys, fundamentalanalys och investeringsstrategier
 - Håll alltid en analytisk, professionell ton — som en erfaren portföljförvaltare
 
-BÖRSANALYS.SE AKTUELLA ANALYSER OCH RIKTKURSER:
-- NVIDIA (NVDA): Riktkurs $185, rekommendation KÖP
-- Microsoft (MSFT): Riktkurs $510, rekommendation KÖP  
-- Alphabet (GOOGL): Riktkurs $360, rekommendation KÖP
+BÖRSANALYS.SE AKTUELLA ANALYSER:
+${analysisLines}
 
 SVARSFORMAT:
 - Håll svar korta och koncisa — max 150 ord om inte användaren ber om mer
@@ -27,6 +36,7 @@ VIKTIGT:
 - Spekulera inte om riktkurser för bolag som Börsanalys.se inte analyserat
 - Om du inte vet något med säkerhet — säg det
 - Hänvisa gärna till borsanalys.se/analyser för djupare läsning`;
+}
 
 export async function POST(req: Request) {
   try {
@@ -34,7 +44,7 @@ export async function POST(req: Request) {
 
     const model = genAI.getGenerativeModel({
       model: "gemini-2.5-flash",
-      systemInstruction: SYSTEM_PROMPT,
+      systemInstruction: buildSystemPrompt(),
     });
 
     const result = await model.generateContent(message);
