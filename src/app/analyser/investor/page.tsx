@@ -239,7 +239,7 @@ export default function InvestorPage() {
       {/* SEKTION III */}
      <section id="financials" data-section="financials" className="mb-16">
   <SectionHeader number="III" title="Finansiell analys" />
-  <FinancialTable rows={financialRows as any} />
+<FinancialTable rows={financialRows as any} columns={["FY2023", "FY2024", "FY2025"]} />
         <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
           <MetricCard label="NAV-tillväxt FY2025" value="+14%" />
           <MetricCard label="Aktieägaravkastning" value="+15%" />
