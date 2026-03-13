@@ -490,7 +490,7 @@ export default function InvestorPage() {
       </section>
 
       {/* Dessa tre rader stänger hela sidan korrekt */}
-    </div>
+      </div>
   </AnalysisLayout>
   );
 }
