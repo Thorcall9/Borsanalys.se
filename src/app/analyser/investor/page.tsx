@@ -58,43 +58,43 @@ threats: [
 };
 
 const scenarios: Scenario[] = [
-  {
-    type: "bull", // Måste vara små bokstäver: "bull"
-    probability: "25%",
-    price: "430 kr",
-    change: "+22%",
-    assumptions: "Bred börshaussé lyfter noterade innehav. EQT levererar starka exits. Nova Biomedical-integration lyckas.",
-    requires: "Substansrabatt normaliseras mot 5-10% och stark tillväxt i onoterade portföljen."
-  },
-  {
-    type: "base", // Måste vara små bokstäver: "base"
-    probability: "50%",
-    price: "370 kr",
-    change: "+5%",
-    assumptions: "NAV-tillväxt ca 5-7%. Utdelning 5,60 kr utbetalas. Nova-integrationen fortskrider enligt plan.",
-    requires: "Stabil utveckling i Atlas Copco och ABB samt bibehållen substansrabatt."
-  },
-  {
-    type: "bear", // Måste vara små bokstäver: "bear"
-    probability: "25%",
-    price: "260 kr",
-    change: "-26%",
-    assumptions: "Global recession pressar noterade innehav och EQT-värderingar. Nova Biomedical belastas av störningar.",
-    requires: "Kraftig kronförstärkning och sämre konjunktur för verkstadsbolagen."
-  }
+{
+type: "bull",
+probability: "25%",
+price: "430 kr",
+change: "+22%",
+assumptions: "Bred börshaussé lyfter noterade innehav. EQT levererar starka exits. Nova Biomedical-integration lyckas.",
+requires: "Substansrabatt normaliseras mot 5-10% och stark tillväxt i onoterade portföljen."
+},
+{
+type: "base",
+probability: "50%",
+price: "370 kr",
+change: "+5%",
+assumptions: "NAV-tillväxt ca 5-7%. Utdelning 5,60 kr utbetalas. Nova-integrationen fortskrider enligt plan.",
+requires: "Stabil utveckling i Atlas Copco och ABB samt bibehållen substansrabatt."
+},
+{
+type: "bear",
+probability: "25%",
+price: "260 kr",
+change: "-26%",
+assumptions: "Global recession pressar noterade innehav och EQT-värderingar. Nova Biomedical belastas av störningar.",
+requires: "Kraftig kronförstärkning och sämre konjunktur för verkstadsbolagen."
+}
 ];
 
 const financialRows = [
-{ metric: "Justerat NAV (mdkr SEK)", fy2023: "808", fy2024: "970", fy2025: "1 087" },
-{ metric: "NAV per aktie (SEK)", fy2023: "264", fy2024: "317", fy2025: "355" },
-{ metric: "NAV-tillväxt (%)", fy2023: "+18%", fy2024: "+20%", fy2025: "+14%" },
-{ metric: "Total aktieägaravkastning (%)", fy2023: "+22%", fy2024: "+27%", fy2025: "+15%" },
-{ metric: "Resultat per aktie (EPS, kr)", fy2023: "41,48", fy2024: "37,00", fy2025: "~55 (est.)" },
-{ metric: "Eget kapital (mdkr SEK)", fy2023: "717", fy2024: "820", fy2025: "~1 050" },
-{ metric: "Soliditet (%)", fy2023: "~85,6%", fy2024: "~86,1%", fy2025: "~85%" },
-{ metric: "Belåningsgrad (%)", fy2023: "1,2%", fy2024: "1,2%", fy2025: "2,1%" },
-{ metric: "Utdelning per aktie (SEK)", fy2023: "4,40", fy2024: "5,20", fy2025: "5,60" },
-{ metric: "20-årig genomsnittlig årsavkastning (%)", fy2023: "—", fy2024: "16,4%", fy2025: "15,0%" },
+{ cells: ["Justerat NAV (mdkr SEK)", "808", "970", "1 087"] },
+{ cells: ["NAV per aktie (SEK)", "264", "317", "355"] },
+{ cells: ["NAV-tillväxt (%)", "+18%", "+20%", "+14%"] },
+{ cells: ["Total aktieägaravkastning (%)", "+22%", "+27%", "+15%"] },
+{ cells: ["Resultat per aktie (EPS, kr)", "41,48", "37,00", "~55 (est.)"] },
+{ cells: ["Eget kapital (mdkr SEK)", "717", "820", "~1 050"] },
+{ cells: ["Soliditet (%)", "~85,6%", "~86,1%", "~85%"] },
+{ cells: ["Belåningsgrad (%)", "1,2%", "1,2%", "2,1%"] },
+{ cells: ["Utdelning per aktie (SEK)", "4,40", "5,20", "5,60"] },
+{ cells: ["20-årig genomsnittlig årsavkastning (%)", "—", "16,4%", "15,0%"] },
 ];
 
 const PUBLISHED = true;
