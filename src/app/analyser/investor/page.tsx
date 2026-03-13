@@ -240,14 +240,14 @@ export default function InvestorPage() {
      <section id="financials" data-section="financials" className="mb-16">
   <SectionHeader number="III" title="Finansiell analys" />
   
-  <FinancialTable 
+  <FinancialTable
     columns={[
       { key: "metric", header: "Nyckeltal" },
-      { key: "v1", header: "FY2023" },
-      { key: "v2", header: "FY2024" },
-      { key: "v3", header: "FY2025" }
-    ] as any}
-    rows={financialRows as any} 
+      { key: "FY2023", header: "FY2023" },
+      { key: "FY2024", header: "FY2024" },
+      { key: "FY2025", header: "FY2025" }
+    ]}
+    rows={financialRows}
   />
 
   <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -317,7 +317,7 @@ export default function InvestorPage() {
       </section>
 
       {/* SEKTION V */}
-      <section id="growth" className="mb-16">
+      <section id="growth" data-section="growth" className="mb-16">
         <SectionHeader number="V" title="Tillvaxtmotorer" />
         <div className="space-y-4">
           <div className="border-l-4 border-[#1a3c6e] pl-4">
@@ -348,7 +348,7 @@ export default function InvestorPage() {
       </section>
 
       {/* SEKTION VI */}
-      <section id="risk" className="mb-16">
+      <section id="risk" data-section="risk" className="mb-16">
         <SectionHeader number="VI" title="Riskprofil" />
         <SwotGrid data={swotData} />
 
@@ -367,7 +367,7 @@ export default function InvestorPage() {
       </section>
 
       {/* SEKTION VII */}
-      <section id="esg" className="mb-16">
+      <section id="esg" data-section="esg" className="mb-16">
         <SectionHeader number="VII" title="ESG och Agande" />
         <p className="text-sm leading-relaxed text-[#2a2a2a] mb-4">
           Investor har uppnått 89% minskning av egna CO2-utsläpp jämfört med 2016 och 70% minskning i portföljbolagen. Under Q4 2025 skärptes hållbarhetsmålen för 2030 med ytterligare fokus på Scope 3 — där den största klimatpåverkan och de största affärsmöjligheterna finns. Sustainalytics ESG-riskscore är 11,87 (låg risk). 100% av portföljbolagen genomför regelbunden antikorruptionsutbildning.
@@ -399,7 +399,7 @@ export default function InvestorPage() {
       </section>
 
       {/* SEKTION VIII */}
-      <section id="portfolio" className="mb-16">
+      <section id="portfolio" data-section="portfolio" className="mb-16">
         <SectionHeader number="VIII" title="Portföljanalys" />
         <p className="text-sm leading-relaxed text-[#2a2a2a] mb-4">
           Noterade Bolag utgör 68% av Investors totala tillgångar och är den primära NAV-drivaren. Q3 2025 levererade 8% totalavkastning och 58 714 mkr i absolut värdeförändring. Q4 2025 levererade ytterligare 6%. Nedan visas Q3-bidragen per innehav:
@@ -451,7 +451,7 @@ export default function InvestorPage() {
       </section>
 
             {/* SEKTION IX */}
-      <section id="decision" data-section="decision" className="mb-16">
+      <section id="verdict" data-section="verdict" className="mb-16">
         <SectionHeader number="IX" title="Investeringsbeslut" />
         
         <RatingBox rating={4}>
@@ -481,14 +481,13 @@ export default function InvestorPage() {
       </section>
 
            {/* SEKTION X */}
-      <section id="scenarios" className="mb-16">
+      <section id="scenarios" data-section="scenarios" className="mb-16">
         <SectionHeader number="X" title="Scenarier" />
         <ScenarioCards scenarios={scenarios} />
         <p className="text-sm leading-relaxed text-[#2a2a2a] mt-6">
           Det sannolikhetsviktade utfallet landar kring 357 kr — nära riktkursen 370 kr. Tre fokusområden dominerar osäkerheten för 2026: (1) Nova Biomedical-integration och GDPR-risk efter cyberincidenten. (2) Permobils vändning efter nolltillväxt Q3 och SmartDrive-återkallelse. (3) Makrofriktion via tariffer och en stärkande krona som pressar Patricia Industries rapporterade siffror. VD Cederholms budskap är tydligt: osäkerheten är hög, men Investors finansiella styrka och 110-åriga affärslogik är intakt.
         </p>
       </section>
-    </div>
   </AnalysisLayout>
   );
 }
