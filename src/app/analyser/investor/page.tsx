@@ -85,16 +85,86 @@ requires: "Kraftig kronförstärkning och sämre konjunktur för verkstadsbolage
 ];
 
 const financialRows = [
-{ cells: ["Justerat NAV (mdkr SEK)", "808", "970", "1 087"] },
-{ cells: ["NAV per aktie (SEK)", "264", "317", "355"] },
-{ cells: ["NAV-tillväxt (%)", "+18%", "+20%", "+14%"] },
-{ cells: ["Total aktieägaravkastning (%)", "+22%", "+27%", "+15%"] },
-{ cells: ["Resultat per aktie (EPS, kr)", "41,48", "37,00", "~55 (est.)"] },
-{ cells: ["Eget kapital (mdkr SEK)", "717", "820", "~1 050"] },
-{ cells: ["Soliditet (%)", "~85,6%", "~86,1%", "~85%"] },
-{ cells: ["Belåningsgrad (%)", "1,2%", "1,2%", "2,1%"] },
-{ cells: ["Utdelning per aktie (SEK)", "4,40", "5,20", "5,60"] },
-{ cells: ["20-årig genomsnittlig årsavkastning (%)", "—", "16,4%", "15,0%"] },
+{
+cells: {
+metric: { value: "Justerat NAV (mdkr SEK)" },
+FY2023: { value: "808" },
+FY2024: { value: "970" },
+FY2025: { value: "1 087" },
+},
+},
+{
+cells: {
+metric: { value: "NAV per aktie (SEK)" },
+FY2023: { value: "264" },
+FY2024: { value: "317" },
+FY2025: { value: "355" },
+},
+},
+{
+cells: {
+metric: { value: "NAV-tillväxt (%)" },
+FY2023: { value: "+18%", color: "green", arrow: "up" },
+FY2024: { value: "+20%", color: "green", arrow: "up" },
+FY2025: { value: "+14%", color: "green", arrow: "up" },
+},
+},
+{
+cells: {
+metric: { value: "Total aktieägaravkastning (%)" },
+FY2023: { value: "+22%", color: "green", arrow: "up" },
+FY2024: { value: "+27%", color: "green", arrow: "up" },
+FY2025: { value: "+15%", color: "green", arrow: "up" },
+},
+},
+{
+cells: {
+metric: { value: "Resultat per aktie (EPS, kr)" },
+FY2023: { value: "41,48" },
+FY2024: { value: "37,00" },
+FY2025: { value: "~55 (est.)" },
+},
+},
+{
+cells: {
+metric: { value: "Eget kapital (mdkr SEK)" },
+FY2023: { value: "717" },
+FY2024: { value: "820" },
+FY2025: { value: "~1 050" },
+},
+},
+{
+cells: {
+metric: { value: "Soliditet (%)" },
+FY2023: { value: "~85,6%" },
+FY2024: { value: "~86,1%" },
+FY2025: { value: "~85%" },
+},
+},
+{
+cells: {
+metric: { value: "Belåningsgrad (%)" },
+FY2023: { value: "1,2%" },
+FY2024: { value: "1,2%" },
+FY2025: { value: "2,1%" },
+},
+},
+{
+cells: {
+metric: { value: "Utdelning per aktie (SEK)" },
+FY2023: { value: "4,40" },
+FY2024: { value: "5,20" },
+FY2025: { value: "5,60" },
+},
+},
+{
+cells: {
+metric: { value: "20-årig genomsnittlig årsavkastning (%)" },
+FY2023: { value: "—" },
+FY2024: { value: "16,4%" },
+FY2025: { value: "15,0%" },
+},
+},
 ];
 
 const PUBLISHED = true;
