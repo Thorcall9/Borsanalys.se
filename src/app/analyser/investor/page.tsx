@@ -256,7 +256,6 @@ export default function InvestorPage() {
     <MetricCard label="Skuldsättningsgrad" value="12%" />
     <MetricCard label="ROIC" value="18.5%" />
   </div>
-</section>
 
 
         <h3 className="text-sm font-bold text-[#1a3c6e] mt-8 mb-3 uppercase tracking-widest">Q3 2025 — Portföljstyrka trots makromotvind</h3>
