@@ -443,11 +443,12 @@ export default function InvestorPage() {
       <section id="verdict" className="mb-16">
         <SectionHeader number="IX" title="Investeringsbeslut" />
         <RatingBox
-          rating="BEHALL"
-          currentPrice="352 kr"
-          targetPrice="370 kr"
-          upside="+5%"
-        />
+         rating={3} // Prova en siffra här (t.ex. 3 för en neutral/behåll-nivå)
+         currentPrice="352 kr"
+         targetPrice="370 kr"
+         upside="+5%"
+/>
+
         <p className="text-sm leading-relaxed text-[#2a2a2a] mt-6 mb-4">
           Investor AB är ett av Stockholmsbörsens absolut bästa långsiktiga innehav. Den 20-åriga historiken (15,0% per år vs SIXRX 10,4%), Wallenbergmodellens ägarstyrka, balansräkningens konservatism och portföljens exponering mot megatrender som automatisering, försvar, life science och digital infrastruktur gör bolaget till en naturlig kärnposition i en långsiktig portfölj.
         </p>
