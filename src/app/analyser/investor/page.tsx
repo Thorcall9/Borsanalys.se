@@ -1,4 +1,4 @@
-“use client”;
+"use client";
 
 import {
 AnalysisLayout,
@@ -9,95 +9,95 @@ SwotGrid,
 ScenarioCards,
 AlertBox,
 RatingBox,
-} from “@/components/analysis”;
-import type { AnalysisSection, Scenario } from “@/components/analysis”;
+} from "@/components/analysis";
+import type { AnalysisSection, Scenario } from "@/components/analysis";
 
-const ACCENT = “#1a3c6e”;
+const ACCENT = "#1a3c6e";
 
 const sections: AnalysisSection[] = [
-{ id: “overview”,   number: “I”,    title: “Oversikt” },
-{ id: “moat”,       number: “II”,   title: “Strategisk Moat” },
-{ id: “financials”, number: “III”,  title: “Finansiell analys” },
-{ id: “valuation”,  number: “IV”,   title: “Vardering” },
-{ id: “growth”,     number: “V”,    title: “Tillvaxtmotorer” },
-{ id: “risk”,       number: “VI”,   title: “Riskprofil” },
-{ id: “esg”,        number: “VII”,  title: “ESG och Agande” },
-{ id: “portfolio”,  number: “VIII”, title: “Portföljanalys” },
-{ id: “verdict”,    number: “IX”,   title: “Investeringsbeslut” },
-{ id: “scenarios”,  number: “X”,    title: “Scenarier” },
+{ id: "overview",   number: "I",    title: "Oversikt" },
+{ id: "moat",       number: "II",   title: "Strategisk Moat" },
+{ id: "financials", number: "III",  title: "Finansiell analys" },
+{ id: "valuation",  number: "IV",   title: "Vardering" },
+{ id: "growth",     number: "V",    title: "Tillvaxtmotorer" },
+{ id: "risk",       number: "VI",   title: "Riskprofil" },
+{ id: "esg",        number: "VII",  title: "ESG och Agande" },
+{ id: "portfolio",  number: "VIII", title: "Portföljanalys" },
+{ id: "verdict",    number: "IX",   title: "Investeringsbeslut" },
+{ id: "scenarios",  number: "X",    title: "Scenarier" },
 ];
 
 const swotData = {
 strengths: [
-“Wallenbergsfärens 110-åriga track record — 15,0% genomsnittlig årsavkastning senaste 20 åren (FY2025) vs SIXRX 10,4%”,
-“Exceptionellt stark balansräkning — belåningsgrad 2,1% (FY2025), genomsnittlig lånelooptid 9,4 år”,
-“Trefaldigt diversifierad portfölj: Noterade Bolag (68%), EQT (10%) och Patricia Industries (19%), nu 24 portföljbolag”,
-“Aktivt ägarskap med styrelserepresentation skapar svårreplikerade nätverkseffekter och reputationsmoat”,
-“Stadigt stigande utdelning — ca 9% per år senaste decenniet, höjd till 5,60 kr för FY2025”,
+"Wallenbergsfärens 110-åriga track record — 15,0% genomsnittlig årsavkastning senaste 20 åren (FY2025) vs SIXRX 10,4%",
+"Exceptionellt stark balansräkning — belåningsgrad 2,1% (FY2025), genomsnittlig lånelooptid 9,4 år",
+"Trefaldigt diversifierad portfölj: Noterade Bolag (68%), EQT (10%) och Patricia Industries (19%), nu 24 portföljbolag",
+"Aktivt ägarskap med styrelserepresentation skapar svårreplikerade nätverkseffekter och reputationsmoat",
+"Stadigt stigande utdelning — ca 9% per år senaste decenniet, höjd till 5,60 kr för FY2025",
 ],
 weaknesses: [
-“Minimal substansrabatt i mars 2026 — kurs nära NAV-paritet eliminerar den klassiska Investor-rabatten som skyddskudde”,
-“Nova Biomedical-integration komplicerad: ransomware-attack (485 000 patientdata läckta), hög multipel 18,2x EV/EBITDA”,
-“Patricia Industries drabbas av valutamotvind — 8 procentenheters gap organisk vs rapporterad tillväxt Q3, Q4-omsättning -5%”,
-“Permobil: nolltillväxt Q3, produktåterkallelse SmartDrive — kräver tydlig vändning under 2026”,
-“Petra Hedengran lämnade Investor i slutet av 2025 — erfarenhetsförlust inom EQT-investeringar och bolagsstyrning”,
+"Minimal substansrabatt i mars 2026 — kurs nära NAV-paritet eliminerar den klassiska Investor-rabatten som skyddskudde",
+"Nova Biomedical-integration komplicerad: ransomware-attack (485 000 patientdata läckta), hög multipel 18,2x EV/EBITDA",
+"Patricia Industries drabbas av valutamotvind — 8 procentenheters gap organisk vs rapporterad tillväxt Q3, Q4-omsättning -5%",
+"Permobil: nolltillväxt Q3, produktåterkallelse SmartDrive — kräver tydlig vändning under 2026",
+"Petra Hedengran lämnade Investor i slutet av 2025 — erfarenhetsförlust inom EQT-investeringar och bolagsstyrning",
 ],
 opportunities: [
-“EQT-innehavets fortsatta tillväxt — 2 mdr SEK i fonddistributioner Q3, 15% totalavkastning FY2025, 29 mdr SEK totala investeringar”,
-“Saab: europeisk upprustningscykel driver flerårig strukturell tillväxt, +147% totalavkastning YTD 2025”,
-“Sobi: förvärv av Arthrosi (14 mdr kr, fas 3 inom gikt) — studieresultat väntas 2026, potentiell NAV-trigger”,
-“AstraZeneca planerar investera 50 mdr USD i USA till 2030 — stark pipeline gynnar långsiktig NAV-tillväxt”,
-“Stor kassa och låg belåning ger kapacitet för opportunistiska förvärv om marknaden försvagas”,
+"EQT-innehavets fortsatta tillväxt — 2 mdr SEK i fonddistributioner Q3, 15% totalavkastning FY2025, 29 mdr SEK totala investeringar",
+"Saab: europeisk upprustningscykel driver flerårig strukturell tillväxt, +147% totalavkastning YTD 2025",
+"Sobi: förvärv av Arthrosi (14 mdr kr, fas 3 inom gikt) — studieresultat väntas 2026, potentiell NAV-trigger",
+"AstraZeneca planerar investera 50 mdr USD i USA till 2030 — stark pipeline gynnar långsiktig NAV-tillväxt",
+"Stor kassa och låg belåning ger kapacitet för opportunistiska förvärv om marknaden försvagas",
 ],
 threats: [
-“Geopolitisk friktion och handelstariffer — VD Cederholm identifierade detta som huvudrisk, SEK-förstärkning tynger rapporterade siffror”,
-“Nova Biomedical: potentiella GDPR-böter (hälsodata-läckage), integrationstryck kan pressa omsättning ytterligare”,
-“Hög värdering eliminerar den klassiska substansrabatten som historisk skyddskudde vid börsnedgång”,
-“Permobils vändning uteblir — ytterligare produktkvalitetsproblem kan skada varumärket och kräva avsättningar”,
+"Geopolitisk friktion och handelstariffer — VD Cederholm identifierade detta som huvudrisk, SEK-förstärkning tynger rapporterade siffror",
+"Nova Biomedical: potentiella GDPR-böter (hälsodata-läckage), integrationstryck kan pressa omsättning ytterligare",
+"Hög värdering eliminerar den klassiska substansrabatten som historisk skyddskudde vid börsnedgång",
+"Permobils vändning uteblir — ytterligare produktkvalitetsproblem kan skada varumärket och kräva avsättningar",
 ],
 };
 
 const scenarios: Scenario[] = [
 {
-label: “Bull”,
+label: "Bull",
 probability: 25,
-price: “430 kr”,
-return: “+22%”,
-color: “#16a34a”,
+price: "430 kr",
+return: "+22%",
+color: "#16a34a",
 description:
-“Bred börshaussé lyfter noterade innehav. EQT levererar starka exits. Nova Biomedical-integration lyckas och återgår till positiv tillväxt. Sobis Arthrosi visar positiva fas 3-resultat. ABB och Atlas Copco gynnas av AI-infrastrukturinvesteringar. Substansrabatt normaliseras mot 5-10%.”,
+"Bred börshaussé lyfter noterade innehav. EQT levererar starka exits. Nova Biomedical-integration lyckas och återgår till positiv tillväxt. Sobis Arthrosi visar positiva fas 3-resultat. ABB och Atlas Copco gynnas av AI-infrastrukturinvesteringar. Substansrabatt normaliseras mot 5-10%.",
 },
 {
-label: “Base”,
+label: "Base",
 probability: 50,
-price: “370 kr”,
-return: “+5%”,
-color: “#b5892a”,
+price: "370 kr",
+return: "+5%",
+color: "#b5892a",
 description:
-“NAV-tillväxt ca 5-7%. Utdelning 5,60 kr utbetalas. Nova-integrationen fortskrider men med viss tröghet. Permobil vänder sakta. Valutamotvinden avtar gradvis. EQT-distributioner håller sig på starka nivåer. Substansrabatt förblir minimal.”,
+"NAV-tillväxt ca 5-7%. Utdelning 5,60 kr utbetalas. Nova-integrationen fortskrider men med viss tröghet. Permobil vänder sakta. Valutamotvinden avtar gradvis. EQT-distributioner håller sig på starka nivåer. Substansrabatt förblir minimal.",
 },
 {
-label: “Bear”,
+label: "Bear",
 probability: 25,
-price: “260 kr”,
-return: “-26%”,
-color: “#dc2626”,
+price: "260 kr",
+return: "-26%",
+color: "#dc2626",
 description:
-“Global recession pressar noterade innehav och EQT-värderingar simultant. Nova Biomedical belastas av GDPR-böter och integrationsstörningar. Permobil missar vändningen. Kronförstärkning och tariffer tynger hela Patricia Industries rapporterade siffror.”,
+"Global recession pressar noterade innehav och EQT-värderingar simultant. Nova Biomedical belastas av GDPR-böter och integrationsstörningar. Permobil missar vändningen. Kronförstärkning och tariffer tynger hela Patricia Industries rapporterade siffror.",
 },
 ];
 
 const financialRows = [
-{ metric: “Justerat NAV (mdkr SEK)”, fy2023: “808”, fy2024: “970”, fy2025: “1 087” },
-{ metric: “NAV per aktie (SEK)”, fy2023: “264”, fy2024: “317”, fy2025: “355” },
-{ metric: “NAV-tillväxt (%)”, fy2023: “+18%”, fy2024: “+20%”, fy2025: “+14%” },
-{ metric: “Total aktieägaravkastning (%)”, fy2023: “+22%”, fy2024: “+27%”, fy2025: “+15%” },
-{ metric: “Resultat per aktie (EPS, kr)”, fy2023: “41,48”, fy2024: “37,00”, fy2025: “~55 (est.)” },
-{ metric: “Eget kapital (mdkr SEK)”, fy2023: “717”, fy2024: “820”, fy2025: “~1 050” },
-{ metric: “Soliditet (%)”, fy2023: “~85,6%”, fy2024: “~86,1%”, fy2025: “~85%” },
-{ metric: “Belåningsgrad (%)”, fy2023: “1,2%”, fy2024: “1,2%”, fy2025: “2,1%” },
-{ metric: “Utdelning per aktie (SEK)”, fy2023: “4,40”, fy2024: “5,20”, fy2025: “5,60” },
-{ metric: “20-årig genomsnittlig årsavkastning (%)”, fy2023: “—”, fy2024: “16,4%”, fy2025: “15,0%” },
+{ metric: "Justerat NAV (mdkr SEK)", fy2023: "808", fy2024: "970", fy2025: "1 087" },
+{ metric: "NAV per aktie (SEK)", fy2023: "264", fy2024: "317", fy2025: "355" },
+{ metric: "NAV-tillväxt (%)", fy2023: "+18%", fy2024: "+20%", fy2025: "+14%" },
+{ metric: "Total aktieägaravkastning (%)", fy2023: "+22%", fy2024: "+27%", fy2025: "+15%" },
+{ metric: "Resultat per aktie (EPS, kr)", fy2023: "41,48", fy2024: "37,00", fy2025: "~55 (est.)" },
+{ metric: "Eget kapital (mdkr SEK)", fy2023: "717", fy2024: "820", fy2025: "~1 050" },
+{ metric: "Soliditet (%)", fy2023: "~85,6%", fy2024: "~86,1%", fy2025: "~85%" },
+{ metric: "Belåningsgrad (%)", fy2023: "1,2%", fy2024: "1,2%", fy2025: "2,1%" },
+{ metric: "Utdelning per aktie (SEK)", fy2023: "4,40", fy2024: "5,20", fy2025: "5,60" },
+{ metric: "20-årig genomsnittlig årsavkastning (%)", fy2023: "—", fy2024: "16,4%", fy2025: "15,0%" },
 ];
 
 const PUBLISHED = true;
