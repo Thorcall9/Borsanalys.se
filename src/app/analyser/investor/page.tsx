@@ -102,15 +102,15 @@ const PUBLISHED = true;
 export default function InvestorPage() {
 if (!PUBLISHED) return null;
 
-return (
-<AnalysisLayout
-sections={sections}
-ticker="INVE B"
-companyName="Investor AB"
-exchange="Nasdaq Stockholm"
-heroImage="/investor_analys_hero.png"
-heroAlt="Investor AB aktieanalys 2026"
->
+  return (
+    <AnalysisLayout
+      sections={sections}
+      companyName="Investor AB"
+      subtitle="Nasdaq Stockholm"
+      date="13 mars 2026"
+      dataSources="Q4 2025, årsredovisning 2025, analytikeruppskattningar"
+      accentColor={ACCENT}
+    >
 {/* SEKTION I */}
 <section id="overview" className="mb-16">
 <SectionHeader number="I" title="Oversikt" accent={ACCENT} />
