@@ -19,7 +19,7 @@ export interface TableCell {
   color?: "green" | "red" | "amber" | "neutral";
   arrow?: "neutral" | "up" | "down";
 }
- 
+
 export interface TableRow {
   cells: {
     [key: string]: TableCell;
@@ -182,7 +182,6 @@ export default function InvestorPage() {
       sections={sections}
       accentColor={ACCENT}
     >
-      <div className="px-6 sm:px-12 pb-20">
       {/* SEKTION I */}
 <section id="overview" data-section="overview" className="mb-16">
         <SectionHeader number="I" title="Oversikt" />
@@ -489,7 +488,6 @@ export default function InvestorPage() {
           Det sannolikhetsviktade utfallet landar kring 357 kr — nära riktkursen 370 kr. Tre fokusområden dominerar osäkerheten för 2026: (1) Nova Biomedical-integration och GDPR-risk efter cyberincidenten. (2) Permobils vändning efter nolltillväxt Q3 och SmartDrive-återkallelse. (3) Makrofriktion via tariffer och en stärkande krona som pressar Patricia Industries rapporterade siffror. VD Cederholms budskap är tydligt: osäkerheten är hög, men Investors finansiella styrka och 110-åriga affärslogik är intakt.
         </p>
       </section>
-      </div>
   </AnalysisLayout>
   );
 }
