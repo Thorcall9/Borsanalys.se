@@ -1,12 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createHmac } from "crypto";
+import { createHmac, timingSafeEqual } from "crypto";
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
-const SESSION_SECRET = process.env.SESSION_SECRET || "borsanalys-default-session-secret";
+const SESSION_SECRET = process.env.SESSION_SECRET;
+
+function getSecret(): string {
+  if (!SESSION_SECRET && process.env.NODE_ENV === "production") {
+    throw new Error("SESSION_SECRET environment variable must be set in production");
+  }
+  return SESSION_SECRET || "borsanalys-dev-only-secret";
+}
 
 function generateToken(): string {
   if (!ADMIN_PASSWORD) return "";
-  return createHmac("sha256", SESSION_SECRET).update(ADMIN_PASSWORD).digest("hex");
+  return createHmac("sha256", getSecret()).update(ADMIN_PASSWORD).digest("hex");
 }
 
 export async function POST(request: NextRequest) {
@@ -26,7 +33,15 @@ export async function POST(request: NextRequest) {
 
   const password = body.password?.trim();
 
-  if (!password || password !== ADMIN_PASSWORD) {
+  if (!password) {
+    return NextResponse.json({ error: "Fel lösenord." }, { status: 401 });
+  }
+
+  const passwordBuffer = Buffer.from(password, "utf-8");
+  const expectedBuffer = Buffer.from(ADMIN_PASSWORD, "utf-8");
+
+  if (passwordBuffer.length !== expectedBuffer.length ||
+      !timingSafeEqual(passwordBuffer, expectedBuffer)) {
     return NextResponse.json({ error: "Fel lösenord." }, { status: 401 });
   }
 

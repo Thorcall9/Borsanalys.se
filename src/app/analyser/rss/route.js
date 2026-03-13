@@ -1,5 +1,14 @@
 import { analyses } from "@/lib/analyses";
 
+function escapeXml(str) {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const format = searchParams.get("format");
@@ -11,16 +20,17 @@ export async function GET(request) {
   const baseUrl = "https://www.borsanalys.se";
 
   const items = analyses
+    .filter((a) => !isNaN(new Date(a.date).getTime()))
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .map((analysis) => {
       const url = `${baseUrl}/analyser/${analysis.slug}`;
       return `
     <item>
-      <title>${analysis.title}</title>
+      <title>${escapeXml(analysis.title)}</title>
       <link>${url}</link>
       <guid>${url}</guid>
       <pubDate>${new Date(analysis.date).toUTCString()}</pubDate>
-      <description>${analysis.excerpt}</description>
+      <description>${escapeXml(analysis.excerpt)}</description>
     </item>`;
     })
     .join("");
@@ -40,7 +50,7 @@ export async function GET(request) {
   return new Response(rss, {
     headers: {
       "Content-Type": "application/xml",
-      "Cache-Control": "s-maxage=3600",
+      "Cache-Control": "public, s-maxage=3600",
     },
   });
 }

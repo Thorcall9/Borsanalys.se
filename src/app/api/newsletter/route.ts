@@ -8,11 +8,10 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function isValidOrigin(request: NextRequest): boolean {
   const origin = request.headers.get("origin");
-  if (!origin) return true;
+  if (!origin) return false;
   return (
     origin === "https://borsanalys.se" ||
     origin === "https://www.borsanalys.se" ||
-    origin.endsWith(".vercel.app") ||
     origin.startsWith("http://localhost")
   );
 }
@@ -37,14 +36,15 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "En giltig e-postadress krävs." }, { status: 400 });
   }
 
-  const isNewsletter = !name && !message;
+  const hasName = name !== undefined && name !== null && name.length > 0;
+  const hasMessage = message !== undefined && message !== null && message.length > 0;
+  const isNewsletter = !hasName && !hasMessage;
 
   if (!isNewsletter) {
-    if (name && name.length > MAX_NAME_LENGTH) return NextResponse.json({ error: "Namnet är för långt." }, { status: 400 });
-    if (message && message.length > MAX_MESSAGE_LENGTH) return NextResponse.json({ error: "Meddelandet är för långt." }, { status: 400 });
+    if (hasName && name.length > MAX_NAME_LENGTH) return NextResponse.json({ error: "Namnet är för långt." }, { status: 400 });
+    if (hasMessage && message.length > MAX_MESSAGE_LENGTH) return NextResponse.json({ error: "Meddelandet är för långt." }, { status: 400 });
   }
 
-  // SPARA I NEON
   if (isNewsletter) {
     try {
       const sql = neon(process.env.DATABASE_URL!);
@@ -60,12 +60,13 @@ export async function POST(request: NextRequest) {
         VALUES (${email})
         ON CONFLICT (email) DO NOTHING
       `;
-      console.log("NY PRENUMERANT SPARAD:", email);
+      console.log("New subscriber saved");
     } catch (err) {
-      console.error("Neon-fel:", err);
+      console.error("Database error during newsletter signup:", err);
+      return NextResponse.json({ error: "Ett fel uppstod. Försök igen senare." }, { status: 500 });
     }
   } else {
-    console.log("KONTAKTMEDDELANDE:", { name, email, message });
+    console.log("Contact message received from form submission");
   }
 
   const redirectUrl = isNewsletter ? "/?prenumeration=klar" : "/kontakt?skickat=true";

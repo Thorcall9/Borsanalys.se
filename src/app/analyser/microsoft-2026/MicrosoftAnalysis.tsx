@@ -689,13 +689,13 @@ export default function MicrosoftAnalysis() {
   </div>
 
   <p className="text-sm leading-relaxed text-[#2a2a2a] mb-4">
-    Probability-weighted expected value: (0,25 × $560) + (0,55 × $480) + (0,20 × $310) = <strong>$482</strong> — bekräftar målpris på $480 som rimligt och konservativt.
+    Probability-weighted expected value: (0,25 × $560) + (0,55 × $480) + (0,20 × $310) = <strong>$466</strong> — bekräftar målpris på $480 som rimligt och konservativt.
   </p>
 
   <div className="bg-[#0f0f0f] text-[#faf8f3] rounded p-4 text-center">
     <div className="text-[10px] text-[#b5892a] tracking-widest uppercase mb-1">Probability-Weighted Målpris</div>
-    <div className="font-serif text-5xl font-bold">$482</div>
-    <div className="text-xs text-[#80e080] mt-1">+23% potential från nuvarande $392</div>
+    <div className="font-serif text-5xl font-bold">$466</div>
+    <div className="text-xs text-[#80e080] mt-1">+19% potential från nuvarande $392</div>
     <div className="text-[10px] text-[#808070] mt-2">Analyserat 1 mars 2025 · Ej finansiell rådgivning</div>
   </div>
 </div>

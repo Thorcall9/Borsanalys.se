@@ -10,16 +10,16 @@ ScenarioCards,
 AlertBox,
 RatingBox,
 } from "@/components/analysis";
-import type { AnalysisSection, Scenario } from "@/components/analysis";
+import type { AnalysisSection, Scenario, TableRow, TableColumn } from "@/components/analysis";
 
 const ACCENT = "#1a3c6e";
 
 const sections: AnalysisSection[] = [
-{ id: "overview",   number: "I",    title: "Oversikt" },
+{ id: "overview",   number: "I",    title: "Översikt" },
 { id: "moat",       number: "II",   title: "Strategisk Moat" },
 { id: "financials", number: "III",  title: "Finansiell analys" },
-{ id: "valuation",  number: "IV",   title: "Vardering" },
-{ id: "growth",     number: "V",    title: "Tillvaxtmotorer" },
+{ id: "valuation",  number: "IV",   title: "Värdering" },
+{ id: "growth",     number: "V",    title: "Tillväxtmotorer" },
 { id: "risk",       number: "VI",   title: "Riskprofil" },
 { id: "esg",        number: "VII",  title: "ESG och Agande" },
 { id: "portfolio",  number: "VIII", title: "Portföljanalys" },
@@ -167,11 +167,7 @@ const financialRows: TableRow[] = [
   },
 ];
 
-const PUBLISHED = true;
-
 export default function InvestorPage() {
-if (!PUBLISHED) return null;
-
   return (
     <AnalysisLayout
       sections={sections}
@@ -183,7 +179,7 @@ if (!PUBLISHED) return null;
     >
 {/* SEKTION I */}
 <section id="overview" className="mb-16">
-<SectionHeader number="I" title="Oversikt"  />
+<SectionHeader number="I" title="Översikt"  />
 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
 <MetricCard label="Aktiekurs (mar 2026)" value="352 kr"  />
 <MetricCard label="Riktkurs (bascase)" value="370 kr"  />
@@ -238,7 +234,12 @@ Investor handlas i mars 2026 med en minimal substansrabatt om bara 1-2% mot NAV 
   {/* SEKTION III */}
   <section id="financials" className="mb-16">
     <SectionHeader number="III" title="Finansiell analys"  />
-    <FinancialTable rows={financialRows} years={["FY2023", "FY2024", "FY2025"]} />
+    <FinancialTable rows={financialRows} columns={[
+      { key: "metric", header: "Nyckeltal", align: "left" },
+      { key: "FY2023", header: "FY2023", align: "right" },
+      { key: "FY2024", header: "FY2024", align: "right" },
+      { key: "FY2025", header: "FY2025", align: "right" },
+    ]} />
     <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
       <MetricCard label="NAV-tillväxt FY2025" value="+14%"  />
       <MetricCard label="Aktieägaravkastning" value="+15%"  />
@@ -265,7 +266,7 @@ Investor handlas i mars 2026 med en minimal substansrabatt om bara 1-2% mot NAV 
 
   {/* SEKTION IV */}
   <section id="valuation" className="mb-16">
-    <SectionHeader number="IV" title="Vardering"  />
+    <SectionHeader number="IV" title="Värdering"  />
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
       <MetricCard label="Aktiekurs (mar 2026)" value="352 kr"  />
       <MetricCard label="NAV per aktie (dec 2025)" value="355 kr"  />
@@ -305,14 +306,14 @@ Investor handlas i mars 2026 med en minimal substansrabatt om bara 1-2% mot NAV 
       </table>
     </div>
     <p className="text-xs text-[#6a6a6a] mb-4">* ROE är missvisande för investmentbolag — NAV-tillväxt är det relevanta måttet.</p>
-    <AlertBox type="warning">
+    <AlertBox type="risk">
       Den minimala substansrabatten är den viktigaste risken i investeringsthesen just nu. De bästa historiska ingångspunkterna för Investor-aktien har uppstått när rabatten nått 15-20% — motsvarande en kurs under 300-310 kr givet nuvarande NAV. Befintliga ägare bör behålla. Nya investerare bör avvakta ett mer attraktivt pris.
     </AlertBox>
   </section>
 
   {/* SEKTION V */}
   <section id="growth" className="mb-16">
-    <SectionHeader number="V" title="Tillvaxtmotorer"  />
+    <SectionHeader number="V" title="Tillväxtmotorer"  />
     <div className="space-y-4">
       <div className="border-l-4 border-[#1a3c6e] pl-4">
         <h3 className="text-sm font-bold text-[#1a3c6e] mb-1">Automatisering och elektrifiering — ABB och Atlas Copco</h3>
@@ -472,13 +473,7 @@ Investor handlas i mars 2026 med en minimal substansrabatt om bara 1-2% mot NAV 
   {/* SEKTION IX */}
   <section id="verdict" className="mb-16">
     <SectionHeader number="IX" title="Investeringsbeslut"  />
-    <RatingBox
-      rating="BEHALL"
-      currentPrice="352 kr"
-      targetPrice="370 kr"
-      upside="+5%"
-      
-    />
+    <RatingBox rating={4}><strong>BEHÅLL — Riktkurs 370 kr (+5%)</strong> Investor AB är ett av Stockholmsbörsens absolut bästa långsiktiga innehav, men den minimala substansrabatten begränsar uppsidan för nyköp. Befintliga ägare bör behålla.</RatingBox>
     <p className="text-sm leading-relaxed text-[#2a2a2a] mt-6 mb-4">
       Investor AB är ett av Stockholmsbörsens absolut bästa långsiktiga innehav. Den 20-åriga historiken (15,0% per år vs SIXRX 10,4%), Wallenbergmodellens ägarstyrka, balansräkningens konservatism och portföljens exponering mot megatrender som automatisering, försvar, life science och digital infrastruktur gör bolaget till en naturlig kärnposition i en långsiktig portfölj.
     </p>

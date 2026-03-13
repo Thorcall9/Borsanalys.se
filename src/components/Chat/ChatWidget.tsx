@@ -23,9 +23,17 @@ export default function ChatWidget() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message }),
       });
+
+      if (!res.ok) {
+        console.error("Chat API returned status:", res.status);
+        setChatLog((prev) => [...prev, { role: "ai", text: "Oj, något gick fel. Försök igen snart!" }]);
+        return;
+      }
+
       const data = await res.json();
       setChatLog((prev) => [...prev, { role: "ai", text: data.text }]);
     } catch (err) {
+      console.error("Chat fetch error:", err);
       setChatLog((prev) => [...prev, { role: "ai", text: "Oj, något gick fel. Försök igen snart!" }]);
     } finally {
       setIsLoading(false);
