@@ -62,30 +62,28 @@ const scenarios: Scenario[] = [
     type: "bull",
     probability: "25%",
     price: "430 kr",
-    return: "+22%",
-    color: "#16a34a",
-    description:
-      "Bred börshaussé lyfter noterade innehav. EQT levererar starka exits. Nova Biomedical-integration lyckas och återgår till positiv tillväxt. Sobis Arthrosi visar positiva fas 3-resultat. ABB och Atlas Copco gynnas av AI-infrastrukturinvesteringar. Substansrabatt normaliseras mot 5-10%.",
+    change: "+22% från nuvarande",  // ← 'return' → 'change'
+    assumptions: "Bred börshaussé lyfter noterade innehav. EQT levererar starka exits.",
+    requires: "Nova Biomedical-integration lyckas. ABB/Atlas Copco gynnas av AI-investeringar.",
   },
   {
-    type: "base",
+    type: "base", 
     probability: "50%",
-    price: "370 kr",
-    return: "+5%",
-    color: "#b5892a",
-    description:
-      "NAV-tillväxt ca 5-7%. Utdelning 5,60 kr utbetalas. Nova-integrationen fortskrider men med viss tröghet. Permobil vänder sakta. Valutamotvinden avtar gradvis. EQT-distributioner håller sig på starka nivåer.",
+    price: "380 kr",
+    change: "+10% från nuvarande",
+    assumptions: "Stabila innehav, Permobil vänder, makro ok.",
+    requires: "Ingen större cyberincident eller tariff-chock.",
   },
   {
     type: "bear",
     probability: "25%",
-    price: "260 kr",
-    return: "-26%",
-    color: "#dc2626",
-    description:
-      "Global recession pressar noterade innehav och EQT-värderingar simultant. Nova Biomedical belastas av GDPR-böter och integrationsstörningar. Permobil missar vändningen. Kronförstärkning och tariffer tynger hela Patricia Industries.",
+    price: "300 kr",
+    change: "-15% från nuvarande",
+    assumptions: "GDPR-boeter, SmartDrive-återkallelse, kronstärkning.",
+    requires: "Nova Biomedical misslyckas, Patricia Industries pressas.",
   },
 ];
+
 
 
 const financialRows = [
