@@ -60,7 +60,7 @@ threats: [
 const scenarios: Scenario[] = [
 {
 label: "Bull",
-probability: 25,
+probability: "25%",
 price: "430 kr",
 return: "+22%",
 color: "#16a34a",
@@ -69,7 +69,7 @@ description:
 },
 {
 label: "Base",
-probability: 50,
+probability: "50%",
 price: "370 kr",
 return: "+5%",
 color: "#b5892a",
@@ -78,7 +78,7 @@ description:
 },
 {
 label: "Bear",
-probability: 25,
+probability: "25%",
 price: "260 kr",
 return: "-26%",
 color: "#dc2626",
