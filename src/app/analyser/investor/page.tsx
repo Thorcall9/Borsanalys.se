@@ -300,7 +300,7 @@ export default function InvestorPage() {
           </table>
         </div>
         <p className="text-xs text-[#6a6a6a] mb-4">* ROE är missvisande för investmentbolag — NAV-tillväxt är det relevanta måttet.</p>
-        <AlertBox type="warning">
+<AlertBox type="risk">
           Den minimala substansrabatten är den viktigaste risken i investeringsthesen just nu. De bästa historiska ingångspunkterna för Investor-aktien har uppstått när rabatten nått 15-20% — motsvarande en kurs under 300-310 kr givet nuvarande NAV. Befintliga ägare bör behålla. Nya investerare bör avvakta ett mer attraktivt pris.
         </AlertBox>
       </section>
