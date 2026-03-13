@@ -137,7 +137,6 @@ Investor handlas i mars 2026 med en minimal substansrabatt om bara 1-2% mot NAV 
 </AlertBox>
 </section>
 
-```
   {/* SEKTION II */}
   <section id="moat" className="mb-16">
     <SectionHeader number="II" title="Strategisk Moat" accent={ACCENT} />
@@ -436,7 +435,6 @@ Investor handlas i mars 2026 med en minimal substansrabatt om bara 1-2% mot NAV 
     </p>
   </section>
 </AnalysisLayout>
-```
 
 );
 }
