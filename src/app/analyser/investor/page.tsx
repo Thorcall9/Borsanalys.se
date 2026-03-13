@@ -19,7 +19,7 @@ export interface TableCell {
   color?: "green" | "red" | "amber" | "neutral";
   arrow?: "neutral" | "up" | "down";
 }
-
+ 
 export interface TableRow {
   cells: {
     [key: string]: TableCell;
