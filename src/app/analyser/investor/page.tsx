@@ -443,7 +443,6 @@ export default function InvestorPage() {
       <section id="verdict" className="mb-16">
         <SectionHeader number="IX" title="Investeringsbeslut" />
         <RatingBox
-         <RatingBox
          rating={3 as any}
          currentPrice={"352 kr" as any}
          targetPrice={"370 kr" as any}
