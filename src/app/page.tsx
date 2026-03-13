@@ -1,11 +1,11 @@
-import Link from “next/link”;
-import { getFeaturedAnalyses } from “@/lib/analyses”;
-import { formatDate, verdictColor } from “@/lib/utils”;
+import Link from "next/link";
+import { getFeaturedAnalyses } from "@/lib/analyses";
+import { formatDate, verdictColor } from "@/lib/utils";
 
 const valueProps = [
 {
-title: “Spara tid”,
-description: “Få marknadsförståelse snabbt med koncisa, datadrivna analyser.”,
+title: "Spara tid",
+description: "Få marknadsförståelse snabbt med koncisa, datadrivna analyser.",
 icon: (
 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -13,8 +13,8 @@ icon: (
 ),
 },
 {
-title: “Detaljerade finansiella mått”,
-description: “Intäkter, marginaler, kassaflöden, värderingsmultiplar och scenarioanalyser.”,
+title: "Detaljerade finansiella mått",
+description: "Intäkter, marginaler, kassaflöden, värderingsmultiplar och scenarioanalyser.",
 icon: (
 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
@@ -22,8 +22,8 @@ icon: (
 ),
 },
 {
-title: “AI + manuell granskning”,
-description: “AI-assisterade analyser som alltid kvalitetsgranskas manuellt.”,
+title: "AI + manuell granskning",
+description: "AI-assisterade analyser som alltid kvalitetsgranskas manuellt.",
 icon: (
 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611l-.002 0A48.848 48.848 0 0112 21c-2.773 0-5.491-.235-8.135-.687l-.002 0c-1.717-.293-2.3-2.379-1.067-3.61L5 14.5" />
@@ -31,8 +31,8 @@ icon: (
 ),
 },
 {
-title: “Konkreta investeringsbeslut”,
-description: “Bull, base och bear-scenarion med tydliga riktkurser.”,
+title: "Konkreta investeringsbeslut",
+description: "Bull, base och bear-scenarion med tydliga riktkurser.",
 icon: (
 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
@@ -40,8 +40,8 @@ icon: (
 ),
 },
 {
-title: “Effektiv research”,
-description: “Allt du behöver för att fatta välgrundade investeringsbeslut på ett ställe.”,
+title: "Effektiv research",
+description: "Allt du behöver för att fatta välgrundade investeringsbeslut på ett ställe.",
 icon: (
 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
@@ -49,8 +49,8 @@ icon: (
 ),
 },
 {
-title: “Kvalitetssäkring”,
-description: “Rigorös granskning av data och slutsatser i varje analys.”,
+title: "Kvalitetssäkring",
+description: "Rigorös granskning av data och slutsatser i varje analys.",
 icon: (
 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
@@ -94,7 +94,6 @@ Om oss
 </div>
 </section>
 
-```
   {/* Featured Analyses */}
   <section className="py-16 md:py-20">
     <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -247,7 +246,6 @@ Om oss
     </div>
   </section>
 </>
-```
 
 );
 }
