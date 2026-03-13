@@ -12,7 +12,7 @@ import {
   RatingBox,
 } from "@/components/analysis";
 import type { AnalysisSection, Scenario } from "@/components/analysis";
-
+ 
 // --- TYPER & INTERFACES ---
 export interface TableCell {
   value: string;
