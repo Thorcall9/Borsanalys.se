@@ -239,13 +239,25 @@ export default function InvestorPage() {
       {/* SEKTION III */}
      <section id="financials" data-section="financials" className="mb-16">
   <SectionHeader number="III" title="Finansiell analys" />
-<FinancialTable rows={financialRows as any} columns={["FY2023", "FY2024", "FY2025"] as any} />
-        <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <MetricCard label="NAV-tillväxt FY2025" value="+14%" />
-          <MetricCard label="Aktieägaravkastning" value="+15%" />
-          <MetricCard label="Belåningsgrad FY2025" value="2,1%" />
-          <MetricCard label="Bruttokassa (Q3-utgång)" value="23,7 mdr SEK" />
-        </div>
+  
+  <FinancialTable 
+    columns={[
+      { key: "metric", header: "Nyckeltal" },
+      { key: "v1", header: "FY2023" },
+      { key: "v2", header: "FY2024" },
+      { key: "v3", header: "FY2025" }
+    ] as any}
+    rows={financialRows as any} 
+  />
+
+  <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
+    <MetricCard label="NAV-tillväxt FY2025" value="+14%" />
+    <MetricCard label="Aktieägaravkastning" value="+15%" />
+    <MetricCard label="Skuldsättningsgrad" value="12%" />
+    <MetricCard label="ROIC" value="18.5%" />
+  </div>
+</section>
+
 
         <h3 className="text-sm font-bold text-[#1a3c6e] mt-8 mb-3 uppercase tracking-widest">Q3 2025 — Portföljstyrka trots makromotvind</h3>
         <p className="text-sm leading-relaxed text-[#2a2a2a] mb-4">
@@ -440,14 +452,21 @@ export default function InvestorPage() {
       </section>
 
       {/* SEKTION IX */}
-      <section id="verdict" className="mb-16">
-        <SectionHeader number="IX" title="Investeringsbeslut" />
-        <RatingBox
-         rating={3 as any}
-         currentPrice={"352 kr" as any}
-         targetPrice={"370 kr" as any}
-         upside={"+5%" as any}
-      />
+      <section id="decision" data-section="decision" className="mb-16">
+  <SectionHeader number="IX" title="Investeringsbeslut" />
+  
+  {/* RatingBox tar nu texten inuti (children) */}
+  <RatingBox rating={4}>
+    Investor fortsätter att leverera stark substanstillväxt över tid. Vid nuvarande rabattnivåer ser vi aktien som ett kärninnehav i en långsiktig portfölj.
+  </RatingBox>
+
+  {/* Manuella fält för priser med MetricCard för att det ska se proffsigt ut */}
+  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+    <MetricCard label="Aktuell kurs" value="352 kr" />
+    <MetricCard label="Riktkurs" value="370 kr" />
+    <MetricCard label="Uppsida" value="+5%" valueColor="text-green-600" />
+  </div>
+</section>
         <p className="text-sm leading-relaxed text-[#2a2a2a] mt-6 mb-4">
           Investor AB är ett av Stockholmsbörsens absolut bästa långsiktiga innehav. Den 20-åriga historiken (15,0% per år vs SIXRX 10,4%), Wallenbergmodellens ägarstyrka, balansräkningens konservatism och portföljens exponering mot megatrender som automatisering, försvar, life science och digital infrastruktur gör bolaget till en naturlig kärnposition i en långsiktig portfölj.
         </p>
