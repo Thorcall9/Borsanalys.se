@@ -113,12 +113,12 @@ if (!PUBLISHED) return null;
     >
 {/* SEKTION I */}
 <section id="overview" className="mb-16">
-<SectionHeader number="I" title="Oversikt" accent={ACCENT} />
+<SectionHeader number="I" title="Oversikt"  />
 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-<MetricCard label="Aktiekurs (mar 2026)" value="352 kr" accent={ACCENT} />
-<MetricCard label="Riktkurs (bascase)" value="370 kr" accent={ACCENT} />
-<MetricCard label="NAV per aktie (dec 2025)" value="355 kr" accent={ACCENT} />
-<MetricCard label="Rekommendation" value="BEHALL" accent={ACCENT} />
+<MetricCard label="Aktiekurs (mar 2026)" value="352 kr"  />
+<MetricCard label="Riktkurs (bascase)" value="370 kr"  />
+<MetricCard label="NAV per aktie (dec 2025)" value="355 kr"  />
+<MetricCard label="Rekommendation" value="BEHALL"  />
 </div>
 <p className="text-sm leading-relaxed text-[#2a2a2a] mb-4">
 Investor AB, grundat av Wallenbergfamiljen 1916, är ett av Sveriges mest ikoniska investmentbolag. Med en portfölj av nu 24 världsledande bolag — däribland ABB, Atlas Copco, AstraZeneca, SEB och Saab — kombinerar Investor långsiktigt aktivt ägande med djup industriell kompetens. Affärsmodellen bygger inte på passiv kapitalförvaltning utan på genuint ägarengagemang via styrelserepresentation, finansiell styrka och ett unikt globalt Wallenberg-nätverk.
@@ -136,7 +136,7 @@ Investor handlas i mars 2026 med en minimal substansrabatt om bara 1-2% mot NAV 
 
   {/* SEKTION II */}
   <section id="moat" className="mb-16">
-    <SectionHeader number="II" title="Strategisk Moat" accent={ACCENT} />
+    <SectionHeader number="II" title="Strategisk Moat"  />
     <p className="text-sm leading-relaxed text-[#2a2a2a] mb-4">
       Investors konkurrensfördel är unik och svår att replikera. Den genomsnittliga aktieägaravkastningen om 15,0% per år de senaste 20 åren (uppdaterat FY2025) — mot SIXRX 10,4% — är det tydligaste beviset på att ägarmodellen skapar verkligt mervärde. Wallenbergsfärens decennier av relationer, industriell kunskap och styrelserepresentation i världsledande bolag skapar ett ekosystem som är mer än summan av sina delar.
     </p>
@@ -167,13 +167,13 @@ Investor handlas i mars 2026 med en minimal substansrabatt om bara 1-2% mot NAV 
 
   {/* SEKTION III */}
   <section id="financials" className="mb-16">
-    <SectionHeader number="III" title="Finansiell analys" accent={ACCENT} />
+    <SectionHeader number="III" title="Finansiell analys"  />
     <FinancialTable rows={financialRows} years={["FY2023", "FY2024", "FY2025"]} />
     <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
-      <MetricCard label="NAV-tillväxt FY2025" value="+14%" accent={ACCENT} />
-      <MetricCard label="Aktieägaravkastning" value="+15%" accent={ACCENT} />
-      <MetricCard label="Belåningsgrad FY2025" value="2,1%" accent={ACCENT} />
-      <MetricCard label="Bruttokassa (Q3-utgång)" value="23,7 mdr SEK" accent={ACCENT} />
+      <MetricCard label="NAV-tillväxt FY2025" value="+14%"  />
+      <MetricCard label="Aktieägaravkastning" value="+15%"  />
+      <MetricCard label="Belåningsgrad FY2025" value="2,1%"  />
+      <MetricCard label="Bruttokassa (Q3-utgång)" value="23,7 mdr SEK"  />
     </div>
 
     <h3 className="text-sm font-bold text-[#1a3c6e] mt-8 mb-3 uppercase tracking-widest">Q3 2025 — Portföljstyrka trots makromotvind</h3>
@@ -195,12 +195,12 @@ Investor handlas i mars 2026 med en minimal substansrabatt om bara 1-2% mot NAV 
 
   {/* SEKTION IV */}
   <section id="valuation" className="mb-16">
-    <SectionHeader number="IV" title="Vardering" accent={ACCENT} />
+    <SectionHeader number="IV" title="Vardering"  />
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
-      <MetricCard label="Aktiekurs (mar 2026)" value="352 kr" accent={ACCENT} />
-      <MetricCard label="NAV per aktie (dec 2025)" value="355 kr" accent={ACCENT} />
-      <MetricCard label="Substansrabatt" value="ca -1%" accent={ACCENT} />
-      <MetricCard label="Direktavkastning" value="1,6%" accent={ACCENT} />
+      <MetricCard label="Aktiekurs (mar 2026)" value="352 kr"  />
+      <MetricCard label="NAV per aktie (dec 2025)" value="355 kr"  />
+      <MetricCard label="Substansrabatt" value="ca -1%"  />
+      <MetricCard label="Direktavkastning" value="1,6%"  />
     </div>
     <p className="text-sm leading-relaxed text-[#2a2a2a] mb-4">
       Det centrala värderingsmåttet för Investor är relationen mellan aktiekurs och substansvärde (NAV). Historiskt har aktien handlats med 10-20% substansrabatt — en strukturell fördel för den långsiktige investeraren. I Q2 2025 var substansrabatten ca 11% (kurs 279,75 kr, NAV 314 kr per aktie). I mars 2026 handlas aktien till i princip paritet med NAV 355 kr — en historiskt ovanlig situation som inte varat länge historiskt.
@@ -242,7 +242,7 @@ Investor handlas i mars 2026 med en minimal substansrabatt om bara 1-2% mot NAV 
 
   {/* SEKTION V */}
   <section id="growth" className="mb-16">
-    <SectionHeader number="V" title="Tillvaxtmotorer" accent={ACCENT} />
+    <SectionHeader number="V" title="Tillvaxtmotorer"  />
     <div className="space-y-4">
       <div className="border-l-4 border-[#1a3c6e] pl-4">
         <h3 className="text-sm font-bold text-[#1a3c6e] mb-1">Automatisering och elektrifiering — ABB och Atlas Copco</h3>
@@ -273,8 +273,8 @@ Investor handlas i mars 2026 med en minimal substansrabatt om bara 1-2% mot NAV 
 
   {/* SEKTION VI */}
   <section id="risk" className="mb-16">
-    <SectionHeader number="VI" title="Riskprofil" accent={ACCENT} />
-    <SwotGrid data={swotData} accent={ACCENT} />
+    <SectionHeader number="VI" title="Riskprofil"  />
+    <SwotGrid data={swotData}  />
 
     <h3 className="text-sm font-bold text-[#1a3c6e] mt-8 mb-3 uppercase tracking-widest">Nova Biomedical — Djupanalys av cyberrisken</h3>
     <p className="text-sm leading-relaxed text-[#2a2a2a] mb-4">
@@ -292,7 +292,7 @@ Investor handlas i mars 2026 med en minimal substansrabatt om bara 1-2% mot NAV 
 
   {/* SEKTION VII */}
   <section id="esg" className="mb-16">
-    <SectionHeader number="VII" title="ESG och Agande" accent={ACCENT} />
+    <SectionHeader number="VII" title="ESG och Agande"  />
     <p className="text-sm leading-relaxed text-[#2a2a2a] mb-4">
       Investor har uppnått 89% minskning av egna CO2-utsläpp jämfört med 2016 och 70% minskning i portföljbolagen. Under Q4 2025 skärptes hållbarhetsmålen för 2030 med ytterligare fokus på Scope 3 — där den största klimatpåverkan och de största affärsmöjligheterna finns. Sustainalytics ESG-riskscore är 11,87 (låg risk). 100% av portföljbolagen genomför regelbunden antikorruptionsutbildning.
     </p>
@@ -330,7 +330,7 @@ Investor handlas i mars 2026 med en minimal substansrabatt om bara 1-2% mot NAV 
 
   {/* SEKTION VIII */}
   <section id="portfolio" className="mb-16">
-    <SectionHeader number="VIII" title="Portföljanalys" accent={ACCENT} />
+    <SectionHeader number="VIII" title="Portföljanalys"  />
     <p className="text-sm leading-relaxed text-[#2a2a2a] mb-4">
       Noterade Bolag utgör 68% av Investors totala tillgångar och är den primära NAV-drivaren. Q3 2025 levererade 8% totalavkastning och 58 714 mkr i absolut värdeförändring. Q4 2025 levererade ytterligare 6%. Nedan visas Q3-bidragen per innehav:
     </p>
@@ -401,13 +401,13 @@ Investor handlas i mars 2026 med en minimal substansrabatt om bara 1-2% mot NAV 
 
   {/* SEKTION IX */}
   <section id="verdict" className="mb-16">
-    <SectionHeader number="IX" title="Investeringsbeslut" accent={ACCENT} />
+    <SectionHeader number="IX" title="Investeringsbeslut"  />
     <RatingBox
       rating="BEHALL"
       currentPrice="352 kr"
       targetPrice="370 kr"
       upside="+5%"
-      accent={ACCENT}
+      
     />
     <p className="text-sm leading-relaxed text-[#2a2a2a] mt-6 mb-4">
       Investor AB är ett av Stockholmsbörsens absolut bästa långsiktiga innehav. Den 20-åriga historiken (15,0% per år vs SIXRX 10,4%), Wallenbergmodellens ägarstyrka, balansräkningens konservatism och portföljens exponering mot megatrender som automatisering, försvar, life science och digital infrastruktur gör bolaget till en naturlig kärnposition i en långsiktig portfölj.
@@ -425,7 +425,7 @@ Investor handlas i mars 2026 med en minimal substansrabatt om bara 1-2% mot NAV 
 
   {/* SEKTION X */}
   <section id="scenarios" className="mb-16">
-    <SectionHeader number="X" title="Scenarier" accent={ACCENT} />
+    <SectionHeader number="X" title="Scenarier" />
     <ScenarioCards scenarios={scenarios} />
     <p className="text-sm leading-relaxed text-[#2a2a2a] mt-6">
       Det sannolikhetsviktade utfallet landar kring 357 kr — nära riktkursen 370 kr. Tre fokusområden dominerar osäkerheten för 2026: (1) Nova Biomedical-integration och GDPR-risk efter cyberincidenten. (2) Permobils vändning efter nolltillväxt Q3 och SmartDrive-återkallelse. (3) Makrofriktion via tariffer och en stärkande krona som pressar Patricia Industries rapporterade siffror. VD Cederholms budskap är tydligt: osäkerheten är hög, men Investors finansiella styrka och 110-åriga affärslogik är intakt.
