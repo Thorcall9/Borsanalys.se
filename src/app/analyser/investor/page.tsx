@@ -60,7 +60,7 @@ threats: [
 const scenarios: Scenario[] = [
   {
     label: "Bull",
-    probability: 25,
+    probability: "25%",
     price: "430 kr",
     return: "+22%",
     color: "#16a34a",
@@ -69,7 +69,7 @@ const scenarios: Scenario[] = [
   },
   {
     label: "Base",
-    probability: 50,
+    probability: "50%",
     price: "370 kr",
     return: "+5%",
     color: "#b5892a",
@@ -78,7 +78,7 @@ const scenarios: Scenario[] = [
   },
   {
     label: "Bear",
-    probability: 25,
+    probability: "25%",
     price: "260 kr",
     return: "-26%",
     color: "#dc2626",
@@ -86,6 +86,7 @@ const scenarios: Scenario[] = [
       "Global recession pressar noterade innehav och EQT-värderingar simultant. Nova Biomedical belastas av GDPR-böter och integrationsstörningar. Permobil missar vändningen. Kronförstärkning och tariffer tynger hela Patricia Industries.",
   },
 ];
+
 
 const financialRows = [
 { metric: "Justerat NAV (mdkr SEK)", fy2023: "808", fy2024: "970", fy2025: "1 087" },
