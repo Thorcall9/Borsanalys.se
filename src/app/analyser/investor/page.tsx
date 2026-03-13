@@ -183,7 +183,7 @@ export default function InvestorPage() {
       accentColor={ACCENT}
     >
       {/* SEKTION I */}
-      <section id="overview" className="mb-16">
+<section id="overview" data-section="overview" className="mb-16">
         <SectionHeader number="I" title="Oversikt" />
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
           <MetricCard label="Aktiekurs (mar 2026)" value="352 kr" />
@@ -206,7 +206,7 @@ export default function InvestorPage() {
       </section>
 
       {/* SEKTION II */}
-      <section id="moat" className="mb-16">
+<section id="moat" data-section="moat" className="mb-16">
         <SectionHeader number="II" title="Strategisk Moat" />
         <p className="text-sm leading-relaxed text-[#2a2a2a] mb-4">
           Investors konkurrensfördel är unik och svår att replikera. Den genomsnittliga aktieägaravkastningen om 15,0% per år de senaste 20 åren (uppdaterat FY2025) — mot SIXRX 10,4% — är det tydligaste beviset på att ägarmodellen skapar verkligt mervärde. Wallenbergsfärens decennier av relationer, industriell kunskap och styrelserepresentation i världsledande bolag skapar ett ekosystem som är mer än summan av sina delar.
@@ -237,9 +237,9 @@ export default function InvestorPage() {
       </section>
 
       {/* SEKTION III */}
-      <section id="financials" className="mb-16">
-        <SectionHeader number="III" title="Finansiell analys" />
-        <FinancialTable rows={financialRows as any} years={["FY2023", "FY2024", "FY2025"]} />
+     <section id="financials" data-section="financials" className="mb-16">
+  <SectionHeader number="III" title="Finansiell analys" />
+  <FinancialTable rows={financialRows as any} />
         <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
           <MetricCard label="NAV-tillväxt FY2025" value="+14%" />
           <MetricCard label="Aktieägaravkastning" value="+15%" />
@@ -265,7 +265,7 @@ export default function InvestorPage() {
       </section>
 
       {/* SEKTION IV */}
-      <section id="valuation" className="mb-16">
+<section id="valuation" data-section="valuation" className="mb-16">
         <SectionHeader number="IV" title="Vardering" />
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
           <MetricCard label="Aktiekurs (mar 2026)" value="352 kr" />
