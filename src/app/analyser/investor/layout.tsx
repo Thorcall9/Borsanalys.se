@@ -5,6 +5,10 @@ export const metadata = {
   description:
     "Djupgående analys av Investor AB. Riktkurs 370 kr. NAV 355 kr. BEHÅLL-rekommendation.",
 
+  alternates: {
+    canonical: "https://www.borsanalys.se/analyser/investor",
+  },
+
   openGraph: {
     title: "Investor AB — Aktieanalys 2026 | Börsanalys.se",
     description:
@@ -21,5 +25,13 @@ export const metadata = {
     ],
     locale: "sv_SE",
     type: "article",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Investor AB — Aktieanalys 2026",
+    description:
+      "Djupgående analys av Investor AB. Riktkurs 370 kr.",
+    images: ["/investor_analys_hero.png"],
   },
 };
