@@ -450,22 +450,22 @@ export default function InvestorPage() {
         </div>
       </section>
 
-      {/* SEKTION IX */}
+            {/* SEKTION IX */}
       <section id="decision" data-section="decision" className="mb-16">
-  <SectionHeader number="IX" title="Investeringsbeslut" />
-  
-  {/* RatingBox tar nu texten inuti (children) */}
-  <RatingBox rating={4}>
-    Investor fortsätter att leverera stark substanstillväxt över tid. Vid nuvarande rabattnivåer ser vi aktien som ett kärninnehav i en långsiktig portfölj.
-  </RatingBox>
+        <SectionHeader number="IX" title="Investeringsbeslut" />
+        
+        <RatingBox rating={4}>
+          Investor fortsätter att leverera stark substanstillväxt över tid. Vid nuvarande rabattnivåer ser vi aktien som ett kärninnehav i en långsiktig portfölj.
+        </RatingBox>
 
-  {/* Manuella fält för priser med MetricCard för att det ska se proffsigt ut */}
-  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
-    <MetricCard label="Aktuell kurs" value="352 kr" />
-    <MetricCard label="Riktkurs" value="370 kr" />
-    <MetricCard label="Uppsida" value="+5%" valueColor="text-green-600" />
-  </div>
-</section>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+          <MetricCard label="Aktuell kurs" value="352 kr" />
+          <MetricCard label="Riktkurs" value="370 kr" />
+          <MetricCard label="Uppsida" value="+5%" valueColor="text-green-600" />
+        </div>
+
+        {/* Notera: Ingen </section> här! Texten nedan ska tillhöra sektion IX */}
+
         <p className="text-sm leading-relaxed text-[#2a2a2a] mt-6 mb-4">
           Investor AB är ett av Stockholmsbörsens absolut bästa långsiktiga innehav. Den 20-åriga historiken (15,0% per år vs SIXRX 10,4%), Wallenbergmodellens ägarstyrka, balansräkningens konservatism och portföljens exponering mot megatrender som automatisering, försvar, life science och digital infrastruktur gör bolaget till en naturlig kärnposition i en långsiktig portfölj.
         </p>
@@ -486,9 +486,12 @@ export default function InvestorPage() {
         <ScenarioCards scenarios={scenarios} />
         <p className="text-sm leading-relaxed text-[#2a2a2a] mt-6">
           Det sannolikhetsviktade utfallet landar kring 357 kr — nära riktkursen 370 kr. Tre fokusområden dominerar osäkerheten för 2026: (1) Nova Biomedical-integration och GDPR-risk efter cyberincidenten. (2) Permobils vändning efter nolltillväxt Q3 och SmartDrive-återkallelse. (3) Makrofriktion via tariffer och en stärkande krona som pressar Patricia Industries rapporterade siffror. VD Cederholms budskap är tydligt: osäkerheten är hög, men Investors finansiella styrka och 110-åriga affärslogik är intakt.
-            </p>
+        </p>
       </section>
+
+      {/* Dessa tre rader stänger hela sidan korrekt */}
     </div>
   </AnalysisLayout>
   );
 }
+
