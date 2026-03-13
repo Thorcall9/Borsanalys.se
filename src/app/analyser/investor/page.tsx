@@ -182,6 +182,15 @@ export default function InvestorPage() {
       sections={sections}
       accentColor={ACCENT}
     >
+      {/* Hero image */}
+      <div className="w-full">
+        <img
+          src="/investor_analys_hero.png"
+          alt="Investor AB aktieanalys 2026"
+          className="w-full object-cover"
+        />
+      </div>
+
       <div className="max-w-5xl mx-auto px-6 sm:px-12 pb-20">
       {/* SEKTION I */}
 <section id="overview" data-section="overview" className="mb-16">
