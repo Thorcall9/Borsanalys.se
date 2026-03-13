@@ -1,4 +1,6 @@
-export const metadata = {
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
   metadataBase: new URL("https://www.borsanalys.se"),
 
   title: "Investor AB — Aktieanalys 2026",
@@ -15,6 +17,8 @@ export const metadata = {
       "Riktkurs 370 kr. Wallenbergsfärens flaggskepp med 15% årsavkastning senaste 20 åren.",
     url: "https://www.borsanalys.se/analyser/investor",
     siteName: "Börsanalys",
+    locale: "sv_SE",
+    type: "article",
     images: [
       {
         url: "/investor_analys_hero.png",
@@ -23,15 +27,20 @@ export const metadata = {
         alt: "Investor AB aktieanalys",
       },
     ],
-    locale: "sv_SE",
-    type: "article",
   },
 
   twitter: {
     card: "summary_large_image",
     title: "Investor AB — Aktieanalys 2026",
-    description:
-      "Djupgående analys av Investor AB. Riktkurs 370 kr.",
+    description: "Djupgående analys av Investor AB. Riktkurs 370 kr.",
     images: ["/investor_analys_hero.png"],
   },
 };
+
+export default function InvestorLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <>{children}</>;
+}
