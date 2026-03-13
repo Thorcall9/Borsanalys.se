@@ -182,7 +182,7 @@ export default function InvestorPage() {
       sections={sections}
       accentColor={ACCENT}
     >
-      <div className="px-6 sm:px-12 pb-20">
+      <div className="max-w-5xl mx-auto px-6 sm:px-12 pb-20">
       {/* SEKTION I */}
 <section id="overview" data-section="overview" className="mb-16">
         <SectionHeader number="I" title="Oversikt" />
