@@ -59,32 +59,30 @@ threats: [
 
 const scenarios: Scenario[] = [
   {
-    type: "bull",
+    type: "bull", // Måste vara små bokstäver: "bull"
     probability: "25%",
     price: "430 kr",
-    change: "+22% från nuvarande",  // ← 'return' → 'change'
-    assumptions: "Bred börshaussé lyfter noterade innehav. EQT levererar starka exits.",
-    requires: "Nova Biomedical-integration lyckas. ABB/Atlas Copco gynnas av AI-investeringar.",
+    change: "+22%",
+    assumptions: "Bred börshaussé lyfter noterade innehav. EQT levererar starka exits. Nova Biomedical-integration lyckas.",
+    requires: "Substansrabatt normaliseras mot 5-10% och stark tillväxt i onoterade portföljen."
   },
   {
-    type: "base", 
+    type: "base", // Måste vara små bokstäver: "base"
     probability: "50%",
-    price: "380 kr",
-    change: "+10% från nuvarande",
-    assumptions: "Stabila innehav, Permobil vänder, makro ok.",
-    requires: "Ingen större cyberincident eller tariff-chock.",
+    price: "370 kr",
+    change: "+5%",
+    assumptions: "NAV-tillväxt ca 5-7%. Utdelning 5,60 kr utbetalas. Nova-integrationen fortskrider enligt plan.",
+    requires: "Stabil utveckling i Atlas Copco och ABB samt bibehållen substansrabatt."
   },
   {
-    type: "bear",
+    type: "bear", // Måste vara små bokstäver: "bear"
     probability: "25%",
-    price: "300 kr",
-    change: "-15% från nuvarande",
-    assumptions: "GDPR-boeter, SmartDrive-återkallelse, kronstärkning.",
-    requires: "Nova Biomedical misslyckas, Patricia Industries pressas.",
-  },
+    price: "260 kr",
+    change: "-26%",
+    assumptions: "Global recession pressar noterade innehav och EQT-värderingar. Nova Biomedical belastas av störningar.",
+    requires: "Kraftig kronförstärkning och sämre konjunktur för verkstadsbolagen."
+  }
 ];
-
-
 
 const financialRows = [
 { metric: "Justerat NAV (mdkr SEK)", fy2023: "808", fy2024: "970", fy2025: "1 087" },
