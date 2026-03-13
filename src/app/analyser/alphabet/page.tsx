@@ -60,31 +60,32 @@ threats: [
 };
 
 const scenarios: Scenario[] = [
-{
-type: "bull",
-probability: "25%",
-price: "$420",
-change: "+37% från $307",
-assumptions: "GCP över 35% tillväxt med över 25% marginal\nAI Overview Ads driver Search\nEPS $13–14",
-requires: "Cloud tar marknadsandelar, Gemini stärker Search-monetarisering, CapEx-effektiviteten är hög och regulatoriska remedies är minimala.",
-},
-{
-type: "base",
-probability: "50%",
-price: "$360",
-change: "+17% från $307",
-assumptions: "GCP ~30% tillväxt med stigande marginal\nSearch +10% YoY\nEPS ~$11,24 (2026e)",
-requires: "Stabil annonsmiljö, Cloud fortsätter växa, CapEx-toppen passerats 2025 och FCF återhämtar sig 2026–2027.",
-},
-{
-type: "bear",
-probability: "25%",
-price: "$220",
-change: "−28% från $307",
-assumptions: "Strukturella DOJ-åtgärder\nSearch tappar andelar till AI-konkurrenter\nP/E-kompression till 20x",
-requires: "Regulatorisk chock utöver det tidigare utfallet, AI-disruption av Search, Cloud-besvikelse och FCF under fortsatt press.",
-},
+  {
+    type: "bull",
+    probability: "25%",
+    price: "430 kr",
+    change: "+22% från 352 kr",
+    assumptions: "NAV-tillväxt 15%+\nNova-integration lyckas\nSaab och ABB fortsätter starka",
+    requires: "Bred börshaussé, EQT levererar starka exits, Sobis Arthrosi visar positiva fas 3-resultat och substansrabatten normaliseras mot 5-10%.",
+  },
+  {
+    type: "base",
+    probability: "50%",
+    price: "370 kr",
+    change: "+5% från 352 kr",
+    assumptions: "NAV-tillväxt ~5-7%\nUtdelning 5,60 kr\nNova-integration fortskrider",
+    requires: "Stabil börs, valutamotvinden avtar gradvis, Permobil vänder sakta och EQT-distributioner håller sig på starka nivåer.",
+  },
+  {
+    type: "bear",
+    probability: "25%",
+    price: "260 kr",
+    change: "-26% från 352 kr",
+    assumptions: "NAV-press från bred nedgång\nGDPR-böter Nova\nPermobil missar vändningen",
+    requires: "Global recession pressar noterade innehav och EQT simultant, kronförstärkning och tariffer tynger Patricia Industries rapporterade siffror.",
+  },
 ];
+
 
 const PUBLISHED = true; // ändra till true för att publicera
 
