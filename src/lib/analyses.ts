@@ -11,6 +11,16 @@ export interface Analysis {
 
 export const analyses: Analysis[] = [
   {
+    slug: "investor",
+    title: "Investor AB – Aktieanalys 2026",
+    date: "2026-03-13",
+    author: "Carl Fredrik Thor",
+    category: "Långsiktiga analyser",
+    excerpt: "Djupanalys av Investor AB med Q3 och Q4 2025-data. NAV 355 kr, riktkurs 370 kr. Wallenbergsfärens flaggskepp navigerar makromotvind med finansiell styrka.",
+    verdict: "BEHÅLL",
+    target: "370 kr",
+  },
+  {
     slug: "alphabet",
     title: "Alphabet (GOOGL): AI-ledarskap och historiska milstolpar",
     date: "2026-03-12",
@@ -49,14 +59,6 @@ export const analyses: Analysis[] = [
     excerpt: "Analys av konkurrensläget inom GLP-1, pipeline-uppdateringar och värdering av Novo Nordisk.",
     verdict: "KÖP",
     target: "DKK 520",
-  },
-  {
-    slug: "investor-2025-q2",
-    title: "Investor – Bear, Base, Bull-scenarion Q2 2025",
-    date: "2025-10-07",
-    author: "Carl Fredrik Thor",
-    category: "Långsiktiga analyser",
-    excerpt: "Scenarioanalys av Investor med potential uppsida på 14%.",
   },
   {
     slug: "volvo-2025-q2",
