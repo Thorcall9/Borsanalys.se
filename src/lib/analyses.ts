@@ -7,6 +7,7 @@ export interface Analysis {
   excerpt: string;
   verdict?: string;
   target?: string;
+  heroImage?: string;
 }
 
 export const analyses: Analysis[] = [
@@ -19,6 +20,7 @@ export const analyses: Analysis[] = [
     excerpt: "Djupanalys av Investor AB med Q3 och Q4 2025-data. NAV 355 kr, riktkurs 370 kr. Wallenbergsfärens flaggskepp navigerar makromotvind med finansiell styrka.",
     verdict: "BEHÅLL",
     target: "370 kr",
+    heroImage: "/investor_analys_hero.png",
   },
   {
     slug: "alphabet",
@@ -29,6 +31,7 @@ export const analyses: Analysis[] = [
     excerpt: "Med en historisk kvartalsomsättning på över $100Mdr och en Cloud-marginal som rusat från 8% till 20% på ett år, befäster Alphabet sin roll som AI-erans definitiva vinnare.",
     verdict: "KÖP",
     target: "$360",
+    heroImage: "/alphabet_analys_hero.png",
   },
   {
     slug: "nvidia-fy2026",
@@ -49,6 +52,7 @@ export const analyses: Analysis[] = [
     excerpt: "Djupanalys av Microsofts AI-strategi, Azure-tillväxt, Copilot-monetarisering och värdering inför 2026.",
     verdict: "KÖP",
     target: "$480",
+    heroImage: "/microsoft_analys_hero.png",
   },
   {
     slug: "novo-nordisk-2025",
