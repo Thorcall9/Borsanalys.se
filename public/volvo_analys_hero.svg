@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" width="1200" height="420">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d2040;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#1a3c6e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f2d52;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#b5892a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d4a93a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="shimmer" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0" />
+      <stop offset="50%" style="stop-color:#ffffff;stop-opacity:0.04" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="420" fill="url(#bg)" />
+
+  <!-- Subtle grid lines -->
+  <line x1="0" y1="140" x2="1200" y2="140" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+  <line x1="0" y1="280" x2="1200" y2="280" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+  <line x1="300" y1="0" x2="300" y2="420" stroke="#ffffff" stroke-opacity="0.03" stroke-width="1"/>
+  <line x1="600" y1="0" x2="600" y2="420" stroke="#ffffff" stroke-opacity="0.03" stroke-width="1"/>
+  <line x1="900" y1="0" x2="900" y2="420" stroke="#ffffff" stroke-opacity="0.03" stroke-width="1"/>
+
+  <!-- Decorative circle (Volvo iron mark inspired) -->
+  <circle cx="980" cy="210" r="180" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1.5"/>
+  <circle cx="980" cy="210" r="140" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+  <line x1="980" y1="30" x2="1120" y2="30" stroke="#ffffff" stroke-opacity="0.08" stroke-width="2"/>
+  <line x1="1120" y1="30" x2="1120" y2="390" stroke="#ffffff" stroke-opacity="0.03" stroke-width="1"/>
+
+  <!-- Shimmer overlay -->
+  <rect width="1200" height="420" fill="url(#shimmer)" />
+
+  <!-- Gold accent bar -->
+  <rect x="80" y="85" width="6" height="80" fill="url(#accent)" rx="3"/>
+
+  <!-- BÖRSANALYS.SE label -->
+  <text x="100" y="108" font-family="Georgia, serif" font-size="11" fill="#b5892a" letter-spacing="4" font-weight="400" opacity="0.9">BÖRSANALYS.SE</text>
+
+  <!-- AKTIEANALYS label -->
+  <text x="100" y="130" font-family="Georgia, serif" font-size="11" fill="#ffffff" letter-spacing="6" opacity="0.5" font-weight="400">AKTIEANALYS</text>
+
+  <!-- Company name -->
+  <text x="96" y="210" font-family="Georgia, serif" font-size="72" fill="#ffffff" font-weight="700" letter-spacing="-1" opacity="0.97">AB Volvo</text>
+
+  <!-- Ticker + Exchange -->
+  <text x="100" y="248" font-family="'Courier New', monospace" font-size="14" fill="#ffffff" opacity="0.55" letter-spacing="3">VOLV B  •  NASDAQ STOCKHOLM</text>
+
+  <!-- Divider line -->
+  <line x1="80" y1="275" x2="520" y2="275" stroke="url(#accent)" stroke-opacity="0.5" stroke-width="1"/>
+
+  <!-- Year -->
+  <text x="100" y="305" font-family="Georgia, serif" font-size="18" fill="#ffffff" opacity="0.4" letter-spacing="8">2026</text>
+
+  <!-- Verdict badge -->
+  <rect x="100" y="325" width="110" height="36" rx="4" fill="#b5892a" opacity="0.9"/>
+  <text x="155" y="348" font-family="'Courier New', monospace" font-size="13" fill="#ffffff" text-anchor="middle" font-weight="700" letter-spacing="2">BEVAKA</text>
+
+  <!-- Target price badge -->
+  <rect x="225" y="325" width="140" height="36" rx="4" fill="none" stroke="#b5892a" stroke-width="1.5" opacity="0.7"/>
+  <text x="295" y="348" font-family="'Courier New', monospace" font-size="13" fill="#b5892a" text-anchor="middle" letter-spacing="1" opacity="0.9">Riktkurs 345 kr</text>
+
+  <!-- Stats row -->
+  <text x="100" y="400" font-family="'Courier New', monospace" font-size="11" fill="#ffffff" opacity="0.35" letter-spacing="1">Direktavkastning 4,0%  •  Nettokassa 63 mdr SEK  •  FY2025-data</text>
+</svg>

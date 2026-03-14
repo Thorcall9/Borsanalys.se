@@ -12,6 +12,18 @@ export interface Analysis {
 
 export const analyses: Analysis[] = [
   {
+    slug: "volvo-2026",
+    title: "AB Volvo – Aktieanalys 2026 (FY2025)",
+    date: "2026-03-14",
+    author: "Carl Fredrik Thor",
+    category: "Långsiktiga analyser",
+    excerpt:
+      "Djupanalys av AB Volvo med FY2025-data. Nettokassa 63 mdr SEK, marknadsledare i Europa för tunga lastbilar för andra året i rad. BEVAKA med riktkurs 345 kr — utdelning 13 kr ger 4,0% direktavkastning.",
+    verdict: "BEVAKA",
+    target: "345 kr",
+    heroImage: "/volvo_analys_hero.svg",
+  },
+  {
     slug: "investor",
     title: "Investor AB – Aktieanalys 2026",
     date: "2026-03-13",
