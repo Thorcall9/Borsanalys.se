@@ -1,4 +1,12 @@
 import { analyses } from "@/lib/analyses";
+import { existsSync } from "fs";
+import { join } from "path";
+
+function getHeroImage(slug) {
+  const filename = `${slug}_analys_hero.png`;
+  const filepath = join(process.cwd(), "public", filename);
+  return existsSync(filepath) ? `/${filename}` : null;
+}
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
@@ -14,7 +22,8 @@ export async function GET(request) {
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .map((analysis) => {
       const url = `${baseUrl}/analyser/${analysis.slug}`;
-      const imageUrl = analysis.heroImage ? `${baseUrl}${analysis.heroImage}` : null;
+      const heroImage = getHeroImage(analysis.slug);
+      const imageUrl = heroImage ? `${baseUrl}${heroImage}` : null;
 
       const description = imageUrl
         ? `<description><![CDATA[<img src="${imageUrl}" />\n${analysis.excerpt}]]></description>`
