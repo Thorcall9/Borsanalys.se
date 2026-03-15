@@ -17,7 +17,7 @@ export async function POST(request: Request) {
       from: 'Börsanalys.se <noreply@borsanalys.se>',
       to: [toEmail],
       subject: `Nytt meddelande från ${name} via Börsanalys.se`,
-      reply_to: email,
+      replyTo: email,
       html: `
         <div style="font-family: sans-serif; line-height: 1.6;">
           <h2>Nytt meddelande från kontaktformuläret</h2>
