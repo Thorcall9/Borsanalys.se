@@ -22,6 +22,7 @@ export default function Footer() {
               maxLength={254}
               placeholder="Din e-postadress"
               className="flex-1 px-4 py-2.5 rounded-lg bg-white/15 border border-white/25 text-white placeholder:text-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+              suppressHydrationWarning
             />
             <button
               type="submit"
