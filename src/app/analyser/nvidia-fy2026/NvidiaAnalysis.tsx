@@ -9,15 +9,15 @@ export default function NvidiaAnalysis() {
 
   // Refs for all chart canvases
   const chartRefs = useRef<{[key: string]: ChartJS}>({});
-  const revenueQuarterChartRef = useRef(null);
-  const marginChartRef = useRef(null);
-  const cfChartRef = useRef(null);
-  const multiplesChartRef = useRef(null);
-  const epsChartRef = useRef(null);
-  const segmentChartRef = useRef(null);
-  const buybackChartRef = useRef(null);
-  const toneTrendChartRef = useRef(null);
-  const scenarioChartRef = useRef(null);
+  const revenueQuarterChartRef = useRef<HTMLCanvasElement>(null);
+  const marginChartRef = useRef<HTMLCanvasElement>(null);
+  const cfChartRef = useRef<HTMLCanvasElement>(null);
+  const multiplesChartRef = useRef<HTMLCanvasElement>(null);
+  const epsChartRef = useRef<HTMLCanvasElement>(null);
+  const segmentChartRef = useRef<HTMLCanvasElement>(null);
+  const buybackChartRef = useRef<HTMLCanvasElement>(null);
+  const toneTrendChartRef = useRef<HTMLCanvasElement>(null);
+  const scenarioChartRef = useRef<HTMLCanvasElement>(null);
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
