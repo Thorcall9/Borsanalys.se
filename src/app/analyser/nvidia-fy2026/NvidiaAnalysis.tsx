@@ -952,7 +952,7 @@ export default function NvidiaAnalysis() {
                       <li>USD-styrka gynnar relativt: NVIDIA säljer i USD.</li>
                      </ul>
                       <h4>Negativa Makrofaktorer</h4>
-                     <ul className="std-list" style={{'--nvidia-green': 'var(--red)'}}>
+                     <ul className="std-list" style={{'--nvidia-green': 'var(--red)'} as React.CSSProperties}>
                       <li>Ränteuppgång pressar techvärderingar.</li>
                       <li>Geopolitisk eskalering (Taiwan, Kina-handel).</li>
                       <li>OBBBA (US-skattelag) höjer effektiv skattesats.</li>
