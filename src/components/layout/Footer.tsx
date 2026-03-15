@@ -12,7 +12,7 @@ export default function Footer() {
           <p className="text-white/80 mb-6 max-w-md mx-auto text-sm">
             Prenumerera för att få nyhetsbrev och de senaste analyserna direkt i din mejl.
           </p>
-          <form className="flex gap-2 max-w-md mx-auto" action="/api/newsletter" method="POST">
+          <form className="flex gap-2 max-w-md mx-auto" action="/api/newsletter" method="POST" suppressHydrationWarning>
             <label htmlFor="newsletter-email" className="sr-only">E-postadress</label>
             <input
               type="email"
@@ -90,7 +90,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-border mt-8 pt-6 text-center text-muted text-xs">
+        <div className="border-t border-border mt-8 pt-6 text-center text-muted text-xs" suppressHydrationWarning>
           &copy; {new Date().getFullYear()} Börsanalys.se. Alla rättigheter förbehållna.
         </div>
       </div>
