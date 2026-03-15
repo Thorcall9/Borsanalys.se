@@ -48,7 +48,7 @@ export const analyses: Analysis[] = [
   {
     slug: "nvidia-fy2026",
     title: "NVIDIA FY2026 – Finansiell analys",
-    date: "2024-06-05",
+    date: "2026-03-03",
     author: "Carl Fredrik Thor",
     category: "Långsiktiga analyser",
     excerpt: "Komplett analys av NVIDIAs dominans inom AI-chip, Blackwell-plattformen, värdering och framtidsutsikter.",
