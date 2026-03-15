@@ -8,6 +8,7 @@ import ChatWidget from "@/components/Chat/ChatWidget";
 import { defaultMetadata } from "@/lib/seo";
 import "./globals.css";
 import SubscriptionSuccess from "@/components/ui/SubscriptionSuccess";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,7 +40,9 @@ export default function RootLayout({
         <main className="min-h-screen">{children}</main>
         <Footer />
         <ChatWidget />
-        <SubscriptionSuccess />
+        <Suspense fallback={null}>
+          <SubscriptionSuccess />
+        </Suspense>
         {gaId && (
           <>
             <Script
