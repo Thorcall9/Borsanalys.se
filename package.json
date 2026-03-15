@@ -8,15 +8,16 @@
     "start": "next start",
     "lint": "eslint"
   },
-    "dependencies": {
+  "dependencies": {
     "@google/generative-ai": "^0.21.0",
-    "@vercel/analytics": "^2.0.0",
     "@neondatabase/serverless": "^0.10.0",
+    "@vercel/analytics": "^2.0.0",
     "chart.js": "^4.5.1",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-chartjs-2": "^5.3.1",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "resend": "^6.9.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

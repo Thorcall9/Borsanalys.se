@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 // Vi hämtar din lista med analyser här
 import { analyses } from "@/lib/analyses";
 
@@ -22,9 +22,26 @@ const navItems = [
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [toolsOpen, setToolsOpen] = useState(false);
+  const toolsMenuRef = useRef<HTMLDivElement>(null);
 
   // Vi hämtar den allra senaste analysen (den som ligger överst i analyses.ts)
   const latestAnalysis = analyses[0];
+
+  // Hook for closing dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (toolsMenuRef.current && !toolsMenuRef.current.contains(event.target as Node)) {
+        setToolsOpen(false);
+      }
+    };
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [toolsMenuRef]);
+
 
   return (
     <>
@@ -50,7 +67,7 @@ export default function Header() {
             <nav className="hidden md:flex items-center gap-1">
               {navItems.map((item) =>
                 item.children ? (
-                  <div key={item.label} className="relative group">
+                  <div key={item.label} className="relative" ref={toolsMenuRef}>
                     <button
                       className="px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground rounded-md hover:bg-card transition-colors"
                       onClick={() => setToolsOpen(!toolsOpen)}
@@ -66,12 +83,13 @@ export default function Header() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>
                     </button>
-                    <div className="absolute left-0 top-full mt-1 w-56 bg-card border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                    <div className={`absolute left-0 top-full mt-1 w-56 bg-card border border-border rounded-lg shadow-lg transition-all ${toolsOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
                       {item.children.map((child) => (
                         <Link
                           key={child.href}
                           href={child.href}
                           className="block px-4 py-2.5 text-sm hover:bg-card-hover first:rounded-t-lg last:rounded-b-lg transition-colors"
+                          onClick={() => setToolsOpen(false)}
                         >
                           {child.label}
                         </Link>
@@ -126,7 +144,10 @@ export default function Header() {
                           key={child.href}
                           href={child.href}
                           className="block pl-6 pr-3 py-2 text-sm text-foreground/70 hover:text-foreground"
-                          onClick={() => setMobileOpen(false)}
+                          onClick={() => {
+                            setMobileOpen(false);
+                            setToolsOpen(false);
+                          }}
                         >
                           {child.label}
                         </Link>

@@ -1,66 +1,44 @@
-import { NextRequest, NextResponse } from "next/server";
 
-const MAX_NAME_LENGTH = 200;
-const MAX_EMAIL_LENGTH = 254;
-const MAX_MESSAGE_LENGTH = 5000;
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const ALLOWED_ORIGIN = "https://borsanalys.se";
+import { NextResponse } from 'next/server';
+import { Resend } from 'resend';
 
-function isValidOrigin(request: NextRequest): boolean {
-  const origin = request.headers.get("origin");
-  if (!origin) return true; // Allow non-browser requests (e.g., curl)
-  return origin === ALLOWED_ORIGIN || origin.startsWith("http://localhost");
-}
+const resend = new Resend(process.env.RESEND_API_KEY);
+const toEmail = process.env.CONTACT_FORM_TO_EMAIL || 'ditt-email@example.com';
 
-export async function POST(request: NextRequest) {
-  if (!isValidOrigin(request)) {
-    return NextResponse.json({ error: "Otillåten källa." }, { status: 403 });
-  }
-
-  let formData: FormData;
+export async function POST(request: Request) {
   try {
-    formData = await request.formData();
-  } catch {
-    return NextResponse.json({ error: "Ogiltig förfrågan." }, { status: 400 });
+    const { name, email, message } = await request.json();
+
+    if (!name || !email || !message) {
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    }
+
+    const { data, error } = await resend.emails.send({
+      from: 'Börsanalys.se <noreply@borsanalys.se>',
+      to: [toEmail],
+      subject: `Nytt meddelande från ${name} via Börsanalys.se`,
+      reply_to: email,
+      html: `
+        <div style="font-family: sans-serif; line-height: 1.6;">
+          <h2>Nytt meddelande från kontaktformuläret</h2>
+          <p><strong>Namn:</strong> ${name}</p>
+          <p><strong>E-post:</strong> ${email}</p>
+          <hr>
+          <h3>Meddelande:</h3>
+          <p>${message.replace(/\n/g, '<br>')}</p>
+        </div>
+      `,
+    });
+
+    if (error) {
+      console.error("Resend API error:", error);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ message: 'Email sent successfully!', data });
+  } catch (e) {
+    const error = e as Error;
+    console.error("Contact form error:", error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
-
-  const name = formData.get("name")?.toString().trim();
-  const email = formData.get("email")?.toString().trim();
-  const message = formData.get("message")?.toString().trim();
-
-  if (!name || !email || !message) {
-    return NextResponse.json(
-      { error: "Alla fält är obligatoriska." },
-      { status: 400 }
-    );
-  }
-
-  if (name.length > MAX_NAME_LENGTH) {
-    return NextResponse.json(
-      { error: "Namnet är för långt." },
-      { status: 400 }
-    );
-  }
-
-  if (!EMAIL_REGEX.test(email) || email.length > MAX_EMAIL_LENGTH) {
-    return NextResponse.json(
-      { error: "Ogiltig e-postadress." },
-      { status: 400 }
-    );
-  }
-
-  if (message.length > MAX_MESSAGE_LENGTH) {
-    return NextResponse.json(
-      { error: "Meddelandet är för långt (max 5000 tecken)." },
-      { status: 400 }
-    );
-  }
-
-  // TODO: Send email or store in database
-  console.log("Contact form submission:", { name, email, message });
-
-  return NextResponse.redirect(
-    new URL("/kontakt?skickat=true", request.url),
-    303
-  );
 }
