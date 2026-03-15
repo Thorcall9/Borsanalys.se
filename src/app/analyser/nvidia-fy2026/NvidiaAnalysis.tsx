@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
-import type { Chart as ChartJS } from 'chart.js';
+import type { Chart as ChartJS, ChartData } from 'chart.js';
 
 export default function NvidiaAnalysis() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -53,7 +53,12 @@ export default function NvidiaAnalysis() {
     const gridOpts = { color: 'rgba(255,255,255,0.05)', drawBorder: false };
     const axisOpts = { grid: gridOpts, border: { display: false }, ticks: { color: '#5a5a5a' } };
     
-    const chartsToCreate = {
+    const chartsToCreate: {[key: string]: {
+        ref: React.RefObject<HTMLCanvasElement>;
+        type: 'bar' | 'line';
+        data: ChartData<any, any, any>;
+        options: any;
+    }} = {
       revenueQuarterChart: {
         ref: revenueQuarterChartRef,
         type: 'bar',
@@ -218,7 +223,7 @@ export default function NvidiaAnalysis() {
           scales: { x: { ...axisOpts, ticks: { color: '#5a5a5a', callback: (v: any) => `$${v}` } }, y: axisOpts }
         }
       },
-    } as const;
+    };
 
     Object.entries(chartsToCreate).forEach(([id, chartConfig]) => {
       const canvas = chartConfig.ref.current;
