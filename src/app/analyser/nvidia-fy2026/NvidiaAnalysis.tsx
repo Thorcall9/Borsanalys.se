@@ -8,7 +8,7 @@ export default function NvidiaAnalysis() {
   const [activeQuarter, setActiveQuarter] = useState('q1');
 
   // Refs for all chart canvases
-  const chartRefs = useRef({});
+  const chartRefs = useRef<{[key: string]: ChartJS}>({});
   const revenueQuarterChartRef = useRef(null);
   const marginChartRef = useRef(null);
   const cfChartRef = useRef(null);
@@ -23,7 +23,7 @@ export default function NvidiaAnalysis() {
     setSidebarOpen(!isSidebarOpen);
   };
 
-  const handleNavClick = (e, targetId) => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     // Basic smooth scroll for navigation
     const targetElement = document.getElementById(targetId.substring(1));
     if (targetElement) {
@@ -35,7 +35,7 @@ export default function NvidiaAnalysis() {
     }
   };
 
-  const showQuarterTab = (quarter) => {
+  const showQuarterTab = (quarter: string) => {
     setActiveQuarter(quarter);
   };
 
@@ -62,7 +62,7 @@ export default function NvidiaAnalysis() {
           datasets: [{
             label: 'Omsättning ($B)',
             data: [26.0, 30.0, 35.1, 39.3, 44.1, 46.7, 57.0, 65.0],
-            backgroundColor: (ctx) => {
+            backgroundColor: (ctx: any) => {
               const i = ctx.dataIndex;
               if (i === 7) return 'rgba(118,185,0,0.35)';
               return i >= 4 ? NVIDIA_GREEN : 'rgba(118,185,0,0.3)';
@@ -74,8 +74,8 @@ export default function NvidiaAnalysis() {
         },
         options: {
           responsive: true, maintainAspectRatio: false,
-          plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ` $${ctx.raw}B` } } },
-          scales: { x: axisOpts, y: { ...axisOpts, ticks: { color: '#5a5a5a', callback: v => `$${v}B` } } }
+          plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx: any) => ` $${ctx.raw}B` } } },
+          scales: { x: axisOpts, y: { ...axisOpts, ticks: { color: '#5a5a5a', callback: (v: any) => `$${v}B` } } }
         }
       },
       marginChart: {
@@ -90,8 +90,8 @@ export default function NvidiaAnalysis() {
         },
         options: {
           responsive: true, maintainAspectRatio: false,
-          plugins: { legend: { display: true, labels: { color: '#7a7a7a', boxWidth: 12, font: { size: 10 } } }, tooltip: { callbacks: { label: ctx => ` ${ctx.raw}%` } } },
-          scales: { x: axisOpts, y: { ...axisOpts, ticks: { color: '#5a5a5a', callback: v => `${v}%` }, min: 45, max: 80 } }
+          plugins: { legend: { display: true, labels: { color: '#7a7a7a', boxWidth: 12, font: { size: 10 } } }, tooltip: { callbacks: { label: (ctx: any) => ` ${ctx.raw}%` } } },
+          scales: { x: axisOpts, y: { ...axisOpts, ticks: { color: '#5a5a5a', callback: (v: any) => `${v}%` }, min: 45, max: 80 } }
         }
       },
       cfChart: {
@@ -106,8 +106,8 @@ export default function NvidiaAnalysis() {
         },
         options: {
           responsive: true, maintainAspectRatio: false,
-          plugins: { legend: { display: true, labels: { color: '#7a7a7a', boxWidth: 12, font: { size: 10 } } }, tooltip: { callbacks: { label: ctx => ` $${ctx.raw}B` } } },
-          scales: { x: axisOpts, y: { ...axisOpts, ticks: { color: '#5a5a5a', callback: v => `$${v}B` } } }
+          plugins: { legend: { display: true, labels: { color: '#7a7a7a', boxWidth: 12, font: { size: 10 } } }, tooltip: { callbacks: { label: (ctx: any) => ` $${ctx.raw}B` } } },
+          scales: { x: axisOpts, y: { ...axisOpts, ticks: { color: '#5a5a5a', callback: (v: any) => `$${v}B` } } }
         }
       },
       multiplesChart: {
@@ -135,14 +135,14 @@ export default function NvidiaAnalysis() {
           datasets: [{
             label: 'EPS ($)',
             data: [2.96, 4.92, 8.24, 10.88],
-            backgroundColor: (ctx) => ['rgba(118,185,0,0.5)', NVIDIA_GREEN, 'rgba(118,185,0,0.7)', 'rgba(118,185,0,0.5)'][ctx.dataIndex],
+            backgroundColor: (ctx: any) => ['rgba(118,185,0,0.5)', NVIDIA_GREEN, 'rgba(118,185,0,0.7)', 'rgba(118,185,0,0.5)'][ctx.dataIndex],
             borderColor: NVIDIA_GREEN, borderWidth: 1, borderRadius: 6,
           }]
         },
         options: {
           responsive: true, maintainAspectRatio: false,
-          plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ` $${ctx.raw}` } } },
-          scales: { x: axisOpts, y: { ...axisOpts, ticks: { color: '#5a5a5a', callback: v => `$${v}` } } }
+          plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx: any) => ` $${ctx.raw}` } } },
+          scales: { x: axisOpts, y: { ...axisOpts, ticks: { color: '#5a5a5a', callback: (v: any) => `$${v}` } } }
         }
       },
       segmentChart: {
@@ -159,8 +159,8 @@ export default function NvidiaAnalysis() {
         },
         options: {
           responsive: true, maintainAspectRatio: false,
-          plugins: { legend: { display: true, labels: { color: '#7a7a7a', boxWidth: 12, font: { size: 10 } } }, tooltip: { callbacks: { label: ctx => ` $${ctx.raw}B` } } },
-          scales: { x: axisOpts, y: { ...axisOpts, stacked: false, ticks: { color: '#5a5a5a', callback: v => `$${v}B` } } }
+          plugins: { legend: { display: true, labels: { color: '#7a7a7a', boxWidth: 12, font: { size: 10 } } }, tooltip: { callbacks: { label: (ctx: any) => ` $${ctx.raw}B` } } },
+          scales: { x: axisOpts, y: { ...axisOpts, stacked: false, ticks: { color: '#5a5a5a', callback: (v: any) => `$${v}B` } } }
         }
       },
       buybackChart: {
@@ -177,8 +177,8 @@ export default function NvidiaAnalysis() {
         },
         options: {
           responsive: true, maintainAspectRatio: false,
-          plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ` $${ctx.raw}B` } } },
-          scales: { x: axisOpts, y: { ...axisOpts, ticks: { color: '#5a5a5a', callback: v => `$${v}B` } } }
+          plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx: any) => ` $${ctx.raw}B` } } },
+          scales: { x: axisOpts, y: { ...axisOpts, ticks: { color: '#5a5a5a', callback: (v: any) => `$${v}B` } } }
         }
       },
       toneTrendChart: {
@@ -194,7 +194,7 @@ export default function NvidiaAnalysis() {
         },
         options: {
           responsive: true, maintainAspectRatio: false,
-          plugins: { legend: { display: true, labels: { color: '#7a7a7a', boxWidth: 12, font: { size: 11 } } }, tooltip: { callbacks: { label: ctx => ` ${ctx.raw}/10` } } },
+          plugins: { legend: { display: true, labels: { color: '#7a7a7a', boxWidth: 12, font: { size: 11 } } }, tooltip: { callbacks: { label: (ctx: any) => ` ${ctx.raw}/10` } } },
           scales: { x: axisOpts, y: { ...axisOpts, min: 0, max: 10, ticks: { color: '#5a5a5a', stepSize: 2 } } }
         }
       },
@@ -214,11 +214,11 @@ export default function NvidiaAnalysis() {
         },
         options: {
           indexAxis: 'y', responsive: true, maintainAspectRatio: false,
-          plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ` $${ctx.raw}` } } },
-          scales: { x: { ...axisOpts, ticks: { color: '#5a5a5a', callback: v => `$${v}` } }, y: axisOpts }
+          plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx: any) => ` $${ctx.raw}` } } },
+          scales: { x: { ...axisOpts, ticks: { color: '#5a5a5a', callback: (v: any) => `$${v}` } }, y: axisOpts }
         }
       },
-    };
+    } as const;
 
     Object.entries(chartsToCreate).forEach(([id, chartConfig]) => {
       const canvas = chartConfig.ref.current;
@@ -254,7 +254,7 @@ export default function NvidiaAnalysis() {
     sections.forEach(s => observer.observe(s));
 
     return () => {
-      Object.values(chartRefs.current).forEach(chart => (chart as ChartJS).destroy());
+      Object.values(chartRefs.current).forEach(chart => chart?.destroy());
       observer.disconnect();
     };
   }, []);
