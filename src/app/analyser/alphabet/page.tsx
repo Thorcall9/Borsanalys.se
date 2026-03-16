@@ -1,156 +1,174 @@
 "use client";
 
-import Image from "next/image" 
+import Image from "next/image"
+import { useMemo } from 'react';
 import {
-AnalysisLayout,
-SectionHeader,
-MetricCard,
-FinancialTable,
-SwotGrid,
-ScenarioCards,
-AlertBox,
-RatingBox,
+  AnalysisLayout,
+  SectionHeader,
+  MetricCard,
+  FinancialTable,
+  SwotGrid,
+  ScenarioCards,
+  AlertBox,
+  RatingBox,
+  RadarChart
 } from "@/components/analysis";
 import type { AnalysisSection, Scenario } from "@/components/analysis";
 
 const ACCENT = "#1a3c6e";
 
 const sections: AnalysisSection[] = [
-{ id: "overview",   number: "I",    title: "Översikt" },
-{ id: "moat",       number: "II",   title: "Strategisk Moat" },
-{ id: "financials", number: "III",  title: "Finansiell analys" },
-{ id: "valuation",  number: "IV",   title: "Värdering" },
-{ id: "growth",     number: "V",    title: "Tillväxtmotorer" },
-{ id: "risk",       number: "VI",   title: "Riskprofil" },
-{ id: "esg",        number: "VII",  title: "ESG & Makro" },
-{ id: "ai-obs",     number: "VIII", title: "AI-observationer" },
-{ id: "verdict",    number: "IX",   title: "Investeringsbeslut" },
-{ id: "scenarios",  number: "X",    title: "Scenarier" },
+  { id: "overview",   number: "I",    title: "Översikt" },
+  { id: "moat",       number: "II",   title: "Strategisk Moat" },
+  { id: "financials", number: "III",  title: "Finansiell analys" },
+  { id: "valuation",  number: "IV",   title: "Värdering" },
+  { id: "growth",     number: "V",    title: "Tillväxtmotorer" },
+  { id: "risk",       number: "VI",   title: "Riskprofil" },
+  { id: "esg",        number: "VII",  title: "ESG & Makro" },
+  { id: "ai-obs",     number: "VIII", title: "AI-observationer" },
+  { id: "verdict",    number: "IX",   title: "Investeringsbeslut" },
+  { id: "scenarios",  number: "X",    title: "Scenarier" },
 ];
 
 const swotData = {
-strengths: [
-"Dominans inom sök och annonsering — ~90% global marknadsandel",
-"Full-stack AI-ledarskap: Gemini 2.5, TPU Ironwood (gen. 7), DeepMind",
-"Massiva nätverkseffekter — 7 produkter med över 2 miljarder användare",
-"GCP-marginal 20,7% (Q2 2025) — snabb lönsamhetsexpansion",
-"Exceptionell balansräkning: $95Mdr nettokassa, nästintill skuldfri",
-],
-weaknesses: [
-"~75% av intäkterna från annonsering — koncentrationsrisk",
-"Google Cloud är #3 bakom AWS och Azure",
-"CapEx exploderar: ~$85Mdr 2025, pressar FCF kortsiktigt",
-"Other Bets (inkl. Waymo) genererar operativa förluster >$1Mdr/kvartal",
-"Dual-class aktiestruktur begränsar minoritetsägares inflytande",
-],
-opportunities: [
-"AI Overview Ads: bevisad monetarisering av generativ sökning",
-"GCP: målsättning $100Mdr ARR — 32% tillväxt i Q2 2025",
-"Waymo: ~450 000 betalda resor/vecka, potentiellt $100Mdr+ värde",
-"YouTube Subscriptions: 270M+ betalande prenumeranter",
-"Gemini 2.5 Pro: topprankad modell driver Cloud-efterfrågan",
-],
-threats: [
-"Microsoft/OpenAI hotar sökbeteendet med Bing + ChatGPT Search",
-"EU Digital Markets Act — begränsar Google Play och ekosystemet",
-"DOJ antitrust: eventuella beteendemässiga krav kvarstår",
-"FCF-kompression 2025–2026 pga massivt CapEx",
-"Energibehov från AI-datacenter — ESG-risk och kostnadsrisk",
-],
+  strengths: [
+    "Dominans inom sök och annonsering — ~90% global marknadsandel",
+    "Full-stack AI-ledarskap: Gemini 2.5, TPU Ironwood (gen. 7), DeepMind",
+    "Massiva nätverkseffekter — 7 produkter med över 2 miljarder användare",
+    "GCP-marginal 20,7% (Q2 2025) — snabb lönsamhetsexpansion",
+    "Exceptionell balansräkning: $95Mdr nettokassa, nästintill skuldfri",
+  ],
+  weaknesses: [
+    "~75% av intäkterna från annonsering — koncentrationsrisk",
+    "Google Cloud är #3 bakom AWS och Azure",
+    "CapEx exploderar: ~$85Mdr 2025, pressar FCF kortsiktigt",
+    "Other Bets (inkl. Waymo) genererar operativa förluster >$1Mdr/kvartal",
+    "Dual-class aktiestruktur begränsar minoritetsägares inflytande",
+  ],
+  opportunities: [
+    "AI Overview Ads: bevisad monetarisering av generativ sökning",
+    "GCP: målsättning $100Mdr ARR — 32% tillväxt i Q2 2025",
+    "Waymo: ~450 000 betalda resor/vecka, potentiellt $100Mdr+ värde",
+    "YouTube Subscriptions: 270M+ betalande prenumeranter",
+    "Gemini 2.5 Pro: topprankad modell driver Cloud-efterfrågan",
+  ],
+  threats: [
+    "Microsoft/OpenAI hotar sökbeteendet med Bing + ChatGPT Search",
+    "EU Digital Markets Act — begränsar Google Play och ekosystemet",
+    "DOJ antitrust: eventuella beteendemässiga krav kvarstår",
+    "FCF-kompression 2025–2026 pga massivt CapEx",
+    "Energibehov från AI-datacenter — ESG-risk och kostnadsrisk",
+  ],
 };
 
 const scenarios: Scenario[] = [
-  {
-    type: "bull",
-    probability: "25%",
-    price: "430 kr",
-    change: "+22% från 352 kr",
-    assumptions: "NAV-tillväxt 15%+\nNova-integration lyckas\nSaab och ABB fortsätter starka",
-    requires: "Bred börshaussé, EQT levererar starka exits, Sobis Arthrosi visar positiva fas 3-resultat och substansrabatten normaliseras mot 5-10%.",
-  },
-  {
-    type: "base",
-    probability: "50%",
-    price: "370 kr",
-    change: "+5% från 352 kr",
-    assumptions: "NAV-tillväxt ~5-7%\nUtdelning 5,60 kr\nNova-integration fortskrider",
-    requires: "Stabil börs, valutamotvinden avtar gradvis, Permobil vänder sakta och EQT-distributioner håller sig på starka nivåer.",
-  },
-  {
-    type: "bear",
-    probability: "25%",
-    price: "260 kr",
-    change: "-26% från 352 kr",
-    assumptions: "NAV-press från bred nedgång\nGDPR-böter Nova\nPermobil missar vändningen",
-    requires: "Global recession pressar noterade innehav och EQT simultant, kronförstärkning och tariffer tynger Patricia Industries rapporterade siffror.",
-  },
-];
+    {
+      type: "bull",
+      probability: "25%",
+      price: "430 kr",
+      change: "+22% från 352 kr",
+      assumptions: "NAV-tillväxt 15%+\nNova-integration lyckas\nSaab och ABB fortsätter starka",
+      requires: "Bred börshaussé, EQT levererar starka exits, Sobis Arthrosi visar positiva fas 3-resultat och substansrabatten normaliseras mot 5-10%.",
+    },
+    {
+      type: "base",
+      probability: "50%",
+      price: "370 kr",
+      change: "+5% från 352 kr",
+      assumptions: "NAV-tillväxt ~5-7%\nUtdelning 5,60 kr\nNova-integration fortskrider",
+      requires: "Stabil börs, valutamotvinden avtar gradvis, Permobil vänder sakta och EQT-distributioner håller sig på starka nivåer.",
+    },
+    {
+      type: "bear",
+      probability: "25%",
+      price: "260 kr",
+      change: "-26% från 352 kr",
+      assumptions: "NAV-press från bred nedgång\nGDPR-böter Nova\nPermobil missar vändningen",
+      requires: "Global recession pressar noterade innehav och EQT simultant, kronförstärkning och tariffer tynger Patricia Industries rapporterade siffror.",
+    },
+  ];
 
-
-const PUBLISHED = true; // ändra till true för att publicera
+const PUBLISHED = true;
 
 export default function AlphabetAnalysis() {
-if (!PUBLISHED) return null;
+  if (!PUBLISHED) return null;
 
-return (
-<AnalysisLayout
-companyName="ALPHABET"
-subtitle="Aktieanalys · Mars 2026"
-date="10 mars 2026"
-dataSources="Data: FY2024, TTM Q2 2025, Q3 2025"
-sections={sections}
-accentColor={ACCENT}
-theme="light"
->
-{/* Header */}
-<div className="bg-[#0f0f0f] text-[#faf8f3] px-6 sm:px-12 py-10">
-<div className="text-[10px] tracking-[.15em] text-[#b5892a] uppercase mb-1">AKTIEANALYS</div>
-<div className="flex flex-wrap items-end justify-between gap-4 mb-4">
-<div>
-<h1 className="font-serif text-3xl sm:text-4xl font-bold">Alphabet Inc.</h1>
-<div className="text-sm text-[#a0a090] mt-1">NASDAQ: GOOGL · S&P 500</div>
-</div>
-<div className="text-right">
-<div className="font-serif text-3xl font-bold text-[#b5892a]">$307</div>
-<div className="text-[11px] text-[#a0a090]">10 mars 2026</div>
-<span className="inline-block mt-1.5 bg-[#1a4a1a] text-[#80d080] text-[11px] font-bold px-2.5 py-0.5 rounded-sm tracking-wide">
-▲ KÖP
-</span>
-</div>
-</div>
-<div className="flex flex-wrap gap-4">
-{[
-{ label: "Börsvärde",      value: "$3,9T" },
-{ label: "P/E (TTM)",      value: "~28x" },
-{ label: "EBIT-marginal",  value: "~33%" },
-{ label: "Cloud-tillväxt", value: "+32% (Q2 2025)" },
-{ label: "Riktkurs",       value: "$360" },
-].map((kpi) => (
-<div key={kpi.label} className="border-l-2 border-[#b5892a] pl-2.5">
-<div className="text-[9px] text-[#808070] uppercase tracking-wide">{kpi.label}</div>
-<div className="font-serif text-base font-bold">{kpi.value}</div>
-</div>
-))}
-</div>
-</div>
+  const analysisData = useMemo(() => {
+    const scores = {
+      affarsmodell: 5,
+      strategiskMoat: 5,
+      finansiellKvalitet: 5,
+      vardering: 4,
+      tillvaxtutsikter: 5,
+      riskprofil: 3,
+      esgMakro: 4,
+      aiObservationer: 5,
+    };
+    const totaltPoang = Object.values(scores).reduce((sum, score) => sum + score, 0);
+    const maxPoang = 40;
+    const rating = (totaltPoang / maxPoang) * 5;
 
+    return { scores, totaltPoang, maxPoang, rating };
+  }, []);
 
-{/* Hero image */}
-<div className="w-full">
-  <Image
-    src="/alphabet_analys_hero.png"
-    alt="Alphabet aktieanalys 2026"
-    width={1600}
-    height={600}
-    className="w-full h-auto"
-    priority
-  />
-</div>
+  return (
+    <AnalysisLayout
+      companyName="ALPHABET"
+      subtitle="Aktieanalys · Mars 2026"
+      date="10 mars 2026"
+      dataSources="Data: FY2024, TTM Q2 2025, Q3 2025"
+      sections={sections}
+      accentColor={ACCENT}
+      theme="light"
+    >
+      {/* Header */}
+      <div className="bg-[#0f0f0f] text-[#faf8f3] px-6 sm:px-12 py-10">
+        <div className="text-[10px] tracking-[.15em] text-[#b5892a] uppercase mb-1">AKTIEANALYS</div>
+        <div className="flex flex-wrap items-end justify-between gap-4 mb-4">
+          <div>
+            <h1 className="font-serif text-3xl sm:text-4xl font-bold">Alphabet Inc.</h1>
+            <div className="text-sm text-[#a0a090] mt-1">NASDAQ: GOOGL · S&P 500</div>
+          </div>
+          <div className="text-right">
+            <div className="font-serif text-3xl font-bold text-[#b5892a]">$307</div>
+            <div className="text-[11px] text-[#a0a090]">10 mars 2026</div>
+            <span className="inline-block mt-1.5 bg-[#1a4a1a] text-[#80d080] text-[11px] font-bold px-2.5 py-0.5 rounded-sm tracking-wide">
+              ▲ KÖP
+            </span>
+          </div>
+        </div>
+        <div className="flex flex-wrap gap-4">
+          {[
+            { label: "Börsvärde", value: "$3,9T" },
+            { label: "P/E (TTM)", value: "~28x" },
+            { label: "EBIT-marginal", value: "~33%" },
+            { label: "Cloud-tillväxt", value: "+32% (Q2 2025)" },
+            { label: "Riktkurs", value: "$360" },
+          ].map((kpi) => (
+            <div key={kpi.label} className="border-l-2 border-[#b5892a] pl-2.5">
+              <div className="text-[9px] text-[#808070] uppercase tracking-wide">{kpi.label}</div>
+              <div className="font-serif text-base font-bold">{kpi.value}</div>
+            </div>
+          ))}
+        </div>
+      </div>
 
-  <div className="px-6 sm:px-12 pb-20 bg-[#faf8f3] text-[#0f0f0f]">
+      {/* Hero image */}
+      <div className="w-full">
+        <Image
+          src="/alphabet_analys_hero.png"
+          alt="Alphabet aktieanalys 2026"
+          width={1600}
+          height={600}
+          className="w-full h-auto"
+          priority
+        />
+      </div>
 
-    {/* I. Översikt */}
-    <div data-section="overview" id="overview" className="pt-14">
+      <div className="px-6 sm:px-12 pb-20 bg-[#faf8f3] text-[#0f0f0f]">
+        {/* ... All other sections from I to VIII remain unchanged ... */}
+
+<div data-section="overview" id="overview" className="pt-14">
       <SectionHeader number="I" title="Översikt" />
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-5">
         <MetricCard label="Börsvärde"     value="$3,9T" />
@@ -551,132 +569,141 @@ theme="light"
       />
     </div>
 
-    {/* IX. Investeringsbeslut */}
-    <div data-section="verdict" id="verdict" className="pt-14">
-      <SectionHeader number="IX" title="Sammanfattning & Investeringsbeslut" />
 
-      <div className="bg-[#0f0f0f] text-[#faf8f3] rounded p-5 mb-5">
-        <div className="flex flex-wrap justify-between items-start gap-4 mb-4">
-          <div>
-            <div className="text-[10px] text-[#b5892a] tracking-widest uppercase mb-1">Investeringsrekommendation</div>
-            <div className="font-serif text-4xl font-bold text-[#80e080]">▲ KÖP</div>
-            <div className="text-sm text-[#a0a090] mt-1">Med 12–18 månaders horisont</div>
-          </div>
-          <div className="text-right">
-            <div className="text-[10px] text-[#b5892a] tracking-widest uppercase">Målpris</div>
-            <div className="font-serif text-4xl font-bold">$360</div>
-            <div className="text-xs text-[#80e080]">+17% potential från $307</div>
-          </div>
-        </div>
-        <div className="flex flex-wrap gap-5">
-          {[
-            { label: "Analysdatum",         value: "10 mars 2026" },
-            { label: "Kurs vid analys",     value: "$307" },
-            { label: "Målpris (12–18 mån)", value: "$360" },
-            { label: "Bull case",           value: "$420" },
-            { label: "Bear case",           value: "$220" },
-          ].map((kpi) => (
-            <div key={kpi.label} className="border-l-2 border-[#b5892a] pl-2.5">
-              <div className="text-[9px] text-[#808070] uppercase tracking-wide">{kpi.label}</div>
-              <div className="font-serif text-sm font-bold">{kpi.value}</div>
+        {/* IX. Investeringsbeslut */}
+        <div data-section="verdict" id="verdict" className="pt-14">
+          <SectionHeader number="IX" title="Sammanfattning & Investeringsbeslut" />
+
+          <div className="bg-[#0f0f0f] text-[#faf8f3] rounded p-5 mb-5">
+            <div className="flex flex-wrap justify-between items-start gap-4 mb-4">
+              <div>
+                <div className="text-[10px] text-[#b5892a] tracking-widest uppercase mb-1">Investeringsrekommendation</div>
+                <div className="font-serif text-4xl font-bold text-[#80e080]">▲ KÖP</div>
+                <div className="text-sm text-[#a0a090] mt-1">Med 12–18 månaders horisont</div>
+              </div>
+              <div className="text-right">
+                <div className="text-[10px] text-[#b5892a] tracking-widest uppercase">Målpris</div>
+                <div className="font-serif text-4xl font-bold">$360</div>
+                <div className="text-xs text-[#80e080]">+17% potential från $307</div>
+              </div>
             </div>
-          ))}
-        </div>
-      </div>
-
-      <FinancialTable
-        title="Kvalitetsbolag-kriterierna"
-        columns={[
-          { key: "criteria", header: "Kriterium" },
-          { key: "result",   header: "Uppfyllt?" },
-          { key: "comment",  header: "Kommentar" },
-        ]}
-        rows={[
-          { cells: { criteria: { value: "Uthållig affärsmodell"    }, result: { value: "Ja",     color: "green" }, comment: { value: "Sökmonopol + GCP + YouTube — AI-first"   } } },
-          { cells: { criteria: { value: "Stark moat"              }, result: { value: "Ja",     color: "green" }, comment: { value: "Full-stack AI, nätverkseffekter, TPUs"    } } },
-          { cells: { criteria: { value: "Konsistent vinsttillväxt"}, result: { value: "Ja",     color: "green" }, comment: { value: "EPS +38% FY2024, +49% Q1 2025"           } } },
-          { cells: { criteria: { value: "Stark balansräkning"     }, result: { value: "Ja",     color: "green" }, comment: { value: "$95Mdr nettokassa, soliditet 72%"         } } },
-          { cells: { criteria: { value: "Hög kapitalavkastning"   }, result: { value: "Ja",     color: "green" }, comment: { value: "ROE ~30%, ROIC > WACC"                   } } },
-          { cells: { criteria: { value: "Kompetent ledning"       }, result: { value: "Ja",     color: "green" }, comment: { value: "Pichai + Hassabis (Nobelpriset) — topp"  } } },
-          { cells: { criteria: { value: "Attraktiv värdering"     }, result: { value: "Delvis", color: "amber" }, comment: { value: "28x P/E — motiverat men inte billigt"    } } },
-          { cells: { criteria: { value: "Regulatorisk risk"       }, result: { value: "Risk",   color: "amber" }, comment: { value: "DOJ + EU DMA — hanterbara men påtagliga" } } },
-          { cells: { criteria: { value: "5–10 år ägbarhet"        }, result: { value: "Ja",     color: "green" }, comment: { value: "AI + Cloud + Waymo = generationsskifte"  } } },
-        ]}
-      />
-
-      <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mt-6 mb-2 pl-2 border-l-[3px] border-[#b5892a]">Motivering</h3>
-      <p className="text-sm leading-relaxed text-[#2a2a2a] mb-3">
-        Alphabet är ett utmärkt kvalitetsbolag med en oöverträffad finansiell ställning och ett teknologiskt försprång inom det mest betydande strukturella skiftet på decennier: Generativ AI. Bolagets strategi bygger på full-stack dominans — från egenutvecklade TPU-chips (gen. 7 Ironwood) och världsledande AI-forskning (DeepMind/Gemini 2.5) till globala distributionsplattformar med miljarder användare. Sökmonopolet har visat sig mer resilient än befarat och AI Overviews stärker snarare än hotar intäkterna.
-      </p>
-      <p className="text-sm leading-relaxed text-[#2a2a2a] mb-4">
-        Den nuvarande CapEx-cykeln ($85Mdr 2025) är en offensiv åtgärd för att befästa AI-ledarskapet och valideras av GCP:s snabbt stigande lönsamhet (8,7% → 20,7% på ett år). Värderat till ~28x P/E med massiv optionalitet i Waymo och en Cloud-affär som accelererar mot $100Mdr ARR framstår aktien som attraktiv. Regulatoriska risker är reella men hanterbara — strukturell uppdelning undveks. En långsiktig investering (5–10 år) stöds av den robusta balansräkningen och bolagets bevisade förmåga att leda teknikskiften.
-      </p>
-
-      <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mt-5 mb-3 pl-2 border-l-[3px] border-[#b5892a]">Samlade scores</h3>
-      <div className="space-y-2 mb-5">
-        {[
-          { label: "Affärsmodell & Ledning (I)",  rating: 5 },
-          { label: "Strategisk moat (II)",         rating: 5 },
-          { label: "Finansiell kvalitet (III)",    rating: 5 },
-          { label: "Värdering (IV)",               rating: 4 },
-          { label: "Riskprofil (VI)",              rating: 3 },
-        ].map((item) => (
-          <div key={item.label} className="flex items-center gap-3">
-            <span className="text-xs text-[#8a8678] w-48 flex-shrink-0">{item.label}</span>
-            <div className="flex gap-1">
-              {[1,2,3,4,5].map((dot) => (
-                <div key={dot} className={`w-3.5 h-3.5 rounded-sm ${dot <= item.rating ? "bg-[#1a3c6e]" : "bg-[#e8e4da]"}`} />
+            <div className="flex flex-wrap gap-5">
+              {[
+                { label: "Analysdatum", value: "10 mars 2026" },
+                { label: "Kurs vid analys", value: "$307" },
+                { label: "Målpris (12–18 mån)", value: "$360" },
+                { label: "Bull case", value: "$420" },
+                { label: "Bear case", value: "$220" },
+              ].map((kpi) => (
+                <div key={kpi.label} className="border-l-2 border-[#b5892a] pl-2.5">
+                  <div className="text-[9px] text-[#808070] uppercase tracking-wide">{kpi.label}</div>
+                  <div className="font-serif text-sm font-bold">{kpi.value}</div>
+                </div>
               ))}
             </div>
-            <span className="text-xs font-bold text-[#1a3c6e] font-serif">{item.rating}/5</span>
           </div>
-        ))}
-      </div>
 
-      <AlertBox type="signal">
-        <strong>Slutsats: KÖP</strong> — Alphabet kombinerar ett av teknikhistoriens starkaste sökmonopol med en snabbväxande och alltmer lönsam Cloud-affär (GCP-marginal 20,7% Q2 2025) och world-class AI-kapacitet i DeepMind. Q3 2025 visade att bolaget är tillbaka i offensiven — historisk milstolpe med över $100Mdr i kvartalsomsättning. Regulatorisk risk (DOJ) är reell men hanteras — vi ser $360 som rimligt bascase och köper vid nuvarande nivåer kring $307.
-      </AlertBox>
-    </div>
-
-    {/* X. Scenarier */}
-    <div data-section="scenarios" id="scenarios" className="pt-14">
-      <SectionHeader number="X" title="Scenarier: Bull, Base & Bear Case" />
-
-      <ScenarioCards scenarios={scenarios} />
-
-      <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mt-6 mb-3 pl-2 border-l-[3px] border-[#b5892a]">Sannolikhetsfördelning</h3>
-      <div className="space-y-3 mb-5">
-        {[
-          { label: "Bull case ($420)", pct: 25, color: "#1a6e3c", textColor: "text-[#1a6e3c]" },
-          { label: "Base case ($360)", pct: 50, color: "#1a3c6e", textColor: "text-[#1a3c6e]" },
-          { label: "Bear case ($220)", pct: 25, color: "#8b1a1a", textColor: "text-[#8b1a1a]" },
-        ].map((item) => (
-          <div key={item.label}>
-            <div className="flex justify-between mb-1">
-              <span className="text-xs font-semibold">{item.label}</span>
-              <span className={`text-xs font-bold ${item.textColor}`}>{item.pct}%</span>
+          <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mt-6 mb-3 pl-2 border-l-[3px] border-[#b5892a]">Samlade scores & Poängdiagram</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-5">
+            <div>
+              <RadarChart scores={analysisData.scores} />
             </div>
-            <div className="bg-[#e8e4da] rounded h-2 overflow-hidden">
-              <div className="h-full rounded" style={{ width: `${item.pct}%`, background: item.color }} />
+            <div className="space-y-2">
+                <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
+                    <span className="text-sm font-bold">Total poäng:</span>
+                    <span className="text-xl font-bold font-serif text-[#1a3c6e]">{analysisData.totaltPoang} / {analysisData.maxPoang}</span>
+                </div>
+                <div className="flex justify-between items-center py-2 border-b border-[#e8e4da] mb-3">
+                    <span className="text-sm font-bold">Viktat betyg:</span>
+                    <span className="text-xl font-bold font-serif text-[#1a3c6e]">{analysisData.rating.toFixed(1)} / 5.0</span>
+                </div>
+                <div className="pt-2 space-y-1">
+                    {Object.entries(analysisData.scores).map(([key, value]) => {
+                        const label = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+                        return (
+                            <div key={key} className="flex items-center gap-3">
+                                <span className="text-xs text-[#5a5a4a] w-32 flex-shrink-0">{label}</span>
+                                <div className="flex-grow bg-[#e8e4da] rounded h-2.5 overflow-hidden">
+                                    <div className="h-full rounded" style={{ width: `${(value / 5) * 100}%`, backgroundColor: ACCENT }} />
+                                </div>
+                                <span className="text-xs font-bold text-[#1a3c6e] font-serif w-8 text-right">{value}/5</span>
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
           </div>
-        ))}
+
+          <FinancialTable
+            title="Kvalitetsbolag-kriterierna"
+            columns={[
+              { key: "criteria", header: "Kriterium" },
+              { key: "result",   header: "Uppfyllt?" },
+              { key: "comment",  header: "Kommentar" },
+            ]}
+            rows={[
+              { cells: { criteria: { value: "Uthållig affärsmodell"    }, result: { value: "Ja",     color: "green" }, comment: { value: "Sökmonopol + GCP + YouTube — AI-first"   } } },
+              { cells: { criteria: { value: "Stark moat"              }, result: { value: "Ja",     color: "green" }, comment: { value: "Full-stack AI, nätverkseffekter, TPUs"    } } },
+              { cells: { criteria: { value: "Konsistent vinsttillväxt"}, result: { value: "Ja",     color: "green" }, comment: { value: "EPS +38% FY2024, +49% Q1 2025"           } } },
+              { cells: { criteria: { value: "Stark balansräkning"     }, result: { value: "Ja",     color: "green" }, comment: { value: "$95Mdr nettokassa, soliditet 72%"         } } },
+              { cells: { criteria: { value: "Hög kapitalavkastning"   }, result: { value: "Ja",     color: "green" }, comment: { value: "ROE ~30%, ROIC > WACC"                   } } },
+              { cells: { criteria: { value: "Kompetent ledning"       }, result: { value: "Ja",     color: "green" }, comment: { value: "Pichai + Hassabis (Nobelpriset) — topp"  } } },
+              { cells: { criteria: { value: "Attraktiv värdering"     }, result: { value: "Delvis", color: "amber" }, comment: { value: "28x P/E — motiverat men inte billigt"    } } },
+              { cells: { criteria: { value: "Regulatorisk risk"       }, result: { value: "Risk",   color: "amber" }, comment: { value: "DOJ + EU DMA — hanterbara men påtagliga" } } },
+              { cells: { criteria: { value: "5–10 år ägbarhet"        }, result: { value: "Ja",     color: "green" }, comment: { value: "AI + Cloud + Waymo = generationsskifte"  } } },
+            ]}
+          />
+
+          <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mt-6 mb-2 pl-2 border-l-[3px] border-[#b5892a]">Motivering</h3>
+          <p className="text-sm leading-relaxed text-[#2a2a2a] mb-3">
+            Alphabet är ett utmärkt kvalitetsbolag med en oöverträffad finansiell ställning och ett teknologiskt försprång inom det mest betydande strukturella skiftet på decennier: Generativ AI. Bolagets strategi bygger på full-stack dominans — från egenutvecklade TPU-chips (gen. 7 Ironwood) och världsledande AI-forskning (DeepMind/Gemini 2.5) till globala distributionsplattformar med miljarder användare. Sökmonopolet har visat sig mer resilient än befarat och AI Overviews stärker snarare än hotar intäkterna.
+          </p>
+          <p className="text-sm leading-relaxed text-[#2a2a2a] mb-4">
+            Den nuvarande CapEx-cykeln ($85Mdr 2025) är en offensiv åtgärd för att befästa AI-ledarskapet och valideras av GCP:s snabbt stigande lönsamhet (8,7% → 20,7% på ett år). Värderat till ~28x P/E med massiv optionalitet i Waymo och en Cloud-affär som accelererar mot $100Mdr ARR framstår aktien som attraktiv. Regulatoriska risker är reella men hanterbara — strukturell uppdelning undveks. En långsiktig investering (5–10 år) stöds av den robusta balansräkningen och bolagets bevisade förmåga att leda teknikskiften.
+          </p>
+
+          <AlertBox type="signal">
+            <strong>Slutsats: KÖP</strong> — Alphabet kombinerar ett av teknikhistoriens starkaste sökmonopol med en snabbväxande och alltmer lönsam Cloud-affär (GCP-marginal 20,7% Q2 2025) och world-class AI-kapacitet i DeepMind. Q3 2025 visade att bolaget är tillbaka i offensiven — historisk milstolpe med över $100Mdr i kvartalsomsättning. Regulatorisk risk (DOJ) är reell men hanteras — vi ser $360 som rimligt bascase och köper vid nuvarande nivåer kring $307.
+          </AlertBox>
+        </div>
+
+        {/* X. Scenarier */}
+        <div data-section="scenarios" id="scenarios" className="pt-14">
+          <SectionHeader number="X" title="Scenarier: Bull, Base & Bear Case" />
+
+          <ScenarioCards scenarios={scenarios} />
+
+          <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mt-6 mb-3 pl-2 border-l-[3px] border-[#b5892a]">Sannolikhetsfördelning</h3>
+          <div className="space-y-3 mb-5">
+            {[
+              { label: "Bull case ($420)", pct: 25, color: "#1a6e3c", textColor: "text-[#1a6e3c]" },
+              { label: "Base case ($360)", pct: 50, color: "#1a3c6e", textColor: "text-[#1a3c6e]" },
+              { label: "Bear case ($220)", pct: 25, color: "#8b1a1a", textColor: "text-[#8b1a1a]" },
+            ].map((item) => (
+              <div key={item.label}>
+                <div className="flex justify-between mb-1">
+                  <span className="text-xs font-semibold">{item.label}</span>
+                  <span className={`text-xs font-bold ${item.textColor}`}>{item.pct}%</span>
+                </div>
+                <div className="bg-[#e8e4da] rounded h-2 overflow-hidden">
+                  <div className="h-full rounded" style={{ width: `${item.pct}%`, background: item.color }} />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-sm leading-relaxed text-[#2a2a2a] mb-4">
+            Sannolikhetsviktat förväntat värde: (0,25 × $420) + (0,50 × $360) + (0,25 × $220) = <strong>$340</strong> — något under bascase-målpriset på $360, vilket reflekterar den kvarstående regulatoriska risken. Ändå ger detta +11% från nuvarande $307. Bull case (+37%) ger attraktivt riskjusterat läge givet Alphabets fundamentala kvalitet och AI-positionering.
+          </p>
+
+          <div className="bg-[#0f0f0f] text-[#faf8f3] rounded p-4 text-center">
+            <div className="text-[10px] text-[#b5892a] tracking-widest uppercase mb-1">Probability-Weighted Målpris</div>
+            <div className="font-serif text-5xl font-bold">$340</div>
+            <div className="text-xs text-[#80e080] mt-1">+11% potential från nuvarande $307</div>
+            <div className="text-[10px] text-[#808070] mt-2">Analyserat 10 mars 2026 · Ej finansiell rådgivning</div>
+          </div>
+        </div>
       </div>
-
-      <p className="text-sm leading-relaxed text-[#2a2a2a] mb-4">
-        Sannolikhetsviktat förväntat värde: (0,25 × $420) + (0,50 × $360) + (0,25 × $220) = <strong>$340</strong> — något under bascase-målpriset på $360, vilket reflekterar den kvarstående regulatoriska risken. Ändå ger detta +11% från nuvarande $307. Bull case (+37%) ger attraktivt riskjusterat läge givet Alphabets fundamentala kvalitet och AI-positionering.
-      </p>
-
-      <div className="bg-[#0f0f0f] text-[#faf8f3] rounded p-4 text-center">
-        <div className="text-[10px] text-[#b5892a] tracking-widest uppercase mb-1">Probability-Weighted Målpris</div>
-        <div className="font-serif text-5xl font-bold">$340</div>
-        <div className="text-xs text-[#80e080] mt-1">+11% potential från nuvarande $307</div>
-        <div className="text-[10px] text-[#808070] mt-2">Analyserat 10 mars 2026 · Ej finansiell rådgivning</div>
-      </div>
-    </div>
-
-  </div>
-</AnalysisLayout>
-
-);
+    </AnalysisLayout>
+  );
 }

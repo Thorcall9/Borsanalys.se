@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from 'react';
 import {
   AnalysisLayout,
   SectionHeader,
@@ -9,101 +10,120 @@ import {
   ScenarioCards,
   AlertBox,
   RatingBox,
+  RadarChart,
 } from "@/components/analysis";
 import type { AnalysisSection, Scenario, TableRow } from "@/components/analysis";
 
 const ACCENT = "#1a3c6e";
 
 const sections: AnalysisSection[] = [
-  { id: "overview",   number: "I",    title: "Översikt" },
-  { id: "moat",       number: "II",   title: "Strategisk Moat" },
-  { id: "financials", number: "III",  title: "Finansiell analys" },
-  { id: "valuation",  number: "IV",   title: "Värdering" },
-  { id: "growth",     number: "V",    title: "Tillväxtmotorer" },
-  { id: "risk",       number: "VI",   title: "Riskprofil" },
-  { id: "esg",        number: "VII",  title: "ESG och Hållbarhet" },
-  { id: "portfolio",  number: "VIII", title: "Segmentanalys" },
-  { id: "verdict",    number: "IX",   title: "Investeringsbeslut" },
-  { id: "scenarios",  number: "X",    title: "Scenarier" },
-];
+    { id: "overview",   number: "I",    title: "Översikt" },
+    { id: "moat",       number: "II",   title: "Strategisk Moat" },
+    { id: "financials", number: "III",  title: "Finansiell analys" },
+    { id: "valuation",  number: "IV",   title: "Värdering" },
+    { id: "growth",     number: "V",    title: "Tillväxtmotorer" },
+    { id: "risk",       number: "VI",   title: "Riskprofil" },
+    { id: "esg",        number: "VII",  title: "ESG och Hållbarhet" },
+    { id: "portfolio",  number: "VIII", title: "Segmentanalys" },
+    { id: "verdict",    number: "IX",   title: "Investeringsbeslut" },
+    { id: "scenarios",  number: "X",    title: "Scenarier" },
+  ];
 
-const swotData = {
-  strengths: [
-    "Stark premiumposition — marknadsandel 19,0% i Europa (tunga lastbilar) FY2025, marknadsledande för andra året i rad",
-    "Nettokassa 63,0 mdr SEK i industriverksamheten vid FY2025 — exceptionell finansiell styrka trots utdelning på 37,6 mdr",
-    "Serviceaffären visar motståndskraft — omsättningstillväxt +5% i konstant valuta Q4 trots svag fordonsmarknad",
-    "Volvo Penta: justerad rörelsemarginal 17,4% FY2025 — bolagets stabilaste kassaflödesgenerator",
-    "Coretura-JV med Daimler Truck delar kostnaden för mjukvaruplattform och frigör resurser till differentiering",
-    "Generös utdelning: 8,50 kr ordinarie + 4,50 kr extra = 13 kr per aktie för FY2025 (direktavkastning 4,0%)",
-  ],
-  weaknesses: [
-    "Lastbilsmarginal under press — justerad marginal 9,8% FY2025 vs 12,7% FY2024, Nordamerika -31% i justerat rörelseresultat",
-    "Operativt kassaflöde industriverksamheten halverades — 21,8 mdr SEK FY2025 vs 45,3 mdr FY2024",
-    "Nettokassa minskade kraftigt från 85,9 till 63,0 mdr SEK, varav utdelning på 37,6 mdr förklarar merparten",
-    "Nordamerika fortsatt svagt — leveranser -15% FY2025, förväntas svag även H1 2026 med fortsatt underabsorption",
-    "Valutamotvind systematisk — negativ påverkan på rörelseresultatet -2,1 mdr SEK Q4, -4,5 mdr SEK valutaeffekt på likvida medel FY2025",
-  ],
-  opportunities: [
-    "Cyklisk uppgångsfas närmar sig — VD Lundstedt: stabilisering på flera marknader, kunder nyttjar fordon på bra nivå",
-    "Swecon-förvärvet (slutfört jan 2026) stärker vertikal integration och serviceandel i Europa och Baltikum",
-    "Anläggningsmaskiner vänder — justerat rörelseresultat marginal 13,9% Q4 (vs 11,8% Q4 2024), orderingång +18% ex-SDLG",
-    "Volvo Penta: naturgasmotor G17 lanserades jan 2026 — breddning mot datacenter och energiinfrastruktur",
-    "Autonoma lastbilar — milstolpe Q4: Waabi Driver integrerat med Volvo VNL Autonomous",
-    "Infrastrukturinvesteringar globalt driver anläggningsmaskiner — Kina +20% totalmarknad 2025",
-  ],
-  threats: [
-    "Tariffer och handelspolitik — Q4-nettoeffekt -800 Mkr, Q1 2026 förväntas -1 mdr SEK, osäkerheten stor",
-    "Nordamerikansk lastbilsmarknad — förväntas svag H1 2026, EPA 2027-regler skapar inköpspaus",
-    "Lastbilskartellen — 6 mdr SEK i avsättningar (Q2 2023), solidariskt ansvar kan överstiga avsatt belopp, ca 3 000 krav i 20+ länder",
-    "Stärkande krona — systematisk negativ påverkan, SEK/USD gick från 11,00 till 9,17 under 2025",
-    "Avgaskomponent-reservering — ~3/4 av 7 mdr SEK (Q4 2018) utnyttjad, resterande del fortfarande osäker",
-  ],
-};
-
-const scenarios: Scenario[] = [
-  {
-    type: "bull",
-    probability: "25%",
-    price: "390 kr",
-    change: "+20% från 324 kr",
-    assumptions: "Marginal återhämtar sig mot 12%\nNordamerika normaliseras H2 2026\nEPS 2026e 20,91 kr levereras",
-    requires: "Nordamerikansk lastbilsmarknad normaliseras efter EPA 2027-klarhet, Swecon-integration lyfter serviceandelen, valutamotvinden minskar och kartellkostnaderna hålls inom avsatt belopp. P/E expansion mot 18-19x på 2026e-vinst.",
-  },
-  {
-    type: "base",
-    probability: "50%",
-    price: "345 kr",
-    change: "+6% från 324 kr",
-    assumptions: "Marginal ~10,5-11% FY2026\nEPS ~20 kr\nUtdelning 13 kr bibehålls",
-    requires: "Stabil europeisk marknad, gradvis normalisering i Nordamerika H2 2026, Swecon bidrar positivt, kassaflöde återhämtar sig mot 30-35 mdr och kartellkostnader hålls inom avsatt ram. Värdering 16-17x P/E på 2026e-vinst.",
-  },
-  {
-    type: "bear",
-    probability: "25%",
-    price: "230 kr",
-    change: "-29% från 324 kr",
-    assumptions: "Marginal faller under 9%\nKartellkostnader överstiger 6 mdr\nNordamerika försvagas ytterligare",
-    requires: "Global recession pressar lastbilar och anläggningsmaskiner simultant, tariffer eskalerar, kartelldomslut med solidariskt ansvar överstiger avsättningar kraftigt och SEK fortsätter stärkas mot USD/EUR.",
-  },
-];
-
-const financialRows: TableRow[] = [
-  { cells: { metric: { value: "Nettoomsättning (mdr SEK)" }, fy2023: { value: "—" }, fy2024: { value: "526,8" }, fy2025: { value: "479,2" } } },
-  { cells: { metric: { value: "Omsättningstillväxt (%)" }, fy2023: { value: "—" }, fy2024: { value: "+20%*", color: "green", arrow: "up" }, fy2025: { value: "-9%", color: "red", arrow: "down" } } },
-  { cells: { metric: { value: "Just. rörelseresultat (mdr SEK)" }, fy2023: { value: "—" }, fy2024: { value: "65,7" }, fy2025: { value: "51,2", color: "red", arrow: "down" } } },
-  { cells: { metric: { value: "Just. rörelsemarginal (%)" }, fy2023: { value: "—" }, fy2024: { value: "12,5%" }, fy2025: { value: "10,7%", color: "red", arrow: "down" } } },
-  { cells: { metric: { value: "Rapporterat rörelseresultat (mdr SEK)" }, fy2023: { value: "—" }, fy2024: { value: "66,6" }, fy2025: { value: "48,5", color: "red", arrow: "down" } } },
-  { cells: { metric: { value: "Resultat per aktie (SEK)" }, fy2023: { value: "—" }, fy2024: { value: "24,78" }, fy2025: { value: "16,94", color: "red", arrow: "down" } } },
-  { cells: { metric: { value: "Op. kassaflöde industri (mdr SEK)" }, fy2023: { value: "—" }, fy2024: { value: "45,3" }, fy2025: { value: "21,8", color: "red", arrow: "down" } } },
-  { cells: { metric: { value: "Nettokassa industri (mdr SEK)" }, fy2023: { value: "—" }, fy2024: { value: "85,9" }, fy2025: { value: "63,0", color: "amber", arrow: "down" } } },
-  { cells: { metric: { value: "Avk. sysselsatt kapital industri (%)" }, fy2023: { value: "—" }, fy2024: { value: "35,8%" }, fy2025: { value: "25,3%", color: "red", arrow: "down" } } },
-  { cells: { metric: { value: "Utdelning per aktie (SEK)" }, fy2023: { value: "—" }, fy2024: { value: "18,50" }, fy2025: { value: "13,00", color: "amber", arrow: "down" } } },
-];
+  const swotData = {
+    strengths: [
+      "Stark premiumposition — marknadsandel 19,0% i Europa (tunga lastbilar) FY2025, marknadsledande för andra året i rad",
+      "Nettokassa 63,0 mdr SEK i industriverksamheten vid FY2025 — exceptionell finansiell styrka trots utdelning på 37,6 mdr",
+      "Serviceaffären visar motståndskraft — omsättningstillväxt +5% i konstant valuta Q4 trots svag fordonsmarknad",
+      "Volvo Penta: justerad rörelsemarginal 17,4% FY2025 — bolagets stabilaste kassaflödesgenerator",
+      "Coretura-JV med Daimler Truck delar kostnaden för mjukvaruplattform och frigör resurser till differentiering",
+      "Generös utdelning: 8,50 kr ordinarie + 4,50 kr extra = 13 kr per aktie för FY2025 (direktavkastning 4,0%)",
+    ],
+    weaknesses: [
+      "Lastbilsmarginal under press — justerad marginal 9,8% FY2025 vs 12,7% FY2024, Nordamerika -31% i justerat rörelseresultat",
+      "Operativt kassaflöde industriverksamheten halverades — 21,8 mdr SEK FY2025 vs 45,3 mdr FY2024",
+      "Nettokassa minskade kraftigt från 85,9 till 63,0 mdr SEK, varav utdelning på 37,6 mdr förklarar merparten",
+      "Nordamerika fortsatt svagt — leveranser -15% FY2025, förväntas svag även H1 2026 med fortsatt underabsorption",
+      "Valutamotvind systematisk — negativ påverkan på rörelseresultatet -2,1 mdr SEK Q4, -4,5 mdr SEK valutaeffekt på likvida medel FY2025",
+    ],
+    opportunities: [
+      "Cyklisk uppgångsfas närmar sig — VD Lundstedt: stabilisering på flera marknader, kunder nyttjar fordon på bra nivå",
+      "Swecon-förvärvet (slutfört jan 2026) stärker vertikal integration och serviceandel i Europa och Baltikum",
+      "Anläggningsmaskiner vänder — justerat rörelseresultat marginal 13,9% Q4 (vs 11,8% Q4 2024), orderingång +18% ex-SDLG",
+      "Volvo Penta: naturgasmotor G17 lanserades jan 2026 — breddning mot datacenter och energiinfrastruktur",
+      "Autonoma lastbilar — milstolpe Q4: Waabi Driver integrerat med Volvo VNL Autonomous",
+      "Infrastrukturinvesteringar globalt driver anläggningsmaskiner — Kina +20% totalmarknad 2025",
+    ],
+    threats: [
+      "Tariffer och handelspolitik — Q4-nettoeffekt -800 Mkr, Q1 2026 förväntas -1 mdr SEK, osäkerheten stor",
+      "Nordamerikansk lastbilsmarknad — förväntas svag H1 2026, EPA 2027-regler skapar inköpspaus",
+      "Lastbilskartellen — 6 mdr SEK i avsättningar (Q2 2023), solidariskt ansvar kan överstiga avsatt belopp, ca 3 000 krav i 20+ länder",
+      "Stärkande krona — systematisk negativ påverkan, SEK/USD gick från 11,00 till 9,17 under 2025",
+      "Avgaskomponent-reservering — ~3/4 av 7 mdr SEK (Q4 2018) utnyttjad, resterande del fortfarande osäker",
+    ],
+  };
+  
+  const scenarios: Scenario[] = [
+    {
+      type: "bull",
+      probability: "25%",
+      price: "390 kr",
+      change: "+20% från 324 kr",
+      assumptions: "Marginal återhämtar sig mot 12%\nNordamerika normaliseras H2 2026\nEPS 2026e 20,91 kr levereras",
+      requires: "Nordamerikansk lastbilsmarknad normaliseras efter EPA 2027-klarhet, Swecon-integration lyfter serviceandelen, valutamotvinden minskar och kartellkostnaderna hålls inom avsatt belopp. P/E expansion mot 18-19x på 2026e-vinst.",
+    },
+    {
+      type: "base",
+      probability: "50%",
+      price: "345 kr",
+      change: "+6% från 324 kr",
+      assumptions: "Marginal ~10,5-11% FY2026\nEPS ~20 kr\nUtdelning 13 kr bibehålls",
+      requires: "Stabil europeisk marknad, gradvis normalisering i Nordamerika H2 2026, Swecon bidrar positivt, kassaflöde återhämtar sig mot 30-35 mdr och kartellkostnader hålls inom avsatt ram. Värdering 16-17x P/E på 2026e-vinst.",
+    },
+    {
+      type: "bear",
+      probability: "25%",
+      price: "230 kr",
+      change: "-29% från 324 kr",
+      assumptions: "Marginal faller under 9%\nKartellkostnader överstiger 6 mdr\nNordamerika försvagas ytterligare",
+      requires: "Global recession pressar lastbilar och anläggningsmaskiner simultant, tariffer eskalerar, kartelldomslut med solidariskt ansvar överstiger avsättningar kraftigt och SEK fortsätter stärkas mot USD/EUR.",
+    },
+  ];
+  
+  const financialRows: TableRow[] = [
+    { cells: { metric: { value: "Nettoomsättning (mdr SEK)" }, fy2023: { value: "—" }, fy2024: { value: "526,8" }, fy2025: { value: "479,2" } } },
+    { cells: { metric: { value: "Omsättningstillväxt (%)" }, fy2023: { value: "—" }, fy2024: { value: "+20%*", color: "green", arrow: "up" }, fy2025: { value: "-9%", color: "red", arrow: "down" } } },
+    { cells: { metric: { value: "Just. rörelseresultat (mdr SEK)" }, fy2023: { value: "—" }, fy2024: { value: "65,7" }, fy2025: { value: "51,2", color: "red", arrow: "down" } } },
+    { cells: { metric: { value: "Just. rörelsemarginal (%)" }, fy2023: { value: "—" }, fy2024: { value: "12,5%" }, fy2025: { value: "10,7%", color: "red", arrow: "down" } } },
+    { cells: { metric: { value: "Rapporterat rörelseresultat (mdr SEK)" }, fy2023: { value: "—" }, fy2024: { value: "66,6" }, fy2025: { value: "48,5", color: "red", arrow: "down" } } },
+    { cells: { metric: { value: "Resultat per aktie (SEK)" }, fy2023: { value: "—" }, fy2024: { value: "24,78" }, fy2025: { value: "16,94", color: "red", arrow: "down" } } },
+    { cells: { metric: { value: "Op. kassaflöde industri (mdr SEK)" }, fy2023: { value: "—" }, fy2024: { value: "45,3" }, fy2025: { value: "21,8", color: "red", arrow: "down" } } },
+    { cells: { metric: { value: "Nettokassa industri (mdr SEK)" }, fy2023: { value: "—" }, fy2024: { value: "85,9" }, fy2025: { value: "63,0", color: "amber", arrow: "down" } } },
+    { cells: { metric: { value: "Avk. sysselsatt kapital industri (%)" }, fy2023: { value: "—" }, fy2024: { value: "35,8%" }, fy2025: { value: "25,3%", color: "red", arrow: "down" } } },
+    { cells: { metric: { value: "Utdelning per aktie (SEK)" }, fy2023: { value: "—" }, fy2024: { value: "18,50" }, fy2025: { value: "13,00", color: "amber", arrow: "down" } } },
+  ];
 
 const PUBLISHED = true;
 
 export default function VolvoPage() {
   if (!PUBLISHED) return null;
+
+  const analysisData = useMemo(() => {
+    const scores = {
+      affarsmodell: 4,
+      strategiskMoat: 4,
+      finansiellKvalitet: 4,
+      vardering: 3,
+      tillvaxtutsikter: 3,
+      riskprofil: 3,
+      esgMakro: 4,
+      aiObservationer: 0, // Not applicable
+    };
+    const totaltPoang = Object.values(scores).reduce((sum, score) => sum + score, 0);
+    const maxPoang = 35;
+    const rating = (totaltPoang / maxPoang) * 5;
+
+    return { scores, totaltPoang, maxPoang, rating };
+  }, []);
 
   return (
     <AnalysisLayout
@@ -376,14 +396,36 @@ export default function VolvoPage() {
 
         <section id="verdict" data-section="verdict" className="mb-16">
           <SectionHeader number="IX" title="Investeringsbeslut" />
-          <RatingBox rating={3}>
-            BEVAKA — Riktkurs 345 kr (+6%). Kvalitetsbolag med stark balansräkning men begränsat uppside vid nuvarande kurs.
-          </RatingBox>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
-            <MetricCard label="Aktuell kurs" value="324 kr" />
-            <MetricCard label="Riktkurs" value="345 kr" />
-            <MetricCard label="Uppsida" value="+6%" valueColor="text-green-600" />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-5">
+            <div>
+              <RadarChart scores={analysisData.scores} />
+            </div>
+            <div className="space-y-2">
+                <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
+                    <span className="text-sm font-bold">Total poäng:</span>
+                    <span className="text-xl font-bold font-serif text-[#1a3c6e]">{analysisData.totaltPoang} / {analysisData.maxPoang}</span>
+                </div>
+                <div className="flex justify-between items-center py-2 border-b border-[#e8e4da] mb-3">
+                    <span className="text-sm font-bold">Viktat betyg:</span>
+                    <span className="text-xl font-bold font-serif text-[#1a3c6e]">{analysisData.rating.toFixed(1)} / 5.0</span>
+                </div>
+                <div className="pt-2 space-y-1">
+                    {Object.entries(analysisData.scores).map(([key, value]) => {
+                        const label = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+                        if (label === 'AiObservationer') return null;
+                        return (
+                            <div key={key} className="flex items-center gap-3">
+                                <span className="text-xs text-[#5a5a4a] w-32 flex-shrink-0">{label}</span>
+                                <div className="flex-grow bg-[#e8e4da] rounded h-2.5 overflow-hidden">
+                                    <div className="h-full rounded" style={{ width: `${(value / 5) * 100}%`, backgroundColor: ACCENT }} />
+                                </div>
+                                <span className="text-xs font-bold text-[#1a3c6e] font-serif w-8 text-right">{value}/5</span>
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
           </div>
 
           <p className="text-sm leading-relaxed text-[#2a2a2a] mt-6 mb-4">

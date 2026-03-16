@@ -10,6 +10,7 @@ export { default as RatingBox } from "./RatingBox";
 export { default as ProgressBar } from "./ProgressBar";
 export { default as Timeline } from "./Timeline";
 export { default as Card } from "./Card";
+export { default as RadarChart } from "./RadarChart";
 export type { AnalysisSection } from "./AnalysisLayout";
 export type { Scenario } from "./ScenarioCards";
 export type { TableColumn, TableRow } from "./FinancialTable";

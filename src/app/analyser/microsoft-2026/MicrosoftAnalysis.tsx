@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import {
   AnalysisLayout,
   SectionHeader,
@@ -11,98 +12,117 @@ import {
   AlertBox,
   RatingBox,
   Card,
+  RadarChart,
 } from "@/components/analysis";
 import type { AnalysisSection, Scenario, TableColumn, TableRow } from "@/components/analysis";
 
 const ACCENT = "#1a3c6e";
 
 const sections: AnalysisSection[] = [
-  { id: "overview", number: "I", title: "Översikt" },
-  { id: "moat", number: "II", title: "Strategisk Moat" },
-  { id: "financials", number: "III", title: "Finansiell analys" },
-  { id: "valuation", number: "IV", title: "Värdering" },
-  { id: "growth", number: "V", title: "Tillväxtmotorer" },
-  { id: "risk", number: "VI", title: "Riskprofil" },
-  { id: "esg", number: "VII", title: "ESG & Makro" },
-  { id: "ai-obs", number: "VIII", title: "AI-observationer" },
-  { id: "verdict", number: "IX", title: "Investeringsbeslut" },
-  { id: "scenarios", number: "X", title: "Scenarier" },
-];
-
-const incomeColumns: TableColumn[] = [
-  { key: "metric", header: "Nyckeltal" },
-  { key: "fy2024", header: "2024" },
-  { key: "current", header: "Nuvarande" },
-  { key: "e2026", header: "2026e" },
-  { key: "e2027", header: "2027e" },
-  { key: "trend", header: "Trend" },
-];
-
-const incomeRows: TableRow[] = [
-  { cells: { metric: { value: "Omsättning ($B)" }, fy2024: { value: "245" }, current: { value: "305" }, e2026: { value: "345" }, e2027: { value: "378" }, trend: { value: "+23% YoY", color: "green", arrow: "up" } } },
-  { cells: { metric: { value: "EBIT-marginal (%)" }, fy2024: { value: "44,6" }, current: { value: "47,1" }, e2026: { value: "48,0" }, e2027: { value: "48,5" }, trend: { value: "Expanding", color: "green", arrow: "up" } } },
-  { cells: { metric: { value: "EPS ($)" }, fy2024: { value: "11,86" }, current: { value: "16,04" }, e2026: { value: "17,80" }, e2027: { value: "19,01" }, trend: { value: "+35% YoY", color: "green", arrow: "up" } } },
-  { cells: { metric: { value: "Capex ($B)" }, fy2024: { value: "44,5" }, current: { value: "83" }, e2026: { value: "110" }, e2027: { value: "129" }, trend: { value: "Accelererar", color: "amber", arrow: "up" } } },
-  { cells: { metric: { value: "FCF ($B)" }, fy2024: { value: "74" }, current: { value: "77" }, e2026: { value: "68" }, e2027: { value: "72" }, trend: { value: "Under press", color: "amber", arrow: "down" } } },
-];
-
-const swotData = {
-  strengths: [
-    "Azure: 23% tillväxt, #2 molnplattform",
-    "M365 ekosystem: 300M+ användare",
-    "Copilot: AI-monetarisering i hela stacken",
-    "47,1% EBIT-marginal — branschledande",
-    "Diversifierad intäktsbas (Cloud, Office, Gaming)",
-  ],
-  weaknesses: [
-    "Capex 52% av OpCF vs historiskt 30–35%",
-    "OpenAI-beroende: partner och potentiell konkurrent",
-    "Copilot-adoption i tidigt skede",
-    "Gaming-integration av Activision pågår",
-  ],
-  opportunities: [
-    "Copilot: $30/user/month × 300M+ användare",
-    "Security: $20B+ ARR och växande",
-    "AI Agents: autonoma affärsprocesser",
-    "Activision + Game Pass: recurring revenue",
-  ],
-  threats: [
-    "Google Gemini disruption",
-    "EU/USA-regulering av AI",
-    "Capex-satsning som ej levererar ROI",
-    "Cybersecurity-incidenter",
-    "Makroekonomisk nedgång → IT-budget cuts",
-  ],
-};
-
-const scenarios: Scenario[] = [
-  {
-    type: "bull",
-    probability: "25%",
-    price: "$560",
-    change: "+43% från $392",
-    assumptions: "Azure >30% tillväxt\nCopilot 20%+ adoption\nEPS $21–22",
-    requires: "AI-adoption accelererar kraftigt, Copilot blir must-have, Azure tar marknadsandelar från AWS.",
-  },
-  {
-    type: "base",
-    probability: "55%",
-    price: "$480",
-    change: "+22% från $392",
-    assumptions: "Azure 22–25% tillväxt\nCopilot gradvis adoption\nEPS in-line",
-    requires: "Stabil molntillväxt, Copilot-revenue synlig i H2 2026, capex-investeringar börjar ge avkastning.",
-  },
-  {
-    type: "bear",
-    probability: "20%",
-    price: "$310",
-    change: "−21% från $392",
-    assumptions: "Azure <18% tillväxt\nCapex delivers ej ROI\nP/E-kompression",
-    requires: "AI-hype avtar, Copilot floppar, capex-utgifterna presserar FCF, regulatorisk motvind.",
-  },
-];
+    { id: "overview", number: "I", title: "Översikt" },
+    { id: "moat", number: "II", title: "Strategisk Moat" },
+    { id: "financials", number: "III", title: "Finansiell analys" },
+    { id: "valuation", number: "IV", title: "Värdering" },
+    { id: "growth", number: "V", title: "Tillväxtmotorer" },
+    { id: "risk", number: "VI", title: "Riskprofil" },
+    { id: "esg", number: "VII", title: "ESG & Makro" },
+    { id: "ai-obs", number: "VIII", title: "AI-observationer" },
+    { id: "verdict", number: "IX", title: "Investeringsbeslut" },
+    { id: "scenarios", number: "X", title: "Scenarier" },
+  ];
+  
+  const incomeColumns: TableColumn[] = [
+    { key: "metric", header: "Nyckeltal" },
+    { key: "fy2024", header: "2024" },
+    { key: "current", header: "Nuvarande" },
+    { key: "e2026", header: "2026e" },
+    { key: "e2027", header: "2027e" },
+    { key: "trend", header: "Trend" },
+  ];
+  
+  const incomeRows: TableRow[] = [
+    { cells: { metric: { value: "Omsättning ($B)" }, fy2024: { value: "245" }, current: { value: "305" }, e2026: { value: "345" }, e2027: { value: "378" }, trend: { value: "+23% YoY", color: "green", arrow: "up" } } },
+    { cells: { metric: { value: "EBIT-marginal (%)" }, fy2024: { value: "44,6" }, current: { value: "47,1" }, e2026: { value: "48,0" }, e2027: { value: "48,5" }, trend: { value: "Expanding", color: "green", arrow: "up" } } },
+    { cells: { metric: { value: "EPS ($)" }, fy2024: { value: "11,86" }, current: { value: "16,04" }, e2026: { value: "17,80" }, e2027: { value: "19,01" }, trend: { value: "+35% YoY", color: "green", arrow: "up" } } },
+    { cells: { metric: { value: "Capex ($B)" }, fy2024: { value: "44,5" }, current: { value: "83" }, e2026: { value: "110" }, e2027: { value: "129" }, trend: { value: "Accelererar", color: "amber", arrow: "up" } } },
+    { cells: { metric: { value: "FCF ($B)" }, fy2024: { value: "74" }, current: { value: "77" }, e2026: { value: "68" }, e2027: { value: "72" }, trend: { value: "Under press", color: "amber", arrow: "down" } } },
+  ];
+  
+  const swotData = {
+    strengths: [
+      "Azure: 23% tillväxt, #2 molnplattform",
+      "M365 ekosystem: 300M+ användare",
+      "Copilot: AI-monetarisering i hela stacken",
+      "47,1% EBIT-marginal — branschledande",
+      "Diversifierad intäktsbas (Cloud, Office, Gaming)",
+    ],
+    weaknesses: [
+      "Capex 52% av OpCF vs historiskt 30–35%",
+      "OpenAI-beroende: partner och potentiell konkurrent",
+      "Copilot-adoption i tidigt skede",
+      "Gaming-integration av Activision pågår",
+    ],
+    opportunities: [
+      "Copilot: $30/user/month × 300M+ användare",
+      "Security: $20B+ ARR och växande",
+      "AI Agents: autonoma affärsprocesser",
+      "Activision + Game Pass: recurring revenue",
+    ],
+    threats: [
+      "Google Gemini disruption",
+      "EU/USA-regulering av AI",
+      "Capex-satsning som ej levererar ROI",
+      "Cybersecurity-incidenter",
+      "Makroekonomisk nedgång → IT-budget cuts",
+    ],
+  };
+  
+  const scenarios: Scenario[] = [
+    {
+      type: "bull",
+      probability: "25%",
+      price: "$560",
+      change: "+43% från $392",
+      assumptions: "Azure >30% tillväxt\nCopilot 20%+ adoption\nEPS $21–22",
+      requires: "AI-adoption accelererar kraftigt, Copilot blir must-have, Azure tar marknadsandelar från AWS.",
+    },
+    {
+      type: "base",
+      probability: "55%",
+      price: "$480",
+      change: "+22% från $392",
+      assumptions: "Azure 22–25% tillväxt\nCopilot gradvis adoption\nEPS in-line",
+      requires: "Stabil molntillväxt, Copilot-revenue synlig i H2 2026, capex-investeringar börjar ge avkastning.",
+    },
+    {
+      type: "bear",
+      probability: "20%",
+      price: "$310",
+      change: "−21% från $392",
+      assumptions: "Azure <18% tillväxt\nCapex delivers ej ROI\nP/E-kompression",
+      requires: "AI-hype avtar, Copilot floppar, capex-utgifterna presserar FCF, regulatorisk motvind.",
+    },
+  ];
 
 export default function MicrosoftAnalysis() {
+    const analysisData = useMemo(() => {
+        const scores = {
+          affarsmodell: 5,
+          strategiskMoat: 5,
+          finansiellKvalitet: 5,
+          vardering: 4,
+          tillvaxtutsikter: 5,
+          riskprofil: 3,
+          esgMakro: 4,
+          aiObservationer: 5,
+        };
+        const totaltPoang = Object.values(scores).reduce((sum, score) => sum + score, 0);
+        const maxPoang = 40;
+        const rating = (totaltPoang / maxPoang) * 5;
+    
+        return { scores, totaltPoang, maxPoang, rating };
+      }, []);
+
   return (
     <AnalysisLayout
       companyName="MICROSOFT"
@@ -610,6 +630,37 @@ export default function MicrosoftAnalysis() {
     </div>
   </div>
 
+  <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mt-6 mb-3 pl-2 border-l-[3px] border-[#b5892a]">Samlade scores & Poängdiagram</h3>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-5">
+    <div>
+      <RadarChart scores={analysisData.scores} />
+    </div>
+    <div className="space-y-2">
+      <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
+        <span className="text-sm font-bold">Total poäng:</span>
+        <span className="text-xl font-bold font-serif text-[#1a3c6e]">{analysisData.totaltPoang} / {analysisData.maxPoang}</span>
+      </div>
+      <div className="flex justify-between items-center py-2 border-b border-[#e8e4da] mb-3">
+        <span className="text-sm font-bold">Viktat betyg:</span>
+        <span className="text-xl font-bold font-serif text-[#1a3c6e]">{analysisData.rating.toFixed(1)} / 5.0</span>
+      </div>
+      <div className="pt-2 space-y-1">
+        {Object.entries(analysisData.scores).map(([key, value]) => {
+          const label = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+          return (
+            <div key={key} className="flex items-center gap-3">
+              <span className="text-xs text-[#5a5a4a] w-32 flex-shrink-0">{label}</span>
+              <div className="flex-grow bg-[#e8e4da] rounded h-2.5 overflow-hidden">
+                <div className="h-full rounded" style={{ width: `${(value / 5) * 100}%`, backgroundColor: ACCENT }} />
+              </div>
+              <span className="text-xs font-bold text-[#1a3c6e] font-serif w-8 text-right">{value}/5</span>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  </div>
+
   <FinancialTable
     title="Kvalitetsbolag-kriterierna"
     columns={[
@@ -636,27 +687,6 @@ export default function MicrosoftAnalysis() {
   <p className="text-sm leading-relaxed text-[#2a2a2a] mb-4">
     <strong>Målpris $480</strong> baseras på 25x P/E × $19,01 (2027e EPS) diskonterat tillbaka ~18 månader. Bull case $560 förutsätter EPS-upprevidering till $21+ pga Copilot-acceleration. Bear case $310 förutsätter Azure-besvikelse och P/E-kompression till 20x.
   </p>
-
-  <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mt-5 mb-3 pl-2 border-l-[3px] border-[#b5892a]">Samlade scores</h3>
-  <div className="space-y-2 mb-5">
-    {[
-      { label: "Affärsmodell & Ledning (I)", rating: 5 },
-      { label: "Strategisk moat (II)", rating: 5 },
-      { label: "Finansiell kvalitet (III)", rating: 5 },
-      { label: "Värdering (IV)", rating: 4 },
-      { label: "Riskprofil (VI)", rating: 3 },
-    ].map((item) => (
-      <div key={item.label} className="flex items-center gap-3">
-        <span className="text-xs text-[#8a8678] w-48 flex-shrink-0">{item.label}</span>
-        <div className="flex gap-1">
-          {[1,2,3,4,5].map((dot) => (
-            <div key={dot} className={`w-3.5 h-3.5 rounded-sm ${dot <= item.rating ? "bg-[#1a3c6e]" : "bg-[#e8e4da]"}`} />
-          ))}
-        </div>
-        <span className="text-xs font-bold text-[#1a3c6e] font-serif">{item.rating}/5</span>
-      </div>
-    ))}
-  </div>
 
   <AlertBox type="signal">
     <strong>✅ Slutsats: KÖP</strong> — Microsoft är ett av marknadens bästa långsiktiga kvalitetsinnehav. Bolaget uppfyller samtliga kriterier för ett bolag man kan äga i 5–10 år. AI är inte en kortlivad trend för Microsoft — det är en fundamental omstrukturering av alla bolagets affärsenheter.
