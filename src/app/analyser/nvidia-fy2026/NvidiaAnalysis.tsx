@@ -165,7 +165,7 @@ export default function NvidiaAnalysisPage() {
 
           <h3 className="text-xs font-bold text-[#76B900] uppercase tracking-widest mt-5 mb-2 pl-2 border-l-[3px] border-[#76B900]">Affärsidé & Modell</h3>
           <p className="text-sm leading-relaxed text-[#b0b0b0] mb-4">
-            NVIDIA designar och levererar accelererad beräkning (GPU/AI-chip), systemprogramvara (CUDA) och nätverkslösningar (NVLink, InfiniBand) för datacenters, gaming och autonoma fordon. Intäktsmodellen bygger på tre ben: (1) Hårdvaruförsäljning (system som HGX, DGX, GB200), (2) Mjukvaruplattformen CUDA som skapar en extremt stark inlåsningseffekt, och (3) Tjänster via DGX Cloud. Fabless-modellen, där tillverkning outsourcas till TSMC, ger extremt hög kapitaleffektivitet (ROIC >90%).
+            NVIDIA designar och levererar accelererad beräkning (GPU/AI-chip), systemprogramvara (CUDA) och nätverkslösningar (NVLink, InfiniBand) för datacenters, gaming och autonoma fordon. Intäktsmodellen bygger på tre ben: (1) Hårdvaruförsäljning (system som HGX, DGX, GB200), (2) Mjukvaruplattformen CUDA som skapar en extremt stark inlåsningseffekt, och (3) Tjänster via DGX Cloud. Fabless-modellen, där tillverkning outsourcas till TSMC, ger extremt hög kapitaleffektivitet (ROIC &gt;90%).
           </p>
 
           <h3 className="text-xs font-bold text-[#76B900] uppercase tracking-widest mt-5 mb-2 pl-2 border-l-[3px] border-[#76B900]">Ledning & Ägarstruktur</h3>
@@ -223,7 +223,7 @@ export default function NvidiaAnalysisPage() {
             ]}
             theme='dark'
           />
-          <RatingBox rating={5} accentColor={ACCENT}><strong>5/5</strong> — Den finansiella profilen är enastående: 55%+ nettomarginal, massiv kassageneration, stark nettokassa och ROE >100%. Accelererande Capex och en tillfällig marginalpress är de enda punkterna att bevaka.</RatingBox>
+          <RatingBox rating={5} accentColor={ACCENT}><strong>5/5</strong> — Den finansiella profilen är enastående: 55%+ nettomarginal, massiv kassageneration, stark nettokassa och ROE &gt;100%. Accelererande Capex och en tillfällig marginalpress är de enda punkterna att bevaka.</RatingBox>
         </div>
 
         {/* IV. Valuation */}
