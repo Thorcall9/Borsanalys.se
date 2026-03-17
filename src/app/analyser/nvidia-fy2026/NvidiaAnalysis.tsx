@@ -175,7 +175,7 @@ export default function NvidiaAnalysisPage() {
           <p className="text-sm leading-relaxed text-[#b0b0b0] mb-4">
             <strong>Colette Kress (CFO):</strong> Erfaren teknisk CFO med gedigen track record inom finansiell kommunikation och kapitalallokering.
           </p>
-          <RatingBox rating={5} accentColor={ACCENT}><strong>5/5</strong> — Affärsmodellen är exceptionellt uthållig tack vare CUDA-ekosystemets inlåsning, fabless-modellens kapitaleffektivitet och Jensens visionära ledarskap, som är branschens starkaste.</RatingBox>
+          <RatingBox rating={5}><strong>5/5</strong> — Affärsmodellen är exceptionellt uthållig tack vare CUDA-ekosystemets inlåsning, fabless-modellens kapitaleffektivitet och Jensens visionära ledarskap, som är branschens starkaste.</RatingBox>
         </div>
 
         {/* II. Moat */}
@@ -190,7 +190,7 @@ export default function NvidiaAnalysisPage() {
               <li><strong>Arkitekturöverlägsenhet:</strong> Blackwell-plattformen tar marknadsandelar från Hopper — NVIDIA kannibaliserar sig självt kontrollerat för att ligga steget före.</li>
           </ul>
           <SwotGrid data={swotData} title="SWOT-Analys" accentColor={ACCENT} />
-          <RatingBox rating={5} accentColor={ACCENT}><strong>5/5</strong> — NVIDIA:s moat är branschens starkaste. CUDA-ekosystemet, full-stack-strategin och nätverkseffekterna skapar en konkurrensvallgrav som är extremt svår att forcera. Geopolitiska risker är den primära osäkerheten.</RatingBox>
+          <RatingBox rating={5}><strong>5/5</strong> — NVIDIA:s moat är branschens starkaste. CUDA-ekosystemet, full-stack-strategin och nätverkseffekterna skapar en konkurrensvallgrav som är extremt svår att forcera. Geopolitiska risker är den primära osäkerheten.</RatingBox>
         </div>
 
         {/* III. Financials */}
@@ -223,7 +223,7 @@ export default function NvidiaAnalysisPage() {
             ]}
             theme='dark'
           />
-          <RatingBox rating={5} accentColor={ACCENT}><strong>5/5</strong> — Den finansiella profilen är enastående: 55%+ nettomarginal, massiv kassageneration, stark nettokassa och ROE &gt;100%. Accelererande Capex och en tillfällig marginalpress är de enda punkterna att bevaka.</RatingBox>
+          <RatingBox rating={5}><strong>5/5</strong> — Den finansiella profilen är enastående: 55%+ nettomarginal, massiv kassageneration, stark nettokassa och ROE &gt;100%. Accelererande Capex och en tillfällig marginalpress är de enda punkterna att bevaka.</RatingBox>
         </div>
 
         {/* IV. Valuation */}
@@ -245,7 +245,7 @@ export default function NvidiaAnalysisPage() {
           <AlertBox type="info" accentColor={ACCENT} theme='dark'>
             <strong>Värderingslogik:</strong> Värderingen är hög på absoluta tal men motiveras av den extrema tillväxten och kvaliteten. Ett P/E på 22x för 2026 är attraktivt. Aktien är inte 'billig' – man betalar ett premiumpris för ett exceptionellt bolag.
           </AlertBox>
-          <RatingBox rating={4} accentColor={ACCENT}><strong>4/5</strong> — Värderingen är hög men rättfärdigas av enastående tillväxt och kvalitet. Ett framåtblickande P/E på ~22x (2026e) och ett PEG-tal under 0.5 är mycket attraktivt.</RatingBox>
+          <RatingBox rating={4}><strong>4/5</strong> — Värderingen är hög men rättfärdigas av enastående tillväxt och kvalitet. Ett framåtblickande P/E på ~22x (2026e) och ett PEG-tal under 0.5 är mycket attraktivt.</RatingBox>
         </div>
 
         {/* V. Growth */}
@@ -259,7 +259,7 @@ export default function NvidiaAnalysisPage() {
           <p className="text-sm leading-relaxed text-[#b0b0b0] mb-4">
             Tillväxten drivs av en sekulär supercykel inom AI-infrastruktur. Tre parallella plattformsskiften driver efterfrågan: (1) accelererad beräkning, (2) kraftfulla AI-modeller (LLMs), och (3) framväxten av agentiska applikationer. Hyperscalers (Microsoft, Google, Amazon, Meta) och nu även nationella stater ('Sovereign AI') investerar hundratals miljarder dollar i datacenterkapacitet, där NVIDIA är den primära leverantören.
           </p>
-          <RatingBox rating={5} accentColor={ACCENT}><strong>5/5</strong> — NVIDIA befinner sig i epicentrum av den största teknikomställningen på decennier. Utsikterna för fortsatt tvåsiffrig tillväxt under flera år är mycket starka.</RatingBox>
+          <RatingBox rating={5}><strong>5/5</strong> — NVIDIA befinner sig i epicentrum av den största teknikomställningen på decennier. Utsikterna för fortsatt tvåsiffrig tillväxt under flera år är mycket starka.</RatingBox>
         </div>
         
         {/* Other sections... */}
