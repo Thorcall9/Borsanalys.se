@@ -189,7 +189,7 @@ export default function NvidiaAnalysisPage() {
               <li><strong>Supply-chain fördel:</strong> Exklusiva och prioriterade kapacitetsavtal hos TSMC.</li>
               <li><strong>Arkitekturöverlägsenhet:</strong> Blackwell-plattformen tar marknadsandelar från Hopper — NVIDIA kannibaliserar sig självt kontrollerat för att ligga steget före.</li>
           </ul>
-          <SwotGrid data={swotData} title="SWOT-Analys" accentColor={ACCENT} />
+          <SwotGrid data={swotData} title="SWOT-Analys" />
           <RatingBox rating={5}><strong>5/5</strong> — NVIDIA:s moat är branschens starkaste. CUDA-ekosystemet, full-stack-strategin och nätverkseffekterna skapar en konkurrensvallgrav som är extremt svår att forcera. Geopolitiska risker är den primära osäkerheten.</RatingBox>
         </div>
 
@@ -206,9 +206,8 @@ export default function NvidiaAnalysisPage() {
               { cells: { metric: { value: 'Nettoresultat' }, fy2024: { value: '72 880' }, fy2025: { value: '120 067' }, yoy: { value: '+64,7%', color: 'green' } } },
               { cells: { metric: { value: 'EPS (utspädd)' }, fy2024: { value: '$2,96' }, fy2025: { value: '$4,92' }, yoy: { value: '+66,2%', color: 'green' } } },
             ]}
-            theme='dark'
           />
-          <AlertBox type="warning" accentColor={ACCENT} theme='dark'>
+          <AlertBox type="risk">
             <strong>Marginalpress:</strong> Bruttomarginalen sjönk från 75% (FY24) till 71% (FY25) p.g.a. den komplexa systemövergången till Blackwell. Dock visar Q3 FY26 en återhämtning till 73,6%, med en guidning mot 75% för Q4.
           </AlertBox>
            <FinancialTable
@@ -221,7 +220,6 @@ export default function NvidiaAnalysisPage() {
               { cells: { metric: { value: 'Fritt Kassaflöde (MUSD)' }, fy2024: { value: '-' }, fy2025: { value: '-' }, q3fy26: { value: '22 000', color: 'green' } } },
               { cells: { metric: { value: 'Goodwill (MUSD)' }, fy2024: { value: '5 200' }, fy2025: { value: '20 800', color: 'amber' }, q3fy26: { value: '-' } } },
             ]}
-            theme='dark'
           />
           <RatingBox rating={5}><strong>5/5</strong> — Den finansiella profilen är enastående: 55%+ nettomarginal, massiv kassageneration, stark nettokassa och ROE &gt;100%. Accelererande Capex och en tillfällig marginalpress är de enda punkterna att bevaka.</RatingBox>
         </div>
@@ -237,12 +235,11 @@ export default function NvidiaAnalysisPage() {
               { cells: { metric: { value: 'EV/EBIT' }, fy2025: { value: '34,9x' }, current: { value: '34,8x' }, e2026: { value: '-' }, e2027: { value: '-' } } },
               { cells: { metric: { value: 'P/S' }, fy2025: { value: '21,3x' }, current: { value: '20,7x' }, e2026: { value: '-' }, e2027: { value: '-' } } },
             ]}
-            theme='dark'
           />
           <p className="text-sm leading-relaxed text-[#b0b0b0] mt-3 mb-4">
             NVIDIAs PEG-tal (P/E / EPS-tillväxt) är en nyckelindikator. Med ett P/E på 22x för 2026e och en EPS-tillväxt på +67% blir PEG-talet <strong>~0.33</strong>, vilket är extremt attraktivt och indikerar att aktien kan vara undervärderad trots den höga absoluta multipeln, om tillväxten håller i sig.
           </p>
-          <AlertBox type="info" accentColor={ACCENT} theme='dark'>
+          <AlertBox type="info">
             <strong>Värderingslogik:</strong> Värderingen är hög på absoluta tal men motiveras av den extrema tillväxten och kvaliteten. Ett P/E på 22x för 2026 är attraktivt. Aktien är inte 'billig' – man betalar ett premiumpris för ett exceptionellt bolag.
           </AlertBox>
           <RatingBox rating={4}><strong>4/5</strong> — Värderingen är hög men rättfärdigas av enastående tillväxt och kvalitet. Ett framåtblickande P/E på ~22x (2026e) och ett PEG-tal under 0.5 är mycket attraktivt.</RatingBox>
@@ -285,7 +282,7 @@ export default function NvidiaAnalysisPage() {
           <h3 className="text-xs font-bold text-[#76B900] uppercase tracking-widest mt-6 mb-3 pl-2 border-l-[3px] border-[#76B900]">Samlade scores & Poängdiagram</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-5">
             <div>
-              <RadarChart scores={analysisData.scores} isDarkMode={true} />
+              <RadarChart scores={analysisData.scores} />
             </div>
             <div className="space-y-2">
               <div className="flex justify-between items-center py-2 border-b border-[#333]">
@@ -317,7 +314,7 @@ export default function NvidiaAnalysisPage() {
           <p className="text-sm leading-relaxed text-[#b0b0b0] mb-3">
             NVIDIA är ett av de starkaste kvalitetsbolagen på marknaden. AI-supercykeln, CUDA-ekosystemets oövervinnerliga vallgrav och Blackwell-arkitekturens dominans skapar en sällsynt kombination av extremt hög tillväxt och exceptionell lönsamhet. Den primära risken är geopolitisk och relaterad till exportkontroller, men denna risk är nu delvis känd och prissatt av marknaden. Värderingen är hög, men det attraktiva PEG-talet (ca 0.33) signalerar att aktien är rimligt prissatt givet den explosiva vinsttillväxten.
           </p>
-          <AlertBox type="signal" accentColor={ACCENT} theme='dark'>
+          <AlertBox type="signal">
             <strong>Slutsats: KÖP.</strong> NVIDIA är ett generationsbolag som leder en teknisk revolution. Bolaget uppfyller alla kriterier för ett långsiktigt kärninnehav. Potentialen för en flerdubbling av vinsten under de kommande åren gör dagens värdering attraktiv för en investerare med en horisont på 2-3 år eller längre.
           </AlertBox>
         </div>
@@ -325,7 +322,7 @@ export default function NvidiaAnalysisPage() {
         {/* X. Scenarios */}
         <div data-section="scenarios" id="scenarios" className="pt-14">
           <SectionHeader number="X" title="Scenarier" accentColor={ACCENT} />
-          <ScenarioCards scenarios={scenarios} isDarkMode={true} />
+          <ScenarioCards scenarios={scenarios} />
         </div>
 
       </div>
