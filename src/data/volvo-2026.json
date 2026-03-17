@@ -1,0 +1,90 @@
+{
+  "slug": "volvo-2026",
+  "name": "AB Volvo",
+  "ticker": "VOLV B",
+  "isin": "SE0000115446",
+  "date": "2026-03-17",
+  "author": "Carl Fredrik Thor",
+  "scores": {
+    "affarsmodell": 5,
+    "strategiskMoat": 5,
+    "finansiellKvalitet": 4,
+    "vardering": 3,
+    "tillvaxtutsikter": 4,
+    "riskprofil": 3,
+    "esgMakro": 4,
+    "aiObservationer": 3
+  },
+  "totaltPoang": 31,
+  "maxPoang": 40,
+  "rating": 3.9,
+  "overview": {
+    "borskurs": 324.0,
+    "borsvarde": "Ca 670 mdr SEK",
+    "bransch": "Transport & Industri",
+    "geografi": "Europa, Nordamerika, Asien, Latinamerika",
+    "affarside": "Global ledare inom transport- och infrastrukturlösningar — lastbilar, bussar, anläggningsmaskiner och marina/industriella motorer",
+    "affarsmodell": "Fordonsförsäljning kombinerat med växande serviceaffär (finansiering, försäkring, reservdelar, underhåll) som strukturellt balanserar cykliska fluktuationer",
+    "ledning": "Martin Lundstedt (VD sedan 2015) — bevisad kostnadskontroll i nedgång och långsiktig strategi för elektrifiering och autonomi",
+    "agarstruktur": "Industrivärden störste ägare med aktivt, långsiktigt ägarskap och styrelserepresentation via Helena Stjernholm"
+  },
+  "strategiskMoat": {
+    "swot": {
+      "styrkor": [
+        "Marknadsandel 19,0% Europa tunga lastbilar — marknadsledare år 2",
+        "Nettokassa 63 mdr SEK i industriverksamheten",
+        "Serviceaffären +5% i konstant valuta Q4 trots svag fordonsmarknad",
+        "Volvo Penta marginal 17,4% FY2025 — bolagets starkaste kassaflödesgenerator",
+        "Coretura-JV med Daimler Truck delar mjukvarukostnader",
+        "Utdelning 13 kr/aktie — direktavkastning 4,0%"
+      ],
+      "svagheter": [
+        "Lastbilsmarginal under press — 9,8% FY2025 vs 12,7% FY2024",
+        "Operativt kassaflöde halverades — 21,8 mdr SEK vs 45,3 mdr FY2024",
+        "Nordamerika svagt — leveranser -15% FY2025",
+        "Systematisk valutamotvind"
+      ],
+      "möjligheter": [
+        "Cyklisk uppgångsfas — stabilisering på flera marknader",
+        "Swecon-förvärvet stärker vertikal integration i Europa",
+        "Volvo Penta: datacenter och energiinfrastruktur",
+        "Autonoma lastbilar med Waabi Driver",
+        "Anläggningsmaskiner: orderingång +18% ex-SDLG"
+      ],
+      "hot": [
+        "Tariffer och handelspolitik — Q1 2026 -1 mdr SEK förväntad effekt",
+        "Nordamerikansk lastbilsmarknad svag H1 2026",
+        "Lastbilskartellen — eventualförpliktelser 14,4 mdr SEK",
+        "Stärkande krona mot USD/EUR"
+      ]
+    },
+    "moat": [
+      "Varumärkesstyrka — Volvo, Mack, Renault Trucks med global prispremie",
+      "Servicenätverk — höga byteskostnader via globala underhållsavtal",
+      "Teknologisk bredd — Coretura (mjukvara), Waabi (autonomi), Penta (energi)",
+      "Skalfördelar och distributionsnät"
+    ]
+  },
+  "finansiellAnalys": {
+    "resultatrakning": {
+      "omsattningstillvaxt": "-9% FY2025 (479,2 mdr SEK vs 526,8 mdr FY2024)",
+      "vinsttillvaxt": "EPS 16,94 kr FY2025 vs 24,78 kr FY2024 (-32%); 2026e 20,91 kr",
+      "rorelsemarginal": "Justerad rörelsemarginal 10,7% FY2025 (12,5% FY2024)"
+    },
+    "nyckeltal": {
+      "roe": "18,5% FY2025 (27,1% FY2024)",
+      "roce": "Avkastning sysselsatt kapital industri 25,3% FY2025 (35,8% FY2024)",
+      "utdelning": "13 kr/aktie FY2025 (8,50 ord + 4,50 extra) — direktavkastning 4,0% vid 324 kr"
+    }
+  },
+  "sammanfattning": {
+    "beslut": "BEVAKA",
+    "motivering": "Volvo är ett kvalitetsbolag med stark premiumposition och robust balansräkning (63 mdr nettokassa). Aktiekurs 324 kr speglar redan stor del av cyklisk återhämtning — begränsat utrymme på uppsidan. Avvakta Q1-rapport 24 april 2026.",
+    "malpris": "345 kr"
+  },
+  "scenarier": {
+    "bullCase": "390 kr (+20%) — Nordamerika normaliseras H2 2026, marginal återhämtar sig mot 12%, P/E expansion mot 18-19x på 2026e-vinst. Sannolikhet 25%.",
+    "baseCase": "345 kr (+6%) — Stabil europeisk marknad, gradvis Nordamerika-normalisering H2 2026, kassaflöde återhämtar sig mot 30-35 mdr. Värdering 16-17x P/E. Sannolikhet 50%.",
+    "bearCase": "230 kr (-29%) — Global recession, tariffer eskalerar, kartelldomslut överstiger avsättningar kraftigt, SEK fortsätter stärkas. Sannolikhet 25%."
+  }
+}

@@ -109,17 +109,17 @@ export default function VolvoPage() {
 
   const analysisData = useMemo(() => {
     const scores = {
-      affarsmodell: 4,
-      strategiskMoat: 4,
+      affarsmodell: 5,
+      strategiskMoat: 5,
       finansiellKvalitet: 4,
       vardering: 3,
-      tillvaxtutsikter: 3,
+      tillvaxtutsikter: 4,
       riskprofil: 3,
       esgMakro: 4,
-      aiObservationer: 0, // Not applicable
+      aiObservationer: 3,
     };
     const totaltPoang = Object.values(scores).reduce((sum, score) => sum + score, 0);
-    const maxPoang = 35;
+    const maxPoang = 40;
     const rating = (totaltPoang / maxPoang) * 5;
 
     return { scores, totaltPoang, maxPoang, rating };
@@ -165,6 +165,7 @@ export default function VolvoPage() {
           <AlertBox type="info">
             Aktiekursen har stigit från 267 kr (vårt ursprungliga scenario) till 324 kr — en uppgång om 21% som speglar marknadens positivare syn på cyklisk återhämtning. Vid 324 kr handlas Volvo till P/E 19,1x på FY2025-vinst och 15,5x på 2026e — rimligt men inte billigt för ett cykliskt bolag i bottenfas. BEVAKA kvarstår med uppdaterad riktkurs 345 kr.
           </AlertBox>
+          <RatingBox rating={5}><strong>5/5</strong> — Volvo är en global ledare med en extremt robust serviceaffär som nu utgör en strukturell krockkudde (växte 5% trots svag fordonsmarknad). Ledningen under Martin Lundstedt har visat prov på god kostnadskontroll i en nedgång och ägarstrukturen med Industrivärden garanterar långsiktighet och &quot;skin in the game&quot;.</RatingBox>
         </section>
 
         <section id="moat" data-section="moat" className="mb-16">
@@ -189,6 +190,7 @@ export default function VolvoPage() {
               <p className="text-sm text-[#2a2a2a]">Justerad marginal 17,4% FY2025 (17,2% FY2024) — bolagets starkaste. Leveranser +30% Q4. Stark efterfrågan generatoraggregat från datacenter och energisäkerhet.</p>
             </div>
           </div>
+          <RatingBox rating={5}><strong>5/5</strong> — Marknadsledarskap i Europa (19% andel), starka varumärken (Volvo, Mack, Renault) och ett oöverträffat servicenätverk skapar höga byteskostnader. Partnerskap som Coretura (mjukvara) och Waabi (autonom körning) säkrar den teknologiska vallgraven för nästa generation fordon.</RatingBox>
         </section>
 
         <section id="financials" data-section="financials" className="mb-16">
@@ -251,6 +253,7 @@ export default function VolvoPage() {
           <p className="text-sm leading-relaxed text-[#2a2a2a]">
             Det rapporterade rörelseresultatet för Q2 innehöll engångsposter om -3,5 mdr SEK (övergången till nollutsläppsfordon -4,5 mdr, Coretura +1,0 mdr). Det justerade resultatet för Q2 var faktiskt starkare: 13,5 mdr SEK med 11,0% justerad marginal. Framåtsikten för 2026 innebär att nettot av kapitalisering och avskrivning av FoU förväntas ge positiv effekt om +3 mdr SEK på rörelseresultatet, men ca 1 mdr SEK negativt jämfört med 2025.
           </p>
+          <RatingBox rating={4}><strong>4/5</strong> — Trots ett utmanande 2025 bibehåller Volvo en urstark nettokassa på 63 mdr SEK och en tvåsiffrig rörelsemarginal (10,7%). Det som drar ner betyget från en 5:a är det halverade operativa kassaflödet och den cykliska sårbarheten som blev tydlig under året.</RatingBox>
         </section>
 
         <section id="valuation" data-section="valuation" className="mb-16">
@@ -299,6 +302,7 @@ export default function VolvoPage() {
           <AlertBox type="info">
             Analytikerkonsensus (2026e EPS 20,91 kr) förutsätter en vinståterhämtning på +23% från FY2025. Det kräver att Nordamerika normaliseras och marginalen återgår mot 11-12%. Q1 2026 förväntas fortsatt tufft — tarifftryck på -1 mdr SEK och svagt Nordamerika. En besvikelse i Q1 kan skapa ett bättre ingångsläge.
           </AlertBox>
+          <RatingBox rating={3}><strong>3/5</strong> — Vid 324 kr är uppsidan begränsad (+6% till bascase). P/E 19x på fjolårets vinst är historiskt högt för Volvo, även om 15,5x på 2026e är rimligare. Aktien prisar redan in en stor del av den förväntade återhämtningen, vilket gör &quot;Bevaka&quot; till en korrekt bedömning.</RatingBox>
         </section>
 
         <section id="growth" data-section="growth" className="mb-16">
@@ -325,6 +329,7 @@ export default function VolvoPage() {
               <p className="text-sm text-[#2a2a2a]">Anläggningsmaskiner visade 13,9% justerad marginal Q4 (11,8% Q4 2024) — driven av positiv produktmix och förbättrad serviceaffär. Orderingång +18% ex-SDLG. Ny monteringsfabrik för bandgravmaskiner bekräftad i Eskilstuna. Nya elektriska L120-hjullastare levererade till europeiska och asiatiska marknader.</p>
             </div>
           </div>
+          <RatingBox rating={4}><strong>4/5</strong> — Starka drivkrafter i form av cyklisk återhämtning (H2 2026), vertikal integration genom Swecon-förvärvet och en spännande nisch i Volvo Penta (datacenter/energi). Elektrifieringen (orderingång +18%) ger en strukturell tillväxtresa långt bortom konjunkturen.</RatingBox>
         </section>
 
         <section id="risk" data-section="risk" className="mb-16">
@@ -340,6 +345,7 @@ export default function VolvoPage() {
           <p className="text-sm leading-relaxed text-[#2a2a2a]">
             Volvo belyser i risknotesen att tariffer och handelshinder "kraftigt ökat osäkerheten" och kan "störa befintliga leverantörskedjor, medföra ökade kostnader och skapa plötsliga konkurrens nackdelar." Nettoeffekten från tariffer var -800 Mkr i Q4 2025 och förväntas bli -1 mdr SEK i Q1 2026. Situationen "förändras snabbt och är komplex att analysera." En stärkande SEK lade på ytterligare -2,1 mdr SEK på rörelseresultatet under Q4. SEK/USD gick från 11,00 vid årsskiftet 2024 till 9,17 vid årsskiftet 2025.
           </p>
+          <RatingBox rating={3}><strong>3/5 — Medelrisk (inverterat betyg)</strong> — Riskerna är betydande men hanterbara. Lastbilskartellen (eventualförpliktelser på 14,4 mdr) och handelspolitiska tariffer (-1 mdr i Q1-effekt) är mörka moln. Den starka kassan agerar dock som en effektiv krockkudde.</RatingBox>
         </section>
 
         <section id="esg" data-section="esg" className="mb-16">
@@ -353,6 +359,7 @@ export default function VolvoPage() {
           <p className="text-sm leading-relaxed text-[#2a2a2a]">
             Ägarstrukturen: Industrivärden är Volvos största aktieägare och bedriver aktivt, långsiktigt ägarskap via styrelserepresentation. Helena Stjernholm (VD Industrivärden) sitter i Volvos styrelse. VD Martin Lundstedts optionsavtal med Industrivärden säkerställer att ledningens och aktieägarnas intressen är synkroniserade.
           </p>
+          <RatingBox rating={4}><strong>4/5</strong> — Ledande position inom elektrifiering av tunga fordon och starka externa betyg (MSCI AA). Det som hindrar en 5:a är de kvarvarande juridiska skuggorna från kartellärendet och sårbarheten för globala handelshinder.</RatingBox>
         </section>
 
         <section id="portfolio" data-section="portfolio" className="mb-16">
@@ -392,6 +399,7 @@ export default function VolvoPage() {
           <p className="text-sm leading-relaxed text-[#2a2a2a]">
             Renault Trucks var en positiv överraskning: orderingången ökade +15% och leveranserna +11% under Q4, med marknadsandel för tunga lastbilar i Europa förbättrad till 9,4% (9,1%). Dongfeng Commercial Vehicles (ej konsoliderat) levererade +20% till 32 848 lastbilar under Q4 och +21% helåret — en stark indikation på kinesisk efterfrågehämtning.
           </p>
+          <RatingBox rating={3}><strong>3/5 — AI-observationer</strong> — AI-indikationer pekar på en marknad som redan prisar in återhämtning, vilket begränsar kortsiktig uppsida. Samtidigt visar serviceaffärens motståndskraft och orderingång i elektrifiering positiva underliggande signaler. Ingen tydlig negativ avvikelse, men heller inget &quot;edge-case&quot; fynd.</RatingBox>
         </section>
 
         <section id="verdict" data-section="verdict" className="mb-16">
@@ -413,7 +421,6 @@ export default function VolvoPage() {
                 <div className="pt-2 space-y-1">
                     {Object.entries(analysisData.scores).map(([key, value]) => {
                         const label = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
-                        if (label === 'AiObservationer') return null;
                         return (
                             <div key={key} className="flex items-center gap-3">
                                 <span className="text-xs text-[#5a5a4a] w-32 flex-shrink-0">{label}</span>
