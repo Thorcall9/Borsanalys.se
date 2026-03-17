@@ -152,6 +152,40 @@ export default function NvidiaAnalysisPage() {
       </div>
 
       <div className="px-6 sm:px-12 pb-20 bg-[#0f0f0f] text-[#faf8f3]">
+        {/* Snabböversikt: Poäng & Spindeldiagram */}
+        <div className="pt-10 pb-2">
+          <h3 className="text-xs font-bold text-[#76B900] uppercase tracking-widest mb-3 pl-2 border-l-[3px] border-[#76B900]">Samlade scores & Poängdiagram</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-5">
+            <div>
+              <RadarChart scores={analysisData.scores} />
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between items-center py-2 border-b border-[#333]">
+                <span className="text-sm font-bold">Total poäng:</span>
+                <span className="text-xl font-bold font-serif text-[#76B900]">{analysisData.totaltPoang} / {analysisData.maxPoang}</span>
+              </div>
+              <div className="flex justify-between items-center py-2 border-b border-[#333] mb-3">
+                <span className="text-sm font-bold">Viktat betyg:</span>
+                <span className="text-xl font-bold font-serif text-[#76B900]">{analysisData.rating.toFixed(1)} / 5.0</span>
+              </div>
+              <div className="pt-2 space-y-1">
+                {Object.entries(analysisData.scores).map(([key, value]) => {
+                  const label = key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase());
+                  return (
+                    <div key={key} className="flex items-center gap-3">
+                      <span className="text-xs text-[#999] w-32 flex-shrink-0">{label}</span>
+                      <div className="flex-grow bg-[#333] rounded h-2.5 overflow-hidden">
+                        <div className="h-full rounded" style={{ width: `${(value / 5) * 100}%`, backgroundColor: ACCENT }} />
+                      </div>
+                      <span className="text-xs font-bold text-[#76B900] font-serif w-8 text-right">{value}/5</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* I. Overview */}
         <div data-section="overview" id="overview" className="pt-14">
           <SectionHeader number="I" title="Översikt" accentColor={ACCENT} />
@@ -275,37 +309,6 @@ export default function NvidiaAnalysisPage() {
                 <div className="text-[10px] text-[#76B900] tracking-widest uppercase">Målpris (Base)</div>
                 <div className="font-serif text-4xl font-bold">$230</div>
                 <div className="text-xs text-[#80d080]">+26% potential från $182</div>
-              </div>
-            </div>
-          </div>
-
-          <h3 className="text-xs font-bold text-[#76B900] uppercase tracking-widest mt-6 mb-3 pl-2 border-l-[3px] border-[#76B900]">Samlade scores & Poängdiagram</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-5">
-            <div>
-              <RadarChart scores={analysisData.scores} />
-            </div>
-            <div className="space-y-2">
-              <div className="flex justify-between items-center py-2 border-b border-[#333]">
-                <span className="text-sm font-bold">Total poäng:</span>
-                <span className="text-xl font-bold font-serif text-[#76B900]">{analysisData.totaltPoang} / {analysisData.maxPoang}</span>
-              </div>
-              <div className="flex justify-between items-center py-2 border-b border-[#333] mb-3">
-                <span className="text-sm font-bold">Viktat betyg:</span>
-                <span className="text-xl font-bold font-serif text-[#76B900]">{analysisData.rating.toFixed(1)} / 5.0</span>
-              </div>
-              <div className="pt-2 space-y-1">
-                {Object.entries(analysisData.scores).map(([key, value]) => {
-                  const label = key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase());
-                  return (
-                    <div key={key} className="flex items-center gap-3">
-                      <span className="text-xs text-[#999] w-32 flex-shrink-0">{label}</span>
-                      <div className="flex-grow bg-[#333] rounded h-2.5 overflow-hidden">
-                        <div className="h-full rounded" style={{ width: `${(value / 5) * 100}%`, backgroundColor: ACCENT }} />
-                      </div>
-                      <span className="text-xs font-bold text-[#76B900] font-serif w-8 text-right">{value}/5</span>
-                    </div>
-                  );
-                })}
               </div>
             </div>
           </div>
