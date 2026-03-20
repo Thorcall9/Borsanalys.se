@@ -63,7 +63,7 @@ export default function Footer() {
             <h4 className="font-medium text-sm uppercase tracking-wider mb-3 text-foreground/80">Följ oss</h4>
             <div className="flex gap-4 mb-6">
               <a
-                href="https://x.com"
+                href="https://x.com/borsanalys"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted hover:text-primary transition-colors"
@@ -74,7 +74,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/borsanalys"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted hover:text-primary transition-colors"
