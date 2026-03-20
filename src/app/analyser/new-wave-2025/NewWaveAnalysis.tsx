@@ -13,7 +13,7 @@ import {
 } from "@/components/analysis";
 import type { AnalysisSection, Scenario, TableRow } from "@/components/analysis";
 
-const ACCENT = "#1a5276";
+const ACCENT = "#1a3c6e";
 
 const sections: AnalysisSection[] = [
   { id: "overview",   number: "I",   title: "Översikt" },
@@ -193,16 +193,16 @@ export default function NewWaveAnalysis() {
         <section id="growth" data-section="growth" className="mb-16">
           <SectionHeader number="V" title="Tillväxtmotorer" />
           <div className="space-y-4">
-            <div className="border-l-4 border-[#1a5276] pl-4">
-              <h3 className="text-sm font-bold text-[#1a5276] mb-1">Cutter & Buck — nordamerikansk premiumtillväxt</h3>
+            <div className="border-l-4 border-[#1a3c6e] pl-4">
+              <h3 className="text-sm font-bold text-[#1a3c6e] mb-1">Cutter & Buck — nordamerikansk premiumtillväxt</h3>
               <p className="text-sm text-[#2a2a2a]">Det nordamerikanska varumärket med fokus på business-casual och golf har bäst tillväxtpotential. Demografisk medvind från välbärgade konsumenter.</p>
             </div>
-            <div className="border-l-4 border-[#2471a3] pl-4">
-              <h3 className="text-sm font-bold text-[#2471a3] mb-1">Craft Sportswear — löpning och triathlon</h3>
+            <div className="border-l-4 border-[#b5892a] pl-4">
+              <h3 className="text-sm font-bold text-[#b5892a] mb-1">Craft Sportswear — löpning och triathlon</h3>
               <p className="text-sm text-[#2a2a2a]">Skandinavisk tekniksportswear med stark position i Nordic och växande exponering mot USA och mellaneuropa via trail running-trenden.</p>
             </div>
-            <div className="border-l-4 border-[#5dade2] pl-4">
-              <h3 className="text-sm font-bold text-[#5dade2] mb-1">Profilreklam — konjunkturstabil återkommande intäkt</h3>
+            <div className="border-l-4 border-[#1a3c6e] pl-4">
+              <h3 className="text-sm font-bold text-[#1a3c6e] mb-1">Profilreklam — konjunkturstabil återkommande intäkt</h3>
               <p className="text-sm text-[#2a2a2a]">Företag köper profilkläder löpande. Segment med höga kundrelationsbarriärer och stabila återköpsfrekvenser.</p>
             </div>
           </div>
@@ -218,16 +218,16 @@ export default function NewWaveAnalysis() {
         <section id="segments" data-section="segments" className="mb-16">
           <SectionHeader number="VII" title="Segmentanalys" />
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="bg-[#eaf2f8] border border-[#aed6f1] rounded-xl p-4">
-              <h3 className="text-xs font-bold text-[#1a5276] uppercase tracking-widest mb-2">Sportswear & Leisure (~40%)</h3>
+            <div className="bg-[#f5f0e8] border border-[#e0d5c0] rounded-xl p-4">
+              <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mb-2">Sportswear & Leisure (~40%)</h3>
               <p className="text-sm text-[#2a2a2a]">Craft och Cutter & Buck. Hög varumärkeskännedom, direkt-till-konsument via webshop och återförsäljare. Bäst tillväxtpotential.</p>
             </div>
-            <div className="bg-[#eaf2f8] border border-[#aed6f1] rounded-xl p-4">
-              <h3 className="text-xs font-bold text-[#1a5276] uppercase tracking-widest mb-2">Workwear & Accessories (~35%)</h3>
+            <div className="bg-[#f5f0e8] border border-[#e0d5c0] rounded-xl p-4">
+              <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mb-2">Workwear & Accessories (~35%)</h3>
               <p className="text-sm text-[#2a2a2a]">Jobman, Clique m.fl. Stabil B2B-marknad för yrkeskläder och profilprodukter. Lägre tillväxt men god lönsamhet.</p>
             </div>
-            <div className="bg-[#eaf2f8] border border-[#aed6f1] rounded-xl p-4">
-              <h3 className="text-xs font-bold text-[#1a5276] uppercase tracking-widest mb-2">Gifts & Home Interior (~25%)</h3>
+            <div className="bg-[#f5f0e8] border border-[#e0d5c0] rounded-xl p-4">
+              <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mb-2">Gifts & Home Interior (~25%)</h3>
               <p className="text-sm text-[#2a2a2a]">Presentreklam och heminredning. Mer konjunkturkänsligt. Volymdriven affär med lägre marginaler.</p>
             </div>
           </div>
@@ -249,11 +249,11 @@ export default function NewWaveAnalysis() {
             <div className="space-y-2">
               <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
                 <span className="text-sm font-bold">Total poäng:</span>
-                <span className="text-xl font-bold font-serif text-[#1a5276]">{analysisData.totaltPoang} / {analysisData.maxPoang}</span>
+                <span className="text-xl font-bold font-serif text-[#1a3c6e]">{analysisData.totaltPoang} / {analysisData.maxPoang}</span>
               </div>
               <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
                 <span className="text-sm font-bold">Viktat betyg:</span>
-                <span className="text-xl font-bold font-serif text-[#1a5276]">{analysisData.rating.toFixed(1)} / 5.0</span>
+                <span className="text-xl font-bold font-serif text-[#1a3c6e]">{analysisData.rating.toFixed(1)} / 5.0</span>
               </div>
             </div>
           </div>

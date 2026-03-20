@@ -13,7 +13,7 @@ import {
 } from "@/components/analysis";
 import type { AnalysisSection, Scenario, TableRow } from "@/components/analysis";
 
-const ACCENT = "#003087";
+const ACCENT = "#1a3c6e";
 
 const sections: AnalysisSection[] = [
   { id: "overview",   number: "I",   title: "Översikt" },
@@ -196,16 +196,16 @@ export default function VolvoQ2Analysis() {
         <section id="growth" data-section="growth" className="mb-16">
           <SectionHeader number="V" title="Tillväxtmotorer" />
           <div className="space-y-4">
-            <div className="border-l-4 border-[#003087] pl-4">
-              <h3 className="text-sm font-bold text-[#003087] mb-1">Cyklisk återhämtning H2 2025–2026</h3>
+            <div className="border-l-4 border-[#1a3c6e] pl-4">
+              <h3 className="text-sm font-bold text-[#1a3c6e] mb-1">Cyklisk återhämtning H2 2025–2026</h3>
               <p className="text-sm text-[#2a2a2a]">Nordamerikansk lastbilsmarknad förväntas bottna H2 2025. Historiskt har återhämtningscykler drivit stark marginalexpansion pga. operativ hävstång.</p>
             </div>
-            <div className="border-l-4 border-[#0057a8] pl-4">
-              <h3 className="text-sm font-bold text-[#0057a8] mb-1">Serviceaffärens tillväxt</h3>
+            <div className="border-l-4 border-[#b5892a] pl-4">
+              <h3 className="text-sm font-bold text-[#b5892a] mb-1">Serviceaffärens tillväxt</h3>
               <p className="text-sm text-[#2a2a2a]">Serviceaffären (~30% av omsättning) är strukturellt i tillväxt och konjunkturstabil. Volvo Connect och digitala tjänster ökar tjänstepenetrationen.</p>
             </div>
-            <div className="border-l-4 border-[#4a90d9] pl-4">
-              <h3 className="text-sm font-bold text-[#4a90d9] mb-1">Elektrifiering — first mover i Europa</h3>
+            <div className="border-l-4 border-[#1a3c6e] pl-4">
+              <h3 className="text-sm font-bold text-[#1a3c6e] mb-1">Elektrifiering — first mover i Europa</h3>
               <p className="text-sm text-[#2a2a2a]">Volvo är ledande i kommersiell elektrifiering i Europa. EU:s koldioxidkrav driver strukturell efterfrågan på el-lastbilar från 2025 och framåt.</p>
             </div>
           </div>
@@ -221,16 +221,16 @@ export default function VolvoQ2Analysis() {
         <section id="segments" data-section="segments" className="mb-16">
           <SectionHeader number="VII" title="Segmentanalys" />
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="bg-[#eaf0fb] border border-[#aabfea] rounded-xl p-4">
-              <h3 className="text-xs font-bold text-[#003087] uppercase tracking-widest mb-2">Trucks (~75%)</h3>
+            <div className="bg-[#f5f0e8] border border-[#e0d5c0] rounded-xl p-4">
+              <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mb-2">Trucks (~75%)</h3>
               <p className="text-sm text-[#2a2a2a]">Kärnaffären. Europa stark men Nordamerika i nedgång H1 2025. Serviceintäkterna motverkar volymfallet.</p>
             </div>
-            <div className="bg-[#eaf0fb] border border-[#aabfea] rounded-xl p-4">
-              <h3 className="text-xs font-bold text-[#003087] uppercase tracking-widest mb-2">Construction Equip. (~15%)</h3>
+            <div className="bg-[#f5f0e8] border border-[#e0d5c0] rounded-xl p-4">
+              <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mb-2">Construction Equip. (~15%)</h3>
               <p className="text-sm text-[#2a2a2a]">SDLG och Volvo CE. Konjunkturkänsligt men gynnas av europeiska infrastrukturinvesteringar och US Infrastructure Act.</p>
             </div>
-            <div className="bg-[#eaf0fb] border border-[#aabfea] rounded-xl p-4">
-              <h3 className="text-xs font-bold text-[#003087] uppercase tracking-widest mb-2">Volvo Penta (~10%)</h3>
+            <div className="bg-[#f5f0e8] border border-[#e0d5c0] rounded-xl p-4">
+              <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mb-2">Volvo Penta (~10%)</h3>
               <p className="text-sm text-[#2a2a2a]">Marin och industriella motorer. Stabil kassaflödesgenerator med 17%+ rörelsemarginal. Elframdrivning för båtar är nästa tillväxtsteg.</p>
             </div>
           </div>
@@ -252,11 +252,11 @@ export default function VolvoQ2Analysis() {
             <div className="space-y-2">
               <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
                 <span className="text-sm font-bold">Total poäng:</span>
-                <span className="text-xl font-bold font-serif text-[#003087]">{analysisData.totaltPoang} / {analysisData.maxPoang}</span>
+                <span className="text-xl font-bold font-serif text-[#1a3c6e]">{analysisData.totaltPoang} / {analysisData.maxPoang}</span>
               </div>
               <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
                 <span className="text-sm font-bold">Viktat betyg:</span>
-                <span className="text-xl font-bold font-serif text-[#003087]">{analysisData.rating.toFixed(1)} / 5.0</span>
+                <span className="text-xl font-bold font-serif text-[#1a3c6e]">{analysisData.rating.toFixed(1)} / 5.0</span>
               </div>
             </div>
           </div>

@@ -13,7 +13,7 @@ import {
 } from "@/components/analysis";
 import type { AnalysisSection, Scenario, TableRow } from "@/components/analysis";
 
-const ACCENT = "#d4a017";
+const ACCENT = "#1a3c6e";
 
 const sections: AnalysisSection[] = [
   { id: "overview",   number: "I",   title: "Översikt" },
@@ -193,8 +193,8 @@ export default function EvolutionAnalysis() {
         <section id="growth" data-section="growth" className="mb-16">
           <SectionHeader number="V" title="Tillväxtmotorer" />
           <div className="space-y-4">
-            <div className="border-l-4 border-[#d4a017] pl-4">
-              <h3 className="text-sm font-bold text-[#d4a017] mb-1">USA — live casino på frammarsch</h3>
+            <div className="border-l-4 border-[#1a3c6e] pl-4">
+              <h3 className="text-sm font-bold text-[#1a3c6e] mb-1">USA — live casino på frammarsch</h3>
               <p className="text-sm text-[#2a2a2a]">Legal sports betting driver medvetenhet om online gambling. Live casino följer i spåren och Evolution är positionerat att ta ledarskapet i USA.</p>
             </div>
             <div className="border-l-4 border-[#b5892a] pl-4">
@@ -224,15 +224,15 @@ export default function EvolutionAnalysis() {
             Evolution verkar i ett enda segment — live casino B2B — men kan delas upp geografiskt. Europa (primärt UK, Sverige, Belgien, Spanien) utgör kärnan. Asien är det mest lönsamma men mest regulatoriskt känsliga segmentet. Nordamerika är det snabbast växande segmentet med längst tillväxtbana.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="bg-[#fefae8] border border-[#e0d5a0] rounded-xl p-4">
+            <div className="bg-[#f5f0e8] border border-[#e0d5c0] rounded-xl p-4">
               <h3 className="text-xs font-bold text-[#b5892a] uppercase tracking-widest mb-2">Europa (~55%)</h3>
               <p className="text-sm text-[#2a2a2a]">Mogen marknad med stabil tillväxt. Regulatorypress pågår men marknaden är stor och Evolution är etablerad.</p>
             </div>
-            <div className="bg-[#fefae8] border border-[#e0d5a0] rounded-xl p-4">
+            <div className="bg-[#f5f0e8] border border-[#e0d5c0] rounded-xl p-4">
               <h3 className="text-xs font-bold text-[#b5892a] uppercase tracking-widest mb-2">Asien (~25%)</h3>
               <p className="text-sm text-[#2a2a2a]">Höga marginaler men oreglerade marknader. Koreansk exponering är en osäkerhetsfaktor. Högt regulatorisk risk.</p>
             </div>
-            <div className="bg-[#fefae8] border border-[#e0d5a0] rounded-xl p-4">
+            <div className="bg-[#f5f0e8] border border-[#e0d5c0] rounded-xl p-4">
               <h3 className="text-xs font-bold text-[#b5892a] uppercase tracking-widest mb-2">Nordamerika (~20%)</h3>
               <p className="text-sm text-[#2a2a2a]">Snabbast växande. USA i tidig fas — reglerat och stor potential. Kan bli den viktigaste marknaden på 5 år.</p>
             </div>
@@ -255,11 +255,11 @@ export default function EvolutionAnalysis() {
             <div className="space-y-2">
               <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
                 <span className="text-sm font-bold">Total poäng:</span>
-                <span className="text-xl font-bold font-serif text-[#d4a017]">{analysisData.totaltPoang} / {analysisData.maxPoang}</span>
+                <span className="text-xl font-bold font-serif text-[#1a3c6e]">{analysisData.totaltPoang} / {analysisData.maxPoang}</span>
               </div>
               <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
                 <span className="text-sm font-bold">Viktat betyg:</span>
-                <span className="text-xl font-bold font-serif text-[#d4a017]">{analysisData.rating.toFixed(1)} / 5.0</span>
+                <span className="text-xl font-bold font-serif text-[#1a3c6e]">{analysisData.rating.toFixed(1)} / 5.0</span>
               </div>
             </div>
           </div>
