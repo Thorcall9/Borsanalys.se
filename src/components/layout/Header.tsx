@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 // Vi hämtar din lista med analyser här
 import { analyses } from "@/lib/analyses";
+import SearchModal from "@/components/SearchModal";
 
 const navItems = [
   { href: "/", label: "Hem" },
@@ -24,10 +25,13 @@ const navItems = [
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [toolsOpen, setToolsOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const toolsMenuRef = useRef<HTMLDivElement>(null);
 
   // Vi hämtar den allra senaste analysen (den som ligger överst i analyses.ts)
   const latestAnalysis = analyses[0];
+
+  const openSearch = useCallback(() => setSearchOpen(true), []);
 
   // Hook for closing dropdown on outside click
   useEffect(() => {
@@ -36,13 +40,30 @@ export default function Header() {
         setToolsOpen(false);
       }
     };
-    // Bind the event listener
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      // Unbind the event listener on clean up
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [toolsMenuRef]);
+
+  // Global keyboard shortcut ⌘K / Ctrl+K to open search
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, []);
+
+  // Listen for custom openSearch event (emitted by hero search bar)
+  useEffect(() => {
+    const handler = () => setSearchOpen(true);
+    window.addEventListener("openSearch", handler);
+    return () => window.removeEventListener("openSearch", handler);
+  }, []);
 
 
   return (
@@ -110,6 +131,21 @@ export default function Header() {
               )}
             </nav>
 
+            {/* Search button */}
+            <button
+              onClick={openSearch}
+              aria-label="Sök"
+              className="flex items-center gap-2 px-3 py-1.5 text-sm text-foreground/70 hover:text-foreground bg-card border border-border rounded-lg hover:border-primary/30 transition-colors"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+              </svg>
+              <span className="hidden sm:inline">Sök</span>
+              <kbd className="hidden md:inline-flex items-center gap-1 px-1.5 py-0.5 bg-background border border-border rounded text-xs font-mono text-muted">
+                ⌘K
+              </kbd>
+            </button>
+
             {/* Mobile hamburger */}
             <button
               className="md:hidden p-2"
@@ -170,6 +206,8 @@ export default function Header() {
           </div>
         )}
       </header>
+
+      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   );
 }
