@@ -1,6 +1,6 @@
 // ============================================================
 // src/app/guider/nyckeltal/page.tsx
-// "De viktigaste nyckeltalen" – komplett guide-sida
+// "De viktigaste nyckeltalen" – komplett guide-sida, utan emojis
 // ============================================================
 
 import {
@@ -12,126 +12,51 @@ import {
   ExampleRow,
   ValuationBar,
   KeyInsight,
+  AnalysisFlow,
+  ChecklistBox,
+  Conclusion,
 } from "@/components/GuideComponents";
 
-// ─── Viktiga punkter-lista längst upp ──────────────────────
+// ─── Viktiga punkter-lista ──────────────────────────────────
 
 function KeyPoints() {
   const points = [
-    {
-      nr: 1,
-      text: "Tillväxt driver aktien – sikta på stabil omsättningstillväxt på 10 %+ och kontrollera att vinsttillväxten inte löper iväg från omsättningen.",
-    },
-    {
-      nr: 2,
-      text: "Lönsamhet skapar värde – ROE på 15 %+ och konsekvent hög vinstmarginal indikerar ett kvalitetsbolag med konkurrensfördel.",
-    },
-    {
-      nr: 3,
-      text: "Värdering avgör din avkastning – analysera alltid P/E i kontext med tillväxt; ett högt P/E kan vara motiverat och ett lågt kan vara en fälla.",
-    },
-    {
-      nr: 4,
-      text: "Skuldsättning (nettoskuld/EBIT) under 3x ger finansiell stabilitet och motståndskraft i svåra tider.",
-    },
-    {
-      nr: 5,
-      text: "Kassaflöde avslöjar sanningen – FCF nära vinsten år efter år är ett av de starkaste tecknen på ett riktigt kvalitetsbolag.",
-    },
+    "Tillväxt driver aktien – sikta på stabil omsättningstillväxt på 10 %+ och kontrollera att vinsttillväxten inte löper iväg från omsättningen.",
+    "Lönsamhet skapar värde – ROE på 15 %+ och konsekvent hög vinstmarginal indikerar ett kvalitetsbolag med konkurrensfördel.",
+    "Värdering avgör din avkastning – analysera alltid P/E i kontext med tillväxt; ett högt P/E kan vara motiverat och ett lågt kan vara en fälla.",
+    "Skuldsättning (nettoskuld/EBIT) under 3x ger finansiell stabilitet och motståndskraft i svåra tider.",
+    "Kassaflöde avslöjar sanningen – FCF nära vinsten år efter år är ett av de starkaste tecknen på ett riktigt kvalitetsbolag.",
   ];
 
   return (
     <div className="rounded-xl border border-blue-200 bg-blue-50 p-5 space-y-3">
-      <p className="text-sm font-semibold text-blue-600 uppercase tracking-wide">
-        Viktiga punkter
-      </p>
-      {points.map((p) => (
-        <div key={p.nr} className="flex gap-3">
+      <p className="text-xs font-semibold text-blue-600 uppercase tracking-widest">Viktiga punkter</p>
+      {points.map((text, i) => (
+        <div key={i} className="flex gap-3">
           <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center mt-0.5">
-            {p.nr}
+            {i + 1}
           </span>
-          <p className="text-sm text-gray-700">{p.text}</p>
+          <p className="text-sm text-gray-700">{text}</p>
         </div>
       ))}
     </div>
   );
 }
 
-// ─── Checklista längst ned ──────────────────────────────────
+// ─── "Vad du vill se"-box (kassaflöde) ─────────────────────
 
-function Checklist() {
-  const strong = [
-    "Stabil tillväxt på 10 %+",
-    "Hög ROE på 15 %+ med bra marginaler",
-    "Rimlig värdering i linje med historiken",
-    "Låg eller kontrollerad skuldsättning",
-    "Stark FCF som speglar vinsten",
-  ];
-  const mistakes = [
-    "Titta bara på P/E",
-    "Ignorera skulder",
-    "Fokusera på vinst utan att kolla kassaflöde",
-    "Inte jämföra historiskt",
-  ];
-
+function CashflowChecklist() {
   return (
-    <div className="rounded-xl border border-gray-200 bg-gray-50 p-5 space-y-5">
-      <p className="font-semibold text-gray-800">Snabb checklista</p>
-
-      <div>
-        <p className="text-sm font-semibold text-green-700 mb-2">
-          Ett starkt bolag har ofta:
-        </p>
-        <ul className="space-y-1">
-          {strong.map((s) => (
-            <li key={s} className="text-sm text-gray-700 flex gap-2">
-              <span className="text-green-500">•</span> {s}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div>
-        <p className="text-sm font-semibold text-red-600 mb-2">
-          Vanliga misstag att undvika:
-        </p>
-        <ul className="space-y-1">
-          {mistakes.map((m) => (
-            <li key={m} className="text-sm text-gray-700 flex gap-2">
-              <span className="text-red-400">•</span> {m}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
-}
-
-// ─── Analysordning-box ──────────────────────────────────────
-
-function AnalysisFlow() {
-  const steps = [
-    { label: "Tillväxt",      question: "Växer bolaget?" },
-    { label: "Lönsamhet",     question: "Är det ett kvalitetsbolag?" },
-    { label: "Värdering",     question: "Betalar du ett rimligt pris?" },
-    { label: "Skuldsättning", question: "Klarar det en kris?" },
-    { label: "Kassaflöde",    question: "Är vinsten verklig?" },
-  ];
-
-  return (
-    <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-5">
-      <p className="font-semibold text-gray-800 mb-4">Analysera i den här ordningen</p>
-      <div className="space-y-2">
-        {steps.map((s, i) => (
-          <div key={s.label} className="flex items-center gap-3">
-            <span className="flex-shrink-0 w-6 h-6 rounded-full bg-gray-100 text-gray-500 text-xs font-bold flex items-center justify-center">
-              {i + 1}
-            </span>
-            <span className="text-sm font-semibold text-gray-800 w-28">{s.label}</span>
-            <span className="text-sm text-gray-500">{s.question}</span>
-          </div>
+    <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-4">
+      <p className="font-semibold text-gray-800 mb-3">Vad du vill se:</p>
+      <ul className="space-y-2">
+        {["Stabilt och växande kassaflöde", "FCF som liknar vinsten över tid"].map((item) => (
+          <li key={item} className="text-sm text-gray-700 flex gap-2">
+            <span>✅</span>
+            <span>{item}</span>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 }
@@ -140,7 +65,7 @@ function AnalysisFlow() {
 
 export default function NyckeltalGuidePage() {
   return (
-    <article className="max-w-3xl mx-auto px-4 py-12 space-y-10">
+    <article className="max-w-3xl mx-auto px-4 py-12 space-y-8">
 
       {/* Rubrik */}
       <header className="space-y-3">
@@ -163,7 +88,7 @@ export default function NyckeltalGuidePage() {
           Att analysera en aktie kan kännas överväldigande. Det finns hundratals nyckeltal –
           men sanningen är att du bara behöver förstå ett fåtal riktigt bra. En träffsäker
           analys bygger på fem frågor: Växer bolaget? Är det lönsamt? Är det billigt eller
-          dyrt? Är det finansiellt stabilt? Och är vinsten faktiskt &quot;på riktigt&quot;?
+          dyrt? Är det finansiellt stabilt? Och är vinsten faktiskt på riktigt?
         </p>
         <p className="mt-2">
           Den här guiden går igenom varje steg och de nyckeltal som hör till. Målet är att
@@ -172,14 +97,14 @@ export default function NyckeltalGuidePage() {
         </p>
       </InfoBox>
 
-      {/* ── 1. TILLVÄXT ────────────────────────── */}
+      {/* ── 1. TILLVÄXT ──────────────────────────── */}
       <SectionTitle number={1} title="Tillväxt – motorn i aktien" />
 
       <TwoCol
         left={
           <MetricBox
             title="Nyckeltal:"
-            description="Omsättningstillväxt (3–5 år) och vinsttillväxt (5 år). Tillsammans visar de hur snabbt bolaget växer och om tillväxten är hållbar."
+            description="Omsättningstillväxt (3–5 år) och vinsttillväxt (5 år). Visar hur snabbt bolaget växer och om tillväxten är hållbar."
           />
         }
         right={
@@ -188,19 +113,18 @@ export default function NyckeltalGuidePage() {
             rows={[
               { range: "0–5 %",   label: "Låg tillväxt" },
               { range: "5–10 %",  label: "Stabilt" },
-              { range: "10–20 %", label: "Bra",          highlight: true },
-              { range: "20 %+",   label: "Hög tillväxt", highlight: true },
+              { range: "10–20 %", label: "Bra",           highlight: true },
+              { range: "20 %+",   label: "Hög tillväxt",  highlight: true },
             ]}
           />
         }
       />
 
-      <InfoBox variant="warning" title="Varningssignal att hålla koll på">
+      <InfoBox variant="warning" title="Varningssignal">
         <p>
           När vinsttillväxten är betydligt högre än omsättningstillväxten kan det indikera
           att kostnadsbesparingar driver vinsten snarare än verklig affärstillväxt – vilket
-          är svårare att upprätthålla över tid. Starka bolag visar konsekvent tillväxt i
-          båda måtten.
+          är svårare att upprätthålla över tid.
         </p>
       </InfoBox>
 
@@ -217,7 +141,7 @@ export default function NyckeltalGuidePage() {
         />
       </InfoBox>
 
-      {/* ── 2. LÖNSAMHET ───────────────────────── */}
+      {/* ── 2. LÖNSAMHET ─────────────────────────── */}
       <SectionTitle number={2} title="Lönsamhet – hur effektivt bolaget skapar värde" />
 
       <TwoCol
@@ -234,7 +158,7 @@ export default function NyckeltalGuidePage() {
             />
             <MetricBox
               title="Vinstmarginal"
-              description="5-årssnitt. Visar hur stor del av omsättningen som faktiskt blir vinst. 20 % marginal är dubbelt så effektivt som 10 %."
+              description="5-årssnitt. Visar hur stor del av omsättningen som faktiskt blir vinst."
             />
           </div>
         }
@@ -259,7 +183,7 @@ export default function NyckeltalGuidePage() {
         många år har sannolikt en konkurrensfördel som skyddar marginalerna.
       </KeyInsight>
 
-      {/* ── 3. VÄRDERING ───────────────────────── */}
+      {/* ── 3. VÄRDERING ─────────────────────────── */}
       <SectionTitle number={3} title="Värdering – vad betalar du?" />
 
       <p className="text-sm text-gray-600">
@@ -297,95 +221,130 @@ export default function NyckeltalGuidePage() {
         }
       />
 
-      {/* ── 4. FINANSIELL STABILITET ───────────── */}
-      <SectionTitle number={4} title="Finansiell stabilitet – klarar bolaget en kris?" />
+      {/* ── 4. RISK / SKULDSÄTTNING ──────────────── */}
+      <SectionTitle number={4} title="Risk – hur stabilt bolaget är" />
 
-      <TwoCol
-        left={
-          <RulesTable
-            title="Nettoskuld / EBIT"
-            rows={[
-              { range: "Under 1x", label: "Låg risk",    highlight: true },
-              { range: "1–3x",     label: "Normalt" },
-              { range: "Över 3x",  label: "Riskabelt" },
-            ]}
-          />
-        }
-        right={
-          <InfoBox variant="example" title="Exempel">
-            <ExampleRow
-              name="Bolag A"
-              details="Nettoskuld/EBIT: 0,5x"
-              verdict="Väldigt trygg skuldsättning."
-            />
-            <ExampleRow
-              name="Bolag B"
-              details="Nettoskuld/EBIT: 4x"
-              verdict="Känsligt för konjunkturnedgångar och räntehöjningar."
-            />
-          </InfoBox>
-        }
-      />
-
-      <InfoBox variant="warning" title="Tänk på detta om skuldsättning">
-        <p>
-          Skuldsättning är inte alltid negativt – det beror på verksamhetens stabilitet.
-          En stabil kassaflödesgenererande verksamhet kan bära mer skuld än ett cykliskt
-          bolag med ryckiga intäkter. Men högt belånade bolag i svåra tider kan tvingas
-          till utspädande nyemissioner eller utdelningssänkningar.
-        </p>
-      </InfoBox>
-
-      {/* ── 5. KASSAFLÖDE ──────────────────────── */}
-      <SectionTitle number={5} title="Kassaflöde – sanningen bakom vinsten" />
-
-      <InfoBox variant="insight" title="Varför kassaflöde är viktigast">
-        <p>
-          Kassaflöde är det nyckeltal som flest amatörinvesterare ignorerar – och det som
-          professionella analytiker lägger störst vikt vid. Vinst är en
-          redovisningskonstruktion. Kassaflöde är riktiga pengar.
-        </p>
-      </InfoBox>
-
-      <TwoCol
-        left={
-          <MetricBox
-            title="Free Cash Flow (FCF)"
-            description="Hur mycket faktiska pengar bolaget genererar efter investeringar."
-          />
-        }
-        right={
-          <MetricBox
-            title="FCF / Vinst"
-            description="Hur stor andel av den redovisade vinsten som faktiskt är kontanter. Nära 100 % är utmärkt."
-          />
-        }
+      <MetricBox
+        accent="red"
+        title="Nettoskuld / EBIT"
+        description="Visar hur många år det tar att betala av skulden med nuvarande vinst."
+        badges={[
+          { label: "< 1 Låg risk", variant: "lagRisk" },
+          { label: "1–3 Normal",   variant: "normal" },
+          { label: "3+ Hög risk",  variant: "hogRisk" },
+        ]}
       />
 
       <InfoBox variant="example" title="Exempel">
         <ExampleRow
           name="Bolag A"
-          details="Vinst: 100, FCF: 95"
-          verdict="Konverterar nästan hela vinsten till faktiska pengar – stark kvalitetssignal."
+          details="Nettoskuld / EBIT: 0,5"
+          verdict="Väldigt tryggt."
         />
         <ExampleRow
           name="Bolag B"
-          details="Vinst: 100, FCF: 20"
-          verdict="Binder upp kapital i investeringar eller rörelsekapital – vinsten är illusorisk."
+          details="Nettoskuld / EBIT: 4"
+          verdict="Riskabelt – känsligt för nedgångar."
         />
       </InfoBox>
 
+      <InfoBox variant="warning" title="Tänk på detta">
+        <p>
+          Skuldsättning är inte alltid negativt – det beror på verksamhetens stabilitet.
+          En stabil kassaflödesgenererande verksamhet kan bära mer skuld än ett cykliskt
+          bolag med ryckiga intäkter. Högt belånade bolag kan i svåra tider tvingas till
+          utspädande nyemissioner eller utdelningssänkningar.
+        </p>
+      </InfoBox>
+
+      {/* ── 5. KASSAFLÖDE ────────────────────────── */}
+      <SectionTitle number={5} title="Kassaflöde – sanningen bakom vinsten" />
+
+      <p className="text-sm text-gray-700">
+        Vinst ≠ pengar. Ett bolag kan visa hög vinst men ändå ha tomt i kassan.
+      </p>
+
+      <TwoCol
+        left={<CashflowChecklist />}
+        right={
+          <InfoBox variant="example" title="Exempel">
+            <ExampleRow
+              name="Bolag A"
+              details="Vinst 100, FCF 95"
+              verdict="Stark kvalitet."
+            />
+            <ExampleRow
+              name="Bolag B"
+              details="Vinst 100, FCF 20"
+              verdict="Varningssignal – vinsten omvandlas inte till pengar."
+            />
+          </InfoBox>
+        }
+      />
+
       <KeyInsight>
-        Stabilt och växande kassaflöde är ett av de tydligaste tecknen på ett
-        kvalitetsbolag.
+        Kassaflöde är det nyckeltal som flest amatörinvesterare ignorerar – och det som
+        professionella analytiker lägger störst vikt vid.
       </KeyInsight>
 
-      {/* ── AVSLUTNING ─────────────────────────── */}
-      <SectionTitle number={6} title="Sätt ihop allt" />
+      {/* ── SÅ SÄTTER DU IHOP ALLT ───────────────── */}
+      <AnalysisFlow
+        title="Så sätter du ihop allt"
+        steps={[
+          { number: "01", label: "Tillväxt",   question: "Växer bolaget?" },
+          { number: "02", label: "Lönsamhet",  question: "Är det kvalitet?" },
+          { number: "03", label: "Värdering",  question: "Rimligt pris?" },
+          { number: "04", label: "Skuld",      question: "Klarar en kris?" },
+          { number: "05", label: "Kassaflöde", question: "Är vinsten verklig?" },
+        ]}
+      />
 
-      <AnalysisFlow />
+      {/* ── CHECKLISTA + MISSTAG ─────────────────── */}
+      <TwoCol
+        left={
+          <ChecklistBox
+            variant="green"
+            title="Snabb checklista"
+            subtitle="Ett starkt bolag har ofta:"
+            items={[
+              "Stabil tillväxt (10 %+)",
+              "Hög ROE (15 %+)",
+              "Bra marginaler",
+              "Rimlig värdering",
+              "Låg eller kontrollerad skuld",
+              "Stark FCF",
+            ]}
+          />
+        }
+        right={
+          <ChecklistBox
+            variant="red"
+            title="Vanliga misstag"
+            items={[
+              "Titta bara på P/E",
+              "Ignorera skulder",
+              "Fokusera bara på vinst (inte kassaflöde)",
+              "Inte jämföra historiskt",
+            ]}
+          />
+        }
+      />
 
-      <Checklist />
+      {/* ── SLUTSATS ─────────────────────────────── */}
+      <Conclusion
+        heading="Slutsats"
+        body="Du behöver inte 50 nyckeltal. Med dessa få kan du snabbt sålla bort dåliga bolag och hitta riktiga kvalitetsinvesteringar."
+        quote="Tillväxt driver aktien. Lönsamhet skapar värde. Värdering avgör din avkastning. Kassaflöde avslöjar sanningen."
+        footer={
+          <p>
+            Vill du ta nästa steg? Kombinera detta med en djupare värderingsmetod som{" "}
+            <a href="/guider/dcf" className="text-blue-600 underline hover:text-blue-800">
+              DCF
+            </a>{" "}
+            – så är du redan långt före många investerare.
+          </p>
+        }
+      />
 
     </article>
   );
