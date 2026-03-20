@@ -309,6 +309,73 @@ export const guides: Guide[] = [
       "Identifiera aktivt vad som kan förstöra investeringstesen",
     ],
   },
+  {
+    slug: "de-viktigaste-nyckeltalen",
+    title: "De viktigaste nyckeltalen – så analyserar du en aktie som ett proffs",
+    description:
+      "Du behöver inte 50 nyckeltal för att analysera en aktie. Den här guiden visar de fem viktigaste – tillväxt, lönsamhet, värdering, skuld och kassaflöde – och hur de tillsammans ger en träffsäker bild av ett bolag.",
+    category: "Analys",
+    readTime: "8 min",
+    publishedDate: "2026-03-20",
+    sections: [
+      {
+        heading: "Den enkla modellen",
+        paragraphs: [
+          "Att analysera en aktie kan kännas överväldigande. Det finns hundratals nyckeltal – men sanningen är att du bara behöver förstå ett fåtal riktigt bra. En träffsäker analys bygger på fem frågor: Växer bolaget? Är det lönsamt? Är det billigt eller dyrt? Är det finansiellt stabilt? Och är vinsten faktiskt 'på riktigt'?",
+          "Den här guiden går igenom varje steg och de nyckeltal som hör till. Målet är att du snabbt ska kunna sålla bort svaga bolag och identifiera kvalitetsbolag – utan att drunkna i detaljer.",
+        ],
+      },
+      {
+        heading: "1. Tillväxt – motorn i aktien",
+        paragraphs: [
+          "Nyckeltal att titta på: omsättningstillväxt (3–5 år) och vinsttillväxt (5 år). Tillsammans visar de hur snabbt bolaget växer och om tillväxten är hållbar. Tumregler: 0–5% är låg tillväxt, 5–10% är stabilt, 10–20% är bra och 20%+ är hög tillväxt.",
+          "En viktig varningssignal är när vinsttillväxten är betydligt högre än omsättningstillväxten. Det kan indikera att kostnadsbesparingar driver vinsten snarare än verklig affärstillväxt – vilket är svårare att upprätthålla över tid. Starka bolag visar konsekvent tillväxt i båda måtten.",
+        ],
+      },
+      {
+        heading: "2. Lönsamhet – hur effektivt bolaget skapar värde",
+        paragraphs: [
+          "De viktigaste lönsamhetsmåtten är ROE (avkastning på eget kapital, helst som 7-årssnitt) och vinstmarginal (5-årssnitt). ROE visar hur effektivt bolaget använder kapital: 10% är okej, 15% är bra och 20%+ är mycket bra. Vinstmarginalen visar hur stor del av omsättningen som faktiskt blir vinst – ett bolag med 20% marginal är dubbelt så effektivt som ett med 10%.",
+          "Ett bolag med ROE på 22% och vinstmarginal på 18% är ett starkt kvalitetsbolag. Ett bolag med ROE på 8% och marginal på 5% har svårt att skapa värde för aktieägarna. Historiska snitt är avgörande – ett bolag med konsekvent hög lönsamhet under många år har sannolikt en konkurrensfördel som skyddar marginalerna.",
+        ],
+      },
+      {
+        heading: "3. Värdering – vad betalar du?",
+        paragraphs: [
+          "P/E-talet – pris i relation till vinst – är det vanligaste värderingsmåttet. Jämför alltid nuvarande P/E med bolagets eget 5-årssnitt för att se om aktien är dyrare eller billigare än normalt. Tumregler: 10–15 är billigt, 15–25 är normalt och 25+ är dyrt.",
+          "Den viktiga insikten är att ett högt P/E inte alltid är dåligt och ett lågt P/E inte alltid är billigt – det beror helt på tillväxten. Ett bolag med P/E 30 och 25% tillväxt kan vara rimligt värderat. Ett bolag med P/E 10 och nolltillväxt riskerar att vara en 'value trap' – billigt av en anledning. Värdera alltid P/E i kontext med tillväxttakt och lönsamhet.",
+        ],
+      },
+      {
+        heading: "4. Finansiell stabilitet – klarar bolaget en kris?",
+        paragraphs: [
+          "Nyckeltalet nettoskuld/EBIT visar hur många år det tar för bolaget att betala av sin skuld med rörelseresultatet. Under 1x är låg risk, 1–3x är normalt och över 3x börjar bli riskabelt. Ett bolag med nettoskuld/EBIT på 0,5x är väldigt tryggt. Ett bolag på 4x är känsligt för konjunkturnedgångar och räntehöjningar.",
+          "Skuldsättning är inte alltid negativt – det beror på verksamhetens stabilitet. En stabil kassaflödesgenererande verksamhet kan bära mer skuld än ett cykliskt bolag med ryckiga intäkter. Men högt belånade bolag i svåra tider kan tvingas till utspädande nyemissioner eller utdelningssänkningar – vilket är direkt negativt för aktieägare.",
+        ],
+      },
+      {
+        heading: "5. Kassaflöde – sanningen bakom vinsten",
+        paragraphs: [
+          "Kassaflöde är det nyckeltal som flest amatörinvesterare ignorerar – och det som professionella analytiker lägger störst vikt vid. Nyckeltalen är Free Cash Flow (FCF) och FCF i relation till vinsten (t.ex. FCF/EBIT). Vinst är en redovisningskonstruktion. Kassaflöde är riktiga pengar.",
+          "Ett bolag med 100 i vinst och 95 i FCF konverterar nästan hela vinsten till faktiska pengar – en stark kvalitetssignal. Ett bolag med 100 i vinst men bara 20 i FCF binder upp kapital i investeringar eller rörelsekapital, vilket gör vinsten illusorisk. Stabilt och växande kassaflöde är ett av de tydligaste tecknen på ett kvalitetsbolag.",
+        ],
+      },
+      {
+        heading: "Sätt ihop allt – en snabb checklista",
+        paragraphs: [
+          "Analysera systematiskt: börja med tillväxt (växer bolaget?), fortsätt med lönsamhet (är det ett kvalitetsbolag?), kolla värdering (betalar du ett rimligt pris?), kontrollera skuldsättning (klarar det en kris?) och avsluta med kassaflöde (är vinsten verklig?).",
+          "Ett starkt bolag har ofta: stabil tillväxt på 10%+, hög ROE på 15%+ med bra marginaler, rimlig värdering i linje med historiken, låg eller kontrollerad skuldsättning och stark FCF som speglar vinsten. Vanliga misstag att undvika: titta bara på P/E, ignorera skulder, fokusera på vinst utan att kolla kassaflöde, och inte jämföra historiskt.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Tillväxt driver aktien – sikta på stabil omsättningstillväxt på 10%+ och kontrollera att vinsttillväxten inte löper iväg från omsättningen",
+      "Lönsamhet skapar värde – ROE på 15%+ och konsekvent hög vinstmarginal indikerar ett kvalitetsbolag med konkurrensfördel",
+      "Värdering avgör din avkastning – analysera alltid P/E i kontext med tillväxt; ett högt P/E kan vara motiverat och ett lågt kan vara en fälla",
+      "Skuldsättning (nettoskuld/EBIT) under 3x ger finansiell stabilitet och motståndskraft i svåra tider",
+      "Kassaflöde avslöjar sanningen – FCF nära vinsten år efter år är ett av de starkaste tecknen på ett riktigt kvalitetsbolag",
+    ],
+  },
 ];
 
 export function getGuideBySlug(slug: string): Guide | undefined {
