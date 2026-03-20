@@ -186,7 +186,7 @@ export default function NovoNordiskAnalysis() {
             <MetricCard label="Direktavkastning" value="~1,5%" />
           </div>
           <p className="text-sm leading-relaxed text-[#2a2a2a] mb-4">
-            På 20x forward P/E handlas Novo med en tydlig rabatt mot historiska multiplar (30–40x på toppen). Det reflekterar nedreviderade tillväxtförväntningar och ökad konkurrensoro. För ett bolag med >45% rörelsemarginal, diversifierade kliniska bevis och strukturell marknadstillväxt framstår den nuvarande värderingen som rimlig — inte uppenbart billig, men heller inte dyr.
+            På 20x forward P/E handlas Novo med en tydlig rabatt mot historiska multiplar (30–40x på toppen). Det reflekterar nedreviderade tillväxtförväntningar och ökad konkurrensoro. För ett bolag med {'>'}45% rörelsemarginal, diversifierade kliniska bevis och strukturell marknadstillväxt framstår den nuvarande värderingen som rimlig — inte uppenbart billig, men heller inte dyr.
           </p>
           <AlertBox type="info">
             Bull-case förutsätter att Amycretin bekräftar sin tidiga effektprofil och att Ozempics CV/njur-indikation driver volymtillväxt utanför diabetes/fetma-segmentet.
@@ -207,7 +207,7 @@ export default function NovoNordiskAnalysis() {
             </div>
             <div className="border-l-4 border-[#00a651] pl-4">
               <h3 className="text-sm font-bold text-[#00a651] mb-1">Oral semaglutide och nästa generations läkemedel</h3>
-              <p className="text-sm text-[#2a2a2a]">Rybelsus (oral) förbättrar följsamhet. Amycretin (GLP-1/amylin) har visat lovande fas 2-data med >20% viktminskning och kan bli nästa plattform.</p>
+              <p className="text-sm text-[#2a2a2a]">Rybelsus (oral) förbättrar följsamhet. Amycretin (GLP-1/amylin) har visat lovande fas 2-data med {'>'}20% viktminskning och kan bli nästa plattform.</p>
             </div>
           </div>
         </section>
