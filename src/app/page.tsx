@@ -5,6 +5,7 @@ import { useState } from "react";
 import { analyses } from "@/lib/analyses";
 import { guides } from "@/lib/guides";
 import { verdictColor } from "@/lib/utils";
+import { openSearch } from "@/components/ui/SearchModal";
 
 const popularStocks = [
   { name: "NVIDIA", ticker: "NVDA", slug: "nvidia-fy2026" },
@@ -101,8 +102,8 @@ export default function Home() {
 
           {/* Search bar */}
           <div className="max-w-lg mx-auto mb-8">
-            <Link
-              href="/analyser"
+            <button
+              onClick={openSearch}
               className="flex items-center gap-3 w-full px-4 py-3 bg-white/10 hover:bg-white/20 border border-white/25 rounded-xl transition-colors text-left"
             >
               <svg className="w-5 h-5 text-white/60 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -112,7 +113,7 @@ export default function Home() {
               <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 bg-white/10 border border-white/20 rounded text-xs text-white/50 font-mono">
                 ⌘K
               </kbd>
-            </Link>
+            </button>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">

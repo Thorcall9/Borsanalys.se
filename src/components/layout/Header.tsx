@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
+import { openSearch } from "@/components/ui/SearchModal";
 // Vi hämtar din lista med analyser här
 import { analyses } from "@/lib/analyses";
 
@@ -110,22 +111,41 @@ export default function Header() {
               )}
             </nav>
 
-            {/* Mobile hamburger */}
+            {/* Search button (desktop) */}
             <button
-              className="md:hidden p-2"
-              onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label="Meny"
+              onClick={openSearch}
+              aria-label="Sök"
+              className="hidden md:flex items-center gap-2 px-3 py-1.5 text-sm text-foreground/60 hover:text-foreground bg-card border border-border hover:border-primary/30 rounded-lg transition-colors"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                {mobileOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                )}
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
               </svg>
+              <span>Sök</span>
+              <kbd className="text-xs font-mono text-foreground/40 border border-border rounded px-1">⌘K</kbd>
             </button>
+
+            {/* Mobile hamburger */}
+            <div className="md:hidden flex items-center gap-2">
+              <button onClick={openSearch} aria-label="Sök" className="p-2 text-foreground/60 hover:text-foreground">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                </svg>
+              </button>
+              <button
+                className="p-2"
+                onClick={() => setMobileOpen(!mobileOpen)}
+                aria-label="Meny"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  {mobileOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
+            </div>
           </div>
-        </div>
 
         {/* Mobile menu */}
         {mobileOpen && (
