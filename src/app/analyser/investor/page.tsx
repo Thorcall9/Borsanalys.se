@@ -31,13 +31,13 @@ const ACCENT = "#1a3c6e";
 
 // --- KONSTANTER ---
 const sections: AnalysisSection[] = [
-    { id: "overview",   number: "I",    title: "Oversikt" },
+    { id: "overview",   number: "I",    title: "Översikt" },
     { id: "moat",       number: "II",   title: "Strategisk Moat" },
     { id: "financials", number: "III",  title: "Finansiell analys" },
-    { id: "valuation",  number: "IV",   title: "Vardering" },
-    { id: "growth",     number: "V",    title: "Tillvaxtmotorer" },
+    { id: "valuation",  number: "IV",   title: "Värdering" },
+    { id: "growth",     number: "V",    title: "Tillväxtmotorer" },
     { id: "risk",       number: "VI",   title: "Riskprofil" },
-    { id: "esg",        number: "VII",  title: "ESG och Agande" },
+    { id: "esg",        number: "VII",  title: "ESG & Ägarskap" },
     { id: "portfolio",  number: "VIII", title: "Portföljanalys" },
     { id: "verdict",    number: "IX",   title: "Investeringsbeslut" },
     { id: "scenarios",  number: "X",    title: "Scenarier" },
@@ -211,12 +211,12 @@ export default function InvestorPage() {
       <div className="max-w-5xl mx-auto px-6 sm:px-12 pb-20">
         {/* SEKTION I */}
         <section id="overview" data-section="overview" className="mb-16 pt-12">
-          <SectionHeader number="I" title="Oversikt" />
+          <SectionHeader number="I" title="Översikt" />
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
             <MetricCard label="Aktiekurs (mar 2026)" value="352 kr" />
             <MetricCard label="Riktkurs (bascase)" value="370 kr" />
             <MetricCard label="NAV per aktie (dec 2025)" value="355 kr" />
-            <MetricCard label="Rekommendation" value="BEHALL" />
+            <MetricCard label="Rekommendation" value="BEHÅLL" />
           </div>
           <p className="text-sm leading-relaxed text-[#2a2a2a] mb-4">
             Investor AB, grundat av Wallenbergfamiljen 1916, är ett av Sveriges mest ikoniska investmentbolag. Med en portfölj av nu 24 världsledande bolag — däribland ABB, Atlas Copco, AstraZeneca, SEB och Saab — kombinerar Investor långsiktigt aktivt ägande med djup industriell kompetens. Affärsmodellen bygger inte på passiv kapitalförvaltning utan på genuint ägarengagemang via styrelserepresentation, finansiell styrka och ett unikt globalt Wallenberg-nätverk.
@@ -225,7 +225,7 @@ export default function InvestorPage() {
             Helåret 2025 var starkt: justerat NAV växte 14% till 1 087 miljarder kronor (355 kr per aktie) och den totala aktieägaravkastningen uppgick till 15% — klart bättre än SIXRX (13%). Fjärde kvartalet levererade ytterligare 6% NAV-tillväxt och 13% totalavkastning. Styrelsen föreslog en höjd utdelning om 5,60 kr per aktie. Trots det transformativa Nova Biomedical-förvärvet (2,2 mdr USD) hölls belåningsgraden på måttliga 2,1%.
           </p>
           <AlertBox type="info">
-            Investor handlas i mars 2026 med en minimal substansrabatt om bara 1-2% mot NAV 355 kr. Historiskt har rabatten legat på 10-20% — en klassisk fördel för Investor-investerare som nu nästan är borta. Vår rekommendation är BEHALL. Bolaget är exceptionellt, men värderingen ger begränsat utrymme för nyköp. Bästa ingångspunkten är vid substansrabatt om 10-15%, motsvarande en kurs kring 300-310 kr.
+            Investor handlas i mars 2026 med en minimal substansrabatt om bara 1-2% mot NAV 355 kr. Historiskt har rabatten legat på 10-20% — en klassisk fördel för Investor-investerare som nu nästan är borta. Vår rekommendation är BEHÅLL. Bolaget är exceptionellt, men värderingen ger begränsat utrymme för nyköp. Bästa ingångspunkten är vid substansrabatt om 10-15%, motsvarande en kurs kring 300-310 kr.
           </AlertBox>
         </section>
 
@@ -277,7 +277,7 @@ export default function InvestorPage() {
 
         {/* SEKTION IV */}
         <section id="valuation" data-section="valuation" className="mb-16">
-          <SectionHeader number="IV" title="Vardering" />
+          <SectionHeader number="IV" title="Värdering" />
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
             <MetricCard label="Aktiekurs (mar 2026)" value="352 kr" />
             <MetricCard label="NAV per aktie (dec 2025)" value="355 kr" />
@@ -318,7 +318,7 @@ export default function InvestorPage() {
 
         {/* SEKTION V */}
         <section id="growth" data-section="growth" className="mb-16">
-          <SectionHeader number="V" title="Tillvaxtmotorer" />
+          <SectionHeader number="V" title="Tillväxtmotorer" />
           <div className="space-y-4">
             <div className="border-l-4 border-[#1a3c6e] pl-4">
               <h3 className="text-sm font-bold text-[#1a3c6e] mb-1">Automatisering & Elektrifiering</h3>
@@ -347,7 +347,7 @@ export default function InvestorPage() {
 
         {/* SEKTION VII */}
         <section id="esg" data-section="esg" className="mb-16">
-          <SectionHeader number="VII" title="ESG och Agande" />
+          <SectionHeader number="VII" title="ESG & Ägarskap" />
           <p className="text-sm leading-relaxed text-[#2a2a2a] mb-4">
             Investor har en stark ESG-profil (Sustainalytics 11,87, låg risk) och har minskat CO2-utsläppen med 70% i portföljen sedan 2016. Ägarstrukturen med Wallenbergstiftelserna som kontrollerande ägare garanterar ett långsiktigt perspektiv.
           </p>
@@ -420,7 +420,7 @@ export default function InvestorPage() {
             Investor är ett av Stockholmsbörsens bästa långsiktiga innehav. Den 20-åriga historiken, Wallenbergmodellens ägarstyrka, och portföljens exponering mot strukturella megatrender gör bolaget till en naturlig kärnposition i en långsiktig portfölj.
           </p>
           <AlertBox type="signal">
-            <strong>Slutsats: BEHALL — Riktkurs 370 kr.</strong> Befintliga ägare bör behålla. Nya investerare bör avvakta en bättre ingångspunkt med en substansrabatt på 10-15%, motsvarande en kurs under 300-310 kr.
+            <strong>Slutsats: BEHÅLL — Riktkurs 370 kr.</strong> Befintliga ägare bör behålla. Nya investerare bör avvakta en bättre ingångspunkt med en substansrabatt på 10-15%, motsvarande en kurs under 300-310 kr.
           </AlertBox>
         </section>
 
