@@ -1,6 +1,7 @@
 export interface Analysis {
   slug: string;
   title: string;
+  ticker?: string;
   date: string;
   author: string;
   category: string;
@@ -14,6 +15,7 @@ export const analyses: Analysis[] = [
   {
     slug: "volvo-2026",
     title: "AB Volvo – Aktieanalys 2026 (FY2025)",
+    ticker: "VOLV B",
     date: "2026-03-14",
     author: "Carl Fredrik Thor",
     category: "Långsiktiga analyser",
@@ -26,6 +28,7 @@ export const analyses: Analysis[] = [
   {
     slug: "investor",
     title: "Investor AB – Aktieanalys 2026",
+    ticker: "INVE B",
     date: "2026-03-13",
     author: "Carl Fredrik Thor",
     category: "Långsiktiga analyser",
@@ -37,6 +40,7 @@ export const analyses: Analysis[] = [
   {
     slug: "alphabet",
     title: "Alphabet (GOOGL): AI-ledarskap och historiska milstolpar",
+    ticker: "GOOGL",
     date: "2026-03-12",
     author: "Carl Fredrik Thor",
     category: "Långsiktiga analyser",
@@ -48,6 +52,7 @@ export const analyses: Analysis[] = [
   {
     slug: "nvidia-fy2026",
     title: "NVIDIA FY2026 – Finansiell analys",
+    ticker: "NVDA",
     date: "2026-03-03",
     author: "Carl Fredrik Thor",
     category: "Långsiktiga analyser",
@@ -58,6 +63,7 @@ export const analyses: Analysis[] = [
   {
     slug: "microsoft-2026",
     title: "Microsoft 2026 – Är AI-giganten fortfarande köpvärd?",
+    ticker: "MSFT",
     date: "2026-03-02",
     author: "Carl Fredrik Thor",
     category: "Långsiktiga analyser",
@@ -69,6 +75,7 @@ export const analyses: Analysis[] = [
   {
     slug: "novo-nordisk-2025",
     title: "Novo Nordisk: Från hypertillväxt till hård konkurrens – vad hände nu?",
+    ticker: "NOVO B",
     date: "2025-10-20",
     author: "Carl Fredrik Thor",
     category: "Långsiktiga analyser",
@@ -79,6 +86,7 @@ export const analyses: Analysis[] = [
   {
     slug: "volvo-2025-q2",
     title: "Volvo – Premium Valuation Assessment 2025",
+    ticker: "VOLV B",
     date: "2025-10-07",
     author: "Carl Fredrik Thor",
     category: "Långsiktiga analyser",
@@ -87,6 +95,7 @@ export const analyses: Analysis[] = [
   {
     slug: "new-wave-2025",
     title: "New Wave Group – Strategy and Valuation 2025",
+    ticker: "NWG B",
     date: "2025-09-28",
     author: "Carl Fredrik Thor",
     category: "Långsiktiga analyser",
@@ -95,6 +104,7 @@ export const analyses: Analysis[] = [
   {
     slug: "freetrailer-2025",
     title: "Freetrailer – Growth Analysis 2025",
+    ticker: "FREETR",
     date: "2025-09-18",
     author: "Carl Fredrik Thor",
     category: "Långsiktiga analyser",
@@ -103,6 +113,7 @@ export const analyses: Analysis[] = [
   {
     slug: "evolution-2025",
     title: "Evolution – Market Position 2025",
+    ticker: "EVO",
     date: "2025-08-27",
     author: "Carl Fredrik Thor",
     category: "Långsiktiga analyser",
