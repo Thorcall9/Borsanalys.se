@@ -107,7 +107,7 @@ export default function NewWaveAnalysis() {
       vardering: 3,
       tillvaxtutsikter: 3,
       riskprofil: 3,
-      segmentanalys: 3,
+      aiObservationer: 3,
       esgMakro: 3,
     };
     const totaltPoang = Object.values(scores).reduce((sum, s) => sum + s, 0);

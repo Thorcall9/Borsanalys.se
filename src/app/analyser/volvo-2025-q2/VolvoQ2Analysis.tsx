@@ -107,7 +107,7 @@ export default function VolvoQ2Analysis() {
       vardering: 3,
       tillvaxtutsikter: 3,
       riskprofil: 3,
-      segmentanalys: 4,
+      aiObservationer: 4,
       esgMakro: 3,
     };
     const totaltPoang = Object.values(scores).reduce((sum, s) => sum + s, 0);

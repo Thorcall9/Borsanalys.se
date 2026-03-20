@@ -106,7 +106,7 @@ export default function FreetrailerAnalysis() {
       vardering: 2,
       tillvaxtutsikter: 4,
       riskprofil: 2,
-      marknadspotential: 4,
+      aiObservationer: 4,
       esgMakro: 4,
     };
     const totaltPoang = Object.values(scores).reduce((sum, s) => sum + s, 0);

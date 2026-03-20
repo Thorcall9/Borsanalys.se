@@ -108,7 +108,7 @@ export default function NovoNordiskAnalysis() {
       vardering: 3,
       tillvaxtutsikter: 3,
       riskprofil: 3,
-      pipeline: 3,
+      aiObservationer: 3,
       esgMakro: 4,
     };
     const totaltPoang = Object.values(scores).reduce((sum, s) => sum + s, 0);
