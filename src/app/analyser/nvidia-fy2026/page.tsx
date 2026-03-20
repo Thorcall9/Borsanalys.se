@@ -16,7 +16,6 @@ const initCharts = () => {
 const Chart = (window as any).Chart
 if (!Chart) return
 
-```
 const chartDefaults = {
   plugins: {
     legend: {
@@ -238,7 +237,6 @@ if (scenarioCanvas) {
     }
   })
 }
-```
 
 }
 
@@ -249,7 +247,6 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"
 onLoad={initCharts}
 />
 
-```
   <div style={{ background: '#0a0a0a', minHeight: '100vh', color: '#e8e8e8', fontFamily: 'system-ui, sans-serif', fontSize: '15px', lineHeight: '1.75' }}>
 
     {/* ── HERO ── */}
@@ -541,9 +538,7 @@ onLoad={initCharts}
 
   </div>
 </>
-```
-
-)
+  )
 }
 
 // ── HELPERS ──────────────────────────────────────────────
