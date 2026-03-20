@@ -116,6 +116,34 @@ export default async function GuideSida({
                 </section>
               ))}
             </div>
+
+            {/* Related guides */}
+            {allGuides.length > 0 && (
+              <div className="mt-16 pt-10 border-t border-border">
+                <h2 className="text-lg font-serif font-semibold mb-6">Fler guider</h2>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {allGuides.map((g) => (
+                    <Link
+                      key={g.slug}
+                      href={`/guider/${g.slug}`}
+                      className="group block bg-card border border-border rounded-xl p-4 hover:border-primary/40 transition-colors"
+                    >
+                      <span
+                        className={`text-xs font-medium px-2 py-0.5 rounded ${
+                          categoryColor[g.category] ?? "bg-card border border-border text-muted"
+                        }`}
+                      >
+                        {g.category}
+                      </span>
+                      <p className="mt-2 text-sm font-medium leading-snug group-hover:text-primary transition-colors">
+                        {g.title}
+                      </p>
+                      <p className="mt-1 text-xs text-muted">{g.readTime} läsning</p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
           </article>
 
           {/* Sidebar */}
