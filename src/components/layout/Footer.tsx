@@ -87,6 +87,7 @@ export default function Footer() {
             </div>
             <div className="space-y-1 text-sm">
               <Link href="/anvandarvillkor" className="block text-muted hover:text-primary transition-colors">Användarvillkor</Link>
+              <Link href="/integritetspolicy" className="block text-muted hover:text-primary transition-colors">Integritetspolicy</Link>
             </div>
           </div>
         </div>
