@@ -8,6 +8,8 @@ import { analyses } from "@/lib/analyses";
 const navItems = [
   { href: "/", label: "Hem" },
   { href: "/analyser", label: "Analyser" },
+  { href: "/aktier", label: "Aktier" },
+  { href: "/guider", label: "Guider" },
   {
     label: "Verktyg",
     children: [
