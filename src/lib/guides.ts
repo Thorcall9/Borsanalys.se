@@ -197,6 +197,59 @@ export const guides: Guide[] = [
     ],
   },
   {
+    slug: "vad-ar-direktavkastning",
+    title: "Vad är direktavkastning?",
+    description:
+      "Allt du behöver veta om direktavkastning och utdelningsaktier — hur du beräknar det, vad som är en bra nivå, och hur du bygger en portfölj med passiv inkomst.",
+    category: "Utdelning",
+    readTime: "6 min",
+    publishedDate: "2026-03-20",
+    sections: [
+      {
+        heading: "Vad är direktavkastning?",
+        paragraphs: [
+          "Direktavkastning (DA) är den procentuella avkastning du får i form av utdelning i förhållande till aktiekursen. Formeln är enkel: Direktavkastning = Utdelning per aktie ÷ Aktiekurs × 100.",
+          "Exempel: Om en aktie handlas till 200 kr och bolaget delar ut 8 kr per aktie är direktavkastningen 4%. Det innebär att du, utan hänsyn till kursutveckling, får 4% av din investering tillbaka varje år i form av kontant utdelning.",
+        ],
+      },
+      {
+        heading: "Vad är en bra direktavkastning?",
+        paragraphs: [
+          "Det beror på marknadsläge och bransch. Generellt anses 3–5% vara en attraktiv direktavkastning för ett stabilt bolag. Under 2% är lågt men kan vara motiverat om bolaget är i stark tillväxtfas. Över 7–8% är en varningssignal — marknaden kan prisa in att utdelningen snart sänks.",
+          "Jämför alltid mot tioåriga statsobligationer. Om obligationsräntan är 3% och aktien ger 4% direktavkastning är riskpremien relativt liten. Om räntan är 0,5% ger samma aktie ett mycket mer attraktivt alternativ.",
+        ],
+      },
+      {
+        heading: "Utdelningsandel (payout ratio)",
+        paragraphs: [
+          "Lika viktigt som direktavkastningen är utdelningsandelen — hur stor del av vinsten som delas ut. Formeln: Payout ratio = Utdelning per aktie ÷ Vinst per aktie × 100.",
+          "En utdelningsandel på 40–60% anses hållbar för de flesta bolag. Över 80% innebär att bolaget lämnar lite kvar för tillväxtinvesteringar, och utdelningen är sårbar om vinsten faller. Under 30% betyder att bolaget antingen prioriterar tillväxt eller bygger en kassa.",
+        ],
+      },
+      {
+        heading: "Utdelningstillväxt är viktigare än direktavkastning",
+        paragraphs: [
+          "En aktie med 2% direktavkastning som höjer utdelningen med 10% per år är ofta ett bättre val än en aktie med 6% direktavkastning men stagnerade utbetalningar. Om du håller aktien i 10 år kan yield-on-cost (din direktavkastning baserad på inköpspriset) för den förstnämnda vara betydligt högre.",
+          "Leta efter bolag med lång historik av utdelningshöjningar, starkt fritt kassaflöde och en hållbar payout ratio. I Sverige kallas sådana bolag ibland 'utdelningsaristokrater' — internationellt är Coca-Cola och Johnson & Johnson kända exempel.",
+        ],
+      },
+      {
+        heading: "Skatteaspekter på utdelning",
+        paragraphs: [
+          "I Sverige beskattas utdelning från börsnoterade aktier med 30% kapitalskatt om du äger dem i ett vanligt aktie- eller fondkonto. Inom ISK betalas en schablonintäkt istället, vilket vanligtvis är förmånligare om direktavkastningen är hög.",
+          "I en kapitalförsäkring (KF) beskattas utdelningen inte direkt — återigen via schablonintäkt på hela portföljens värde. Välj kontotyp utifrån din totala situation och förväntad direktavkastning.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Direktavkastning = utdelning per aktie ÷ aktiekurs × 100",
+      "3–5% är generellt attraktivt — över 8% kan vara en varningssignal",
+      "Kontrollera alltid payout ratio för att bedöma utdelningens hållbarhet",
+      "Utdelningstillväxt slår ofta hög men stagnerad direktavkastning",
+      "ISK eller KF är ofta skattemässigt fördelaktigt för utdelningsaktier",
+    ],
+  },
+  {
     slug: "hur-analyserar-man-en-aktie",
     title: "Hur analyserar man en aktie?",
     description:

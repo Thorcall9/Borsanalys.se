@@ -28,9 +28,10 @@ export async function generateMetadata({
 }
 
 const categoryColor: Record<string, string> = {
-  Värdering: "bg-blue-500/10 text-blue-400",
-  Analys: "bg-emerald-500/10 text-emerald-400",
-  Grundläggande: "bg-amber-500/10 text-amber-400",
+  Värdering: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
+  Analys: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
+  Utdelning: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
+  Grundläggande: "bg-violet-500/10 text-violet-600 dark:text-violet-400",
 };
 
 export default async function GuideSida({
