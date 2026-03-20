@@ -13,7 +13,7 @@ import {
 } from "@/components/analysis";
 import type { AnalysisSection, Scenario, TableRow } from "@/components/analysis";
 
-const ACCENT = "#002855";
+const ACCENT = "#1a3c6e";
 
 const sections: AnalysisSection[] = [
   { id: "overview",   number: "I",   title: "Översikt" },
@@ -197,12 +197,12 @@ export default function NovoNordiskAnalysis() {
         <section id="growth" data-section="growth" className="mb-16">
           <SectionHeader number="V" title="Tillväxtmotorer" />
           <div className="space-y-4">
-            <div className="border-l-4 border-[#002855] pl-4">
-              <h3 className="text-sm font-bold text-[#002855] mb-1">Fetmaepidemi — strukturell medvind</h3>
+            <div className="border-l-4 border-[#1a3c6e] pl-4">
+              <h3 className="text-sm font-bold text-[#1a3c6e] mb-1">Fetmaepidemi — strukturell medvind</h3>
               <p className="text-sm text-[#2a2a2a]">Penetrationsgraden för läkemedelsbehandling av fetma är fortfarande under 5% globalt. Marknaden förväntas växa till $100+ mdr till 2030. Novo är positionerat att ta en stor del av den tillväxten.</p>
             </div>
-            <div className="border-l-4 border-[#0066cc] pl-4">
-              <h3 className="text-sm font-bold text-[#0066cc] mb-1">Kardiovaskulär och njurindikation</h3>
+            <div className="border-l-4 border-[#b5892a] pl-4">
+              <h3 className="text-sm font-bold text-[#b5892a] mb-1">Kardiovaskulär och njurindikation</h3>
               <p className="text-sm text-[#2a2a2a]">SELECT-studien (CV-risk) och FLOW-studien (njurskydd) breddar patientunderlaget signifikant. Njurmedicin är ett relativt outforskat segment för GLP-1.</p>
             </div>
             <div className="border-l-4 border-[#00a651] pl-4">
@@ -227,7 +227,7 @@ export default function NovoNordiskAnalysis() {
           <div className="overflow-x-auto mb-6">
             <table className="w-full text-sm border-collapse">
               <thead>
-                <tr className="bg-[#002855] text-white">
+                <tr className="bg-[#1a3c6e] text-white">
                   <th className="text-left p-3 font-semibold">Läkemedel / Konkurrent</th>
                   <th className="text-right p-3 font-semibold">Mekanism</th>
                   <th className="text-right p-3 font-semibold">Status</th>
@@ -243,7 +243,7 @@ export default function NovoNordiskAnalysis() {
                   ["Orforglipron (Lilly)", "Oral GLP-1", "Fas 3", "Potentiell disruptor om godkänd"],
                   ["Retatrutid (Lilly)", "Triple agonist", "Fas 2", "Tidig men lovande viktminskningsdata"],
                 ].map(([drug, mech, status, comment], i) => (
-                  <tr key={i} className={i % 2 === 0 ? "bg-[#f0f4f8]" : "bg-white"}>
+                  <tr key={i} className={i % 2 === 0 ? "bg-[#f5f0e8]" : "bg-white"}>
                     <td className="p-3 font-medium">{drug}</td>
                     <td className="p-3 text-right text-[#4a4a4a]">{mech}</td>
                     <td className="p-3 text-right">{status}</td>
@@ -274,11 +274,11 @@ export default function NovoNordiskAnalysis() {
             <div className="space-y-2">
               <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
                 <span className="text-sm font-bold">Total poäng:</span>
-                <span className="text-xl font-bold font-serif text-[#002855]">{analysisData.totaltPoang} / {analysisData.maxPoang}</span>
+                <span className="text-xl font-bold font-serif text-[#1a3c6e]">{analysisData.totaltPoang} / {analysisData.maxPoang}</span>
               </div>
               <div className="flex justify-between items-center py-2 border-b border-[#e8e4da] mb-3">
                 <span className="text-sm font-bold">Viktat betyg:</span>
-                <span className="text-xl font-bold font-serif text-[#002855]">{analysisData.rating.toFixed(1)} / 5.0</span>
+                <span className="text-xl font-bold font-serif text-[#1a3c6e]">{analysisData.rating.toFixed(1)} / 5.0</span>
               </div>
             </div>
           </div>

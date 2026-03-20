@@ -1,7 +1,7 @@
-‘use client’
+'use client'
 
-import { useEffect } from ‘react’
-import Script from ‘next/script’
+import { useEffect } from 'react'
+import Script from 'next/script'
 
 export default function NvidiaAnalysis() {
 useEffect(() => {
@@ -16,7 +16,6 @@ const initCharts = () => {
 const Chart = (window as any).Chart
 if (!Chart) return
 
-```
 const chartDefaults = {
   plugins: {
     legend: {
@@ -238,7 +237,6 @@ if (scenarioCanvas) {
     }
   })
 }
-```
 
 }
 
@@ -249,7 +247,6 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"
 onLoad={initCharts}
 />
 
-```
   <div style={{ background: '#0a0a0a', minHeight: '100vh', color: '#e8e8e8', fontFamily: 'system-ui, sans-serif', fontSize: '15px', lineHeight: '1.75' }}>
 
     {/* ── HERO ── */}
@@ -541,22 +538,20 @@ onLoad={initCharts}
 
   </div>
 </>
-```
-
-)
+  )
 }
 
 // ── HELPERS ──────────────────────────────────────────────
 
-const pStyle: React.CSSProperties = { marginBottom: ‘14px’, color: ‘#d0d0d0’ }
+const pStyle: React.CSSProperties = { marginBottom: '14px', color: '#d0d0d0' }
 
 function Section({ num, title, score, children }: { num: string; title: string; score: string; children: React.ReactNode }) {
 return (
-<div style={{ marginTop: ‘56px’, paddingTop: ‘40px’, borderTop: ‘1px solid rgba(255,255,255,0.06)’ }}>
-<div style={{ display: ‘flex’, alignItems: ‘baseline’, gap: ‘16px’, marginBottom: ‘28px’, flexWrap: ‘wrap’ }}>
-<span style={{ fontSize: ‘11px’, letterSpacing: ‘2px’, textTransform: ‘uppercase’, color: ‘#76b900’, minWidth: ‘28px’ }}>{num}</span>
-<span style={{ fontSize: ‘22px’, fontWeight: 700, color: ‘#fff’ }}>{title}</span>
-{score && <span style={{ marginLeft: ‘auto’, background: ‘rgba(118,185,0,0.1)’, border: ‘1px solid rgba(118,185,0,0.2)’, borderRadius: ‘6px’, padding: ‘4px 12px’, fontSize: ‘13px’, fontWeight: 700, color: ‘#76b900’, whiteSpace: ‘nowrap’ }}>{score}</span>}
+<div style={{ marginTop: '56px', paddingTop: '40px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+<div style={{ display: 'flex', alignItems: 'baseline', gap: '16px', marginBottom: '28px', flexWrap: 'wrap' }}>
+<span style={{ fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase', color: '#76b900', minWidth: '28px' }}>{num}</span>
+<span style={{ fontSize: '22px', fontWeight: 700, color: '#fff' }}>{title}</span>
+{score && <span style={{ marginLeft: 'auto', background: 'rgba(118,185,0,0.1)', border: '1px solid rgba(118,185,0,0.2)', borderRadius: '6px', padding: '4px 12px', fontSize: '13px', fontWeight: 700, color: '#76b900', whiteSpace: 'nowrap' }}>{score}</span>}
 </div>
 {children}
 </div>
@@ -564,21 +559,21 @@ return (
 }
 
 function SectionH3({ children }: { children: React.ReactNode }) {
-return <h3 style={{ fontSize: ‘16px’, fontWeight: 700, color: ‘#fff’, margin: ‘24px 0 10px’ }}>{children}</h3>
+return <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#fff', margin: '24px 0 10px' }}>{children}</h3>
 }
 
 function TwoCol({ children }: { children: React.ReactNode }) {
-return <div style={{ display: ‘grid’, gridTemplateColumns: ‘repeat(auto-fit,minmax(220px,1fr))’, gap: ‘16px’, margin: ‘20px 0’ }}>{children}</div>
+return <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: '16px', margin: '20px 0' }}>{children}</div>
 }
 
 function InfoBlock({ title, items }: { title: string; items: string[] }) {
 return (
-<div style={{ background: ‘#1a1a1a’, border: ‘1px solid rgba(255,255,255,0.07)’, borderRadius: ‘10px’, padding: ‘18px 20px’ }}>
-<div style={{ fontSize: ‘11px’, letterSpacing: ‘1.5px’, textTransform: ‘uppercase’, color: ‘#76b900’, marginBottom: ‘10px’ }}>{title}</div>
-<ul style={{ listStyle: ‘none’ }}>
+<div style={{ background: '#1a1a1a', border: '1px solid rgba(255,255,255,0.07)', borderRadius: '10px', padding: '18px 20px' }}>
+<div style={{ fontSize: '11px', letterSpacing: '1.5px', textTransform: 'uppercase', color: '#76b900', marginBottom: '10px' }}>{title}</div>
+<ul style={{ listStyle: 'none' }}>
 {items.map(item => (
-<li key={item} style={{ fontSize: ‘13.5px’, color: ‘#bbb’, padding: ‘4px 0’, borderBottom: ‘1px solid rgba(255,255,255,0.04)’ }}>
-<span style={{ color: ‘#76b900’, marginRight: ‘8px’, fontSize: ‘12px’ }}>→</span>{item}
+<li key={item} style={{ fontSize: '13.5px', color: '#bbb', padding: '4px 0', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
+<span style={{ color: '#76b900', marginRight: '8px', fontSize: '12px' }}>→</span>{item}
 </li>
 ))}
 </ul>
@@ -586,10 +581,10 @@ return (
 )
 }
 
-function Callout({ children, variant = ‘default’ }: { children: React.ReactNode; variant?: ‘default’ | ‘warn’ | ‘risk’ }) {
-const colors = { default: ‘#76b900’, warn: ‘#f5c842’, risk: ‘#e05252’ }
+function Callout({ children, variant = 'default' }: { children: React.ReactNode; variant?: 'default' | 'warn' | 'risk' }) {
+const colors = { default: '#76b900', warn: '#f5c842', risk: '#e05252' }
 return (
-<div style={{ background: ‘#1a1a1a’, borderLeft: `3px solid ${colors[variant]}`, borderRadius: ‘0 8px 8px 0’, padding: ‘16px 20px’, margin: ‘20px 0’, fontSize: ‘14px’, color: ‘#ccc’ }}>
+<div style={{ background: '#1a1a1a', borderLeft: `3px solid ${colors[variant]}`, borderRadius: '0 8px 8px 0', padding: '16px 20px', margin: '20px 0', fontSize: '14px', color: '#ccc' }}>
 {children}
 </div>
 )
@@ -597,8 +592,8 @@ return (
 
 function ChartWrap({ title, children }: { title: string; children: React.ReactNode }) {
 return (
-<div style={{ background: ‘#1a1a1a’, border: ‘1px solid rgba(255,255,255,0.07)’, borderRadius: ‘12px’, padding: ‘24px’, margin: ‘24px 0’ }}>
-<div style={{ fontSize: ‘12px’, fontWeight: 700, color: ‘#888’, letterSpacing: ‘1px’, textTransform: ‘uppercase’, marginBottom: ‘16px’ }}>{title}</div>
+<div style={{ background: '#1a1a1a', border: '1px solid rgba(255,255,255,0.07)', borderRadius: '12px', padding: '24px', margin: '24px 0' }}>
+<div style={{ fontSize: '12px', fontWeight: 700, color: '#888', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '16px' }}>{title}</div>
 {children}
 </div>
 )
@@ -606,21 +601,21 @@ return (
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
 return (
-<div style={{ overflowX: ‘auto’, margin: ‘20px 0’ }}>
-<table style={{ width: ‘100%’, borderCollapse: ‘collapse’, fontSize: ‘13.5px’ }}>
+<div style={{ overflowX: 'auto', margin: '20px 0' }}>
+<table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13.5px' }}>
 <thead>
 <tr>
 {headers.map(h => (
-<th key={h} style={{ textAlign: ‘left’, padding: ‘10px 14px’, background: ‘#1a1a1a’, color: ‘#888’, fontSize: ‘11px’, letterSpacing: ‘1px’, textTransform: ‘uppercase’, borderBottom: ‘1px solid rgba(118,185,0,0.2)’, fontWeight: 500 }}>{h}</th>
+<th key={h} style={{ textAlign: 'left', padding: '10px 14px', background: '#1a1a1a', color: '#888', fontSize: '11px', letterSpacing: '1px', textTransform: 'uppercase', borderBottom: '1px solid rgba(118,185,0,0.2)', fontWeight: 500 }}>{h}</th>
 ))}
 </tr>
 </thead>
 <tbody>
 {rows.map((row, i) => (
-<tr key={i} style={{ borderBottom: ‘1px solid rgba(255,255,255,0.04)’ }}>
+<tr key={i} style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
 {row.map((cell, j) => (
-<td key={j} style={{ padding: ‘10px 14px’, color: cell.includes(‘✦’) ? ‘#76b900’ : ‘#ccc’, fontWeight: cell.includes(‘✦’) ? 600 : 400 }}>
-{cell.replace(’ ✦’, ‘’)}
+<td key={j} style={{ padding: '10px 14px', color: cell.includes('✦') ? '#76b900' : '#ccc', fontWeight: cell.includes('✦') ? 600 : 400 }}>
+{cell.replace(' ✦', '')}
 </td>
 ))}
 </tr>
@@ -633,18 +628,18 @@ return (
 
 function SwotGrid() {
 const items = [
-{ cls: ‘s’, label: ‘Styrkor’, color: ‘#76b900’, bg: ‘rgba(118,185,0,0.08)’, border: ‘rgba(118,185,0,0.2)’, points: [‘Dominerande marknadsandel i AI-GPU:er’, ‘CUDA-monopol i praktiken’, ‘Exceptionell lönsamhet (55%+ nettomarginal)’, ‘Starka partnerskap med hyperscalers’, ‘Visionär VD med lång track record’] },
-{ cls: ‘w’, label: ‘Svagheter’, color: ‘#e05252’, bg: ‘rgba(224,82,82,0.06)’, border: ‘rgba(224,82,82,0.18)’, points: [‘Extremt beroende av TSMC’, ‘Stark koncentration till Data Center (~90%)’, ‘Hög kundkoncentration (topp 2 = 39%)’, ‘H20-incident visade sårbarhet’] },
-{ cls: ‘o’, label: ‘Möjligheter’, color: ‘#52a8e0’, bg: ‘rgba(82,168,224,0.06)’, border: ‘rgba(82,168,224,0.18)’, points: [‘Agentic AI – ny stor marknad’, ‘Fysisk AI & robotik’, ‘Autonoma fordon’, ‘Läkemedelsupptäckt via AI’, ‘Sovereign AI – länders egna AI-fabriker’] },
-{ cls: ‘t’, label: ‘Hot’, color: ‘#f5c842’, bg: ‘rgba(245,200,66,0.06)’, border: ‘rgba(245,200,66,0.18)’, points: [‘AMD, Intel och egentillverkade chip’, ‘Kinesiska konkurrenter (Huawei Ascend)’, ‘Ökande exportrestriktioner’, ‘Open-source AI kan minska beräkningsbehov’, ‘Kunder bygger egna chip’] },
+{ cls: 's', label: 'Styrkor', color: '#76b900', bg: 'rgba(118,185,0,0.08)', border: 'rgba(118,185,0,0.2)', points: ['Dominerande marknadsandel i AI-GPU:er', 'CUDA-monopol i praktiken', 'Exceptionell lönsamhet (55%+ nettomarginal)', 'Starka partnerskap med hyperscalers', 'Visionär VD med lång track record'] },
+{ cls: 'w', label: 'Svagheter', color: '#e05252', bg: 'rgba(224,82,82,0.06)', border: 'rgba(224,82,82,0.18)', points: ['Extremt beroende av TSMC', 'Stark koncentration till Data Center (~90%)', 'Hög kundkoncentration (topp 2 = 39%)', 'H20-incident visade sårbarhet'] },
+{ cls: 'o', label: 'Möjligheter', color: '#52a8e0', bg: 'rgba(82,168,224,0.06)', border: 'rgba(82,168,224,0.18)', points: ['Agentic AI – ny stor marknad', 'Fysisk AI & robotik', 'Autonoma fordon', 'Läkemedelsupptäckt via AI', 'Sovereign AI – länders egna AI-fabriker'] },
+{ cls: 't', label: 'Hot', color: '#f5c842', bg: 'rgba(245,200,66,0.06)', border: 'rgba(245,200,66,0.18)', points: ['AMD, Intel och egentillverkade chip', 'Kinesiska konkurrenter (Huawei Ascend)', 'Ökande exportrestriktioner', 'Open-source AI kan minska beräkningsbehov', 'Kunder bygger egna chip'] },
 ]
 return (
-<div style={{ display: ‘grid’, gridTemplateColumns: ‘repeat(auto-fit,minmax(220px,1fr))’, gap: ‘12px’, margin: ‘20px 0’ }}>
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: '12px', margin: '20px 0' }}>
 {items.map(item => (
-<div key={item.cls} style={{ background: item.bg, border: `1px solid ${item.border}`, borderRadius: ‘10px’, padding: ‘18px 20px’ }}>
-<div style={{ fontSize: ‘11px’, letterSpacing: ‘2px’, textTransform: ‘uppercase’, fontWeight: 700, color: item.color, marginBottom: ‘10px’ }}>{item.label}</div>
-<ul style={{ listStyle: ‘none’ }}>
-{item.points.map(p => <li key={p} style={{ fontSize: ‘13px’, padding: ‘3px 0’, color: ‘#bbb’ }}>• {p}</li>)}
+<div key={item.cls} style={{ background: item.bg, border: `1px solid ${item.border}`, borderRadius: '10px', padding: '18px 20px' }}>
+<div style={{ fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase', fontWeight: 700, color: item.color, marginBottom: '10px' }}>{item.label}</div>
+<ul style={{ listStyle: 'none' }}>
+{item.points.map(p => <li key={p} style={{ fontSize: '13px', padding: '3px 0', color: '#bbb' }}>• {p}</li>)}
 </ul>
 </div>
 ))}
@@ -652,18 +647,18 @@ return (
 )
 }
 
-function ScenarioBlock({ variant, label, price, children }: { variant: ‘bull’ | ‘base’ | ‘bear’; label: string; price: string; children: React.ReactNode }) {
+function ScenarioBlock({ variant, label, price, children }: { variant: 'bull' | 'base' | 'bear'; label: string; price: string; children: React.ReactNode }) {
 const styles = {
-bull: { bg: ‘rgba(118,185,0,0.07)’, border: ‘rgba(118,185,0,0.2)’, color: ‘#76b900’ },
-base: { bg: ‘rgba(82,168,224,0.06)’, border: ‘rgba(82,168,224,0.18)’, color: ‘#52a8e0’ },
-bear: { bg: ‘rgba(224,82,82,0.06)’, border: ‘rgba(224,82,82,0.18)’, color: ‘#e05252’ },
+bull: { bg: 'rgba(118,185,0,0.07)', border: 'rgba(118,185,0,0.2)', color: '#76b900' },
+base: { bg: 'rgba(82,168,224,0.06)', border: 'rgba(82,168,224,0.18)', color: '#52a8e0' },
+bear: { bg: 'rgba(224,82,82,0.06)', border: 'rgba(224,82,82,0.18)', color: '#e05252' },
 }
 const s = styles[variant]
 return (
-<div style={{ background: s.bg, border: `1px solid ${s.border}`, borderRadius: ‘10px’, padding: ‘20px’ }}>
-<div style={{ fontSize: ‘11px’, letterSpacing: ‘2px’, textTransform: ‘uppercase’, fontWeight: 700, color: s.color, marginBottom: ‘8px’ }}>{label}</div>
-<div style={{ fontSize: ‘26px’, fontWeight: 800, color: ‘#fff’, marginBottom: ‘4px’ }}>{price}</div>
-<p style={{ fontSize: ‘13px’, color: ‘#aaa’, marginTop: ‘10px’ }}>{children}</p>
+<div style={{ background: s.bg, border: `1px solid ${s.border}`, borderRadius: '10px', padding: '20px' }}>
+<div style={{ fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase', fontWeight: 700, color: s.color, marginBottom: '8px' }}>{label}</div>
+<div style={{ fontSize: '26px', fontWeight: 800, color: '#fff', marginBottom: '4px' }}>{price}</div>
+<p style={{ fontSize: '13px', color: '#aaa', marginTop: '10px' }}>{children}</p>
 </div>
 )
 }

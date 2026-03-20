@@ -13,7 +13,7 @@ import {
 } from "@/components/analysis";
 import type { AnalysisSection, Scenario, TableRow } from "@/components/analysis";
 
-const ACCENT = "#e67e22";
+const ACCENT = "#1a3c6e";
 
 const sections: AnalysisSection[] = [
   { id: "overview",   number: "I",   title: "Översikt" },
@@ -189,16 +189,16 @@ export default function FreetrailerAnalysis() {
         <section id="growth" data-section="growth" className="mb-16">
           <SectionHeader number="V" title="Tillväxtmotorer" />
           <div className="space-y-4">
-            <div className="border-l-4 border-[#e67e22] pl-4">
-              <h3 className="text-sm font-bold text-[#e67e22] mb-1">Tyskt marknadsöppnande</h3>
+            <div className="border-l-4 border-[#1a3c6e] pl-4">
+              <h3 className="text-sm font-bold text-[#1a3c6e] mb-1">Tyskt marknadsöppnande</h3>
               <p className="text-sm text-[#2a2a2a]">Tyskland har 4× Nordens befolkning och en etablerad IKEA/Bauhaus-kultur. En lyckad tysketablering är den enskilt viktigaste värdedrivaren i aktien.</p>
             </div>
-            <div className="border-l-4 border-[#d35400] pl-4">
-              <h3 className="text-sm font-bold text-[#d35400] mb-1">Digitala annonsformat</h3>
+            <div className="border-l-4 border-[#b5892a] pl-4">
+              <h3 className="text-sm font-bold text-[#b5892a] mb-1">Digitala annonsformat</h3>
               <p className="text-sm text-[#2a2a2a]">Digitala skärmar och QR-koder på trailers möjliggör riktad annonsering och mätbarhet — det höjer annons-CPM och attraherar fler varumärken.</p>
             </div>
-            <div className="border-l-4 border-[#f39c12] pl-4">
-              <h3 className="text-sm font-bold text-[#f39c12] mb-1">Fler partnerkedjor</h3>
+            <div className="border-l-4 border-[#1a3c6e] pl-4">
+              <h3 className="text-sm font-bold text-[#1a3c6e] mb-1">Fler partnerkedjor</h3>
               <p className="text-sm text-[#2a2a2a]">Sportkedja, elektronikhandel och möbelhandel är naturliga nästa steg. Varje ny kedja adderar trailer-punkter och uthyrnings­volym.</p>
             </div>
           </div>
@@ -214,16 +214,16 @@ export default function FreetrailerAnalysis() {
         <section id="markets" data-section="markets" className="mb-16">
           <SectionHeader number="VII" title="Marknader" />
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="bg-[#fef5e7] border border-[#fad7a0] rounded-xl p-4">
-              <h3 className="text-xs font-bold text-[#e67e22] uppercase tracking-widest mb-2">Norden (mogen)</h3>
+            <div className="bg-[#f5f0e8] border border-[#e0d5c0] rounded-xl p-4">
+              <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mb-2">Norden (mogen)</h3>
               <p className="text-sm text-[#2a2a2a]">Sverige, Danmark, Norge, Finland. Etablerade partnerskapen med IKEA och Bauhaus. Stabil intäktsbas, begränsad marginalexpansion.</p>
             </div>
-            <div className="bg-[#fef5e7] border border-[#fad7a0] rounded-xl p-4">
-              <h3 className="text-xs font-bold text-[#e67e22] uppercase tracking-widest mb-2">DACH (expansion)</h3>
+            <div className="bg-[#f5f0e8] border border-[#e0d5c0] rounded-xl p-4">
+              <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mb-2">DACH (expansion)</h3>
               <p className="text-sm text-[#2a2a2a]">Primärt Tyskland. Testfas pågår 2025. Avgörande för aktiens långsiktiga potential. Tidslinje: full utrullning 2026-2027.</p>
             </div>
-            <div className="bg-[#fef5e7] border border-[#fad7a0] rounded-xl p-4">
-              <h3 className="text-xs font-bold text-[#e67e22] uppercase tracking-widest mb-2">Övrig Europa (framtid)</h3>
+            <div className="bg-[#f5f0e8] border border-[#e0d5c0] rounded-xl p-4">
+              <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mb-2">Övrig Europa (framtid)</h3>
               <p className="text-sm text-[#2a2a2a]">Benelux, Polen och övriga Centraleuropa är potentiella marknaderna bortom DACH. Längre tidslinje, beroende av kapitaltillgång.</p>
             </div>
           </div>
@@ -245,11 +245,12 @@ export default function FreetrailerAnalysis() {
             <div className="space-y-2">
               <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
                 <span className="text-sm font-bold">Total poäng:</span>
-                <span className="text-xl font-bold font-serif text-[#e67e22]">{analysisData.totaltPoang} / {analysisData.maxPoang}</span>
+                <span className="text-xl font-bold font-serif text-[#1a3c6e]">{analysisData.totaltPoang} / {analysisData.maxPoang}</span>
               </div>
               <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
                 <span className="text-sm font-bold">Viktat betyg:</span>
-                <span className="text-xl font-bold font-serif text-[#e67e22]">{analysisData.rating.toFixed(1)} / 5.0</span>
+                <span className="text-xl font-bold font-serif text-[#1a3c6e]">{analysisData.rating.toFixed(1)} / 5.0</span>
+
               </div>
             </div>
           </div>
