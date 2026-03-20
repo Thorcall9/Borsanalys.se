@@ -14,7 +14,7 @@ import {
 } from '@/components/analysis';
 import type { AnalysisSection, Scenario, TableColumn, TableRow } from '@/components/analysis';
 
-const ACCENT = '#76B900'; // NVIDIA Green
+const ACCENT = '#1a3c6e';
 
 const sections: AnalysisSection[] = [
   { id: 'overview', number: 'I', title: 'Översikt' },
@@ -117,18 +117,18 @@ export default function NvidiaAnalysisPage() {
       dataSources="Data: FY2024–FY2027e, CFO Commentaries Q1-Q3 FY2026"
       sections={sections}
       accentColor={ACCENT}
-      theme="dark"
+      theme="light"
     >
       {/* Header */}
       <div className="bg-[#0f0f0f] text-[#faf8f3] px-6 sm:px-12 py-10">
-        <div className="text-[10px] tracking-[.15em] text-[#76B900] uppercase mb-1">AKTIEANALYS</div>
+        <div className="text-[10px] tracking-[.15em] text-[#b5892a] uppercase mb-1">AKTIEANALYS</div>
         <div className="flex flex-wrap items-end justify-between gap-4 mb-4">
           <div>
             <h1 className="font-serif text-3xl sm:text-4xl font-bold">NVIDIA Corporation</h1>
             <div className="text-sm text-[#a0a090] mt-1">NASDAQ: NVDA · S&P 500</div>
           </div>
           <div className="text-right">
-            <div className="font-serif text-3xl font-bold text-[#76B900]">$182</div>
+            <div className="font-serif text-3xl font-bold text-[#b5892a]">$182</div>
             <div className="text-[11px] text-[#a0a090]">3 mars 2026</div>
             <span className="inline-block mt-1.5 bg-[#1a4a1a] text-[#80d080] text-[11px] font-bold px-2.5 py-0.5 rounded-sm tracking-wide">
               ▲ KÖP
@@ -143,7 +143,7 @@ export default function NvidiaAnalysisPage() {
             { label: 'Nettomarginal', value: '55,6%' },
             { label: 'Riktkurs', value: '$230' },
           ].map((kpi) => (
-            <div key={kpi.label} className="border-l-2 border-[#76B900] pl-2.5">
+            <div key={kpi.label} className="border-l-2 border-[#b5892a] pl-2.5">
               <div className="text-[9px] text-[#808070] uppercase tracking-wide">{kpi.label}</div>
               <div className="font-serif text-base font-bold">{kpi.value}</div>
             </div>
@@ -151,7 +151,7 @@ export default function NvidiaAnalysisPage() {
         </div>
       </div>
 
-      <div className="px-6 sm:px-12 pb-20 bg-[#0f0f0f] text-[#faf8f3]">
+      <div className="px-6 sm:px-12 pb-20 bg-[#faf8f3] text-[#0f0f0f]">
         {/* I. Overview */}
         <div data-section="overview" id="overview" className="pt-14">
           <SectionHeader number="I" title="Översikt" accentColor={ACCENT} />
@@ -163,16 +163,16 @@ export default function NvidiaAnalysisPage() {
             <MetricCard label="ROE" value="101%" />
           </div>
 
-          <h3 className="text-xs font-bold text-[#76B900] uppercase tracking-widest mt-5 mb-2 pl-2 border-l-[3px] border-[#76B900]">Affärsidé & Modell</h3>
-          <p className="text-sm leading-relaxed text-[#b0b0b0] mb-4">
+          <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mt-5 mb-2 pl-2 border-l-[3px] border-[#b5892a]">Affärsidé & Modell</h3>
+          <p className="text-sm leading-relaxed text-[#2a2a2a] mb-4">
             NVIDIA designar och levererar accelererad beräkning (GPU/AI-chip), systemprogramvara (CUDA) och nätverkslösningar (NVLink, InfiniBand) för datacenters, gaming och autonoma fordon. Intäktsmodellen bygger på tre ben: (1) Hårdvaruförsäljning (system som HGX, DGX, GB200), (2) Mjukvaruplattformen CUDA som skapar en extremt stark inlåsningseffekt, och (3) Tjänster via DGX Cloud. Fabless-modellen, där tillverkning outsourcas till TSMC, ger extremt hög kapitaleffektivitet (ROIC &gt;90%).
           </p>
 
-          <h3 className="text-xs font-bold text-[#76B900] uppercase tracking-widest mt-5 mb-2 pl-2 border-l-[3px] border-[#76B900]">Ledning & Ägarstruktur</h3>
-          <p className="text-sm leading-relaxed text-[#b0b0b0] mb-2">
+          <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mt-5 mb-2 pl-2 border-l-[3px] border-[#b5892a]">Ledning & Ägarstruktur</h3>
+          <p className="text-sm leading-relaxed text-[#2a2a2a] mb-2">
             <strong>Jensen Huang (VD & Medgrundare):</strong> Grundade NVIDIA 1993. En av tech-branschens mest framgångsrika visionärer. Hans beslut att satsa på CUDA (2006) och AI-acceleratorer (2012+) är fundamentet till dagens dominans. Insynsägandet ligger på 3,79%.
           </p>
-          <p className="text-sm leading-relaxed text-[#b0b0b0] mb-4">
+          <p className="text-sm leading-relaxed text-[#2a2a2a] mb-4">
             <strong>Colette Kress (CFO):</strong> Erfaren teknisk CFO med gedigen track record inom finansiell kommunikation och kapitalallokering.
           </p>
           <RatingBox rating={5}><strong>5/5</strong> — Affärsmodellen är exceptionellt uthållig tack vare CUDA-ekosystemets inlåsning, fabless-modellens kapitaleffektivitet och Jensens visionära ledarskap, som är branschens starkaste.</RatingBox>
@@ -181,8 +181,8 @@ export default function NvidiaAnalysisPage() {
         {/* II. Moat */}
         <div data-section="moat" id="moat" className="pt-14">
           <SectionHeader number="II" title="Strategisk Moat" accentColor={ACCENT} />
-          <h3 className="text-xs font-bold text-[#76B900] uppercase tracking-widest mt-5 mb-2 pl-2 border-l-[3px] border-[#76B900]">Konkurrensfördelar</h3>
-           <ul className="text-sm text-[#b0b0b0] space-y-2 mb-4 list-disc list-inside">
+          <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mt-5 mb-2 pl-2 border-l-[3px] border-[#b5892a]">Konkurrensfördelar</h3>
+           <ul className="text-sm text-[#2a2a2a] space-y-2 mb-4 list-disc list-inside">
               <li><strong>CUDA-ekosystem:</strong> 20+ år av programvara, bibliotek och verktyg. Miljontals tränade ingenjörer. Närmast omöjligt att replikera på kort sikt.</li>
               <li><strong>Full-stack-strategi:</strong> Chip (Blackwell) + Interconnect (NVLink/InfiniBand) + System (DGX/HGX) + Mjukvara (CUDA) + Moln (DGX Cloud). Konkurrenter levererar delar, NVIDIA levererar hela stacken.</li>
               <li><strong>Nätverkseffekter:</strong> Fler modeller tränas på CUDA → fler verktyg utvecklas → fler ingenjörer lär sig plattformen → fler kunder väljer NVIDIA. En självförstärkande loop.</li>
@@ -236,7 +236,7 @@ export default function NvidiaAnalysisPage() {
               { cells: { metric: { value: 'P/S' }, fy2025: { value: '21,3x' }, current: { value: '20,7x' }, e2026: { value: '-' }, e2027: { value: '-' } } },
             ]}
           />
-          <p className="text-sm leading-relaxed text-[#b0b0b0] mt-3 mb-4">
+          <p className="text-sm leading-relaxed text-[#2a2a2a] mt-3 mb-4">
             NVIDIAs PEG-tal (P/E / EPS-tillväxt) är en nyckelindikator. Med ett P/E på 22x för 2026e och en EPS-tillväxt på +67% blir PEG-talet <strong>~0.33</strong>, vilket är extremt attraktivt och indikerar att aktien kan vara undervärderad trots den höga absoluta multipeln, om tillväxten håller i sig.
           </p>
           <AlertBox type="info">
@@ -253,7 +253,7 @@ export default function NvidiaAnalysisPage() {
             <MetricCard label="Networking (Q3 FY26)" value="$8,2B" trend="+162% YoY" />
             <MetricCard label="Automotive (Q1 FY26)" value="+72% YoY" trend="Ny tillväxtmotor" />
           </div>
-          <p className="text-sm leading-relaxed text-[#b0b0b0] mb-4">
+          <p className="text-sm leading-relaxed text-[#2a2a2a] mb-4">
             Tillväxten drivs av en sekulär supercykel inom AI-infrastruktur. Tre parallella plattformsskiften driver efterfrågan: (1) accelererad beräkning, (2) kraftfulla AI-modeller (LLMs), och (3) framväxten av agentiska applikationer. Hyperscalers (Microsoft, Google, Amazon, Meta) och nu även nationella stater ('Sovereign AI') investerar hundratals miljarder dollar i datacenterkapacitet, där NVIDIA är den primära leverantören.
           </p>
           <RatingBox rating={5}><strong>5/5</strong> — NVIDIA befinner sig i epicentrum av den största teknikomställningen på decennier. Utsikterna för fortsatt tvåsiffrig tillväxt under flera år är mycket starka.</RatingBox>
@@ -264,45 +264,45 @@ export default function NvidiaAnalysisPage() {
         <div data-section="verdict" id="verdict" className="pt-14">
           <SectionHeader number="IX" title="Sammanfattning & Investeringsbeslut" accentColor={ACCENT} />
 
-          <div className="bg-[#1a1a1a] rounded p-5 mb-5">
+          <div className="bg-[#0f0f0f] text-[#faf8f3] rounded p-5 mb-5">
             <div className="flex flex-wrap justify-between items-start gap-4 mb-4">
               <div>
-                <div className="text-[10px] text-[#76B900] tracking-widest uppercase mb-1">Investeringsrekommendation</div>
-                <div className="font-serif text-4xl font-bold text-[#76B900]">▲ KÖP</div>
+                <div className="text-[10px] text-[#b5892a] tracking-widest uppercase mb-1">Investeringsrekommendation</div>
+                <div className="font-serif text-4xl font-bold text-[#80e080]">▲ KÖP</div>
                 <div className="text-sm text-[#a0a090] mt-1">Med 24–36 månaders horisont</div>
               </div>
               <div className="text-right">
-                <div className="text-[10px] text-[#76B900] tracking-widest uppercase">Målpris (Base)</div>
+                <div className="text-[10px] text-[#b5892a] tracking-widest uppercase">Målpris (Base)</div>
                 <div className="font-serif text-4xl font-bold">$230</div>
-                <div className="text-xs text-[#80d080]">+26% potential från $182</div>
+                <div className="text-xs text-[#80e080]">+26% potential från $182</div>
               </div>
             </div>
           </div>
 
-          <h3 className="text-xs font-bold text-[#76B900] uppercase tracking-widest mt-6 mb-3 pl-2 border-l-[3px] border-[#76B900]">Samlade scores & Poängdiagram</h3>
+          <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mt-6 mb-3 pl-2 border-l-[3px] border-[#b5892a]">Samlade scores & Poängdiagram</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-5">
             <div>
               <RadarChart scores={analysisData.scores} />
             </div>
             <div className="space-y-2">
-              <div className="flex justify-between items-center py-2 border-b border-[#333]">
+              <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
                 <span className="text-sm font-bold">Total poäng:</span>
-                <span className="text-xl font-bold font-serif text-[#76B900]">{analysisData.totaltPoang} / {analysisData.maxPoang}</span>
+                <span className="text-xl font-bold font-serif text-[#1a3c6e]">{analysisData.totaltPoang} / {analysisData.maxPoang}</span>
               </div>
-              <div className="flex justify-between items-center py-2 border-b border-[#333] mb-3">
+              <div className="flex justify-between items-center py-2 border-b border-[#e8e4da] mb-3">
                 <span className="text-sm font-bold">Viktat betyg:</span>
-                <span className="text-xl font-bold font-serif text-[#76B900]">{analysisData.rating.toFixed(1)} / 5.0</span>
+                <span className="text-xl font-bold font-serif text-[#1a3c6e]">{analysisData.rating.toFixed(1)} / 5.0</span>
               </div>
               <div className="pt-2 space-y-1">
                 {Object.entries(analysisData.scores).map(([key, value]) => {
                   const label = key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase());
                   return (
                     <div key={key} className="flex items-center gap-3">
-                      <span className="text-xs text-[#999] w-32 flex-shrink-0">{label}</span>
-                      <div className="flex-grow bg-[#333] rounded h-2.5 overflow-hidden">
+                      <span className="text-xs text-[#5a5a4a] w-32 flex-shrink-0">{label}</span>
+                      <div className="flex-grow bg-[#e8e4da] rounded h-2.5 overflow-hidden">
                         <div className="h-full rounded" style={{ width: `${(value / 5) * 100}%`, backgroundColor: ACCENT }} />
                       </div>
-                      <span className="text-xs font-bold text-[#76B900] font-serif w-8 text-right">{value}/5</span>
+                      <span className="text-xs font-bold text-[#1a3c6e] font-serif w-8 text-right">{value}/5</span>
                     </div>
                   );
                 })}
@@ -310,8 +310,8 @@ export default function NvidiaAnalysisPage() {
             </div>
           </div>
 
-          <h3 className="text-xs font-bold text-[#76B900] uppercase tracking-widest mt-6 mb-2 pl-2 border-l-[3px] border-[#76B900]">Motivering</h3>
-          <p className="text-sm leading-relaxed text-[#b0b0b0] mb-3">
+          <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mt-6 mb-2 pl-2 border-l-[3px] border-[#b5892a]">Motivering</h3>
+          <p className="text-sm leading-relaxed text-[#2a2a2a] mb-3">
             NVIDIA är ett av de starkaste kvalitetsbolagen på marknaden. AI-supercykeln, CUDA-ekosystemets oövervinnerliga vallgrav och Blackwell-arkitekturens dominans skapar en sällsynt kombination av extremt hög tillväxt och exceptionell lönsamhet. Den primära risken är geopolitisk och relaterad till exportkontroller, men denna risk är nu delvis känd och prissatt av marknaden. Värderingen är hög, men det attraktiva PEG-talet (ca 0.33) signalerar att aktien är rimligt prissatt givet den explosiva vinsttillväxten.
           </p>
           <AlertBox type="signal">
