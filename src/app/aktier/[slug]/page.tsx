@@ -5,6 +5,10 @@ import { createMetadata } from "@/lib/seo";
 import { getCompanyBySlug, getAllCompanies } from "@/lib/stocks";
 import { analyses } from "@/lib/analyses";
 import { formatDate, verdictColor } from "@/lib/utils";
+import { fetchStockMetrics } from "@/lib/yahoo-finance";
+
+// Revalidate page data once per day (86400 seconds)
+export const revalidate = 86400;
 
 export function generateStaticParams() {
   return getAllCompanies().map((c) => ({ slug: c.slug }));
@@ -25,6 +29,12 @@ export async function generateMetadata({
   });
 }
 
+function formatUpdatedAt(iso: string | null): string | null {
+  if (!iso) return null;
+  const d = new Date(iso);
+  return d.toLocaleDateString("sv-SE", { day: "numeric", month: "long", year: "numeric" });
+}
+
 export default async function AktieSida({
   params,
 }: {
@@ -37,6 +47,19 @@ export default async function AktieSida({
   const relatedAnalyses = analyses.filter((a) =>
     company.analysisSlugs.includes(a.slug)
   );
+
+  // Fetch live metrics from Yahoo Finance (cached 24h by Next.js)
+  const live = await fetchStockMetrics(company.ticker);
+
+  // Merge live data with static fallback from stocks.ts
+  const metrics = {
+    pe: live?.pe ?? company.metrics?.pe ?? null,
+    marketCap: live?.marketCap ?? company.metrics?.marketCap ?? null,
+    dividend: live?.dividend ?? company.metrics?.dividend ?? null,
+    currency: live?.currency ?? company.metrics?.currency ?? null,
+  };
+
+  const hasMetrics = Object.values(metrics).some(Boolean);
 
   return (
     <div className="py-16 md:py-20">
@@ -71,32 +94,39 @@ export default async function AktieSida({
         </div>
 
         {/* Key metrics */}
-        {company.metrics && Object.values(company.metrics).some(Boolean) && (
+        {hasMetrics && (
           <div className="mb-12">
-            <h2 className="text-lg font-serif font-semibold mb-4">Nyckeltal</h2>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-serif font-semibold">Nyckeltal</h2>
+              {live?.updatedAt && (
+                <span className="text-xs text-muted">
+                  Uppdaterat: {formatUpdatedAt(live.updatedAt)}
+                </span>
+              )}
+            </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              {company.metrics.pe && (
+              {metrics.pe && (
                 <div className="bg-card border border-border rounded-xl p-4">
                   <p className="text-xs text-muted mb-1">P/E-tal</p>
-                  <p className="text-xl font-semibold">{company.metrics.pe}</p>
+                  <p className="text-xl font-semibold">{metrics.pe}</p>
                 </div>
               )}
-              {company.metrics.marketCap && (
+              {metrics.marketCap && (
                 <div className="bg-card border border-border rounded-xl p-4">
                   <p className="text-xs text-muted mb-1">Börsvärde</p>
-                  <p className="text-xl font-semibold">{company.metrics.marketCap}</p>
+                  <p className="text-xl font-semibold">{metrics.marketCap}</p>
                 </div>
               )}
-              {company.metrics.dividend && (
+              {metrics.dividend && (
                 <div className="bg-card border border-border rounded-xl p-4">
                   <p className="text-xs text-muted mb-1">Direktavkastning</p>
-                  <p className="text-xl font-semibold">{company.metrics.dividend}</p>
+                  <p className="text-xl font-semibold">{metrics.dividend}</p>
                 </div>
               )}
-              {company.metrics.currency && (
+              {metrics.currency && (
                 <div className="bg-card border border-border rounded-xl p-4">
                   <p className="text-xs text-muted mb-1">Valuta</p>
-                  <p className="text-xl font-semibold">{company.metrics.currency}</p>
+                  <p className="text-xl font-semibold">{metrics.currency}</p>
                 </div>
               )}
             </div>
