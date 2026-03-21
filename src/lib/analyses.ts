@@ -124,7 +124,7 @@ export const analyses: Analysis[] = [
     slug: "evolution-2025",
     title: "Evolution – Market Position 2025",
     ticker: "EVO",
-    date: "2025-08-27",
+    date: "2026-03-21",
     author: "Carl Fredrik Thor",
     category: "Långsiktiga analyser",
     sector: "Spel",
