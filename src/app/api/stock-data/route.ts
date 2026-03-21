@@ -25,50 +25,80 @@ export interface StockData {
   error?: boolean;
 }
 
-async function fetchStockData(fmpTicker: string): Promise<StockData | null> {
-  const apiKey = process.env.FMP_API_KEY;
-  if (!apiKey) return null;
+async function fetchQuote(fmpTicker: string, apiKey: string) {
+  const res = await fetch(
+    `https://financialmodelingprep.com/stable/quote?symbol=${fmpTicker}&apikey=${apiKey}`
+  );
+  if (!res.ok) return null;
+  const data = await res.json();
+  return Array.isArray(data) && data.length > 0 ? data[0] : null;
+}
 
+async function fetchProfile(fmpTicker: string, apiKey: string) {
+  const res = await fetch(
+    `https://financialmodelingprep.com/stable/profile?symbol=${fmpTicker}&apikey=${apiKey}`
+  );
+  if (!res.ok) return null;
+  const data = await res.json();
+  return Array.isArray(data) && data.length > 0 ? data[0] : null;
+}
+
+async function fetchStockData(
+  displayTicker: string,
+  fmpTicker: string,
+  apiKey: string
+): Promise<StockData> {
   try {
-    const [quoteRes, profileRes] = await Promise.all([
-      fetch(`https://financialmodelingprep.com/api/v3/quote/${fmpTicker}?apikey=${apiKey}`),
-      fetch(`https://financialmodelingprep.com/api/v3/profile/${fmpTicker}?apikey=${apiKey}`),
+    const [quote, profile] = await Promise.all([
+      fetchQuote(fmpTicker, apiKey),
+      fetchProfile(fmpTicker, apiKey),
     ]);
 
-    if (!quoteRes.ok || !profileRes.ok) return null;
+    if (!quote) {
+      throw new Error("Ingen quote-data");
+    }
 
-    const quoteData = await quoteRes.json();
-    const profileData = await profileRes.json();
+    const currency =
+      profile?.currency ?? (fmpTicker.endsWith(".ST") ? "SEK" : "USD");
 
-    const quote = Array.isArray(quoteData) ? quoteData[0] : null;
-    const profile = Array.isArray(profileData) ? profileData[0] : null;
-
-    if (!quote) return null;
+    const dividendYield =
+      profile?.lastDiv && quote.price
+        ? (profile.lastDiv / quote.price) * 100
+        : null;
 
     return {
-      ticker: fmpTicker,
-      name: profile?.companyName ?? quote.name ?? fmpTicker,
+      ticker: displayTicker,
+      name: profile?.companyName ?? quote.name ?? displayTicker,
       price: quote.price ?? null,
-      pe: quote.pe ?? null,
-      eps: quote.eps ?? null,
+      pe: profile?.pe ?? null,
+      eps: profile?.eps ?? null,
       marketCap: quote.marketCap ?? null,
-      dividendYield: profile?.lastDiv
-        ? (profile.lastDiv / quote.price) * 100
-        : null,
+      dividendYield,
       change: quote.change ?? null,
-      changePercent: quote.changesPercentage ?? null,
-      currency: profile?.currency ?? (fmpTicker.endsWith(".ST") ? "SEK" : "USD"),
+      changePercent: quote.changePercentage ?? null,
+      currency,
       error: false,
     };
   } catch {
-    return null;
+    return {
+      ticker: displayTicker,
+      name: displayTicker,
+      price: null,
+      pe: null,
+      eps: null,
+      marketCap: null,
+      dividendYield: null,
+      change: null,
+      changePercent: null,
+      currency: fmpTicker.endsWith(".ST") ? "SEK" : "USD",
+      error: true,
+    };
   }
 }
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
 
-  // ?reset=true rensar cachen
   if (searchParams.get("reset") === "true") {
     cache = null;
   }
@@ -82,17 +112,6 @@ export async function GET(request: Request) {
   }
 
   const apiKey = process.env.FMP_API_KEY;
-  console.log("API key length:", apiKey?.length, "First 4 chars:", apiKey?.substring(0, 4));
-
-  // TEMPORÄRT — ta bort efter felsökning
-  if (searchParams.get("debug") === "true") {
-    return NextResponse.json({
-      keyExists: !!apiKey,
-      keyLength: apiKey?.length ?? 0,
-      keyStart: apiKey?.substring(0, 6) ?? "saknas",
-    });
-  }
-
   if (!apiKey) {
     return NextResponse.json(
       { error: "FMP_API_KEY saknas i miljövariabler" },
@@ -101,25 +120,9 @@ export async function GET(request: Request) {
   }
 
   const results = await Promise.all(
-    Object.entries(TICKERS).map(async ([displayTicker, fmpTicker]) => {
-      const data = await fetchStockData(fmpTicker);
-      if (!data) {
-        return {
-          ticker: displayTicker,
-          name: displayTicker,
-          price: null,
-          pe: null,
-          eps: null,
-          marketCap: null,
-          dividendYield: null,
-          change: null,
-          changePercent: null,
-          currency: fmpTicker.endsWith(".ST") ? "SEK" : "USD",
-          error: true,
-        } as StockData;
-      }
-      return { ...data, ticker: displayTicker };
-    })
+    Object.entries(TICKERS).map(([displayTicker, fmpTicker]) =>
+      fetchStockData(displayTicker, fmpTicker, apiKey)
+    )
   );
 
   cache = { data: results, timestamp: Date.now() };
