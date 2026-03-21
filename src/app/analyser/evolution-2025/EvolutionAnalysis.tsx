@@ -296,6 +296,35 @@ accentColor={ACCENT}
     {/* ── I. ÖVERSIKT ─────────────────────────────────────────────────── */}
     <section id="overview" data-section="overview" className="mb-16 pt-12">
       <SectionHeader number="I" title="Översikt" />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-8">
+        <RadarChart scores={analysisData.scores} />
+        <div className="space-y-2">
+          <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
+            <span className="text-sm font-bold">Total poäng:</span>
+            <span className="text-xl font-bold font-serif text-[#1a3c6e]">
+              {analysisData.totaltPoang} / {analysisData.maxPoang}
+            </span>
+          </div>
+          <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
+            <span className="text-sm font-bold">Viktat betyg:</span>
+            <span className="text-xl font-bold font-serif text-[#1a3c6e]">
+              {analysisData.rating.toFixed(1)} / 5.0
+            </span>
+          </div>
+          <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
+            <span className="text-sm font-bold">Rekommendation:</span>
+            <span className="text-xl font-bold font-serif text-green-700">KÖP</span>
+          </div>
+          <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
+            <span className="text-sm font-bold">Målpris (12 mån):</span>
+            <span className="text-xl font-bold font-serif text-[#1a3c6e]">SEK 720</span>
+          </div>
+          <div className="flex justify-between items-center py-2">
+            <span className="text-sm font-bold">Riskjust. EV-avkastning:</span>
+            <span className="text-xl font-bold font-serif text-green-700">+21%</span>
+          </div>
+        </div>
+      </div>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
         <MetricCard label="Börskurs (mars 2026)" value="~SEK 577" />
         <MetricCard label="P/E (nuläge)"          value="9,95x" />
