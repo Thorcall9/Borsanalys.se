@@ -82,6 +82,17 @@ export async function GET(request: Request) {
   }
 
   const apiKey = process.env.FMP_API_KEY;
+  console.log("API key length:", apiKey?.length, "First 4 chars:", apiKey?.substring(0, 4));
+
+  // TEMPORÄRT — ta bort efter felsökning
+  if (searchParams.get("debug") === "true") {
+    return NextResponse.json({
+      keyExists: !!apiKey,
+      keyLength: apiKey?.length ?? 0,
+      keyStart: apiKey?.substring(0, 6) ?? "saknas",
+    });
+  }
+
   if (!apiKey) {
     return NextResponse.json(
       { error: "FMP_API_KEY saknas i miljövariabler" },
