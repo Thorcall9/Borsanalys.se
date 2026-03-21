@@ -430,7 +430,7 @@ accentColor={ACCENT}
     {/* ── V. TILLVÄXTMOTORER ──────────────────────────────────────────── */}
     <section id="growth" data-section="growth" className="mb-16">
       <SectionHeader number="V" title="Tillväxtmotorer" />
-      <AlertBox type="warning">
+      <AlertBox type="risk">
         Tillväxtbetyg: 3/5 — Stabil, ej stark. Estimaten talar tydligt: omsättningstillväxt
         8% → 6% → 4% och EPS-tillväxt 2–4%/år. USA och LatAm är reella möjligheter men ännu
         inte bevisade i siffrorna. Potential räknas inte som leverans.
@@ -691,7 +691,7 @@ accentColor={ACCENT}
         </div>
       </div>
 
-      <AlertBox type="warning">
+      <AlertBox type="risk">
         Den psykologiska kostnaden: pensionsfonder och utdelningsfonder <em>kräver</em> utdelning
         för att hålla aktier. Inställd utdelning skapar onödig volatilitet och skrämmer bort
         defensiva institutionella ägare — oavsett hur rationell matematiken är. Återkomsten
