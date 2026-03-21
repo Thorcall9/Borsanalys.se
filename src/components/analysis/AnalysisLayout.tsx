@@ -54,7 +54,7 @@ export default function AnalysisLayout({
   const sidebarBorder = isDark ? "border-r border-white/10" : "border-r border-border";
 
   return (
-    <div className={`${bgClass} flex min-h-screen relative`}>
+    <div className={`${bgClass} flex min-h-screen relative overflow-x-hidden`}>
       {/* Mobile toggle */}
       <button
         className="fixed top-20 right-4 z-[200] md:hidden w-10 h-10 rounded-lg flex items-center justify-center text-lg shadow-lg border"
