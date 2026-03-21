@@ -31,12 +31,8 @@ async function fetchStockData(fmpTicker: string): Promise<StockData | null> {
 
   try {
     const [quoteRes, profileRes] = await Promise.all([
-      fetch(
-        `https://financialmodelingprep.com/api/v3/quote/${fmpTicker}?apikey=${apiKey}`
-      ),
-      fetch(
-        `https://financialmodelingprep.com/api/v3/profile/${fmpTicker}?apikey=${apiKey}`
-      ),
+      fetch(`https://financialmodelingprep.com/api/v3/quote/${fmpTicker}?apikey=${apiKey}`),
+      fetch(`https://financialmodelingprep.com/api/v3/profile/${fmpTicker}?apikey=${apiKey}`),
     ]);
 
     if (!quoteRes.ok || !profileRes.ok) return null;
@@ -69,7 +65,14 @@ async function fetchStockData(fmpTicker: string): Promise<StockData | null> {
   }
 }
 
-export async function GET() {
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+
+  // ?reset=true rensar cachen
+  if (searchParams.get("reset") === "true") {
+    cache = null;
+  }
+
   if (cache && Date.now() - cache.timestamp < CACHE_TTL) {
     return NextResponse.json({
       data: cache.data,
