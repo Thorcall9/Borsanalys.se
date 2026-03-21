@@ -803,7 +803,6 @@ accentColor={ACCENT}
 
   </div>
 </AnalysisLayout>
-```
 
 );
 }
