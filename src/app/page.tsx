@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import { analyses } from "@/lib/analyses";
 import { guides } from "@/lib/guides";
 import { verdictColor } from "@/lib/utils";
@@ -77,14 +76,6 @@ function getAvatarColor(index: number): string {
 }
 
 export default function Home() {
-  const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) setSubscribed(true);
-  };
-
   return (
     <>
       {/* Hero */}
@@ -135,8 +126,6 @@ export default function Home() {
       </section>
 
       <StockTicker />
-
-      <MakroWidget />
 
       {/* ANALYSER – Senaste analyserna */}
       <section className="py-16 md:py-20">
@@ -228,6 +217,8 @@ export default function Home() {
         </div>
       </section>
 
+      <MakroWidget />
+
       {/* UTBILDNING – Börsguider */}
       <section className="py-16 md:py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -264,48 +255,6 @@ export default function Home() {
               </Link>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* NYHETSBREV */}
-      <section className="py-16 bg-section-alt">
-        <div className="max-w-xl mx-auto px-4 sm:px-6 text-center">
-          <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">NYHETSBREV</p>
-          <h2 className="text-2xl md:text-3xl font-serif mb-3">
-            Få våra analyser direkt i din inkorg
-          </h2>
-          <p className="text-muted text-sm mb-8">
-            Varje vecka skickar vi ut en sammanfattning av de senaste analyserna, guiderna och marknadstrenderna. Helt gratis.
-          </p>
-
-          {subscribed ? (
-            <div className="bg-card border border-border rounded-xl px-6 py-5 text-sm font-medium text-emerald-700">
-              Tack! Du prenumererar nu på vårt nyhetsbrev.
-            </div>
-          ) : (
-            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                placeholder="E-POSTADRESS"
-                className="flex-1 px-4 py-3 bg-card border border-border rounded-lg text-sm placeholder:text-muted/60 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40"
-              />
-              <button
-                type="submit"
-                className="px-6 py-3 bg-primary hover:bg-primary-light text-white rounded-lg font-medium text-sm transition-colors whitespace-nowrap"
-              >
-                Börja prenumerera
-              </button>
-            </form>
-          )}
-
-          <p className="text-xs text-muted mt-4">
-            Genom att prenumerera godkänner du vår{" "}
-            <Link href="/integritetspolicy" className="underline hover:text-foreground">integritetspolicy</Link>.
-            {" "}Du kan avbryta när som helst.
-          </p>
         </div>
       </section>
 
