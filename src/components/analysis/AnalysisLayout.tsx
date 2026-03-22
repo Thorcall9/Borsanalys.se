@@ -24,9 +24,14 @@ export interface Scenario {
 export interface AnalysisLayoutProps {
   children: React.ReactNode;
   sections: AnalysisSection[];
-  ticker: string;
   companyName: string;
-  exchange: string;
+  ticker?: string;
+  exchange?: string;
+  subtitle?: string;
+  date?: string;
+  dataSources?: string;
+  accentColor?: string;
+  theme?: "dark" | "light";
   heroImage?: string;
   heroAlt?: string;
   // Nyckeltal visas i toppen — fyll i det du vet, resten hämtas live
@@ -92,6 +97,7 @@ function useLiveData(ticker: string): { data: LiveData | null; loading: boolean 
 
   useEffect(() => {
     async function load() {
+      if (!ticker) { setLoading(false); return; }
       try {
         // Försök hämta från Yahoo direkt för 52v high/low och volym
         const yahooSymbol = toYahooSymbol(ticker);
@@ -411,7 +417,7 @@ export function ScenarioCards({ scenarios }: { scenarios: Scenario[] }) {
 export function AnalysisLayout({
   children,
   sections,
-  ticker,
+  ticker = "",
   companyName,
   exchange,
   heroImage,
