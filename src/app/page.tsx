@@ -6,6 +6,7 @@ import { analyses } from "@/lib/analyses";
 import { guides } from "@/lib/guides";
 import { verdictColor } from "@/lib/utils";
 import StockTicker from "@/components/StockTicker";
+import { MakroWidget } from "@/app/marknad/page";
 
 const popularStocks = [
   { name: "NVIDIA", ticker: "NVDA", slug: "nvidia-fy2026" },
@@ -134,6 +135,8 @@ export default function Home() {
       </section>
 
       <StockTicker />
+
+      <MakroWidget />
 
       {/* ANALYSER – Senaste analyserna */}
       <section className="py-16 md:py-20">

@@ -10,6 +10,7 @@ const navItems = [
   { href: "/", label: "Hem" },
   { href: "/analyser", label: "Analyser" },
   { href: "/aktier", label: "Aktier" },
+  { href: "/marknad", label: "Marknad" },
   { href: "/guider", label: "Guider" },
   {
     label: "Verktyg",
