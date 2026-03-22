@@ -136,8 +136,6 @@ export default function Home() {
 
       <StockTicker />
 
-      <MakroWidget />
-
       {/* ANALYSER – Senaste analyserna */}
       <section className="py-16 md:py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -227,6 +225,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <MakroWidget />
 
       {/* UTBILDNING – Börsguider */}
       <section className="py-16 md:py-20">
