@@ -1,5 +1,5 @@
 import { createMetadata } from "@/lib/seo";
-import { analyses } from "@/lib/analyses";
+import { sortedAnalyses } from "@/lib/analyses";
 import AnalyserFilter from "./AnalyserFilter";
 
 export const metadata = createMetadata({
@@ -21,7 +21,7 @@ export default function Analyser() {
           </p>
         </div>
 
-        <AnalyserFilter analyses={analyses} />
+        <AnalyserFilter analyses={sortedAnalyses} />
       </div>
     </section>
   );
