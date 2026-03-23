@@ -39,7 +39,9 @@ export default function RootLayout({
         <Header />
         <main className="min-h-screen">{children}</main>
         <Footer />
-        <ChatWidget />
+        <Suspense fallback={null}>
+          <ChatWidget />
+        </Suspense>
         <Suspense fallback={null}>
           <SubscriptionSuccess />
         </Suspense>

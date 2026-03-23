@@ -140,6 +140,3 @@ export const sortedAnalyses = [...analyses].sort((a, b) =>
   b.date.localeCompare(a.date)
 );
 
-export function getFeaturedAnalyses(count = 4): Analysis[] {
-  return sortedAnalyses.slice(0, count);
-}

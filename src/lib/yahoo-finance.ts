@@ -6,30 +6,24 @@ export interface LiveMetrics {
   updatedAt: string | null;
 }
 
-const TICKER_TO_YAHOO: Record<string, string> = {
-  NVDA: "NVDA",
-  MSFT: "MSFT",
-  GOOGL: "GOOGL",
-  "INVE-B": "INVE-B.ST",
-  "VOLV-B": "VOLV-B.ST",
-  "NOVO-B": "NOVO-B.CO",
-  "NEWA-B": "NEWA-B.ST",
-  FREET: "FREET.ST",
-  EVO: "EVO.ST",
-};
+import { TICKER_TO_YAHOO } from "./ticker-mappings";
+import { logger } from "./logger";
+
+const BILLION = 1_000_000_000;
+const TRILLION = 1_000_000_000_000;
 
 function formatMarketCap(raw: number, currency: string): string {
   const isNordic = ["SEK", "DKK", "NOK"].includes(currency);
   if (isNordic) {
-    const mdr = raw / 1_000_000_000;
-    return `~${Math.round(mdr)} mdr ${currency}`;
+    const billions = raw / BILLION;
+    return `~${Math.round(billions)} mdr ${currency}`;
   }
-  const trillion = raw / 1_000_000_000_000;
-  if (trillion >= 1) {
-    return `~$${(Math.round(trillion * 10) / 10).toFixed(1)} T`;
+  const trillions = raw / TRILLION;
+  if (trillions >= 1) {
+    return `~$${(Math.round(trillions * 10) / 10).toFixed(1)} T`;
   }
-  const billion = raw / 1_000_000_000;
-  return `~$${Math.round(billion)} B`;
+  const billions = raw / BILLION;
+  return `~$${Math.round(billions)} B`;
 }
 
 export async function fetchStockMetrics(ticker: string): Promise<LiveMetrics | null> {
@@ -70,7 +64,8 @@ export async function fetchStockMetrics(ticker: string): Promise<LiveMetrics | n
       currency,
       updatedAt: new Date().toISOString(),
     };
-  } catch {
+  } catch (error: unknown) {
+    logger.warn("Failed to fetch stock metrics", { ticker, error: error instanceof Error ? error.message : String(error) });
     return null;
   }
 }

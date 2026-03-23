@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
-
+import { logger } from "@/lib/logger";
 // ─────────────────────────────────────────────────────────────
 // TYPES
 // ─────────────────────────────────────────────────────────────
@@ -10,15 +11,6 @@ export interface AnalysisSection {
   id: string;
   number: string;
   title: string;
-}
-
-export interface Scenario {
-  type: "bull" | "base" | "bear";
-  probability: string;
-  price: string;
-  change: string;
-  assumptions: string;
-  requires: string;
 }
 
 export interface AnalysisLayoutProps {
@@ -55,18 +47,6 @@ const REC_CONFIG = {
   SALJ:   { label: "SÄLJ",   bg: "bg-red-600",     text: "text-white" },
 };
 
-// Mappa display-ticker till Yahoo-symbol
-function toYahooSymbol(ticker: string): string {
-  const map: Record<string, string> = {
-    "INVE B": "INVE-B.ST",
-    "VOLV B": "VOLV-B.ST",
-    "NVDA":   "NVDA",
-    "MSFT":   "MSFT",
-    "GOOGL":  "GOOGL",
-  };
-  return map[ticker] ?? ticker.replace(" ", "-") + ".ST";
-}
-
 function formatPrice(price: number, currency: string) {
   if (currency === "SEK")
     return price.toLocaleString("sv-SE", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " SEK";
@@ -99,18 +79,16 @@ function useLiveData(ticker: string): { data: LiveData | null; loading: boolean 
     async function load() {
       if (!ticker) { setLoading(false); return; }
       try {
-        // Försök hämta från Yahoo direkt för 52v high/low och volym
-        const yahooSymbol = toYahooSymbol(ticker);
         const res = await fetch(
-          `https://query2.finance.yahoo.com/v8/finance/chart/${yahooSymbol}?interval=1d&range=1d`
+          `/api/stock-chart?ticker=${encodeURIComponent(ticker)}&range=1d&interval=1d`
         );
-        if (!res.ok) throw new Error("Yahoo fel");
+        if (!res.ok) throw new Error("API fel");
         const json = await res.json();
-        const meta = json?.chart?.result?.[0]?.meta;
+        const meta = json?.meta;
         if (!meta) throw new Error("Ingen meta");
 
         const price = meta.regularMarketPrice ?? null;
-        const prev = meta.previousClose ?? meta.chartPreviousClose ?? null;
+        const prev = meta.previousClose ?? null;
         const change = price && prev ? price - prev : null;
         const changePct = change && prev ? (change / prev) * 100 : null;
 
@@ -121,14 +99,15 @@ function useLiveData(ticker: string): { data: LiveData | null; loading: boolean 
           high52: meta.fiftyTwoWeekHigh ?? null,
           low52: meta.fiftyTwoWeekLow ?? null,
           volume: meta.regularMarketVolume ?? null,
-          pe: null, // hämtas separat om möjligt
+          pe: null,
           eps: null,
           marketCap: null,
           dividendYield: null,
           currency: meta.currency ?? "SEK",
           name: meta.longName ?? meta.shortName ?? ticker,
         });
-      } catch {
+      } catch (error: unknown) {
+        logger.warn("Failed to fetch live data", { ticker, error: error instanceof Error ? error.message : String(error) });
         setData(null);
       } finally {
         setLoading(false);
@@ -153,13 +132,12 @@ function Sparkline({ ticker, positive }: { ticker: string; positive: boolean }) 
         const { Chart, registerables } = await import("chart.js");
         Chart.register(...registerables);
 
-        const yahooSymbol = toYahooSymbol(ticker);
         const res = await fetch(
-          `https://query2.finance.yahoo.com/v8/finance/chart/${yahooSymbol}?interval=1d&range=3mo`
+          `/api/stock-chart?ticker=${encodeURIComponent(ticker)}&range=3mo&interval=1d`
         );
         const json = await res.json();
-        const closes = json?.chart?.result?.[0]?.indicators?.quote?.[0]?.close ?? [];
-        const timestamps = json?.chart?.result?.[0]?.timestamp ?? [];
+        const closes = json?.closes ?? [];
+        const timestamps = json?.timestamps ?? [];
 
         if (!canvasRef.current || closes.length === 0) return;
 
@@ -194,7 +172,9 @@ function Sparkline({ ticker, positive }: { ticker: string; positive: boolean }) 
             },
           },
         });
-      } catch {}
+      } catch (error: unknown) {
+        logger.warn("Failed to draw sparkline", { ticker, error: error instanceof Error ? error.message : String(error) });
+      }
     }
     draw();
     return () => { chart?.destroy(); };
@@ -250,164 +230,6 @@ function SidebarNav({ sections, activeId }: { sections: AnalysisSection[]; activ
         ))}
       </ul>
     </nav>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────
-// EXPORTED SUBCOMPONENTS (används i page.tsx)
-// ─────────────────────────────────────────────────────────────
-export function SectionHeader({ number, title, accent }: { number: string; title: string; accent?: string }) {
-  return (
-    <div className="flex items-baseline gap-3 mb-6">
-      <span className="text-xs font-mono text-gray-300 w-6">{number}</span>
-      <h2 className="text-xl font-bold text-[#1a3c6e]" style={{ fontFamily: "Georgia, serif" }}>
-        {title}
-      </h2>
-    </div>
-  );
-}
-
-export function MetricCard({ label, value, accent }: { label: string; value: string; accent?: string }) {
-  return (
-    <div className="bg-[#f5f5f0] rounded-2xl p-4 border border-gray-200">
-      <p className="text-xs uppercase tracking-widest text-gray-400 font-semibold mb-1">{label}</p>
-      <p className="text-lg font-bold text-[#1a3c6e]" style={{ fontFamily: "Georgia, serif" }}>{value}</p>
-    </div>
-  );
-}
-
-export function AlertBox({ type, children }: { type: "info" | "warning" | "signal"; children: React.ReactNode }) {
-  const config = {
-    info:    { bg: "bg-blue-50",   border: "border-blue-200",  icon: "ℹ",  text: "text-blue-800" },
-    warning: { bg: "bg-amber-50",  border: "border-amber-200", icon: "⚠",  text: "text-amber-800" },
-    signal:  { bg: "bg-green-50",  border: "border-green-200", icon: "●",  text: "text-green-800" },
-  }[type];
-  return (
-    <div className={`${config.bg} ${config.border} border rounded-2xl p-4 my-4`}>
-      <p className={`text-sm leading-relaxed ${config.text}`}>{children}</p>
-    </div>
-  );
-}
-
-export function RatingBox({ rating, currentPrice, targetPrice, upside, accent }: {
-  rating: string; currentPrice: string; targetPrice: string; upside: string; accent?: string;
-}) {
-  const rec = REC_CONFIG[rating as keyof typeof REC_CONFIG] ?? REC_CONFIG.BEHALL;
-  return (
-    <div className="bg-[#f5f5f0] border border-gray-200 rounded-2xl p-6 flex flex-wrap gap-6 items-center">
-      <div>
-        <p className="text-xs text-gray-400 uppercase tracking-widest mb-1">Rekommendation</p>
-        <span className={`inline-block px-4 py-1.5 rounded-full text-sm font-bold ${rec.bg} ${rec.text}`}>
-          {rec.label}
-        </span>
-      </div>
-      <div>
-        <p className="text-xs text-gray-400 uppercase tracking-widest mb-1">Nuvarande kurs</p>
-        <p className="text-xl font-bold text-[#1a3c6e]" style={{ fontFamily: "Georgia, serif" }}>{currentPrice}</p>
-      </div>
-      <div>
-        <p className="text-xs text-gray-400 uppercase tracking-widest mb-1">Riktkurs</p>
-        <p className="text-xl font-bold text-[#1a3c6e]" style={{ fontFamily: "Georgia, serif" }}>{targetPrice}</p>
-      </div>
-      <div>
-        <p className="text-xs text-gray-400 uppercase tracking-widest mb-1">Uppsida</p>
-        <p className="text-xl font-bold text-emerald-600" style={{ fontFamily: "Georgia, serif" }}>{upside}</p>
-      </div>
-    </div>
-  );
-}
-
-export function FinancialTable({ rows, years }: {
-  rows: { metric: string; fy2023: string; fy2024: string; fy2025: string }[];
-  years: string[];
-}) {
-  return (
-    <div className="overflow-x-auto rounded-2xl border border-gray-200">
-      <table className="w-full text-sm border-collapse">
-        <thead>
-          <tr className="bg-[#1a3c6e] text-white">
-            <th className="text-left p-3 font-semibold">Nyckeltal</th>
-            {years.map((y) => <th key={y} className="text-right p-3 font-semibold">{y}</th>)}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row, i) => (
-            <tr key={i} className={i % 2 === 0 ? "bg-[#f5f5f0]" : "bg-white"}>
-              <td className="p-3 font-medium text-gray-700">{row.metric}</td>
-              <td className="p-3 text-right">{row.fy2023}</td>
-              <td className="p-3 text-right">{row.fy2024}</td>
-              <td className="p-3 text-right font-semibold text-[#1a3c6e]">{row.fy2025}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-export function SwotGrid({ data, accent }: {
-  data: { strengths: string[]; weaknesses: string[]; opportunities: string[]; threats: string[] };
-  accent?: string;
-}) {
-  const sections = [
-    { key: "strengths",     label: "Styrkor",     color: "bg-emerald-50 border-emerald-200", dot: "bg-emerald-500" },
-    { key: "weaknesses",    label: "Svagheter",   color: "bg-red-50 border-red-200",         dot: "bg-red-500" },
-    { key: "opportunities", label: "Möjligheter", color: "bg-blue-50 border-blue-200",       dot: "bg-blue-500" },
-    { key: "threats",       label: "Hot",         color: "bg-amber-50 border-amber-200",     dot: "bg-amber-500" },
-  ] as const;
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {sections.map(({ key, label, color, dot }) => (
-        <div key={key} className={`${color} border rounded-2xl p-4`}>
-          <p className="text-xs font-bold uppercase tracking-widest text-gray-600 mb-3">{label}</p>
-          <ul className="space-y-2">
-            {data[key].map((item, i) => (
-              <li key={i} className="flex gap-2 text-sm text-gray-700">
-                <span className={`mt-1.5 w-2 h-2 rounded-full flex-shrink-0 ${dot}`} />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-export function ScenarioCards({ scenarios }: { scenarios: Scenario[] }) {
-  const config = {
-    bull: { label: "Bull", color: "#16a34a", bg: "bg-emerald-50", border: "border-emerald-200" },
-    base: { label: "Base", color: "#b5892a", bg: "bg-amber-50",   border: "border-amber-200" },
-    bear: { label: "Bear", color: "#dc2626", bg: "bg-red-50",     border: "border-red-200" },
-  };
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-      {scenarios.map((s) => {
-        const c = config[s.type];
-        return (
-          <div key={s.type} className={`${c.bg} ${c.border} border rounded-2xl p-5`}>
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-sm font-bold uppercase tracking-widest" style={{ color: c.color }}>{c.label}</span>
-              <span className="text-xs font-bold text-gray-500 bg-white border border-gray-200 rounded-full px-2 py-0.5">
-                {s.probability}
-              </span>
-            </div>
-            <p className="text-2xl font-bold text-[#1a3c6e] mb-0.5" style={{ fontFamily: "Georgia, serif" }}>{s.price}</p>
-            <p className="text-sm font-semibold mb-3" style={{ color: c.color }}>{s.change}</p>
-            <div className="space-y-2">
-              <div>
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Antaganden</p>
-                <p className="text-xs text-gray-600 whitespace-pre-line">{s.assumptions}</p>
-              </div>
-              <div>
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Kräver</p>
-                <p className="text-xs text-gray-600">{s.requires}</p>
-              </div>
-            </div>
-          </div>
-        );
-      })}
-    </div>
   );
 }
 
@@ -553,7 +375,7 @@ export function AnalysisLayout({
         {/* ── HERO-BILD (om den finns) ── */}
         {heroImage && (
           <div className="mb-6 rounded-2xl overflow-hidden">
-            <img src={heroImage} alt={heroAlt ?? companyName} className="w-full h-48 sm:h-64 object-cover" />
+            <Image src={heroImage} alt={heroAlt ?? companyName} width={1200} height={400} className="w-full h-48 sm:h-64 object-cover" />
           </div>
         )}
 
