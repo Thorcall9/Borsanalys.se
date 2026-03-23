@@ -1,29 +1,29 @@
-import { useState } from “react”;
+import { useState } from "react";
 import {
 LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid,
 Tooltip, Legend, ResponsiveContainer, ReferenceLine, Cell, ComposedChart, Area
-} from “recharts”;
+} from "recharts";
 
 const COLORS = {
-red: “#C8102E”,
-blue: “#003087”,
-lightBlue: “#4A90D9”,
-gold: “#B8860B”,
-gray: “#6B7280”,
-lightGray: “#F3F4F6”,
-darkGray: “#1F2937”,
-green: “#15803D”,
-orange: “#EA580C”,
-teal: “#0D9488”,
+red: "#C8102E",
+blue: "#003087",
+lightBlue: "#4A90D9",
+gold: "#B8860B",
+gray: "#6B7280",
+lightGray: "#F3F4F6",
+darkGray: "#1F2937",
+green: "#15803D",
+orange: "#EA580C",
+teal: "#0D9488",
 };
 
 const json = {
-slug: “novo-nordisk-2025”,
-name: “Novo Nordisk A/S”,
-ticker: “NOVO-B.CO / NVO”,
-isin: “DK0060534915”,
-date: “2026-03-23”,
-author: “Carl Fredrik Thor”,
+slug: "novo-nordisk-2025",
+name: "Novo Nordisk A/S",
+ticker: "NOVO-B.CO / NVO",
+isin: "DK0060534915",
+date: "2026-03-23",
+author: "Carl Fredrik Thor",
 scores: {
 affarsmodell: 5,
 strategiskMoat: 5,
@@ -38,90 +38,90 @@ totaltPoang: 31,
 maxPoang: 40,
 rating: 0.775,
 overview: {
-borskurs: “DKK 236 (mars 2026 est.)”,
-borsvarde: “~DKK 1 050 miljarder”,
-bransch: “Läkemedel – Diabetes & Fetma (GLP-1)”,
-geografi: “Global: USA (~55%), Europa/Kanada ~20%, EM/APAC ~25%”,
-affarside: “Besegra allvarliga kroniska sjukdomar – primärt fetma och diabetes”,
-affarsmodell: “Patentskyddade läkemedel, återkommande recept, global tillverkning”,
-ledning: “Maziar Mike Doustdar (ny VD 2025), Lars Rebien Sørensen (styrelseordförande)”,
-agarstruktur: “Novo Holdings A/S (~28% av B-aktier + alla A-aktier) ägs av Novo Nordisk Foundation – stabil ankare”,
+borskurs: "DKK 236 (mars 2026 est.)",
+borsvarde: "~DKK 1 050 miljarder",
+bransch: "Läkemedel – Diabetes & Fetma (GLP-1)",
+geografi: "Global: USA (~55%), Europa/Kanada ~20%, EM/APAC ~25%",
+affarside: "Besegra allvarliga kroniska sjukdomar – primärt fetma och diabetes",
+affarsmodell: "Patentskyddade läkemedel, återkommande recept, global tillverkning",
+ledning: "Maziar Mike Doustdar (ny VD 2025), Lars Rebien Sørensen (styrelseordförande)",
+agarstruktur: "Novo Holdings A/S (~28% av B-aktier + alla A-aktier) ägs av Novo Nordisk Foundation – stabil ankare",
 },
 sammanfattning: {
-beslut: “KÖP”,
-motivering: “Världsledande inom GLP-1, exceptionell moat, kraftigt nedtryckt värdering efter -48% kursnedgång 2025. P/E ~10x för 2026e är historiskt lågt för ett bolag med denna kvalitet. Pipelinerisken är hantherbar.”,
-malpris: “DKK 340–380 (12 månader)”,
+beslut: "KÖP",
+motivering: "Världsledande inom GLP-1, exceptionell moat, kraftigt nedtryckt värdering efter -48% kursnedgång 2025. P/E ~10x för 2026e är historiskt lågt för ett bolag med denna kvalitet. Pipelinerisken är hantherbar.",
+malpris: "DKK 340–380 (12 månader)",
 },
 scenarier: {
-bullCase: “CagriSema godkänt 2026, Wegovy-piller tar marknadsandelar, MFN-avtal begränsas – aktie DKK 450+”,
-baseCase: “Stabil volymtillväxt kompenserar prissänkningar, pipeline levererar – aktie DKK 340–380”,
-bearCase: “MFN slår hårdare än väntat, pipeline-miss, konkurrensen från Eli Lilly accelererar – aktie DKK 160–200”,
+bullCase: "CagriSema godkänt 2026, Wegovy-piller tar marknadsandelar, MFN-avtal begränsas – aktie DKK 450+",
+baseCase: "Stabil volymtillväxt kompenserar prissänkningar, pipeline levererar – aktie DKK 340–380",
+bearCase: "MFN slår hårdare än väntat, pipeline-miss, konkurrensen från Eli Lilly accelererar – aktie DKK 160–200",
 },
 };
 
 // ── DATA ────────────────────────────────────────────────────────────────────
 
 const omsattningData = [
-{ ar: “2021”, omsattning: 140.8, typ: “historisk” },
-{ ar: “2022”, omsattning: 177.0, typ: “historisk” },
-{ ar: “2023”, omsattning: 232.3, typ: “historisk” },
-{ ar: “2024”, omsattning: 290.4, typ: “historisk” },
-{ ar: “2025”, omsattning: 309.1, typ: “historisk” },
-{ ar: “2026e”, omsattning: 311.3, typ: “estimat” },
-{ ar: “2027e”, omsattning: 332.2, typ: “estimat” },
+{ ar: "2021", omsattning: 140.8, typ: "historisk" },
+{ ar: "2022", omsattning: 177.0, typ: "historisk" },
+{ ar: "2023", omsattning: 232.3, typ: "historisk" },
+{ ar: "2024", omsattning: 290.4, typ: "historisk" },
+{ ar: "2025", omsattning: 309.1, typ: "historisk" },
+{ ar: "2026e", omsattning: 311.3, typ: "estimat" },
+{ ar: "2027e", omsattning: 332.2, typ: "estimat" },
 ];
 
 const epsData = [
-{ ar: “2021”, eps: 10.40, typ: “historisk” },
-{ ar: “2022”, eps: 12.26, typ: “historisk” },
-{ ar: “2023”, eps: 18.67, typ: “historisk” },
-{ ar: “2024”, eps: 22.67, typ: “historisk” },
-{ ar: “2025”, eps: 23.05, typ: “historisk” },
-{ ar: “2026e”, eps: 22.6, typ: “estimat” },
-{ ar: “2027e”, eps: 23.8, typ: “estimat” },
+{ ar: "2021", eps: 10.40, typ: "historisk" },
+{ ar: "2022", eps: 12.26, typ: "historisk" },
+{ ar: "2023", eps: 18.67, typ: "historisk" },
+{ ar: "2024", eps: 22.67, typ: "historisk" },
+{ ar: "2025", eps: 23.05, typ: "historisk" },
+{ ar: "2026e", eps: 22.6, typ: "estimat" },
+{ ar: "2027e", eps: 23.8, typ: "estimat" },
 ];
 
 const marginalData = [
-{ ar: “2021”, brutto: 83.2, ebit: 41.7, netto: 33.9 },
-{ ar: “2022”, brutto: 83.9, ebit: 42.3, netto: 31.4 },
-{ ar: “2023”, brutto: 84.6, ebit: 44.2, netto: 36.0 },
-{ ar: “2024”, brutto: 84.7, ebit: 44.2, netto: 34.8 },
-{ ar: “2025”, brutto: 81.0, ebit: 41.3, netto: 33.1 },
+{ ar: "2021", brutto: 83.2, ebit: 41.7, netto: 33.9 },
+{ ar: "2022", brutto: 83.9, ebit: 42.3, netto: 31.4 },
+{ ar: "2023", brutto: 84.6, ebit: 44.2, netto: 36.0 },
+{ ar: "2024", brutto: 84.7, ebit: 44.2, netto: 34.8 },
+{ ar: "2025", brutto: 81.0, ebit: 41.3, netto: 33.1 },
 ];
 
 const peData = [
-{ ar: “2022”, pe: null, typ: “historisk” },
-{ ar: “2023”, pe: null, typ: “historisk” },
-{ ar: “2024”, pe: 27.52, typ: “historisk” },
-{ ar: “2025”, pe: 14.10, typ: “historisk” },
-{ ar: “Nu”, pe: 10.24, typ: “nu” },
-{ ar: “2026e”, pe: 10.47, typ: “estimat” },
-{ ar: “2027e”, pe: 9.9, typ: “estimat” },
+{ ar: "2022", pe: null, typ: "historisk" },
+{ ar: "2023", pe: null, typ: "historisk" },
+{ ar: "2024", pe: 27.52, typ: "historisk" },
+{ ar: "2025", pe: 14.10, typ: "historisk" },
+{ ar: "Nu", pe: 10.24, typ: "nu" },
+{ ar: "2026e", pe: 10.47, typ: "estimat" },
+{ ar: "2027e", pe: 9.9, typ: "estimat" },
 ];
 
 const utdelningData = [
-{ ar: “2021”, utd: 5.20, direktavk: null },
-{ ar: “2022”, utd: 6.20, direktavk: null },
-{ ar: “2023”, utd: 9.40, direktavk: null },
-{ ar: “2024”, utd: 11.40, direktavk: 1.83 },
-{ ar: “2025”, utd: 11.70, direktavk: 3.60 },
-{ ar: “2026e”, utd: 11.4, direktavk: 4.83 },
-{ ar: “2027e”, utd: 12.1, direktavk: 5.13 },
+{ ar: "2021", utd: 5.20, direktavk: null },
+{ ar: "2022", utd: 6.20, direktavk: null },
+{ ar: "2023", utd: 9.40, direktavk: null },
+{ ar: "2024", utd: 11.40, direktavk: 1.83 },
+{ ar: "2025", utd: 11.70, direktavk: 3.60 },
+{ ar: "2026e", utd: 11.4, direktavk: 4.83 },
+{ ar: "2027e", utd: 12.1, direktavk: 5.13 },
 ];
 
 // ── CUSTOM TOOLTIP ───────────────────────────────────────────────────────────
 
-const CustomTooltip = ({ active, payload, label, unit = “” }) => {
+const CustomTooltip = ({ active, payload, label, unit = "" }) => {
 if (!active || !payload?.length) return null;
 return (
 <div style={{
-background: “rgba(15,23,42,0.95)”, border: “1px solid #334155”,
-borderRadius: 8, padding: “10px 14px”, color: “#e2e8f0”, fontSize: 13
+background: "rgba(15,23,42,0.95)", border: "1px solid #334155",
+borderRadius: 8, padding: "10px 14px", color: "#e2e8f0", fontSize: 13
 }}>
-<p style={{ fontWeight: 700, marginBottom: 4, color: “#94a3b8” }}>{label}</p>
+<p style={{ fontWeight: 700, marginBottom: 4, color: "#94a3b8" }}>{label}</p>
 {payload.map((p, i) => (
-<p key={i} style={{ color: p.color, margin: “2px 0” }}>
-{p.name}: <strong>{typeof p.value === “number” ? p.value.toFixed(1) : p.value}{unit}</strong>
+<p key={i} style={{ color: p.color, margin: "2px 0" }}>
+{p.name}: <strong>{typeof p.value === "number" ? p.value.toFixed(1) : p.value}{unit}</strong>
 </p>
 ))}
 </div>
@@ -137,11 +137,11 @@ const color = inverted
 : pct >= 0.8 ? COLORS.green : pct >= 0.6 ? COLORS.teal : pct >= 0.4 ? COLORS.gold : COLORS.red;
 return (
 <span style={{
-display: “inline-flex”, alignItems: “center”, gap: 4,
-background: color + “22”, border: `1px solid ${color}55`,
-borderRadius: 6, padding: “2px 10px”, color, fontWeight: 700, fontSize: 15
+display: "inline-flex", alignItems: "center", gap: 4,
+background: color + "22", border: `1px solid ${color}55`,
+borderRadius: 6, padding: "2px 10px", color, fontWeight: 700, fontSize: 15
 }}>
-{score}<span style={{ color: “#64748b”, fontWeight: 400, fontSize: 12 }}>/{max}</span>
+{score}<span style={{ color: "#64748b", fontWeight: 400, fontSize: 12 }}>/{max}</span>
 </span>
 );
 };
@@ -167,70 +167,70 @@ const SectionHeader = ({ roman, title, score, inverted }) => (
 
 const swot = {
 styrkor: [
-“Global marknadsledare inom GLP-1 (59,6% branded volymandel fetma)”,
-“Semaglutide – världens mest sålda läkemedelsmolekyl”,
-“Unik ägarstruktur via Novo Nordisk Foundation – långsiktigt tänkande”,
-“Exceptionell lönsamhet: ROE ~61%, ROIC ~38%”,
-“Starka kassaflöden (~DKK 119 Mdr operativt 2025)”,
+"Global marknadsledare inom GLP-1 (59,6% branded volymandel fetma)",
+"Semaglutide – världens mest sålda läkemedelsmolekyl",
+"Unik ägarstruktur via Novo Nordisk Foundation – långsiktigt tänkande",
+"Exceptionell lönsamhet: ROE ~61%, ROIC ~38%",
+"Starka kassaflöden (~DKK 119 Mdr operativt 2025)",
 ],
 svagheter: [
-“Hög koncentrationsrisk – semaglutide utgör merparten av omsättningen”,
-“Fallande bruttomarginal 2025 (84,7% → 81,0%) p.g.a. Catalent-förvärv”,
-“Nytt ledarskap (Doustdar) med begränsat track record som VD”,
-“Negativt rörelsekapital och stigande skuldsättning efter Catalent-affären”,
+"Hög koncentrationsrisk – semaglutide utgör merparten av omsättningen",
+"Fallande bruttomarginal 2025 (84,7% → 81,0%) p.g.a. Catalent-förvärv",
+"Nytt ledarskap (Doustdar) med begränsat track record som VD",
+"Negativt rörelsekapital och stigande skuldsättning efter Catalent-affären",
 ],
 mojligheter: [
-“CagriSema (22,7% viktnedgång) – potentiellt blockbuster i FDA-ansökan”,
-“Wegovy-piller – öppnar för >100 Mn patienter som ej vill injicera”,
-“WHO-stöd för GLP-1 bredare global tillgång”,
-“Zenagamtide (amycretin) i fas 3 – nästa generations GLP-1/amylin”,
-“Fetma-marknaden ~1 miljard potentiella patienter globalt”,
+"CagriSema (22,7% viktnedgång) – potentiellt blockbuster i FDA-ansökan",
+"Wegovy-piller – öppnar för >100 Mn patienter som ej vill injicera",
+"WHO-stöd för GLP-1 bredare global tillgång",
+"Zenagamtide (amycretin) i fas 3 – nästa generations GLP-1/amylin",
+"Fetma-marknaden ~1 miljard potentiella patienter globalt",
 ],
 hot: [
-“MFN-avtal (Most Favoured Nations) pressar US-priser”,
-“Exclusivitetsförlust semaglutide i vissa marknader (Ozempic 2026 EU)”,
-“Eli Lilly/tirzepatide (Mounjaro/Zepbound) intensifierar konkurrensen”,
-“Medicaid-nedskärningar minskar täckning för fetmaläkemedel”,
-“Politisk/regulatorisk prispress (IRA/Inflation Reduction Act)”,
+"MFN-avtal (Most Favoured Nations) pressar US-priser",
+"Exclusivitetsförlust semaglutide i vissa marknader (Ozempic 2026 EU)",
+"Eli Lilly/tirzepatide (Mounjaro/Zepbound) intensifierar konkurrensen",
+"Medicaid-nedskärningar minskar täckning för fetmaläkemedel",
+"Politisk/regulatorisk prispress (IRA/Inflation Reduction Act)",
 ],
 };
 
 // ── MAIN COMPONENT ───────────────────────────────────────────────────────────
 
 export default function NovoNordiskAnalys() {
-const [tab, setTab] = useState(“oversikt”);
+const [tab, setTab] = useState("oversikt");
 
 const tabs = [
-{ id: “oversikt”, label: “Översikt” },
-{ id: “finansiell”, label: “Finansiell” },
-{ id: “vardering”, label: “Värdering” },
-{ id: “strategi”, label: “Strategi & Risk” },
-{ id: “scenarier”, label: “Scenarier” },
+{ id: "oversikt", label: "Översikt" },
+{ id: "finansiell", label: "Finansiell" },
+{ id: "vardering", label: "Värdering" },
+{ id: "strategi", label: "Strategi & Risk" },
+{ id: "scenarier", label: "Scenarier" },
 ];
 
 return (
 <div style={{
-fontFamily: “‘Segoe UI’, system-ui, sans-serif”,
-background: “#0a0f1e”,
-minHeight: “100vh”,
-color: “#e2e8f0”,
-padding: “0 0 60px 0”,
+fontFamily: "‘Segoe UI’, system-ui, sans-serif",
+background: "#0a0f1e",
+minHeight: "100vh",
+color: "#e2e8f0",
+padding: "0 0 60px 0",
 }}>
 {/* ── HERO HEADER ── */}
 <div style={{
-background: “linear-gradient(135deg, #0a0f1e 0%, #0f172a 40%, #1a0a10 100%)”,
-borderBottom: “1px solid #1e293b”,
-padding: “32px 32px 24px”,
-position: “relative”,
-overflow: “hidden”,
+background: "linear-gradient(135deg, #0a0f1e 0%, #0f172a 40%, #1a0a10 100%)",
+borderBottom: "1px solid #1e293b",
+padding: "32px 32px 24px",
+position: "relative",
+overflow: "hidden",
 }}>
 {/* decorative circles */}
-<div style={{ position: “absolute”, top: -40, right: -40, width: 200, height: 200,
-borderRadius: “50%”, background: COLORS.red + “15”, pointerEvents: “none” }} />
-<div style={{ position: “absolute”, bottom: -20, right: 80, width: 100, height: 100,
-borderRadius: “50%”, background: COLORS.blue + “20”, pointerEvents: “none” }} />
+<div style={{ position: "absolute", top: -40, right: -40, width: 200, height: 200,
+borderRadius: "50%", background: COLORS.red + "15", pointerEvents: "none" }} />
+<div style={{ position: "absolute", bottom: -20, right: 80, width: 100, height: 100,
+borderRadius: "50%", background: COLORS.blue + "20", pointerEvents: "none" }} />
 
-```
+
     <div style={{ display: "flex", alignItems: "flex-start", gap: 20, flexWrap: "wrap" }}>
       <div style={{
         background: COLORS.red, color: "#fff", borderRadius: 12,
@@ -960,7 +960,7 @@ borderRadius: “50%”, background: COLORS.blue + “20”, pointerEvents: “n
     )}
   </div>
 </div>
-```
+
 
 );
 }
