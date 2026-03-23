@@ -9,7 +9,7 @@ export const metadata = createMetadata({
     "Analys av konkurrensläget inom GLP-1, pipeline-uppdateringar och värdering av Novo Nordisk efter 2024 års kursfall.",
   path: "/analyser/novo-nordisk-2025",
   type: "article",
-  publishedTime: "2025-10-20",
+  publishedTime: "2026-03-23",
   author: "Carl Fredrik Thor",
 });
 
