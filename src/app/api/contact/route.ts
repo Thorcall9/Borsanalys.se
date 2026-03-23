@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { createRateLimiter } from "@/lib/rate-limit";
+import { logger } from "@/lib/logger";
 
 const MAX_NAME_LENGTH = 200;
 const MAX_EMAIL_LENGTH = 254;
@@ -8,6 +10,8 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const toEmail = process.env.CONTACT_FORM_TO_EMAIL;
+
+const checkRateLimit = createRateLimiter({ limit: 5, windowSeconds: 60 });
 
 function escapeHtml(str: string): string {
   return str
@@ -19,9 +23,12 @@ function escapeHtml(str: string): string {
 }
 
 export async function POST(request: Request) {
+  const rateLimitResponse = checkRateLimit(request);
+  if (rateLimitResponse) return rateLimitResponse;
+
   try {
     if (!toEmail) {
-      console.error("CONTACT_FORM_TO_EMAIL is not configured");
+      logger.error("CONTACT_FORM_TO_EMAIL is not configured");
       return NextResponse.json({ error: 'Serverkonfiguration saknas.' }, { status: 500 });
     }
 
@@ -66,13 +73,13 @@ export async function POST(request: Request) {
     });
 
     if (error) {
-      console.error("Resend API error:", error);
+      logger.error("Resend API error", { error: String(error) });
       return NextResponse.json({ error: 'Kunde inte skicka meddelandet.' }, { status: 500 });
     }
 
     return NextResponse.json({ message: 'Meddelandet har skickats!' });
   } catch (error: unknown) {
-    console.error("Contact form error:", error instanceof Error ? error.message : error);
+    logger.error("Contact form error", { error: error instanceof Error ? error.message : String(error) });
     return NextResponse.json({ error: 'Ett oväntat fel uppstod.' }, { status: 500 });
   }
 }

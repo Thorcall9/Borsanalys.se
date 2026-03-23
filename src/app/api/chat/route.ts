@@ -1,11 +1,15 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
 import { analyses } from "@/lib/analyses";
+import { createRateLimiter } from "@/lib/rate-limit";
+import { logger } from "@/lib/logger";
 
 const MAX_MESSAGE_LENGTH = 2000;
 
 const apiKey = process.env.GOOGLE_GEMINI_API_KEY?.trim() || "";
 const genAI = new GoogleGenerativeAI(apiKey);
+
+const checkRateLimit = createRateLimiter({ limit: 10, windowSeconds: 60 });
 
 function buildSystemPrompt(): string {
   const analysisLines = analyses
@@ -41,6 +45,9 @@ VIKTIGT:
 }
 
 export async function POST(req: Request) {
+  const rateLimitResponse = checkRateLimit(req);
+  if (rateLimitResponse) return rateLimitResponse;
+
   try {
     const body = await req.json();
     const { message } = body;
@@ -72,7 +79,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ text });
   } catch (error: unknown) {
-    console.error("Chat API error:", error instanceof Error ? error.message : error);
+    logger.error("Chat API error", { error: error instanceof Error ? error.message : String(error) });
     return NextResponse.json(
       { text: "Ett fel uppstod. Försök igen senare." },
       { status: 500 }

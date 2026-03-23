@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { neon } from "@neondatabase/serverless";
+import { createRateLimiter } from "@/lib/rate-limit";
+import { logger } from "@/lib/logger";
 
 const MAX_EMAIL_LENGTH = 254;
 const MAX_NAME_LENGTH = 200;
 const MAX_MESSAGE_LENGTH = 5000;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+const checkRateLimit = createRateLimiter({ limit: 5, windowSeconds: 60 });
 
 const ALLOWED_ORIGINS = [
   "https://borsanalys.se",
@@ -22,6 +26,9 @@ function isValidOrigin(request: NextRequest): boolean {
 }
 
 export async function POST(request: NextRequest) {
+  const rateLimitResponse = checkRateLimit(request);
+  if (rateLimitResponse) return rateLimitResponse;
+
   if (!isValidOrigin(request)) {
     return NextResponse.json({ error: "Otillåten källa." }, { status: 403 });
   }
@@ -51,7 +58,7 @@ export async function POST(request: NextRequest) {
   if (isNewsletter) {
     const databaseUrl = process.env.DATABASE_URL;
     if (!databaseUrl) {
-      console.error("DATABASE_URL is not configured");
+      logger.error("DATABASE_URL is not configured");
       return NextResponse.json({ error: "Serverkonfiguration saknas." }, { status: 500 });
     }
 
@@ -63,7 +70,7 @@ export async function POST(request: NextRequest) {
         ON CONFLICT (email) DO NOTHING
       `;
     } catch (err) {
-      console.error("Database error during newsletter subscription");
+      logger.error("Database error during newsletter subscription");
       return NextResponse.json({ error: "Kunde inte spara prenumerationen." }, { status: 500 });
     }
   }

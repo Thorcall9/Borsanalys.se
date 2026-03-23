@@ -1,6 +1,22 @@
 import type { NextConfig } from "next";
 
+const ContentSecurityPolicy = `
+  default-src 'self';
+  script-src 'self' 'unsafe-eval' https://www.googletagmanager.com https://cdnjs.cloudflare.com;
+  style-src 'self' 'unsafe-inline';
+  img-src 'self' data: https://www.googletagmanager.com;
+  font-src 'self';
+  connect-src 'self' https://www.google-analytics.com https://query2.finance.yahoo.com https://vitals.vercel-insights.com;
+  frame-ancestors 'none';
+  base-uri 'self';
+  form-action 'self';
+`;
+
 const securityHeaders = [
+  {
+    key: "Content-Security-Policy",
+    value: ContentSecurityPolicy.replace(/\s{2,}/g, " ").trim(),
+  },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "X-Frame-Options", value: "DENY" },
   { key: "X-XSS-Protection", value: "1; mode=block" },

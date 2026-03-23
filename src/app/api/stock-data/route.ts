@@ -1,19 +1,13 @@
 import { NextResponse } from "next/server";
-
-const FMP_TICKERS: Record<string, string> = {
-  NVDA: "NVDA",
-  MSFT: "MSFT",
-  GOOGL: "GOOGL",
-};
-
-const YAHOO_TICKERS: Record<string, string> = {
-  "VOLV-B": "VOLV-B.ST",
-  "INVE-B": "INVE-B.ST",
-};
+import { FMP_TICKERS, YAHOO_WIDGET_TICKERS } from "@/lib/ticker-mappings";
+import { createRateLimiter } from "@/lib/rate-limit";
+import { logger } from "@/lib/logger";
 
 let cache: { data: StockData[]; timestamp: number } | null = null;
 /** Cache time-to-live: 1 hour in milliseconds */
 const CACHE_TTL_MS = 60 * 60 * 1000;
+
+const checkRateLimit = createRateLimiter({ limit: 30, windowSeconds: 60 });
 
 export interface StockData {
   ticker: string;
@@ -72,7 +66,7 @@ async function fetchYahooData(
       error: false,
     };
   } catch (error: unknown) {
-    console.error(`Yahoo fetch error for ${displayTicker}:`, error instanceof Error ? error.message : error);
+    logger.error("Yahoo fetch error", { ticker: displayTicker, error: error instanceof Error ? error.message : String(error) });
     return {
       ticker: displayTicker,
       name: displayTicker,
@@ -129,7 +123,7 @@ async function fetchFmpData(
       error: false,
     };
   } catch (error: unknown) {
-    console.error(`FMP fetch error for ${displayTicker}:`, error instanceof Error ? error.message : error);
+    logger.error("FMP fetch error", { ticker: displayTicker, error: error instanceof Error ? error.message : String(error) });
     return {
       ticker: displayTicker,
       name: displayTicker,
@@ -147,6 +141,9 @@ async function fetchFmpData(
 }
 
 export async function GET(request: Request) {
+  const rateLimitResponse = checkRateLimit(request);
+  if (rateLimitResponse) return rateLimitResponse;
+
   const { searchParams } = new URL(request.url);
 
   // Cache reset requires a secret to prevent abuse
@@ -175,7 +172,7 @@ export async function GET(request: Request) {
 
   const [yahooResults, fmpResults] = await Promise.all([
     Promise.all(
-      Object.entries(YAHOO_TICKERS).map(([displayTicker, yahooSymbol]) =>
+      Object.entries(YAHOO_WIDGET_TICKERS).map(([displayTicker, yahooSymbol]) =>
         fetchYahooData(displayTicker, yahooSymbol)
       )
     ),

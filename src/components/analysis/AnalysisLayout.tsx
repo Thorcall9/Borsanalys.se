@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
+import { logger } from "@/lib/logger";
 // ─────────────────────────────────────────────────────────────
 // TYPES
 // ─────────────────────────────────────────────────────────────
@@ -47,18 +47,6 @@ const REC_CONFIG = {
   SALJ:   { label: "SÄLJ",   bg: "bg-red-600",     text: "text-white" },
 };
 
-// Mappa display-ticker till Yahoo-symbol
-function toYahooSymbol(ticker: string): string {
-  const map: Record<string, string> = {
-    "INVE B": "INVE-B.ST",
-    "VOLV B": "VOLV-B.ST",
-    "NVDA":   "NVDA",
-    "MSFT":   "MSFT",
-    "GOOGL":  "GOOGL",
-  };
-  return map[ticker] ?? ticker.replace(" ", "-") + ".ST";
-}
-
 function formatPrice(price: number, currency: string) {
   if (currency === "SEK")
     return price.toLocaleString("sv-SE", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " SEK";
@@ -91,18 +79,16 @@ function useLiveData(ticker: string): { data: LiveData | null; loading: boolean 
     async function load() {
       if (!ticker) { setLoading(false); return; }
       try {
-        // Försök hämta från Yahoo direkt för 52v high/low och volym
-        const yahooSymbol = toYahooSymbol(ticker);
         const res = await fetch(
-          `https://query2.finance.yahoo.com/v8/finance/chart/${yahooSymbol}?interval=1d&range=1d`
+          `/api/stock-chart?ticker=${encodeURIComponent(ticker)}&range=1d&interval=1d`
         );
-        if (!res.ok) throw new Error("Yahoo fel");
+        if (!res.ok) throw new Error("API fel");
         const json = await res.json();
-        const meta = json?.chart?.result?.[0]?.meta;
+        const meta = json?.meta;
         if (!meta) throw new Error("Ingen meta");
 
         const price = meta.regularMarketPrice ?? null;
-        const prev = meta.previousClose ?? meta.chartPreviousClose ?? null;
+        const prev = meta.previousClose ?? null;
         const change = price && prev ? price - prev : null;
         const changePct = change && prev ? (change / prev) * 100 : null;
 
@@ -113,7 +99,7 @@ function useLiveData(ticker: string): { data: LiveData | null; loading: boolean 
           high52: meta.fiftyTwoWeekHigh ?? null,
           low52: meta.fiftyTwoWeekLow ?? null,
           volume: meta.regularMarketVolume ?? null,
-          pe: null, // hämtas separat om möjligt
+          pe: null,
           eps: null,
           marketCap: null,
           dividendYield: null,
@@ -121,7 +107,7 @@ function useLiveData(ticker: string): { data: LiveData | null; loading: boolean 
           name: meta.longName ?? meta.shortName ?? ticker,
         });
       } catch (error: unknown) {
-        console.warn(`Failed to fetch live data for ${ticker}:`, error instanceof Error ? error.message : error);
+        logger.warn("Failed to fetch live data", { ticker, error: error instanceof Error ? error.message : String(error) });
         setData(null);
       } finally {
         setLoading(false);
@@ -146,13 +132,12 @@ function Sparkline({ ticker, positive }: { ticker: string; positive: boolean }) 
         const { Chart, registerables } = await import("chart.js");
         Chart.register(...registerables);
 
-        const yahooSymbol = toYahooSymbol(ticker);
         const res = await fetch(
-          `https://query2.finance.yahoo.com/v8/finance/chart/${yahooSymbol}?interval=1d&range=3mo`
+          `/api/stock-chart?ticker=${encodeURIComponent(ticker)}&range=3mo&interval=1d`
         );
         const json = await res.json();
-        const closes = json?.chart?.result?.[0]?.indicators?.quote?.[0]?.close ?? [];
-        const timestamps = json?.chart?.result?.[0]?.timestamp ?? [];
+        const closes = json?.closes ?? [];
+        const timestamps = json?.timestamps ?? [];
 
         if (!canvasRef.current || closes.length === 0) return;
 
@@ -188,7 +173,7 @@ function Sparkline({ ticker, positive }: { ticker: string; positive: boolean }) 
           },
         });
       } catch (error: unknown) {
-        console.warn(`Failed to draw sparkline for ${ticker}:`, error instanceof Error ? error.message : error);
+        logger.warn("Failed to draw sparkline", { ticker, error: error instanceof Error ? error.message : String(error) });
       }
     }
     draw();

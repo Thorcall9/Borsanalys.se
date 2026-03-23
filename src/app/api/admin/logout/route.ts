@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createHmac, timingSafeEqual } from "crypto";
+import { createRateLimiter } from "@/lib/rate-limit";
+
+const checkRateLimit = createRateLimiter({ limit: 10, windowSeconds: 60 });
 
 function isAuthenticated(request: NextRequest): boolean {
   const adminPassword = process.env.ADMIN_PASSWORD;
@@ -17,6 +20,9 @@ function isAuthenticated(request: NextRequest): boolean {
 }
 
 export async function POST(request: NextRequest) {
+  const rateLimitResponse = checkRateLimit(request);
+  if (rateLimitResponse) return rateLimitResponse;
+
   if (!isAuthenticated(request)) {
     return NextResponse.json({ error: "Ej autentiserad." }, { status: 401 });
   }

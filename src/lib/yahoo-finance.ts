@@ -6,17 +6,8 @@ export interface LiveMetrics {
   updatedAt: string | null;
 }
 
-const TICKER_TO_YAHOO: Record<string, string> = {
-  NVDA: "NVDA",
-  MSFT: "MSFT",
-  GOOGL: "GOOGL",
-  "INVE-B": "INVE-B.ST",
-  "VOLV-B": "VOLV-B.ST",
-  "NOVO-B": "NOVO-B.CO",
-  "NEWA-B": "NEWA-B.ST",
-  FREET: "FREET.ST",
-  EVO: "EVO.ST",
-};
+import { TICKER_TO_YAHOO } from "./ticker-mappings";
+import { logger } from "./logger";
 
 const BILLION = 1_000_000_000;
 const TRILLION = 1_000_000_000_000;
@@ -74,7 +65,7 @@ export async function fetchStockMetrics(ticker: string): Promise<LiveMetrics | n
       updatedAt: new Date().toISOString(),
     };
   } catch (error: unknown) {
-    console.warn(`Failed to fetch stock metrics for ${ticker}:`, error instanceof Error ? error.message : error);
+    logger.warn("Failed to fetch stock metrics", { ticker, error: error instanceof Error ? error.message : String(error) });
     return null;
   }
 }

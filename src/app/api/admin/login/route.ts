@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createHmac, timingSafeEqual } from "crypto";
+import { createRateLimiter } from "@/lib/rate-limit";
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 const SESSION_SECRET = process.env.SESSION_SECRET;
+
+const checkRateLimit = createRateLimiter({ limit: 5, windowSeconds: 60 });
 
 function generateToken(): string {
   if (!ADMIN_PASSWORD || !SESSION_SECRET) return "";
@@ -10,6 +13,9 @@ function generateToken(): string {
 }
 
 export async function POST(request: NextRequest) {
+  const rateLimitResponse = checkRateLimit(request);
+  if (rateLimitResponse) return rateLimitResponse;
+
   if (!ADMIN_PASSWORD || !SESSION_SECRET) {
     return NextResponse.json(
       { error: "Serverkonfiguration saknas." },
