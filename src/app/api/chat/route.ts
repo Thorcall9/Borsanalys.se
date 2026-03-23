@@ -2,6 +2,8 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
 import { analyses } from "@/lib/analyses";
 
+const MAX_MESSAGE_LENGTH = 2000;
+
 const apiKey = process.env.GOOGLE_GEMINI_API_KEY?.trim() || "";
 const genAI = new GoogleGenerativeAI(apiKey);
 
@@ -40,20 +42,40 @@ VIKTIGT:
 
 export async function POST(req: Request) {
   try {
-    const { message } = await req.json();
+    const body = await req.json();
+    const { message } = body;
+
+    if (!message || typeof message !== "string") {
+      return NextResponse.json({ text: "Meddelandet saknas." }, { status: 400 });
+    }
+
+    const trimmed = message.trim();
+    if (trimmed.length === 0 || trimmed.length > MAX_MESSAGE_LENGTH) {
+      return NextResponse.json(
+        { text: `Meddelandet måste vara mellan 1 och ${MAX_MESSAGE_LENGTH} tecken.` },
+        { status: 400 }
+      );
+    }
+
+    if (!apiKey) {
+      return NextResponse.json({ text: "AI-tjänsten är inte konfigurerad." }, { status: 500 });
+    }
 
     const model = genAI.getGenerativeModel({
       model: "gemini-2.5-flash",
       systemInstruction: buildSystemPrompt(),
     });
 
-    const result = await model.generateContent(message);
+    const result = await model.generateContent(trimmed);
     const response = await result.response;
     const text = response.text();
 
     return NextResponse.json({ text });
-  } catch (error: any) {
-    console.error("DETALJERAT FEL:", error.message);
-    return NextResponse.json({ text: `Fel: ${error.message}` }, { status: 500 });
+  } catch (error: unknown) {
+    console.error("Chat API error:", error instanceof Error ? error.message : error);
+    return NextResponse.json(
+      { text: "Ett fel uppstod. Försök igen senare." },
+      { status: 500 }
+    );
   }
 }

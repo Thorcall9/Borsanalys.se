@@ -2,9 +2,7 @@
 
 import { useState, useMemo } from "react";
 import SliderInput from "@/components/ui/SliderInput";
-
-const sekFormatter = new Intl.NumberFormat("sv-SE", { style: "currency", currency: "SEK", maximumFractionDigits: 0 });
-const formatSek = (n: number) => sekFormatter.format(n);
+import { formatSek } from "@/lib/formatters";
 
 export default function CompoundCalculator() {
   const [startAmount, setStartAmount] = useState(50000);

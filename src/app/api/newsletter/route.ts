@@ -4,17 +4,21 @@ import { neon } from "@neondatabase/serverless";
 const MAX_EMAIL_LENGTH = 254;
 const MAX_NAME_LENGTH = 200;
 const MAX_MESSAGE_LENGTH = 5000;
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+const ALLOWED_ORIGINS = [
+  "https://borsanalys.se",
+  "https://www.borsanalys.se",
+];
 
 function isValidOrigin(request: NextRequest): boolean {
   const origin = request.headers.get("origin");
-  if (!origin) return true;
-  return (
-    origin === "https://borsanalys.se" ||
-    origin === "https://www.borsanalys.se" ||
-    origin.endsWith(".vercel.app") ||
-    origin.startsWith("http://localhost")
-  );
+  if (!origin) return false;
+  if (ALLOWED_ORIGINS.includes(origin)) return true;
+  // Allow Vercel preview deployments for this specific project
+  if (origin.endsWith("-thorcall9s-projects.vercel.app")) return true;
+  if (process.env.NODE_ENV === "development" && origin.startsWith("http://localhost:")) return true;
+  return false;
 }
 
 export async function POST(request: NextRequest) {
@@ -44,28 +48,24 @@ export async function POST(request: NextRequest) {
     if (message && message.length > MAX_MESSAGE_LENGTH) return NextResponse.json({ error: "Meddelandet är för långt." }, { status: 400 });
   }
 
-  // SPARA I NEON
   if (isNewsletter) {
+    const databaseUrl = process.env.DATABASE_URL;
+    if (!databaseUrl) {
+      console.error("DATABASE_URL is not configured");
+      return NextResponse.json({ error: "Serverkonfiguration saknas." }, { status: 500 });
+    }
+
     try {
-      const sql = neon(process.env.DATABASE_URL!);
-      await sql`
-        CREATE TABLE IF NOT EXISTS subscribers (
-          id SERIAL PRIMARY KEY,
-          email TEXT UNIQUE NOT NULL,
-          created_at TIMESTAMP DEFAULT NOW()
-        )
-      `;
+      const sql = neon(databaseUrl);
       await sql`
         INSERT INTO subscribers (email)
         VALUES (${email})
         ON CONFLICT (email) DO NOTHING
       `;
-      console.log("NY PRENUMERANT SPARAD:", email);
     } catch (err) {
-      console.error("Neon-fel:", err);
+      console.error("Database error during newsletter subscription");
+      return NextResponse.json({ error: "Kunde inte spara prenumerationen." }, { status: 500 });
     }
-  } else {
-    console.log("KONTAKTMEDDELANDE:", { name, email, message });
   }
 
   const redirectUrl = isNewsletter ? "/?prenumeration=klar" : "/kontakt?skickat=true";

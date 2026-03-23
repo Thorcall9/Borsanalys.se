@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 const SITE_NAME = "Börsanalys.se";
-const SITE_URL = "https://borsanalys.se";
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://borsanalys.se";
 const SITE_DESCRIPTION =
   "AI-driven aktieanalys för smartare investeringar. Detaljerade analyser, värderingsmodeller och finansiella verktyg.";
 
