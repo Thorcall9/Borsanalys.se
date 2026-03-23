@@ -3,13 +3,12 @@
 import { useEffect, useState, useRef } from "react";
 
 interface Stock {
-  ticker: string;
-  name: string;
-  price: number | null;
-  change: number | null;
-  changePercent: number | null;
+  symbol: string;
+  display: string;
+  price: number;
+  change: number;
+  changePercent: number;
   currency: string;
-  error?: boolean;
 }
 
 function formatPrice(price: number, currency: string): string {
@@ -34,48 +33,26 @@ export default function StockTicker() {
   const trackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const POLL_INTERVAL_MS = 60_000;
-    let intervalId: ReturnType<typeof setInterval> | null = null;
-
     async function fetchStocks() {
       try {
         const res = await fetch("/api/stock-data");
         if (res.ok) {
           const data = await res.json();
-          setStocks(data.data ?? []);
+          setStocks(data.stocks ?? []);
         }
       } finally {
         setLoading(false);
       }
     }
-
-    function startPolling() {
-      fetchStocks();
-      intervalId = setInterval(fetchStocks, POLL_INTERVAL_MS);
-    }
-
-    function stopPolling() {
-      if (intervalId) { clearInterval(intervalId); intervalId = null; }
-    }
-
-    function handleVisibility() {
-      if (document.hidden) { stopPolling(); } else { startPolling(); }
-    }
-
-    startPolling();
-    document.addEventListener("visibilitychange", handleVisibility);
-    return () => {
-      stopPolling();
-      document.removeEventListener("visibilitychange", handleVisibility);
-    };
+    fetchStocks();
+    const interval = setInterval(fetchStocks, 60_000);
+    return () => clearInterval(interval);
   }, []);
 
-  const validStocks = stocks.filter((s) => !s.error && s.price !== null);
-
-  if (loading || validStocks.length === 0) return null;
+  if (loading || stocks.length === 0) return null;
 
   // Duplicate list for seamless loop
-  const items = [...validStocks, ...validStocks];
+  const items = [...stocks, ...stocks];
 
   return (
     <div className="bg-card border-b border-border overflow-hidden select-none">
@@ -87,22 +64,22 @@ export default function StockTicker() {
         >
           {items.map((stock, i) => (
             <div
-              key={`${stock.ticker}-${i}`}
+              key={`${stock.symbol}-${i}`}
               className="inline-flex items-center gap-2 px-5 py-2 border-r border-border/50 shrink-0"
             >
               <span className="text-xs font-semibold text-foreground">
-                {stock.ticker}
+                {stock.display}
               </span>
               <span className="text-xs font-mono text-muted">
-                {formatPrice(stock.price!, stock.currency)}{" "}
+                {formatPrice(stock.price, stock.currency)}{" "}
                 {stock.currency === "SEK" ? "kr" : "$"}
               </span>
               <span
                 className={`text-xs font-mono font-medium ${
-                  (stock.changePercent ?? 0) >= 0 ? "text-emerald-600" : "text-rose-600"
+                  stock.changePercent >= 0 ? "text-emerald-600" : "text-rose-600"
                 }`}
               >
-                {formatChange(stock.change ?? 0)} ({formatPercent(stock.changePercent ?? 0)})
+                {formatChange(stock.change)} ({formatPercent(stock.changePercent)})
               </span>
             </div>
           ))}

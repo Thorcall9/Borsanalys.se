@@ -1,24 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createHmac, timingSafeEqual } from "crypto";
-import { createRateLimiter } from "@/lib/rate-limit";
+import { createHmac } from "crypto";
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
-const SESSION_SECRET = process.env.SESSION_SECRET;
-
-const checkRateLimit = createRateLimiter({ limit: 5, windowSeconds: 60 });
+const SESSION_SECRET = process.env.SESSION_SECRET || "borsanalys-default-session-secret";
 
 function generateToken(): string {
-  if (!ADMIN_PASSWORD || !SESSION_SECRET) return "";
+  if (!ADMIN_PASSWORD) return "";
   return createHmac("sha256", SESSION_SECRET).update(ADMIN_PASSWORD).digest("hex");
 }
 
 export async function POST(request: NextRequest) {
-  const rateLimitResponse = checkRateLimit(request);
-  if (rateLimitResponse) return rateLimitResponse;
-
-  if (!ADMIN_PASSWORD || !SESSION_SECRET) {
+  if (!ADMIN_PASSWORD) {
     return NextResponse.json(
-      { error: "Serverkonfiguration saknas." },
+      { error: "Admin-lösenord ej konfigurerat på servern." },
       { status: 500 }
     );
   }
@@ -32,11 +26,7 @@ export async function POST(request: NextRequest) {
 
   const password = body.password?.trim();
 
-  if (
-    !password ||
-    password.length !== ADMIN_PASSWORD.length ||
-    !timingSafeEqual(Buffer.from(password), Buffer.from(ADMIN_PASSWORD))
-  ) {
+  if (!password || password !== ADMIN_PASSWORD) {
     return NextResponse.json({ error: "Fel lösenord." }, { status: 401 });
   }
 

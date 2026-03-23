@@ -16,7 +16,7 @@ export async function GET(request) {
     return new Response("Not found", { status: 404 });
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://borsanalys.se";
+  const baseUrl = "https://www.borsanalys.se";
 
   const items = analyses
     .sort((a, b) => new Date(b.date) - new Date(a.date))

@@ -1,18 +1,18 @@
 "use client";
 
-import { useState, memo } from "react";
+import { useState } from "react";
 
-function ChatWidget() {
+export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
-  const [chatLog, setChatLog] = useState<{ id: string; role: string; text: string }[]>([]);
+  const [chatLog, setChatLog] = useState<{ role: string; text: string }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!message.trim()) return;
 
-    const userMsg = { id: `user-${Date.now()}`, role: "user", text: message };
+    const userMsg = { role: "user", text: message };
     setChatLog((prev) => [...prev, userMsg]);
     setMessage("");
     setIsLoading(true);
@@ -23,16 +23,10 @@ function ChatWidget() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message }),
       });
-
       const data = await res.json();
-
-      if (!res.ok) {
-        setChatLog((prev) => [...prev, { id: `ai-${Date.now()}`, role: "ai", text: data.text ?? "Ett fel uppstod." }]);
-      } else {
-        setChatLog((prev) => [...prev, { id: `ai-${Date.now()}`, role: "ai", text: data.text }]);
-      }
-    } catch {
-      setChatLog((prev) => [...prev, { id: `ai-${Date.now()}`, role: "ai", text: "Oj, något gick fel. Försök igen snart!" }]);
+      setChatLog((prev) => [...prev, { role: "ai", text: data.text }]);
+    } catch (err) {
+      setChatLog((prev) => [...prev, { role: "ai", text: "Oj, något gick fel. Försök igen snart!" }]);
     } finally {
       setIsLoading(false);
     }
@@ -41,7 +35,7 @@ function ChatWidget() {
   return (
     <div className="fixed bottom-6 right-6 z-[100]">
       {/* Chatt-bubbla knapp */}
-      <button
+      <button 
         onClick={() => setIsOpen(!isOpen)}
         className="bg-primary hover:bg-primary-light text-white p-4 rounded-full shadow-2xl transition-all transform hover:scale-110"
       >
@@ -55,15 +49,15 @@ function ChatWidget() {
             <h3 className="font-bold">Börsanalys AI</h3>
             <p className="text-xs opacity-80">Ställ frågor om aktier & analyser</p>
           </div>
-
+          
           <div className="h-80 overflow-y-auto p-4 space-y-4 bg-background">
             {chatLog.length === 0 && (
               <p className="text-sm text-muted text-center mt-10 italic">
                 Hej! Jag är din AI-analytiker. Vad vill du veta mer om idag?
               </p>
             )}
-            {chatLog.map((msg) => (
-              <div key={msg.id} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+            {chatLog.map((msg, i) => (
+              <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
                 <div className={`max-w-[80%] p-3 rounded-2xl text-sm ${
                   msg.role === "user" ? "bg-primary text-white" : "bg-section-alt border border-border text-foreground"
                 }`}>
@@ -95,5 +89,3 @@ function ChatWidget() {
     </div>
   );
 }
-
-export default memo(ChatWidget);

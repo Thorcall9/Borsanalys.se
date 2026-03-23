@@ -1,34 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 import { neon } from "@neondatabase/serverless";
-import { createRateLimiter } from "@/lib/rate-limit";
-import { logger } from "@/lib/logger";
 
 const MAX_EMAIL_LENGTH = 254;
 const MAX_NAME_LENGTH = 200;
 const MAX_MESSAGE_LENGTH = 5000;
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
-const checkRateLimit = createRateLimiter({ limit: 5, windowSeconds: 60 });
-
-const ALLOWED_ORIGINS = [
-  "https://borsanalys.se",
-  "https://www.borsanalys.se",
-];
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function isValidOrigin(request: NextRequest): boolean {
   const origin = request.headers.get("origin");
-  if (!origin) return false;
-  if (ALLOWED_ORIGINS.includes(origin)) return true;
-  // Allow Vercel preview deployments for this specific project
-  if (origin.endsWith("-thorcall9s-projects.vercel.app")) return true;
-  if (process.env.NODE_ENV === "development" && origin.startsWith("http://localhost:")) return true;
-  return false;
+  if (!origin) return true;
+  return (
+    origin === "https://borsanalys.se" ||
+    origin === "https://www.borsanalys.se" ||
+    origin.endsWith(".vercel.app") ||
+    origin.startsWith("http://localhost")
+  );
 }
 
 export async function POST(request: NextRequest) {
-  const rateLimitResponse = checkRateLimit(request);
-  if (rateLimitResponse) return rateLimitResponse;
-
   if (!isValidOrigin(request)) {
     return NextResponse.json({ error: "Otillåten källa." }, { status: 403 });
   }
@@ -55,24 +44,28 @@ export async function POST(request: NextRequest) {
     if (message && message.length > MAX_MESSAGE_LENGTH) return NextResponse.json({ error: "Meddelandet är för långt." }, { status: 400 });
   }
 
+  // SPARA I NEON
   if (isNewsletter) {
-    const databaseUrl = process.env.DATABASE_URL;
-    if (!databaseUrl) {
-      logger.error("DATABASE_URL is not configured");
-      return NextResponse.json({ error: "Serverkonfiguration saknas." }, { status: 500 });
-    }
-
     try {
-      const sql = neon(databaseUrl);
+      const sql = neon(process.env.DATABASE_URL!);
+      await sql`
+        CREATE TABLE IF NOT EXISTS subscribers (
+          id SERIAL PRIMARY KEY,
+          email TEXT UNIQUE NOT NULL,
+          created_at TIMESTAMP DEFAULT NOW()
+        )
+      `;
       await sql`
         INSERT INTO subscribers (email)
         VALUES (${email})
         ON CONFLICT (email) DO NOTHING
       `;
+      console.log("NY PRENUMERANT SPARAD:", email);
     } catch (err) {
-      logger.error("Database error during newsletter subscription");
-      return NextResponse.json({ error: "Kunde inte spara prenumerationen." }, { status: 500 });
+      console.error("Neon-fel:", err);
     }
+  } else {
+    console.log("KONTAKTMEDDELANDE:", { name, email, message });
   }
 
   const redirectUrl = isNewsletter ? "/?prenumeration=klar" : "/kontakt?skickat=true";

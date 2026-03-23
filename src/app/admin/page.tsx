@@ -1,20 +1,16 @@
 import { cookies } from "next/headers";
-import { createHmac, timingSafeEqual } from "crypto";
+import { createHmac } from "crypto";
 import AdminLogin from "./AdminLogin";
 import AdminDashboard from "./AdminDashboard";
 
 function isAuthenticated(sessionCookie: string | undefined): boolean {
   const adminPassword = process.env.ADMIN_PASSWORD;
-  const sessionSecret = process.env.SESSION_SECRET;
+  const sessionSecret = process.env.SESSION_SECRET || "borsanalys-default-session-secret";
 
-  if (!adminPassword || !sessionSecret || !sessionCookie) return false;
+  if (!adminPassword || !sessionCookie) return false;
 
   const expected = createHmac("sha256", sessionSecret).update(adminPassword).digest("hex");
-  try {
-    return timingSafeEqual(Buffer.from(sessionCookie), Buffer.from(expected));
-  } catch {
-    return false;
-  }
+  return sessionCookie === expected;
 }
 
 export default async function AdminPage() {

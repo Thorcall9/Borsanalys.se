@@ -1,13 +1,18 @@
 import { NextResponse } from "next/server";
-import { FMP_TICKERS, YAHOO_WIDGET_TICKERS } from "@/lib/ticker-mappings";
-import { createRateLimiter } from "@/lib/rate-limit";
-import { logger } from "@/lib/logger";
+
+const FMP_TICKERS: Record<string, string> = {
+  NVDA: "NVDA",
+  MSFT: "MSFT",
+  GOOGL: "GOOGL",
+};
+
+const YAHOO_TICKERS: Record<string, string> = {
+  "VOLV-B": "VOLV-B.ST",
+  "INVE-B": "INVE-B.ST",
+};
 
 let cache: { data: StockData[]; timestamp: number } | null = null;
-/** Cache time-to-live: 1 hour in milliseconds */
-const CACHE_TTL_MS = 60 * 60 * 1000;
-
-const checkRateLimit = createRateLimiter({ limit: 30, windowSeconds: 60 });
+const CACHE_TTL = 60 * 60 * 1000;
 
 export interface StockData {
   ticker: string;
@@ -47,10 +52,7 @@ async function fetchYahooData(
     const price = meta.regularMarketPrice ?? null;
     const previousClose = meta.previousClose ?? meta.chartPreviousClose ?? null;
     const change = price !== null && previousClose !== null ? price - previousClose : null;
-    const changePercent =
-      change !== null && previousClose !== null && previousClose !== 0
-        ? (change / previousClose) * 100
-        : null;
+    const changePercent = change !== null && previousClose ? (change / previousClose) * 100 : null;
 
     return {
       ticker: displayTicker,
@@ -65,8 +67,7 @@ async function fetchYahooData(
       currency: meta.currency ?? "SEK",
       error: false,
     };
-  } catch (error: unknown) {
-    logger.error("Yahoo fetch error", { ticker: displayTicker, error: error instanceof Error ? error.message : String(error) });
+  } catch {
     return {
       ticker: displayTicker,
       name: displayTicker,
@@ -105,9 +106,7 @@ async function fetchFmpData(
     if (!quote) throw new Error("Ingen quote-data");
 
     const dividendYield =
-      profile?.lastDiv && quote.price && quote.price !== 0
-        ? (profile.lastDiv / quote.price) * 100
-        : null;
+      profile?.lastDiv && quote.price ? (profile.lastDiv / quote.price) * 100 : null;
 
     return {
       ticker: displayTicker,
@@ -122,8 +121,7 @@ async function fetchFmpData(
       currency: profile?.currency ?? "USD",
       error: false,
     };
-  } catch (error: unknown) {
-    logger.error("FMP fetch error", { ticker: displayTicker, error: error instanceof Error ? error.message : String(error) });
+  } catch {
     return {
       ticker: displayTicker,
       name: displayTicker,
@@ -141,20 +139,13 @@ async function fetchFmpData(
 }
 
 export async function GET(request: Request) {
-  const rateLimitResponse = checkRateLimit(request);
-  if (rateLimitResponse) return rateLimitResponse;
-
   const { searchParams } = new URL(request.url);
 
-  // Cache reset requires a secret to prevent abuse
   if (searchParams.get("reset") === "true") {
-    const resetSecret = searchParams.get("secret");
-    if (resetSecret && resetSecret === process.env.SESSION_SECRET) {
-      cache = null;
-    }
+    cache = null;
   }
 
-  if (cache && Date.now() - cache.timestamp < CACHE_TTL_MS) {
+  if (cache && Date.now() - cache.timestamp < CACHE_TTL) {
     return NextResponse.json({
       data: cache.data,
       cached: true,
@@ -172,7 +163,7 @@ export async function GET(request: Request) {
 
   const [yahooResults, fmpResults] = await Promise.all([
     Promise.all(
-      Object.entries(YAHOO_WIDGET_TICKERS).map(([displayTicker, yahooSymbol]) =>
+      Object.entries(YAHOO_TICKERS).map(([displayTicker, yahooSymbol]) =>
         fetchYahooData(displayTicker, yahooSymbol)
       )
     ),

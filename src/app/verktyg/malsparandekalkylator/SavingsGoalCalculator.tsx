@@ -2,7 +2,9 @@
 
 import { useState, useMemo } from "react";
 import SliderInput from "@/components/ui/SliderInput";
-import { formatSek } from "@/lib/formatters";
+
+const sekFormatter = new Intl.NumberFormat("sv-SE", { style: "currency", currency: "SEK", maximumFractionDigits: 0 });
+const formatSek = (n: number) => sekFormatter.format(n);
 
 export default function SavingsGoalCalculator() {
   const [goalAmount, setGoalAmount] = useState(1000000);

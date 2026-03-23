@@ -2,10 +2,9 @@ import type { MetadataRoute } from "next";
 import { analyses } from "@/lib/analyses";
 import { companies } from "@/lib/stocks";
 import { guides } from "@/lib/guides";
-import { SITE_URL } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = SITE_URL;
+  const baseUrl = "https://borsanalys.se";
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: baseUrl, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
