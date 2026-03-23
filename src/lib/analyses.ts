@@ -136,6 +136,10 @@ export function getAnalysisBySlug(slug: string): Analysis | undefined {
   return analyses.find((a) => a.slug === slug);
 }
 
+export const sortedAnalyses = [...analyses].sort((a, b) =>
+  b.date.localeCompare(a.date)
+);
+
 export function getFeaturedAnalyses(count = 4): Analysis[] {
-  return analyses.slice(0, count);
+  return sortedAnalyses.slice(0, count);
 }

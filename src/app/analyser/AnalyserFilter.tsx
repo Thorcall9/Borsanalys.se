@@ -19,15 +19,17 @@ export default function AnalyserFilter({ analyses }: { analyses: Analysis[] }) {
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase();
-    return analyses.filter((a) => {
-      const matchSearch =
-        !q ||
-        a.title.toLowerCase().includes(q) ||
-        (a.ticker ?? "").toLowerCase().includes(q);
-      const matchSector = !sector || a.sector === sector;
-      const matchVerdict = !verdict || a.verdict === verdict;
-      return matchSearch && matchSector && matchVerdict;
-    });
+    return analyses
+      .filter((a) => {
+        const matchSearch =
+          !q ||
+          a.title.toLowerCase().includes(q) ||
+          (a.ticker ?? "").toLowerCase().includes(q);
+        const matchSector = !sector || a.sector === sector;
+        const matchVerdict = !verdict || a.verdict === verdict;
+        return matchSearch && matchSector && matchVerdict;
+      })
+      .sort((a, b) => b.date.localeCompare(a.date));
   }, [analyses, search, sector, verdict]);
 
   return (

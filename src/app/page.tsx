@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { analyses } from "@/lib/analyses";
+import { sortedAnalyses as analyses } from "@/lib/analyses";
 import { guides } from "@/lib/guides";
 import { verdictColor } from "@/lib/utils";
 import StockTicker from "@/components/StockTicker";
