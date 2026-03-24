@@ -10,7 +10,7 @@ import {
   ScenarioCards,
   AlertBox,
   RatingBox,
-  RadarChart,
+  ScoreBreakdown,
 } from "@/components/analysis";
 import type { AnalysisSection, Scenario, TableRow } from "@/components/analysis";
 
@@ -118,11 +118,7 @@ export default function VolvoPage() {
       esgMakro: 4,
       aiObservationer: 3,
     };
-    const totaltPoang = Object.values(scores).reduce((sum, score) => sum + score, 0);
-    const maxPoang = 40;
-    const rating = (totaltPoang / maxPoang) * 5;
-
-    return { scores, totaltPoang, maxPoang, rating };
+    return { scores };
   }, []);
 
   return (
@@ -148,35 +144,7 @@ export default function VolvoPage() {
         <section id="overview" data-section="overview" className="mb-16 pt-12">
           <SectionHeader number="I" title="Översikt" />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-8">
-            <div>
-              <RadarChart scores={analysisData.scores} />
-            </div>
-            <div className="space-y-2">
-              <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
-                <span className="text-sm font-bold">Total poäng:</span>
-                <span className="text-xl font-bold font-serif text-[#1a3c6e]">{analysisData.totaltPoang} / {analysisData.maxPoang}</span>
-              </div>
-              <div className="flex justify-between items-center py-2 border-b border-[#e8e4da] mb-3">
-                <span className="text-sm font-bold">Viktat betyg:</span>
-                <span className="text-xl font-bold font-serif text-[#1a3c6e]">{analysisData.rating.toFixed(1)} / 5.0</span>
-              </div>
-              <div className="pt-2 space-y-1">
-                {Object.entries(analysisData.scores).map(([key, value]) => {
-                  const label = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
-                  return (
-                    <div key={key} className="flex items-center gap-3">
-                      <span className="text-xs text-[#5a5a4a] w-32 flex-shrink-0">{label}</span>
-                      <div className="flex-grow bg-[#e8e4da] rounded h-2.5 overflow-hidden">
-                        <div className="h-full rounded" style={{ width: `${(value / 5) * 100}%`, backgroundColor: ACCENT }} />
-                      </div>
-                      <span className="text-xs font-bold text-[#1a3c6e] font-serif w-8 text-right">{value}/5</span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
+          <ScoreBreakdown scores={analysisData.scores} accentColor={ACCENT} />
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
             <MetricCard label="Aktiekurs (mar 2026)" value="324 kr" />

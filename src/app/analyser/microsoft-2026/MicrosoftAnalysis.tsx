@@ -10,7 +10,7 @@ import {
   ScenarioCards,
   AlertBox,
   RatingBox,
-  RadarChart,
+  ScoreBreakdown,
 } from "@/components/analysis";
 import type { AnalysisSection, Scenario, TableColumn, TableRow } from "@/components/analysis";
 
@@ -97,11 +97,7 @@ export default function MicrosoftAnalysis() {
           esgMakro: 4,
           aiObservationer: 5,
         };
-        const totaltPoang = Object.values(scores).reduce((sum, score) => sum + score, 0);
-        const maxPoang = 40;
-        const rating = (totaltPoang / maxPoang) * 5;
-
-        return { scores, totaltPoang, maxPoang, rating };
+        return { scores };
       }, []);
 
   return (
@@ -496,35 +492,7 @@ export default function MicrosoftAnalysis() {
           </div>
 
           <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mt-6 mb-3 pl-2 border-l-[3px] border-[#b5892a]">Samlade scores & Poängdiagram</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-5">
-            <div>
-              <RadarChart scores={analysisData.scores} />
-            </div>
-            <div className="space-y-2">
-              <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
-                <span className="text-sm font-bold">Total poäng:</span>
-                <span className="text-xl font-bold font-serif text-[#1a3c6e]">{analysisData.totaltPoang} / {analysisData.maxPoang}</span>
-              </div>
-              <div className="flex justify-between items-center py-2 border-b border-[#e8e4da] mb-3">
-                <span className="text-sm font-bold">Viktat betyg:</span>
-                <span className="text-xl font-bold font-serif text-[#1a3c6e]">{analysisData.rating.toFixed(1)} / 5.0</span>
-              </div>
-              <div className="pt-2 space-y-1">
-                {Object.entries(analysisData.scores).map(([key, value]) => {
-                  const label = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
-                  return (
-                    <div key={key} className="flex items-center gap-3">
-                      <span className="text-xs text-[#5a5a4a] w-32 flex-shrink-0">{label}</span>
-                      <div className="flex-grow bg-[#e8e4da] rounded h-2.5 overflow-hidden">
-                        <div className="h-full rounded" style={{ width: `${(value / 5) * 100}%`, backgroundColor: ACCENT }} />
-                      </div>
-                      <span className="text-xs font-bold text-[#1a3c6e] font-serif w-8 text-right">{value}/5</span>
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
-          </div>
+          <ScoreBreakdown scores={analysisData.scores} accentColor={ACCENT} />
 
           <h3 className="text-xs font-bold text-[#1a3c6e] uppercase tracking-widest mt-6 mb-2 pl-2 border-l-[3px] border-[#b5892a]">Motivering</h3>
           <p className="text-sm leading-relaxed text-[#2a2a2a] mb-3">

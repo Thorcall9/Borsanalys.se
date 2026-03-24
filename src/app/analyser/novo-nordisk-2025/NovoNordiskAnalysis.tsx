@@ -9,7 +9,7 @@ import {
   SwotGrid,
   ScenarioCards,
   AlertBox,
-  RadarChart,
+  ScoreBreakdown,
 } from "@/components/analysis";
 import type { AnalysisSection, Scenario, TableRow } from "@/components/analysis";
 
@@ -297,8 +297,7 @@ export default function NovoNordiskAnalysis() {
     };
     const totaltPoang = Object.values(scores).reduce((sum, s) => sum + s, 0);
     const maxPoang = 40;
-    const rating = (totaltPoang / maxPoang) * 5;
-    return { scores, totaltPoang, maxPoang, rating };
+    return { scores, totaltPoang, maxPoang };
   }, []);
 
   return (
@@ -323,35 +322,20 @@ export default function NovoNordiskAnalysis() {
         {/* ── I. FÖRETAGSÖVERSIKT ──────────────────────────────────────── */}
         <section id="overview" data-section="overview" className="mb-16 pt-12">
           <SectionHeader number="I" title="Företagsöversikt" />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-8">
-            <RadarChart scores={analysisData.scores} />
-            <div className="space-y-2">
-              <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
-                <span className="text-sm font-bold">Total poäng:</span>
-                <span className="text-xl font-bold font-serif text-[#1a3c6e]">
-                  {analysisData.totaltPoang} / {analysisData.maxPoang}
-                </span>
-              </div>
-              <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
-                <span className="text-sm font-bold">Viktat betyg:</span>
-                <span className="text-xl font-bold font-serif text-[#1a3c6e]">
-                  {analysisData.rating.toFixed(1)} / 5.0
-                </span>
-              </div>
-              <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
-                <span className="text-sm font-bold">Rekommendation:</span>
-                <span className="text-xl font-bold font-serif text-green-700">KÖP</span>
-              </div>
-              <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
-                <span className="text-sm font-bold">Målpris (12 mån):</span>
-                <span className="text-xl font-bold font-serif text-[#1a3c6e]">DKK 340-380</span>
-              </div>
-              <div className="flex justify-between items-center py-2">
-                <span className="text-sm font-bold">Uppsida (base case):</span>
-                <span className="text-xl font-bold font-serif text-green-700">+44-61%</span>
-              </div>
+          <ScoreBreakdown scores={analysisData.scores} accentColor="#C8102E">
+            <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
+              <span className="text-sm font-bold">Rekommendation:</span>
+              <span className="text-xl font-bold font-serif text-green-700">KÖP</span>
             </div>
-          </div>
+            <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
+              <span className="text-sm font-bold">Målpris (12 mån):</span>
+              <span className="text-xl font-bold font-serif text-[#1a3c6e]">DKK 340-380</span>
+            </div>
+            <div className="flex justify-between items-center py-2">
+              <span className="text-sm font-bold">Uppsida (base case):</span>
+              <span className="text-xl font-bold font-serif text-green-700">+44-61%</span>
+            </div>
+          </ScoreBreakdown>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
             <MetricCard label="Börskurs (mars 2026)" value="~DKK 236" trend="-48% under 2025" />
