@@ -276,7 +276,7 @@ export default function NvidiaAnalysisPage() {
           </div>
 
           <h3 className="text-xs font-bold text-[#76B900] uppercase tracking-widest mt-6 mb-3 pl-2 border-l-[3px] border-[#76B900]">Samlade scores & Poängdiagram</h3>
-          <ScoreBreakdown scores={analysisData.scores} accentColor={ACCENT} />
+          <ScoreBreakdown scores={analysisData.scores} accentColor={ACCENT} theme="dark" />
 
           <h3 className="text-xs font-bold text-[#76B900] uppercase tracking-widest mt-6 mb-2 pl-2 border-l-[3px] border-[#76B900]">Motivering</h3>
           <p className="text-sm leading-relaxed text-[#b0b0b0] mb-3">

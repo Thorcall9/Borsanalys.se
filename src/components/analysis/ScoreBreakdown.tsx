@@ -28,6 +28,7 @@ export interface ScoreBreakdownProps {
     aiObservationer: number;
   };
   accentColor?: string;
+  theme?: "light" | "dark";
   /** Category keys to hide from the bar list (e.g. ["aiObservationer"]) */
   hideCategories?: string[];
   /** Extra summary rows rendered below the score bars */
@@ -40,6 +41,7 @@ const MAX_TOTAL = 40;
 export default function ScoreBreakdown({
   scores,
   accentColor = "#1a3c6e",
+  theme = "light",
   hideCategories,
   children,
 }: ScoreBreakdownProps) {
@@ -48,6 +50,13 @@ export default function ScoreBreakdown({
 
   const hiddenSet = hideCategories ? new Set(hideCategories) : null;
 
+  const isDark = theme === "dark";
+  const borderColor = isDark ? "border-[#333]" : "border-[#e8e4da]";
+  const labelColor = isDark ? "text-[#999]" : "text-[#5a5a4a]";
+  const trackColor = isDark ? "bg-[#333]" : "bg-[#e8e4da]";
+  const totalColor = isDark ? "" : "text-[#1a3c6e]";
+  const totalStyle = isDark ? { color: accentColor } : undefined;
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-8">
       <div>
@@ -55,15 +64,15 @@ export default function ScoreBreakdown({
       </div>
       <div className="space-y-2">
         {/* Total + weighted rating */}
-        <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
+        <div className={`flex justify-between items-center py-2 border-b ${borderColor}`}>
           <span className="text-sm font-bold">Total poäng:</span>
-          <span className="text-xl font-bold font-serif text-[#1a3c6e]">
+          <span className={`text-xl font-bold font-serif ${totalColor}`} style={totalStyle}>
             {totaltPoang} / {MAX_TOTAL}
           </span>
         </div>
-        <div className="flex justify-between items-center py-2 border-b border-[#e8e4da] mb-3">
+        <div className={`flex justify-between items-center py-2 border-b ${borderColor} mb-3`}>
           <span className="text-sm font-bold">Viktat betyg:</span>
-          <span className="text-xl font-bold font-serif text-[#1a3c6e]">
+          <span className={`text-xl font-bold font-serif ${totalColor}`} style={totalStyle}>
             {rating.toFixed(1)} / 5.0
           </span>
         </div>
@@ -75,10 +84,10 @@ export default function ScoreBreakdown({
             const label = SCORE_LABELS[key] ?? key;
             return (
               <div key={key} className="flex items-center gap-3">
-                <span className="text-xs text-[#5a5a4a] w-32 flex-shrink-0">
+                <span className={`text-xs ${labelColor} w-32 flex-shrink-0`}>
                   {label}
                 </span>
-                <div className="flex-grow bg-[#e8e4da] rounded h-2.5 overflow-hidden">
+                <div className={`flex-grow ${trackColor} rounded h-2.5 overflow-hidden`}>
                   <div
                     className="h-full rounded"
                     style={{
@@ -87,7 +96,7 @@ export default function ScoreBreakdown({
                     }}
                   />
                 </div>
-                <span className="text-xs font-bold text-[#1a3c6e] font-serif w-8 text-right">
+                <span className={`text-xs font-bold font-serif w-8 text-right ${isDark ? "" : "text-[#1a3c6e]"}`} style={isDark ? { color: accentColor } : undefined}>
                   {value}/{MAX_PER_CATEGORY}
                 </span>
               </div>
