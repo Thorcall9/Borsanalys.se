@@ -9,7 +9,7 @@ FinancialTable,
 SwotGrid,
 ScenarioCards,
 AlertBox,
-RadarChart,
+ScoreBreakdown,
 } from "@/components/analysis";
 import {
 ACCENT,
@@ -34,10 +34,7 @@ riskprofil:        3,
 esgMakro:          3,
 aiObservationer:   4,
 };
-const totaltPoang = Object.values(scores).reduce((sum, s) => sum + s, 0);
-const maxPoang = 40;
-const rating = (totaltPoang / maxPoang) * 5;
-return { scores, totaltPoang, maxPoang, rating };
+return { scores };
 }, []);
 
 return (
@@ -55,35 +52,20 @@ accentColor={ACCENT}
     {/* ── I. ÖVERSIKT ─────────────────────────────────────────────────── */}
     <section id="overview" data-section="overview" className="mb-16 pt-12">
       <SectionHeader number="I" title="Översikt" />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-8">
-        <RadarChart scores={analysisData.scores} />
-        <div className="space-y-2">
-          <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
-            <span className="text-sm font-bold">Total poäng:</span>
-            <span className="text-xl font-bold font-serif text-[#1a3c6e]">
-              {analysisData.totaltPoang} / {analysisData.maxPoang}
-            </span>
-          </div>
-          <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
-            <span className="text-sm font-bold">Viktat betyg:</span>
-            <span className="text-xl font-bold font-serif text-[#1a3c6e]">
-              {analysisData.rating.toFixed(1)} / 5.0
-            </span>
-          </div>
-          <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
-            <span className="text-sm font-bold">Rekommendation:</span>
-            <span className="text-xl font-bold font-serif text-green-700">KÖP</span>
-          </div>
-          <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
-            <span className="text-sm font-bold">Målpris (12 mån):</span>
-            <span className="text-xl font-bold font-serif text-[#1a3c6e]">SEK 720</span>
-          </div>
-          <div className="flex justify-between items-center py-2">
-            <span className="text-sm font-bold">Riskjust. EV-avkastning:</span>
-            <span className="text-xl font-bold font-serif text-green-700">+21%</span>
-          </div>
+      <ScoreBreakdown scores={analysisData.scores} accentColor={ACCENT}>
+        <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
+          <span className="text-sm font-bold">Rekommendation:</span>
+          <span className="text-xl font-bold font-serif text-green-700">KÖP</span>
         </div>
-      </div>
+        <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
+          <span className="text-sm font-bold">Målpris (12 mån):</span>
+          <span className="text-xl font-bold font-serif text-[#1a3c6e]">SEK 720</span>
+        </div>
+        <div className="flex justify-between items-center py-2">
+          <span className="text-sm font-bold">Riskjust. EV-avkastning:</span>
+          <span className="text-xl font-bold font-serif text-green-700">+21%</span>
+        </div>
+      </ScoreBreakdown>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
         <MetricCard label="Börskurs (mars 2026)" value="~SEK 577" />
         <MetricCard label="P/E (nuläge)"          value="9,95x" />
@@ -521,31 +503,7 @@ accentColor={ACCENT}
     {/* ── XI. INVESTERINGSBESLUT ───────────────────────────────────────── */}
     <section id="verdict" data-section="verdict" className="mb-16">
       <SectionHeader number="XI" title="Investeringsbeslut" />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-6">
-        <RadarChart scores={analysisData.scores} />
-        <div className="space-y-2">
-          <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
-            <span className="text-sm font-bold">Total poäng:</span>
-            <span className="text-xl font-bold font-serif text-[#1a3c6e]">
-              {analysisData.totaltPoang} / {analysisData.maxPoang}
-            </span>
-          </div>
-          <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
-            <span className="text-sm font-bold">Viktat betyg:</span>
-            <span className="text-xl font-bold font-serif text-[#1a3c6e]">
-              {analysisData.rating.toFixed(1)} / 5.0
-            </span>
-          </div>
-          <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
-            <span className="text-sm font-bold">Målpris (12 mån):</span>
-            <span className="text-xl font-bold font-serif text-[#1a3c6e]">SEK 720</span>
-          </div>
-          <div className="flex justify-between items-center py-2">
-            <span className="text-sm font-bold">Riskjust. EV-avkastning:</span>
-            <span className="text-xl font-bold font-serif text-green-700">+21%</span>
-          </div>
-        </div>
-      </div>
+      <ScoreBreakdown scores={analysisData.scores} accentColor={ACCENT} />
 
       {/* EV-matris */}
       <div className="bg-[#f5f0e8] border border-[#e0d5c0] rounded-xl p-5 mb-6">

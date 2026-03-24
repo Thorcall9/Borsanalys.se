@@ -9,7 +9,7 @@ import {
   SwotGrid,
   ScenarioCards,
   AlertBox,
-  RadarChart,
+  ScoreBreakdown,
 } from "@/components/analysis";
 import type { AnalysisSection, Scenario, TableRow } from "@/components/analysis";
 
@@ -110,10 +110,7 @@ export default function NewWaveAnalysis() {
       aiObservationer: 3,
       esgMakro: 3,
     };
-    const totaltPoang = Object.values(scores).reduce((sum, s) => sum + s, 0);
-    const maxPoang = 40;
-    const rating = (totaltPoang / maxPoang) * 5;
-    return { scores, totaltPoang, maxPoang, rating };
+    return { scores };
   }, []);
 
   return (
@@ -244,19 +241,7 @@ export default function NewWaveAnalysis() {
         {/* IX */}
         <section id="verdict" data-section="verdict" className="mb-16">
           <SectionHeader number="IX" title="Investeringsbeslut" />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-5">
-            <RadarChart scores={analysisData.scores} />
-            <div className="space-y-2">
-              <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
-                <span className="text-sm font-bold">Total poäng:</span>
-                <span className="text-xl font-bold font-serif text-[#1a3c6e]">{analysisData.totaltPoang} / {analysisData.maxPoang}</span>
-              </div>
-              <div className="flex justify-between items-center py-2 border-b border-[#e8e4da]">
-                <span className="text-sm font-bold">Viktat betyg:</span>
-                <span className="text-xl font-bold font-serif text-[#1a3c6e]">{analysisData.rating.toFixed(1)} / 5.0</span>
-              </div>
-            </div>
-          </div>
+          <ScoreBreakdown scores={analysisData.scores} accentColor={ACCENT} />
           <p className="text-sm leading-relaxed text-[#2a2a2a] mt-6 mb-4">
             New Wave Group är ett välskött, ägarstyrt bolag med diversifierad varumärkesportfölj och rimlig värdering. Det är inte ett case med explosiv tillväxtpotential, utan ett stabilt bolag för investerare som söker exponering mot konsumentvaror och profilreklam till ett rimligt pris.
           </p>
