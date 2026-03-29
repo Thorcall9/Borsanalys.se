@@ -117,7 +117,7 @@ export default function NvidiaAnalysisPage() {
     >
       {/* Header */}
       <div className="bg-[#0f0f0f] text-[#faf8f3] px-6 sm:px-12 py-10">
-        <div className="text-[10px] tracking-[.15em] text-[#76B900] uppercase mb-1">AKTIEANALYS</div>
+        <div className="text-xs tracking-[.15em] text-[#76B900] uppercase mb-1">AKTIEANALYS</div>
         <div className="flex flex-wrap items-end justify-between gap-4 mb-4">
           <div>
             <h1 className="font-serif text-3xl sm:text-4xl font-bold">NVIDIA Corporation</h1>
@@ -125,8 +125,8 @@ export default function NvidiaAnalysisPage() {
           </div>
           <div className="text-right">
             <div className="font-serif text-3xl font-bold text-[#76B900]">$182</div>
-            <div className="text-[11px] text-[#a0a090]">3 mars 2026</div>
-            <span className="inline-block mt-1.5 bg-[#1a4a1a] text-[#80d080] text-[11px] font-bold px-2.5 py-0.5 rounded-sm tracking-wide">
+            <div className="text-xs text-[#a0a090]">3 mars 2026</div>
+            <span className="inline-block mt-1.5 bg-[#1a4a1a] text-[#80d080] text-xs font-bold px-2.5 py-0.5 rounded-sm tracking-wide">
               ▲ KÖP
             </span>
           </div>
@@ -140,7 +140,7 @@ export default function NvidiaAnalysisPage() {
             { label: 'Riktkurs', value: '$230' },
           ].map((kpi) => (
             <div key={kpi.label} className="border-l-2 border-[#76B900] pl-2.5">
-              <div className="text-[9px] text-[#808070] uppercase tracking-wide">{kpi.label}</div>
+              <div className="text-xs text-[#808070] uppercase tracking-wide">{kpi.label}</div>
               <div className="font-serif text-base font-bold">{kpi.value}</div>
             </div>
           ))}
@@ -263,12 +263,12 @@ export default function NvidiaAnalysisPage() {
           <div className="bg-[#1a1a1a] rounded p-5 mb-5">
             <div className="flex flex-wrap justify-between items-start gap-4 mb-4">
               <div>
-                <div className="text-[10px] text-[#76B900] tracking-widest uppercase mb-1">Investeringsrekommendation</div>
+                <div className="text-xs text-[#76B900] tracking-widest uppercase mb-1">Investeringsrekommendation</div>
                 <div className="font-serif text-4xl font-bold text-[#76B900]">▲ KÖP</div>
                 <div className="text-sm text-[#a0a090] mt-1">Med 24–36 månaders horisont</div>
               </div>
               <div className="text-right">
-                <div className="text-[10px] text-[#76B900] tracking-widest uppercase">Målpris (Base)</div>
+                <div className="text-xs text-[#76B900] tracking-widest uppercase">Målpris (Base)</div>
                 <div className="font-serif text-4xl font-bold">$230</div>
                 <div className="text-xs text-[#80d080]">+26% potential från $182</div>
               </div>
