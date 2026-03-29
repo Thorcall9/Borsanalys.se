@@ -132,35 +132,41 @@ export default function Header() {
               )}
             </nav>
 
-            {/* Search button */}
-            <button
-              onClick={openSearch}
-              aria-label="Sök"
-              className="flex items-center gap-2 px-3 py-1.5 text-sm text-foreground/70 hover:text-foreground bg-card border border-border rounded-lg hover:border-primary/30 transition-colors"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-              </svg>
-              <span className="hidden sm:inline">Sök</span>
-              <kbd className="hidden md:inline-flex items-center gap-1 px-1.5 py-0.5 bg-background border border-border rounded text-xs font-mono text-muted">
-                ⌘K
-              </kbd>
-            </button>
+            {/* Right side: search + mobile hamburger */}
+            <div className="flex items-center gap-2">
+              {/* Search button */}
+              <button
+                onClick={openSearch}
+                aria-label="Sök"
+                className="flex items-center gap-2 px-3 py-1.5 text-sm text-foreground/70 hover:text-foreground bg-card border border-border rounded-lg hover:border-primary/30 transition-colors"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                </svg>
+                <span className="hidden sm:inline">Sök</span>
+                <kbd className="hidden md:inline-flex items-center gap-1 px-1.5 py-0.5 bg-background border border-border rounded text-xs font-mono text-muted">
+                  ⌘K
+                </kbd>
+              </button>
 
-            {/* Mobile hamburger */}
-            <button
-              className="md:hidden p-2"
-              onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label="Meny"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                {mobileOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
-            </button>
+              {/* Mobile hamburger */}
+              <button
+                type="button"
+                className="md:hidden p-2 relative z-10"
+                style={{ touchAction: "manipulation" }}
+                onClick={() => setMobileOpen(!mobileOpen)}
+                aria-label="Meny"
+                aria-expanded={mobileOpen}
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  {mobileOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
 
