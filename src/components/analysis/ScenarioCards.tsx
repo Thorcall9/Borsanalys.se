@@ -49,13 +49,13 @@ export default function ScenarioCards({ scenarios }: ScenarioCardsProps) {
             <h3 className={`font-serif text-lg uppercase tracking-wider font-bold mb-1 ${config.textColor}`}>
               {config.label}
             </h3>
-            <div className="text-[11px] font-mono text-muted mb-2">
+            <div className="text-xs font-mono text-muted mb-2">
               SANNOLIKHET: {scenario.probability}
             </div>
             <div className={`font-serif text-3xl font-bold mb-1 ${config.textColor}`}>
               {scenario.price}
             </div>
-            <div className="text-[11px] text-muted mb-4">{scenario.change}</div>
+            <div className="text-xs text-muted mb-4">{scenario.change}</div>
             <div className="text-xs text-muted leading-relaxed">
               <strong className="text-foreground">Antaganden:</strong>
               <br />

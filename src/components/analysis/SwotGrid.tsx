@@ -14,7 +14,7 @@ export default function SwotGrid({ data, title }: SwotGridProps) {
   return (
     <div className="bg-card border border-border rounded-xl p-5">
       {title && (
-        <div className="text-[11px] font-mono uppercase tracking-wider text-primary mb-4">{title}</div>
+        <div className="text-xs font-mono uppercase tracking-wider text-primary mb-4">{title}</div>
       )}
       <div className="grid grid-cols-1 sm:grid-cols-2 rounded-xl overflow-hidden border border-border">
         <SwotCell label="Styrkor" items={data.strengths} color="text-success" />

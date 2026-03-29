@@ -36,7 +36,7 @@ export default function FinancialTable({ title, columns, rows }: FinancialTableP
   return (
     <div className="bg-card border border-border rounded-xl p-5 overflow-x-auto">
       {title && (
-        <div className="text-[11px] font-mono uppercase tracking-wider text-primary mb-4">{title}</div>
+        <div className="text-xs font-mono uppercase tracking-wider text-primary mb-4">{title}</div>
       )}
       <table className="w-full border-collapse text-sm">
         <thead>
@@ -44,7 +44,7 @@ export default function FinancialTable({ title, columns, rows }: FinancialTableP
             {columns.map((col) => (
               <th
                 key={col.key}
-                className={`py-2 px-3 text-[10px] font-mono uppercase tracking-wider text-muted border-b border-border font-normal ${col.align === "left" || col.key === columns[0].key ? "text-left" : "text-right"}`}
+                className={`py-2 px-3 text-xs font-mono uppercase tracking-wider text-muted border-b border-border font-normal ${col.align === "left" || col.key === columns[0].key ? "text-left" : "text-right"}`}
               >
                 {col.header}
               </th>

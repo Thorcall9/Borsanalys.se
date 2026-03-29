@@ -538,7 +538,7 @@ export default function NovoNordiskAnalysis() {
               { risk: "ESG/Compliance", level: "LAG", levelColor: "text-yellow-700 bg-yellow-50 border-yellow-200", desc: "Illegala compounding products (Ozempic-kopior) skapar safety-risker och regulatoriska utmaningar." },
             ].map(({ risk, level, levelColor, desc }) => (
               <div key={risk} className="flex gap-4 items-start p-4 bg-card border border-border rounded-xl">
-                <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded border shrink-0 ${levelColor}`}>
+                <span className={`text-xs font-bold uppercase tracking-wider px-2 py-1 rounded border shrink-0 ${levelColor}`}>
                   {level}
                 </span>
                 <div>
