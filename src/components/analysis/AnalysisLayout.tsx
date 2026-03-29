@@ -382,7 +382,7 @@ export function AnalysisLayout({
         {/* ── HUVUD: SIDEBAR + INNEHÅLL ── */}
         <div className="flex gap-8">
           {/* Sidebar */}
-          <aside className="w-52 flex-shrink-0">
+          <aside className="hidden lg:block w-52 flex-shrink-0">
             <SidebarNav sections={sections} activeId={activeId} />
           </aside>
 
