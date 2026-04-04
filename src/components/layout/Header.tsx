@@ -93,6 +93,7 @@ export default function Header() {
                 item.children ? (
                   <div key={item.label} className="relative" ref={toolsMenuRef}>
                     <button
+                      type="button"
                       className="px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground rounded-md hover:bg-card transition-colors"
                       onClick={() => setToolsOpen(!toolsOpen)}
                     >
@@ -132,8 +133,11 @@ export default function Header() {
               )}
             </nav>
 
+            {/* Right side: search + hamburger */}
+            <div className="flex items-center gap-2">
             {/* Search button */}
             <button
+              type="button"
               onClick={openSearch}
               aria-label="Sök"
               className="flex items-center gap-2 px-3 py-1.5 text-sm text-foreground/70 hover:text-foreground bg-card border border-border rounded-lg hover:border-primary/30 transition-colors"
@@ -149,6 +153,7 @@ export default function Header() {
 
             {/* Mobile hamburger */}
             <button
+              type="button"
               className="md:hidden p-2"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Meny"
@@ -161,6 +166,7 @@ export default function Header() {
                 )}
               </svg>
             </button>
+            </div>
           </div>
         </div>
 
@@ -172,6 +178,7 @@ export default function Header() {
                 item.children ? (
                   <div key={item.label}>
                     <button
+                      type="button"
                       className="w-full text-left px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground rounded-md hover:bg-card"
                       onClick={() => setToolsOpen(!toolsOpen)}
                     >
