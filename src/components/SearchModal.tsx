@@ -139,17 +139,16 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div
-      className="fixed inset-0 z-[100] flex items-start justify-center pt-[10vh] px-4"
-      onMouseDown={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
-    >
-      {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+    <div className="fixed inset-0 z-[100] flex items-start justify-center pt-[10vh] px-4">
+      {/* Backdrop – stänger modalen vid klick utanför panelen */}
+      <div
+        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+        onClick={onClose}
+        aria-hidden="true"
+      />
 
-      {/* Panel */}
-      <div className="relative w-full max-w-xl bg-background border border-border rounded-2xl shadow-2xl overflow-hidden">
+      {/* Panel – z-10 säkerställer att den ligger ovanför bakgrunden */}
+      <div className="relative z-10 w-full max-w-xl bg-background border border-border rounded-2xl shadow-2xl overflow-hidden">
         {/* Search input */}
         <div className="flex items-center gap-3 px-4 py-3 border-b border-border">
           <svg
@@ -175,6 +174,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted focus:outline-none"
           />
           <button
+            type="button"
             onClick={onClose}
             className="text-xs text-muted border border-border rounded px-1.5 py-0.5 hover:text-foreground"
           >
