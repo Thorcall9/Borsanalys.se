@@ -69,14 +69,14 @@ export default function Header() {
 
   return (
     <>
-      {/* Announcement bar - NU HELT AUTOMATISK */}
-      <div className="bg-gradient-to-r from-primary to-primary-light text-white text-center text-sm py-2 px-4 transition-all">
-        <Link href={`/analyser/${latestAnalysis.slug}`} className="hover:underline">
-          Ny analys ute nu: <span className="font-semibold">{latestAnalysis.title}</span>
-        </Link>
-      </div>
+      <header className="sticky top-0 z-50 bg-background border-b border-border">
+        {/* Announcement bar */}
+        <div className="bg-gradient-to-r from-primary to-primary-light text-white text-center text-sm py-2 px-4">
+          <Link href={`/analyser/${latestAnalysis.slug}`} className="hover:underline">
+            Ny analys ute nu: <span className="font-semibold">{latestAnalysis.title}</span>
+          </Link>
+        </div>
 
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur border-b border-border">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
