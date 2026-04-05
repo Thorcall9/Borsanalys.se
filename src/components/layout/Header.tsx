@@ -76,8 +76,11 @@ export default function Header() {
         </Link>
       </div>
 
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur border-b border-border">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <header className="sticky top-0 z-50 border-b border-border">
+        {/* Separat bakgrundslager – backdrop-filter på sticky-element blockerar klick i iOS Safari.
+            Placeras bakom allt innehåll med -z-10 och pointer-events-none. */}
+        <div className="absolute inset-0 -z-10 bg-background/95 backdrop-blur pointer-events-none" aria-hidden="true" />
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2">
