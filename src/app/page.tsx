@@ -11,7 +11,7 @@ const popularStocks = [
   { name: "NVIDIA", ticker: "NVDA", slug: "nvidia-fy2026" },
   { name: "Investor", ticker: "INVE B", slug: "investor" },
   { name: "Microsoft", ticker: "MSFT", slug: "microsoft-2026" },
-  { name: "Evolution", ticker: "EVO", slug: "evolution-2025" },
+  { name: "RevolutionRace", ticker: "RVRC", slug: "revolutionrace-2026" },
   { name: "Apple", ticker: "AAPL", slug: null },
   { name: "Tesla", ticker: "TSLA", slug: null },
   { name: "Volvo", ticker: "VOLV B", slug: "volvo-2026" },
